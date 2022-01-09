@@ -1,0 +1,5 @@
+.idea/
+logs/
+.vscode/
+.metals/
+.DS_Store
