@@ -336,3 +336,27 @@ public int mySqrt(int x) {
     return -1;
 }
 ```
+
+### Q: Container with most water
+
+__Solution:__
+
+```java
+public int maxArea(int[] height) {
+    if (height == null || height.length < 2) return 0;
+    if (height.length == 2) return Math.min(height[0], height[1]);
+
+    int water = 0;
+    int i = 0;
+    int j = height.length-1;
+    while (i < j) {
+        water = Math.max(water, (j-i) * Math.min(height[i], height[j]));
+        if (height[i] < height[j]) {
+            i++;
+        } else {
+            j--;
+        }
+    }
+    return water;
+}
+```
