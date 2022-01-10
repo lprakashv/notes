@@ -1,4 +1,4 @@
-# Miscellaneous Helpful Commands
+# Miscellaneous Helpful Commands - WIP
 
 Commands used in personal/professional Experience
 
@@ -7,7 +7,7 @@ Commands used in personal/professional Experience
 Multiple dependencies using maven local repos, use JAR files `:` (colon) separated
 
 ```bash
-jshell --class-path ~/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.4/jackson-databind-2.12.4.jar:~/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.4/jackson-core-2.12.4.jar:~/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.4/jackson-annotations-2.12.4.jar:~/Downloads/vertx-core-4.1.6.jar:~/Downloads/netty-all-4.1.68.Final.jar
+jshell --class-path ./jackson-databind-2.12.4.jar:./jackson-core-2.12.4.jar:./jackson-annotations-2.12.4.jar
 ```
 
 ## Docker
@@ -30,7 +30,7 @@ Run an image in a container with its name
 docker run --rm `docker images --filter reference='*/log-generator' --format '{{.ID}}'`
 ```
 
-## JVM Arguments
+## JVM Arguments - WIP
 
 Hibernate enable SQL generation/logging
 
@@ -69,7 +69,7 @@ FROM sys.dm_exec_requests req
 CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sqltext;
 ```
 
-## Git
+## Git - WIP
 
 Remove files from remote after adding int .gitignore:
 
@@ -79,7 +79,7 @@ git rm -r --cached .
 
 Then git add, commit and push
 
-## General Unix Commands
+## General Unix Commands - WIP
 
 Process stats
 
@@ -88,7 +88,7 @@ top -p <pid>
 top -i
 ```
 
-User
+User taking superuser role - ?
 
 ```bash
 sudo -su <username>
@@ -122,7 +122,7 @@ Local DNS
 /etc/hosts
 ```
 
-## Nginx Basics
+## Nginx Basics - WIP
 
 ```bash
 nginx -s reload|reopen|quit|stop
@@ -132,7 +132,7 @@ conf files with server specifications: `/etc/nginx/sites-available/*.conf`
 
 `/etc/nginx/sites-enabled/<---->`
 
-## AWK
+## AWK - WIP
 
 ```bash
 less image-processing.log | sed -E -e "s/Img//g" | awk '{print $6".jpeg"}' | xargs -I '{}' sudo mv ./tmp/{} ./temp-images/
@@ -143,6 +143,11 @@ less nginx_access.log | sed -E -e "s/(\?|\&)([^=]+)\=([^&]+)//g" | awk '{print $
 
 less nginx_access.log | grep status=502 | sed -E -e "s/(\?|\&)([^=]+)\=([^&]+)//g" | awk '{arr[$10]++}END{for(a in arr) print arr[a], "\t" a}' | sort -k1n
 ```
+
+- `sort -k1n` - ???
+- `xargs -I '{}'` - ???
+- `sed -E -e ""` - ???
+- `awk` with multi-line expression and for-loop.
 
 ## HDFS
 
@@ -186,7 +191,8 @@ kafkacat \
 To find the latest offset in a topic
 
 ```bash
-~/Downloads/confluent-5.4.0/bin/kafka-run-class kafka.tools.GetOffsetShell --broker-list <bootstrap-servers> \
+kafka-run-class kafka.tools.GetOffsetShell \
+--broker-list <bootstrap-servers> \
 --topic asda-recipes-etl --time -1 \
 | awk -F  ":" '{sum += $3} END {print sum}'
 ```
