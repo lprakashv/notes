@@ -87,7 +87,7 @@ public List<String> letterCombinations(String digits) {
 }
 ```
 
-## Q: Generate parenthesis, given ’n’
+## Q: Generate parenthesis, given 'n'
 
 ```java
 public List<String> generateParenthesis(int n) {
@@ -301,5 +301,34 @@ public int maxUniqueSplit(String s) {
     Set<String> set = new HashSet<>();
 
     return backtrackDFS(s, 0, set);
+}
+```
+
+## Q: Combination Sum, can have any repeated candidates
+
+Example:
+
+Input : [2,3,6,7], 7
+Output : [[2,2,3], [7]]
+
+```java
+public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    List<List<Integer>> res = new ArrayList<>();
+    Arrays.sort(candidates);
+    backtrack(candidates, candidates.length-1, target, 0, new LinkedList<>(), res);
+    return res;
+}
+
+private void backtrack(int[] sorted, int i, int target,
+                        int sum, LinkedList<Integer> list, List<List<Integer>> res) {
+    if (sum == target) {
+        res.add(new ArrayList<>(list));
+    } else if (sum < target) {
+        for (int j=i; j>=0; j--) {
+            list.add(sorted[j]);
+            backtrack(sorted, j, target, sum + sorted[j], list, res);
+            list.removeLast();
+        }
+    }
 }
 ```

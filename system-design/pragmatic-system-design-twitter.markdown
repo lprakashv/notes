@@ -1,5 +1,12 @@
 # Pragmatic System Design : Twitter
 
+Or Any News Feed System
+
+Basic Requirements:
+
+- User should be able to post/tweet.
+- Feeds of all the followers should get the post/tweet.
+
 ## Questions
 
 - How many tweets per sec? => __10K per sec__
@@ -9,11 +16,13 @@
 
 ## Basic Design
 
-- Load balancers servers with a single database
+![twitter-basic](images/twitter-basic.png)
+
+- Load balanced servers with a single database
 - __Tweets table__ [ user_id, tweet, timestamp ] and __followers table__ [ source, target ]
 - POST API to create a tweet
 - 10K writes per second can be handled by a fairly large DB and proper buffering strategies
-- 300K reads per sec => single DB cannot handle
+- __300K reads per sec__ => __single DB cannot handle__
 
 ## Storage
 

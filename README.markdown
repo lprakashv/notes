@@ -20,12 +20,12 @@ Contains course learnings, coding interview problems, daily learnings etc.
 ## System Design
 
 - [Pragmatic System Design](system-design/pragmatic-system-design.markdown)
-  - [Uber](./system-design/pragmatic-syste-design-uber.markdown)
+  - [Uber](./system-design/pragmatic-system-design-uber.markdown)
   - [WhatsApp](./system-design/pragmatic-system-design-whatsapp.markdown)
   - [Flash Sale](./system-design/pragmatic-system-design-flashsale.markdown)
   - [Search Egine Crawler](./system-design/pragmatic-system-design-webcrawler.markdown)
   - [eBay / eAuction](./system-design/pgragmatic-system-design-ebay.markdown)
-  - [TinyURL / Bitly](./system-design/pragmatics-system-design-tinyurl.markdown)
+  - [TinyURL / Bitly](./system-design/pragmatic-system-design-tinyurl.markdown)
   - [Twitter](./system-design/pragmatic-system-design-twitter.markdown)
 - [Distributed System Notes](./system-design/distributed-systems-additional-notes.markdown)
 
