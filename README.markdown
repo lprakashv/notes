@@ -28,6 +28,8 @@ Contains course learnings, coding interview problems, daily learnings etc.
   - [TinyURL / Bitly](./system-design/pragmatic-system-design-tinyurl.markdown)
   - [Twitter](./system-design/pragmatic-system-design-twitter.markdown)
 - [Distributed System Notes](./system-design/distributed-systems-additional-notes.markdown)
+- [System Design Checklist](./system-design/system-design-checklist.markdown)
+- [System Design Inteview CheatSheet](./system-design/system-design-interview-cheatsheet.markdown)
 
 ## Concurrency, Parallelism and Reactive Programming
 
