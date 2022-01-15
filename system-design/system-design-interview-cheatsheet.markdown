@@ -161,23 +161,23 @@ Types of Proxies:
 
 |  | NoSQL | SQL |
 | ----- | ----- | ----- |
-| **When to use** | When storing large volumes of data that often have **little to no structure**. Cost-saving solution but requires data to be easily spread across multiple servers to scale up. **Rapid development** - when you’re working on quick iterations of your system which require making frequent updates to the data structure | When you need to ensure **ACID** compliance. When data is **structured** and **unchanging**. |
-| **Model** | **Non-relational**. Stores data in JSON docs, key-value pairs, wide column stores or graphs. | **Relational**. Stores data in tables. |
-| **Data** | Offers **flexibility** as not every record need to store the same properties. New properties can be added on the fly. Relationships are often captured by denormalizing data and presenting all data for a single object in a single record. Good for semi-structured, complex or nested data. | Great for solutions where every record has the same properties. Adding a new property may require altering schemas or backfilling data. Relationships are often captured in a normalized model using joins to resolve references across tables. |
-| **Schema** | Dynamic or flexible schemas. Db is schema-agnostic and the schema is dictated by the application => agility & highly iterative development. | Strict schema. Schema must be maintained and kept in sync between app and DB. |
-| **Transactions** | ACID support varies. | Supports ACID. |
-| **Consistency & Availability** | Strong consistency support. CAP can be treated to meet the needs of the app. | Strong consistency enforced and prioritized over A&P. |
-| **Performance** | Can be maximized by reducing consistency. All info about an entity is typically in a single record, so an update can happen in a single operation. | Insert & update performance is dependent upon how fast a write is committed. Can be maximised by scaling up available resources. Information about an entity may be spread across multiple table. |
-| **Scaling** | Horizontally | Vertically |
+| __When to use__ | large volumes of __unstructured data__,  __Rapid development__ | need __ACID__ compliance, __structured__ and __unchanging__ data |
+| __Model__ | __Non-relational__ - JSON docs, key-value pairs, wide column stores, graphs | __Relational__ - tables |
+| __Data__ | __flexibility__ - relationships are de-normalized, nested, in single record, on the fly property creation | __rigid__ - relationships are normalized using joins, addition of fields require alter and back-filling |
+| __Schema__ | Dynamic or flexible, DD is schema-agnostic, dictated by the application | Strict schema. To be kept in sync between app and DB |
+| __Transactions__ | ACID support varies | Supports ACID |
+| __Consistency & Availability__ | Strong consistency support | Strong consistency enforced and prioritized over A&P |
+| __Performance__ | Can be maximized by reducing consistency. All entity info in a single record => updates in single operation | Insert & update performance is dependent upon how fast a write is committed. Can be maximised by vertical scaling |
+| __Scaling__ | Horizontally | Vertically |
 
 ### NoSQL Types
 
 | Type | Description |
 | ---- | ----- |
-| **Key-Value** | Uses a map where each key is associated with one and only one value in a collection. Each key is represented as an arbitrary string (hash value). The value is stored in BLOB. Doesn’t have a query language. They only allow to store, retrieve and update the data using get/put/delete commands e.g. DynamoDB (Nike), Cassandra, Redis, Memcache, Manhattan (Twitter), Sherpa (Yahoo). Possible uses: session, shopping cart info etc|
-| **Document** | Stores data on the basis of key/value which is similar to a key-value db. The only difference is that it stores the values in the form of XML, JSON, BSON. Allows storage for complex data - trees, collections, dictionaries. Doesn’t support relations. Each document is a standalone. Doesn’t support joins. e.g. MongoDb (eBay), CouchDB (LinkedIn) |
-| **Column** | Stores data in column families as rows. Each column family can be compared to a container of rows where the key identifies the row & the row consists of multiple columns. Rows don’t need to have the same columns and columns can be added to any row. e.g. Cassandra (Instagram, Walmart), HBase (Salesforce, FB Messages, Imgur notifications) |
-| **Graph** | Stores data in the form of nodes and edges where nodes = entities and edges = relationships. Stores data only once & a no. of different types of relationships can be stored in these nodes. Relationships can be uni and bi direcational (as in RDBMS). Adding new relationships is easy but changing existing ones is difficult. e.g. Neo4J, OrientDB, InfiniteGraph, FlockDB (Twitter), TAO (FB Social Graph) |
+| __Key-Value__ | 1-1 KV mapping. Key = String (hash value) Value = BLOB. No query language. They only allow to store, get/put/delete commands e.g. DynamoDB (Nike), Cassandra, Redis, Memcache, Manhattan (Twitter), Sherpa (Yahoo). Possible uses: session, shopping cart info etc |
+| __Document__ | Similar to a key-value db. Values = XML, JSON, BSON. Supports complex data - trees, collections, dictionaries. Doesn't support relations. e.g. MongoDb (eBay), CouchDB (LinkedIn) |
+| __Column__ | Stores data in column families as rows. Each column family = container of rows where the key identifies the row & the row consists of multiple columns. Rows don't need to have the same columns and columns can be added to any row. e.g. Cassandra (Instagram, Walmart), HBase (Salesforce, FB Messages, Imgur notifications) |
+| __Graph__ | Stores data in the form of nodes and edges where nodes = entities and edges = relationships. Stores data only once & a no. of different types of relationships can be stored in these nodes. Relationships can be uni and bi direcational (as in RDBMS). Adding new relationships is easy but changing existing ones is difficult. e.g. Neo4J, OrientDB, InfiniteGraph, FlockDB (Twitter), TAO (FB Social Graph) |
 
 ### Sharding or Partitioning Data
 

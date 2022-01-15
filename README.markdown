@@ -30,6 +30,8 @@ Contains course learnings, coding interview problems, daily learnings etc.
 - [Distributed System Notes](./system-design/distributed-systems-additional-notes.markdown)
 - [System Design Checklist](./system-design/system-design-checklist.markdown)
 - [System Design Inteview CheatSheet](./system-design/system-design-interview-cheatsheet.markdown)
+- Current Architectures
+  - [Twitter](./system-design/architecture-twitter.markdown)
 
 ## Concurrency, Parallelism and Reactive Programming
 
