@@ -1,6 +1,6 @@
 # Leetcode other problems
 
-## Q: Implement insert, remove and getRandom in O(1) - RandomizedSet
+## Implement insert, remove and getRandom in O(1) - RandomizedSet
 
 __Solution:__
 
@@ -54,7 +54,7 @@ class RandomizedSet {
 }
 ```
 
-## Q: Find smallest divisor, given a threasold
+## Find smallest divisor, given a threasold
 
 > Input: nums = [1,2,5,9], threshold = 6
 Output: 5
@@ -83,7 +83,7 @@ public int smallestDivisor(int[] A, int threshold) {
 }
 ```
 
-## Q: Decode string
+## Decode string
 
 __Solution:__ 1 - recursion
 
@@ -157,7 +157,7 @@ public String decodeString(String s) {
 }
 ```
 
-## Q: Can array be splitted into consecutive arrays (with length >= 3)
+## Can array be splitted into consecutive arrays (with length >= 3)
 
 Given an array nums sorted in ascending order, return true if and only if you can split it into 1 or more subsequences such that each subsequence consists of consecutive integers and has length at least 3.
 
@@ -204,7 +204,7 @@ public boolean isPossible(int[] nums) {
 }
 ```
 
-## Q: LISP Parser
+## LISP Parser
 
 Expressions allowed:
 
@@ -265,7 +265,7 @@ public int evaluate(String expression) {
 }
 ```
 
-## Q: Median of integer stream
+## Median of integer stream
 
 __Solution:__
 
@@ -333,7 +333,7 @@ __“HashMap + DoublyLinkedList”:__
 - Keep a tail and head as DLLnodes.
 - If size > capacity: tail = popTail; cache.remove(tail.key).
 
-## Q: Min intervals need to be removed to make non-overlapping intervals
+## Min intervals need to be removed to make non-overlapping intervals
 
 __Solution__ - Greedy with sorting
 

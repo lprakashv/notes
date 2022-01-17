@@ -1,6 +1,6 @@
 # Leetcode notable Graph problems
 
-## Q: Sortest Path in Binary Matrix (0 for open 1 for blocked) with 8 direction movement
+## Sortest Path in Binary Matrix (0 for open 1 for blocked) with 8 direction movement
 
 __Solution 1__ - BFS
 
@@ -61,7 +61,7 @@ For this reason, BFS is the best choice here.
 person 2:
 > __whenever you see 'shortest' in path problem, dfs should be out of consideration__. Think about what djkstra's algo solves and remind yourself whether it is bfs or dfs.
 
-## Q: Path with maximum minimum value
+## Path with maximum minimum value
 
 Given a matrix of integers A with R rows and C columns, find the maximum score of a path starting at [0,0] and ending at [R-1,C-1].
 

@@ -5,7 +5,7 @@ NOTES:
 * Subsequence = list (need not be contiguous)
 * Subarray = array (contiguous);
 
-## Q: Max sum subarray
+## Max sum subarray
 
 > Kadane's Algorithm.
 
@@ -24,7 +24,7 @@ public int maxSubArray(int[] nums) {
 }
 ```
 
-## Q: Find string inside a string
+## Find string inside a string
 
 > KMP
 
@@ -53,7 +53,7 @@ for (int i = 1; i < n; ++i) {
 }
 ```
 
-## Q: Check if string contains repetitions
+## Check if string contains repetitions
 
 __Solution:__ 1 - Concatenation
 
@@ -86,7 +86,7 @@ public boolean repeatedSubstringPattern(String s) {
 }
 ```
 
-## Q: Max product subarray
+## Max product subarray
 
 ```java
 public int maxProduct(int[] nums) {
@@ -110,7 +110,7 @@ public int maxProduct(int[] nums) {
 }
 ```
 
-## Q: Product of array elements without self
+## Product of array elements without self
 
 __Solution:__
 
@@ -120,7 +120,7 @@ __Solution:__
     3. N-2 to 0 :=> `right[i] = right[i+1] * right[i+1]`
 2. `output[i] = left[i] * right[i]`
 
-## Q: Coin change problem
+## Coin change problem
 
 ```java
   public int coinChange(int[] coins, int amount) {
@@ -139,7 +139,7 @@ __Solution:__
   }
 ```
 
-## Q: Longest increasing subsequence “LIS”
+## Longest increasing subsequence “LIS”
 
 > Input: [10,9,2,5,3,7,101,18]
 >> Output: 4
@@ -167,7 +167,7 @@ public int lengthOfLIS(int[] nums) {
 }
 ```
 
-## Q: Decode num of strings can be decoded from integer sequence (1 -> A, 26 -> Z)
+## Decode num of strings can be decoded from integer sequence (1 -> A, 26 -> Z)
 
 ```java
 public int numDecodings(String s) {
@@ -187,7 +187,7 @@ public int numDecodings(String s) {
 
         // Check if successful single digit decode is possible.
         if(s.charAt(i-1) != '0') {
-            dp[i] += dp[i-1];  
+            dp[i] += dp[i-1];
         }
 
         // Check if successful two digit decode is possible.
@@ -201,7 +201,7 @@ public int numDecodings(String s) {
 }
 ```
 
-## Q: Word can be broken into all the words in dict
+## Word can be broken into all the words in dict
 
 ```java
 public boolean wordBreak(String s, List<String> wordDict) {
@@ -220,7 +220,7 @@ public boolean wordBreak(String s, List<String> wordDict) {
 }
 ```
 
-## Q: Word can be broken into all the words in dict (all the sentences formed)
+## Word can be broken into all the words in dict (all the sentences formed)
 
 > like above with slight modification.
 
@@ -268,7 +268,7 @@ public List<String> wordBreak(String s, List<String> wordDict) {
 }
 ```
 
-## Q: All confusing (number rotated will have another meaning) numbers till ’N’
+## All confusing (number rotated will have another meaning) numbers till ’N’
 
 __Solution:__
 
@@ -320,7 +320,7 @@ private boolean isConfused(long s, Map<Integer, Integer> map){
 }
 ```
 
-## Q: Balloon burst, burst “ith” and `coins_got = a[I] * a[I-1] * a[I+1]`
+## Balloon burst, burst “ith” and `coins_got = a[I] * a[I-1] * a[I+1]`
 
 ```java
 public int maxCoins(int[] nums) {
@@ -350,7 +350,7 @@ public int maxCoins(int[] nums) {
 }
 ```
 
-## Q: max “square”
+## max “square”
 
 __Solution:__
 
@@ -358,7 +358,7 @@ __Solution:__
 * Keep cur max.
 * Answer = `curmax ^ 2`.
 
-## Q: Longest Palindromic substring
+## Longest Palindromic substring
 
 > Expand around centre(1 for odd and 2 for even)
 
@@ -388,7 +388,7 @@ private int expandAroundCenter(String s, int left, int right) {
 }
 ```
 
-## Q: Max rectangle in a matrix
+## Max rectangle in a matrix
 
 > dp = histogram with column heights
 
@@ -426,7 +426,7 @@ public int maximalRectangle(char[][] matrix) {
 }
 ```
 
-## Q: Max area under histogram (array with bar heights given)
+## Max area under histogram (array with bar heights given)
 
 __Solution:__s
 
@@ -489,7 +489,7 @@ public int maximalRectangle(char[][] matrix) {
 }
 ```
 
-## Q: Can str1 be transformed into another str2
+## Can str1 be transformed into another str2
 
 ```java
 public boolean canConvert(String str1, String str2) {
@@ -532,7 +532,7 @@ public boolean canConvert(String str1, String str2) {
 }
 ```
 
-## Q: Check if hand has ‘W’ straight hands
+## Check if hand has ‘W’ straight hands
 
 ```java
 public boolean isNStraightHand(int[] hand, int W) {
@@ -557,7 +557,7 @@ public boolean isNStraightHand(int[] hand, int W) {
 }
 ```
 
-## Q: Next lexicographical permutation
+## Next lexicographical permutation
 
 __Solution:__
 
@@ -567,7 +567,7 @@ __Solution:__
 4. Swap I and J.
 5. Reverse array from I till length.
 
-## Q: Longest common subsequence“LCS”
+## Longest common subsequence“LCS”
 
 ```java
 public int longestCommonSubsequence(String text1, String text2) {
@@ -594,7 +594,7 @@ public int longestCommonSubsequence(String text1, String text2) {
 }
 ```
 
-## Q: Find min window in “S” chose subsequence is “T”
+## Find min window in “S” chose subsequence is “T”
 
 > 2 pointers
 
@@ -617,7 +617,7 @@ public String minWindow(String S, String T) {
 }
 ```
 
-## Q: No. Of subarrays having sum = K
+## No. Of subarrays having sum = K
 
 __Solution:__ 1 - n^2, constant space (kinda brute-force)
 
@@ -653,7 +653,7 @@ public int subarraySum(int[] nums, int k) {
 }
 ```
 
-## Q: Number of delete operations to make 2 strings equal
+## Number of delete operations to make 2 strings equal
 
 __Solution:__ 1 - DP with LCS
 
@@ -696,11 +696,11 @@ public int minDistance(String word1, String word2) {
 }
 ```
 
-## Q: Longest palindromic “subsequence”
+## Longest palindromic “subsequence”
 
 __Solution:__ : LCS of self and reverse
 
-## Q: Longest continuous subarray with “absolute difference” <= limit
+## Longest continuous subarray with “absolute difference” <= limit
 
 ### Soluton 1
 
@@ -750,7 +750,7 @@ public int longestSubarray(int[] nums, int limit) {
 }
 ```
 
-## Q: Longest increasing path in matrix
+## Longest increasing path in matrix
 
 > DFS with memoization
 
@@ -780,7 +780,7 @@ private int dfs(int[][] matrix, int i, int j, int[][] cache) {
 }
 ```
 
-## Q: Sum or 2 non-overlapping subarray each having sum = target
+## Sum or 2 non-overlapping subarray each having sum = target
 
 > 2 pass + map
 

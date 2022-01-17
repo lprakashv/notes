@@ -1,6 +1,6 @@
 # Leetcode Notable Backtracking problems
 
-## Q: max jumps from an array indices given, find if traversal possible or not
+## max jumps from an array indices given, find if traversal possible or not
 
 - Backtracking (2^n, n)
 - DP (n^2, n)
@@ -8,7 +8,7 @@
 
 [solution](https://leetcode.com/problems/jump-game/solution/)
 
-## Q: Phone number combinations
+## Phone number combinations
 
 __Leetcode solution:__
 
@@ -87,7 +87,7 @@ public List<String> letterCombinations(String digits) {
 }
 ```
 
-## Q: Generate parenthesis, given 'n'
+## Generate parenthesis, given 'n'
 
 ```java
 public List<String> generateParenthesis(int n) {
@@ -104,7 +104,7 @@ public List<String> generateParenthesis(int n) {
 }
 ```
 
-## Q: Permutations of an array
+## Permutations of an array
 
 ```java
   public void backtrack(int n,
@@ -140,7 +140,7 @@ public List<String> generateParenthesis(int n) {
   }
 ```
 
-## Q: Word search in matrix (any snaky)
+## Word search in matrix (any snaky)
 
 > backtracking / DFS with reset visited on mismatch
 
@@ -182,7 +182,7 @@ public boolean exist(char[][] board, String word) {
 }
 ```
 
-## Q: Palindrome partitioning
+## Palindrome partitioning
 
 ```java
 public List<List<String>> partition(String s) {
@@ -212,7 +212,7 @@ public boolean isPalindrome(String s, int low, int high){
 }
 ```
 
-## Q: Robot clean the room
+## Robot clean the room
 
 Given functions:
 
@@ -276,7 +276,7 @@ public void cleanRoom(Robot robot) {
 }
 ```
 
-## Q: Split a String Into the Max Number of Unique Substrings
+## Split a String Into the Max Number of Unique Substrings
 
 ```java
 private int backtrackDFS(String s, int i, Set<String> set) {
@@ -304,7 +304,7 @@ public int maxUniqueSplit(String s) {
 }
 ```
 
-## Q: Combination Sum, can have any repeated candidates
+## Combination Sum, can have any repeated candidates
 
 Example:
 

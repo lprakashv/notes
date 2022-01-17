@@ -8,7 +8,7 @@ __Sliding sum__
 __Sliding unique substring__
 ![Sliding unique substring](./images/slidingwindow2.jpeg)
 
-### Q: Longest Substring with At Most K Distinct Characters (Hard)
+### Longest Substring with At Most K Distinct Characters (Hard)
 
 __My Solution:__
 
@@ -44,7 +44,7 @@ public int lengthOfLongestSubstringKDistinct(String s, int k) {
 }
 ```
 
-### Q: Longest Substring Without Repeating Characters
+### Longest Substring Without Repeating Characters
 
 __My Solution:__
 
@@ -72,7 +72,7 @@ public int lengthOfLongestSubstring(String s) {
 }
 ```
 
-### Q: Subarrays with K different integers
+### Subarrays with K different integers
 
 __Solution:__
 
@@ -105,7 +105,7 @@ int atMostK(int[] A, int K) {
 }
 ```
 
-### Q: Max consecutive ones with at most K 0 -> 1 transitions
+### Max consecutive ones with at most K 0 -> 1 transitions
 
 __My Solution:__
 
@@ -132,7 +132,7 @@ public int longestOnes(int[] A, int K) {
 
 ## Iteration problems with context
 
-### Q: Remove comments (single line and block) in give source lines
+### Remove comments (single line and block) in give source lines
 
 __Solution:__
 
@@ -172,7 +172,7 @@ public List<String> removeComments(String[] source) {
 
 ## Sorted arrays
 
-### Q: Merge 2nd sorted array into first sorted array (big enough with empty values)
+### Merge 2nd sorted array into first sorted array (big enough with empty values)
 
 __Solution:__
 
@@ -188,7 +188,7 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
 }
 ```
 
-### Q: Find an element in a rotated sorted array
+### Find an element in a rotated sorted array
 
 __Solution:__
 
@@ -228,7 +228,7 @@ public int search(int[] nums, int target) {
 
 ## Unsorted Arrays
 
-### Q: Water/area under bars (only 2 not total water can be trapped)
+### Water/area under bars (only 2 not total water can be trapped)
 
 __Solution:__
 
@@ -246,7 +246,7 @@ public int maxArea(int[] height) {
 }
 ```
 
-### Q: Sum of 3 elements in an array = K {similarly for sum of 2}
+### Sum of 3 elements in an array = K {similarly for sum of 2}
 
 __Solution:__
 
@@ -275,7 +275,7 @@ void twoSum(int[] nums, int i, List<List<Integer>> res) {
 }
 ```
 
-### Q: Rotate a String
+### Rotate a String
 
 __Solution:__
 
@@ -283,7 +283,7 @@ __Solution:__
 2. __Brute force__: call shift1 (simple prev keeping algo) K times.
 3. __Cyclic replace__
 
-### Q: Merge overlapping intervals
+### Merge overlapping intervals
 
 __Solution:__
 
@@ -305,7 +305,7 @@ public int[][] merge(int[][] intervals) {
 }
 ```
 
-### Q: `sqrt` using Binary Search
+### `sqrt` using Binary Search
 
 __Solution:__
 
@@ -337,7 +337,7 @@ public int mySqrt(int x) {
 }
 ```
 
-### Q: Container with most water
+### Container with most water
 
 __Solution:__
 
@@ -358,5 +358,38 @@ public int maxArea(int[] height) {
         }
     }
     return water;
+}
+```
+
+### Rotate the Image (matrix)
+
+```java
+public void rotate(int[][] matrix) {
+
+    // Reverse Rows (top to bottom)
+    // a | b | c      g | h | i
+    // --+---+--      --+---+--
+    // d | e | f  ==> d | e | f
+    // --+---+--      --+---+--
+    // g | h | i      a | b | c
+    for (int i=0; i<matrix.length/2; i++) {
+        for (int j=0; j<matrix[i].length; j++) {
+            swap(matrix, i, j, matrix.length-i-1, j);
+        }
+    }
+
+    // A[i, j] = A[j, i]
+    for (int i=0; i<matrix.length; i++) {
+        // note 'j' start from 'i'
+        for (int j=i; j<matrix[i].length; j++) {
+            swap(matrix, i, j, j, i);
+        }
+    }
+}
+
+private void swap(int[][] matrix, int aI, int aJ, int bI, int bJ) {
+    int temp = matrix[aI][aJ];
+    matrix[aI][aJ] = matrix[bI][bJ];
+    matrix[bI][bJ] = temp;
 }
 ```

@@ -1,6 +1,6 @@
 # Leetcode Notable Tree problems
 
-## Q: “max sum of the path in a binary tree”
+## “max sum of the path in a binary tree”
 
 __Solution:__
 
@@ -14,18 +14,18 @@ __Solution:__
     6. Return `val + max(maxLeftGain, maxRightGain)` - __to choose one path and not having the path in only one subtree__.
 3. Call recursive method and return global max.
 
-## Q: Diameter of a binary tree / “Longest path in a binary tree”
+## Diameter of a binary tree / “Longest path in a binary tree”
 
 > Similar to max sum in a binary tree.
 
-## Q: min sum binary tree path
+## min sum binary tree path
 
 __Solution:__
 
 1. `dp[i][j] = (first row or first column) ? max(top, left) : min(top, left)`.
 2. Answer = `dp[L][W]`.
 
-## Q: Construct binary tree from pre-order and in-order given
+## Construct binary tree from pre-order and in-order given
 
 __Solution:__
 
@@ -57,7 +57,7 @@ public TreeNode buildTree(int[] preorder, int[] inorder) {
 }
 ```
 
-## Q: Kth smallest number in BST - same with inorder recursion (standard iterative approach)
+## Kth smallest number in BST - same with inorder recursion (standard iterative approach)
 
 > use a stack instead of recursion
 
@@ -77,7 +77,7 @@ public TreeNode buildTree(int[] preorder, int[] inorder) {
   }
 ```
 
-## Q: Populate next right pointer in each node
+## Populate next right pointer in each node
 
 __Solution:__
 
@@ -121,7 +121,7 @@ public Node connect(Node root) {
 }
 ```
 
-## Q: Delete nodes and return forest - all the partial tree formed after deleting linking nodes
+## Delete nodes and return forest - all the partial tree formed after deleting linking nodes
 
 ```java
 public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
