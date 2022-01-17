@@ -393,3 +393,25 @@ private void swap(int[][] matrix, int aI, int aJ, int bI, int bJ) {
     matrix[bI][bJ] = temp;
 }
 ```
+
+### Search Index of `target` or where `target` is to be inserted in O(log(N))
+
+```java
+public int searchInsert(int[] nums, int target) {
+    return binarySearch(nums, target, 0, nums.length-1);
+}
+
+private int binarySearch(int[] nums, int target, int l, int r) {
+    // edge base-case (target not present)
+    if (target <= nums[l]) return l;
+    if (target > nums[r]) return r+1;
+
+    int mid = l + (r-l) / 2;
+    // match base-case
+    if (nums[mid] == target) return mid;
+
+    // further backtrack left or right
+    if (nums[mid] > target) return binarySearch(nums, target, l, mid-1);
+    return binarySearch(nums, target, mid+1, r);
+}
+```

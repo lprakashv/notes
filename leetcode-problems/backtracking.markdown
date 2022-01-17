@@ -332,3 +332,70 @@ private void backtrack(int[] sorted, int i, int target,
     }
 }
 ```
+
+## Combinations Sum - containing duplicates
+
+Use duplicates algo from permutations, and combinations algo for overall structure.
+
+```java
+public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+    List<List<Integer>> res = new ArrayList<>();
+    Arrays.sort(candidates);
+    backtrack(candidates, -1, target, 0,
+              new boolean[candidates.length], new LinkedList<>(), res);
+    return res;
+}
+
+private void backtrack(int[] sorted, int i, int target, int sum,
+                        boolean[] visited, LinkedList<Integer> list, List<List<Integer>> res) {
+    if (sum == target) {
+        res.add(new ArrayList<>(list));
+    } else if (sum < target) {
+        for (int j=i+1; j<sorted.length; j++) {
+            if (visited[j] || j > 0 && sorted[j] == sorted[j-1] && !visited[j-1]) continue;
+            visited[j] = true;
+            list.add(sorted[j]);
+            backtrack(sorted, j, target, sum + sorted[j], visited, list, res);
+            list.removeLast();
+            visited[j] = false;
+        }
+    }
+}
+```
+
+### Sudoku Solver
+
+```java
+public void solveSudoku(char[][] board) {
+    doSolve(board, 0, 0);
+}
+
+private boolean doSolve(char[][] board, int row, int col) {
+    // note: must reset col here!
+    for (int i = row; i < 9; i++, col = 0) {
+        for (int j = col; j < 9; j++) {
+            if (board[i][j] != '.') continue;
+            for (char num = '1'; num <= '9'; num++) {
+                if (isValid(board, i, j, num)) {
+                    board[i][j] = num;
+                    if (doSolve(board, i, j + 1))
+                        return true;
+                    board[i][j] = '.';
+                }
+            }
+            return false;
+        }
+    }
+    return true;
+}
+
+private boolean isValid(char[][] board, int row, int col, char num) {
+    // Block no. is i/3, first element is i/3*3
+    int blkrow = (row / 3) * 3, blkcol = (col / 3) * 3;
+    for (int i = 0; i < 9; i++)
+        if (board[i][col] == num || board[row][i] == num ||
+                board[blkrow + i / 3][blkcol + i % 3] == num)
+            return false;
+    return true;
+}
+```
