@@ -226,7 +226,66 @@ public int search(int[] nums, int target) {
 }
 ```
 
+### `sqrt` using Binary Search
+
+__Solution:__
+
+```java
+public int mySqrt(int x) {
+    int start = 0;
+    int end = Integer.MAX_VALUE;
+
+    if (x == 0 || x == 1) {
+        return x;
+    }
+
+    while (start <= end) {
+        int mid = start + (end - start) / 2;
+
+        // `(x / mid)` avoids integer overflow caused by `(mid * mid)`
+        if (mid <= x / mid && (mid + 1) > x / (mid + 1)) {
+            return mid;
+        }
+
+        if (mid > x / mid) {
+            end = mid;
+        } else {
+            start = mid + 1;
+        }
+    }
+
+    return -1;
+}
+```
+
+### Search Index of `target` or where `target` is to be inserted in O(log(N))
+
+```java
+public int searchInsert(int[] nums, int target) {
+    return binarySearch(nums, target, 0, nums.length-1);
+}
+
+private int binarySearch(int[] nums, int target, int l, int r) {
+    // edge base-case (target not present)
+    if (target <= nums[l]) return l;
+    if (target > nums[r]) return r+1;
+
+    int mid = l + (r-l) / 2;
+    // match base-case
+    if (nums[mid] == target) return mid;
+
+    // further backtrack left or right
+    if (nums[mid] > target) return binarySearch(nums, target, l, mid-1);
+    return binarySearch(nums, target, mid+1, r);
+}
+```
+
 ## Unsorted Arrays
+
+## Inserting into an array with sufficient space
+
+- Iterate backwards to avoid overwriting values (since, we are shifting right)
+- `arr[i+1] = arr[i]`
 
 ### Water/area under bars (only 2 not total water can be trapped)
 
@@ -305,38 +364,6 @@ public int[][] merge(int[][] intervals) {
 }
 ```
 
-### `sqrt` using Binary Search
-
-__Solution:__
-
-```java
-public int mySqrt(int x) {
-    int start = 0;
-    int end = Integer.MAX_VALUE;
-
-    if (x == 0 || x == 1) {
-        return x;
-    }
-
-    while (start <= end) {
-        int mid = start + (end - start) / 2;
-
-        // `(x / mid)` avoids integer overflow caused by `(mid * mid)`
-        if (mid <= x / mid && (mid + 1) > x / (mid + 1)) {
-            return mid;
-        }
-
-        if (mid > x / mid) {
-            end = mid;
-        } else {
-            start = mid + 1;
-        }
-    }
-
-    return -1;
-}
-```
-
 ### Container with most water
 
 __Solution:__
@@ -391,27 +418,5 @@ private void swap(int[][] matrix, int aI, int aJ, int bI, int bJ) {
     int temp = matrix[aI][aJ];
     matrix[aI][aJ] = matrix[bI][bJ];
     matrix[bI][bJ] = temp;
-}
-```
-
-### Search Index of `target` or where `target` is to be inserted in O(log(N))
-
-```java
-public int searchInsert(int[] nums, int target) {
-    return binarySearch(nums, target, 0, nums.length-1);
-}
-
-private int binarySearch(int[] nums, int target, int l, int r) {
-    // edge base-case (target not present)
-    if (target <= nums[l]) return l;
-    if (target > nums[r]) return r+1;
-
-    int mid = l + (r-l) / 2;
-    // match base-case
-    if (nums[mid] == target) return mid;
-
-    // further backtrack left or right
-    if (nums[mid] > target) return binarySearch(nums, target, l, mid-1);
-    return binarySearch(nums, target, mid+1, r);
 }
 ```
