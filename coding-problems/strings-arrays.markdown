@@ -296,12 +296,125 @@ private int binarySearch(int[] nums, int target, int l, int r) {
 }
 ```
 
+### Remove duplicates from a sorted array in-place, return final length
+
+- Okay to leave garbage values after resultant length
+- Shift unique values left-wards
+
+```java
+public int removeDuplicates(int[] nums) {
+    int uniqueIndex = 1;
+    int j = 1;
+
+    while (j < nums.length) {
+        if (nums[j] > nums[uniqueIndex-1]) {
+            nums[uniqueIndex++] = nums[j];
+        }
+        j++;
+    }
+    return uniqueIndex;
+}
+```
+
+### Check Valid mountain array - strictly increasing followed by strictly decreasing
+
+```java
+public boolean validMountainArray(int[] arr) {
+    if (arr.length < 3) return false;
+    boolean checkUp = true;
+    for (int i=1; i<arr.length; i++) {
+        if (arr[i] == arr[i-1]) return false;
+        if (checkUp && arr[i] < arr[i-1]) {
+            if (i == 1) return false;
+            checkUp = false;
+        } else if (!checkUp) {
+            if (arr[i] > arr[i-1]) return false;
+        }
+    }
+    return !checkUp;
+}
+```
+
+### Find Index in a top-bottom and left-right sorted matrix
+
+- Sorted from left -> right
+- Sorted from top -> bottom
+
+Logic `O(m+n)`:
+
+1. Start from Top-Right
+2. Match Every cell
+3. If target is more -> go down, else go left.
+
+```java
+public boolean searchMatrix(int[][] matrix, int target) {
+    if(matrix == null || matrix.length < 1 || matrix[0].length <1) {
+        return false;
+    }
+    int col = matrix[0].length-1;
+    int row = 0;
+    while(col >= 0 && row <= matrix.length-1) {
+        if(target == matrix[row][col]) {
+            return true;
+        } else if(target < matrix[row][col]) {
+            col--;
+        } else if(target > matrix[row][col]) {
+            row++;
+        }
+    }
+    return false;
+}
+```
+
 ## Unsorted Arrays
 
-## Inserting into an array with sufficient space
+### Inserting into an array with sufficient space
 
 - Iterate backwards to avoid overwriting values (since, we are shifting right)
 - `arr[i+1] = arr[i]`
+
+### Shifting array elements left-wards
+
+- Iterate from __left-to-right__
+
+### Shifting array elements right-wards
+
+- Iterate from __right-to-left__
+
+### Move Zeroes to right
+
+```java
+public void moveZeroes(int[] nums) {
+    int nonZero = 0, i = 0;
+    while (i < nums.length) {
+        while (i < nums.length && nums[i] == 0) {
+            i++;
+        }
+        if (i == nums.length) break;
+
+        nums[nonZero++] = nums[i++];
+    }
+    for (int j=nonZero; j<nums.length; j++) {
+        nums[j] = 0;
+    }
+}
+```
+
+### Missing number from a range [1-N] of list of size N
+
+```java
+public List<Integer> findDisappearedNumbers(int[] nums) {
+    List<Integer> res = new ArrayList<>();
+    for (int i=0; i<nums.length; i++) {
+        int numAsIndex = Math.abs(nums[i])-1;
+        nums[numAsIndex] = -1 * Math.abs(nums[numAsIndex]);
+    }
+    for (int i=0; i<nums.length; i++) {
+        if (nums[i] > 0) res.add(i+1);
+    }
+    return res;
+}
+```
 
 ### Water/area under bars (only 2 not total water can be trapped)
 

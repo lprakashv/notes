@@ -1,5 +1,58 @@
 # Dynamic Programming Patterns
 
+DP problem often has following characteristics:
+
+- __Optimal Substructure__ - Optimal solution to the problem can be achieved from solving optimal solution for sub-problems
+- __Overlapping Sub-problems__ - Sub problems are overlapping in nature
+  - Greedy problems also have "optimal substructure" but the sub-problems are "not overlapping"
+
+2 Approaches:
+
+__Bottom-Up (Tabulation)__
+
+```txt
+// Pseudo-code example for bottom-up
+
+F = array of length (n + 1)
+F[0] = 0                       // base-case-1 (example - fibonacci)
+F[1] = 1                       // base-case-2 (example - fibonacci)
+for i from 2 to n:
+    F[i] = F[i - 1] + F[i - 2] // sub-solutions (example - fibonacci)
+```
+
+__Top-Down (Memoization)__
+
+```txt
+// Pseudo-code example for top-down
+
+memo = hashmap
+Function F(integer i):
+    if i is 0 or 1:                   // base-case (example - fibonacci)
+        return i
+    if i doesn't exist in memo:
+        memo[i] = F(i - 1) + F(i - 2) // sub-solutions (example - fibonacci)
+    return memo[i]
+```
+
+__2 Characteristics to Identify if problem is DP?__
+
+First - The problem will ask for the optimum value (maximum or minimum) of something, or the number of ways there are to do something. For example:
+
+- What is the minimum cost of doing...
+- What is the maximum profit from...
+- How many ways are there to do...
+- What is the longest possible...
+- Is it possible to reach a certain point...
+
+> Note: Not all DP problems follow this format, and not all problems that follow these formats should be solved using DP. However, these formats are very common for DP problems and are generally a hint that you should consider using dynamic programming.
+
+Second - Future "decisions" depend on earlier decisions. Deciding to do something at one step may affect the ability to do something in a later step. This characteristic is what makes a greedy algorithm invalid for a DP problem - we need to factor in results from previous decisions.
+
+NOTE:
+
+- Divide and conquer approaches can be parallelized while dynamic programming approaches cannot be (easily) parallelized
+  - The subproblems in divide an conquer approaches are independent of one another (they do not overlap) while in dynamic programming, the subproblems do overlap
+
 ## Knapsack
 
 - Given a set of items with 'w' weight and 'v' value.

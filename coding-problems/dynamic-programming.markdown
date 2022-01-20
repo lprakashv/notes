@@ -434,18 +434,25 @@ __Solution:__s
 2. Better brute force = n^2 by merging 2nd and min loop.
 3. Optimised: stack based (better DnQ).
 
+Inefficient:
+
 ```java
-public int calculateArea(int[] heights, int start, int end) {
+public int largestRectangleArea(int[] heights) {
+    return calculateArea(heights, 0, heights.length - 1);
+}
+
+private int calculateArea(int[] heights, int start, int end) {
     if (start > end)
         return 0;
     int minindex = start;
     for (int i = start; i <= end; i++)
         if (heights[minindex] > heights[i])
             minindex = i;
-    return Math.max(heights[minindex] * (end - start + 1), Math.max(calculateArea(heights, start, minindex - 1), calculateArea(heights, minindex + 1, end)));
-}
-public int largestRectangleArea(int[] heights) {
-    return calculateArea(heights, 0, heights.length - 1);
+    return Math.max(
+      heights[minindex] * (end - start + 1),
+      Math.max(
+        calculateArea(heights, start, minindex - 1),
+        calculateArea(heights, minindex + 1, end)));
 }
 ```
 
@@ -453,39 +460,38 @@ Most optimal:
 
 ```java
 public int maximalRectangle(char[][] matrix) {
-    if(matrix.length == 0) return 0;
-    int m = matrix.length;
-    int n = matrix[0].length;
+  if (height == null || height.length == 0) return 0;
 
-    int[] left = new int[n]; // initialize left as the leftmost boundary possible
-    int[] right = new int[n];
-    int[] height = new int[n];
+  int[] lessFromLeft = new int[height.length]; // idx of the first bar on the left that is lower than current
+  int[] lessFromRight = new int[height.length]; // idx of the first bar on the right that is lower than current
 
-    Arrays.fill(right, n); // initialize right as the rightmost boundary possible
+  lessFromRight[height.length - 1] = height.length;
+  lessFromLeft[0] = -1;
 
-    int maxarea = 0;
-    for(int i = 0; i < m; i++) {
-        int cur_left = 0, cur_right = n;
-        // update height
-        for(int j = 0; j < n; j++) {
-            if(matrix[i][j] == '1') height[j]++;
-            else height[j] = 0;
-        }
-        // update left
-        for(int j=0; j<n; j++) {
-            if(matrix[i][j]=='1') left[j]=Math.max(left[j],cur_left);
-            else {left[j]=0; cur_left=j+1;}
-        }
-        // update right
-        for(int j = n - 1; j >= 0; j--) {
-            if(matrix[i][j] == '1') right[j] = Math.min(right[j], cur_right);
-            else {right[j] = n; cur_right = j;}
-        }
-        // update area
-        for(int j = 0; j < n; j++) {
-            maxarea = Math.max(maxarea, (right[j] - left[j]) * height[j]);
-        }
-    return maxarea;
+  for (int i = 1; i < height.length; i++) {
+    int p = i - 1;
+
+    while (p >= 0 && height[p] >= height[i]) {
+      p = lessFromLeft[p];
+    }
+    lessFromLeft[i] = p;
+  }
+
+  for (int i = height.length - 2; i >= 0; i--) {
+    int p = i + 1;
+
+    while (p < height.length && height[p] >= height[i]) {
+      p = lessFromRight[p];
+    }
+    lessFromRight[i] = p;
+  }
+
+  int maxArea = 0;
+  for (int i = 0; i < height.length; i++) {
+    maxArea = Math.max(maxArea, height[i] * (lessFromRight[i] - lessFromLeft[i] - 1));
+  }
+
+  return maxArea;
 }
 ```
 

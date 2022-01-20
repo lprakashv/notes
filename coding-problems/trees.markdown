@@ -1,6 +1,93 @@
 # Leetcode Notable Tree problems
 
-## “max sum of the path in a binary tree”
+## In-order Traversal (Recursive)
+
+```java
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> res = new ArrayList<>();
+    inorder(root, res);
+    return res;
+}
+
+private void inorder(TreeNode node, List<Integer> res) {
+    if (node == null) return;
+    inorder(node.left, res);
+    res.add(node.val);
+    inorder(node.right, res);
+}
+```
+
+## In-order Traversal (iterative)
+
+```java
+public List<Integer> inorderTraversal(TreeNode root) {
+    Stack<TreeNode> st = new Stack<>();
+    TreeNode current = root;
+    List<Integer> res = new ArrayList<>();
+
+    while (!st.isEmpty() || current != null) {
+        if (current != null) {
+            st.push(current);
+            current = current.left;
+        } else {
+            TreeNode node = st.pop();
+            res.add(node.val);
+            current = node.right;
+        }
+    }
+
+    return res;
+}
+```
+
+## Level-order Traversal
+
+```java
+public List<List<Integer>> levelOrder(TreeNode root) {
+    List<List<Integer>> res = new ArrayList<>();
+    if (root == null) return res;
+
+    List<Integer> level = new ArrayList<>();
+    Queue<TreeNode> q = new LinkedList<>();
+    q.offer(root);
+    q.offer(null);
+
+    while (!q.isEmpty()) {
+        TreeNode node = q.poll();
+        if (node != null) {
+            level.add(node.val);
+            if (node.left != null) q.offer(node.left);
+            if (node.right != null) q.offer(node.right);
+        } else {
+            res.add(level);
+            level = new ArrayList<>();
+            if (!q.isEmpty()) q.offer(null);
+        }
+    }
+
+    return res;
+}
+```
+
+## Valid BST
+
+```java
+public boolean isValidBST(TreeNode root) {
+    return util(root, null, null);
+}
+
+boolean util(TreeNode root, Integer min, Integer max) {
+    if (root == null)
+        return true;
+
+    if ((min != null && root.val <= min) || (max != null && root.val >= max))
+        return false;
+
+    return util(root.left, min, root.val) && util(root.right, root.val, max);
+}
+```
+
+## max sum of the path in a binary tree
 
 __Solution:__
 
@@ -14,7 +101,7 @@ __Solution:__
     6. Return `val + max(maxLeftGain, maxRightGain)` - __to choose one path and not having the path in only one subtree__.
 3. Call recursive method and return global max.
 
-## Diameter of a binary tree / “Longest path in a binary tree”
+## Diameter of a binary tree / Longest path in a binary tree
 
 > Similar to max sum in a binary tree.
 
@@ -82,7 +169,7 @@ public TreeNode buildTree(int[] preorder, int[] inorder) {
 __Solution:__
 
 1. level-order-traversal
-2. Using previously populated “next” pointers (amazing)
+2. Using previously populated "next" pointers (amazing)
 
 ```java
 public Node connect(Node root) {
