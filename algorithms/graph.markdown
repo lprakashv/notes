@@ -155,3 +155,307 @@ Algo Impl - Java: TODO
 
 ```java
 ```
+
+## Disjoint Set / Union-Find data structure
+
+- Data structure to address connectivity of components in a network
+- Allows to quickly find if two nodes are connected
+
+Building a Disjoint set:
+
+1. Given all the edges
+2. We do the "Union" operation:
+   1. We choose one of the vertices' in edge as the head, and add the vertices to a set - `head = choose(vertex1, vertex2)`, `set = new Set(head, [vertex1, vertex2, ...])`
+   2. We keep adding both the vertices for each edge to their corresponding sets or creating new ones - `set = Set.find(vertex1, vertex2)`, `set.add(...)`
+   3. Each set is such that for every element in set we can check what is their head - `set.head()`, `headOf(vertex)`
+3. Merging sets will re-elect the head - `set3 = merge(set1, set2)`, `set3.head = choose(set1.head(), set2.head())`
+
+Checking if two vertices are connected:
+
+`headOf(vertex1) == headOf(vertex2)`
+
+### Implementation of a Disjoint Set
+
+Two functions:
+
+- union
+- find
+
+```java
+// range of vertices 0 - N-1
+int N;
+
+// edges - [vertex1, vertex2]
+int[][] edges = new int[][]{{0, 1}, {0, 3}, {5, 6}, ...};
+
+// This will be called a disjoint set or parent set
+// parent of vertex='n' = parent[n]
+// For root vertex, parent[n] = n
+int[] parent = new int[N];
+
+// Initially are nodes are 'root' nodes
+for (int i=0; i<N; i++) parent[i] = i;
+
+// Building Disjoin-Set
+for (int[] edge : edges) {
+  // both do not belong to any set - both are root nodes
+  if (parent[edge[0]] == edge[0] && parent[edge[1]] == edge[1]) {
+    // take any and make the other as its parent
+    parent[edge[1]] = edge[0];
+    continue;
+  }
+
+  // only one is independent - root node
+  if (parent[edge[0]] == edge[0]) {
+    // make the other as its parent
+    parent[edge[0]] = edge[1];
+    continue;
+  }
+
+  // TODO - similar for the other node as above
+
+  // else case - both are part of a set!
+  // find out root of vertex2
+  int root2 = getRootNode(parent, edge[1]);
+  // make one node as parent of other's
+  parent[root2] = edge[0];
+}
+
+private int getRootNode(int[] parent, int node) {
+  int root = node;
+  while (root != parent[root]) {
+    root = parent[root];
+  }
+  return root;
+}
+
+// find
+public boolean checkConnectivity(int[] parent, int node1, int node2) {
+  return getRootNode(parent, node1) == getRootNode(parent, node2);
+}
+```
+
+### Quick Find
+
+```java
+// UnionFind.class
+class UnionFind {
+  private int[] root;
+
+  public UnionFind(int size) {
+    root = new int[size];
+    for (int i = 0; i < size; i++) {
+      root[i] = i;
+    }
+  }
+
+  // O(1)
+  public int find(int x) {
+    return root[x];
+  }
+  // O(N)
+  public void union(int x, int y) {
+      int rootX = find(x);
+      int rootY = find(y);
+      if (rootX != rootY) {
+        for (int i = 0; i < root.length; i++) {
+          if (root[i] == rootY) {
+            root[i] = rootX;
+          }
+        }
+      }
+  }
+  // O(1)
+  public boolean connected(int x, int y) {
+    return find(x) == find(y);
+  }
+}
+```
+
+### Quick Union
+
+```java
+class UnionFind {
+  private int[] root;
+
+  // O(N)
+  public UnionFind(int size) {
+    root = new int[size];
+    for (int i = 0; i < size; i++) {
+      root[i] = i;
+    }
+  }
+
+  // O(N)
+  public int find(int x) {
+    while (x != root[x]) {
+      x = root[x];
+    }
+    return x;
+  }
+
+  // O(N)
+  public void union(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX != rootY) {
+      root[rootY] = rootX;
+    }
+  }
+
+  // O(N)
+  public boolean connected(int x, int y) {
+    return find(x) == find(y);
+  }
+}
+```
+
+Quick-Union is more efficient than Quick-Find
+
+- Time-complexity of `find` in quick-find = `O(1)`, while worst-case time-complexity of `find` in quick-union = `O(N)`, when graph is made like a linked-list. It's not always the case
+- Time-complexity of `union` in quick-find = `O(N)`, while time-complexity of `union` in quick-union depends upon `find`. Since, average-case time-complexity of `find` `< O(N)`, average-case time-complexity of `union` `< N * O(N) < O(N^2)`
+
+### Union by Rank - Quick-Rank (optimization to `union` method for Quick-Union)
+
+- To join two nodes of independent graphs, choose a root-node such that resultant graph has lower height/depth.
+- It is an optimization for union-based DSs - quick union sets.
+
+```java
+class UnionFind {
+  private int[] root;
+  private int[] rank;
+
+  // O(N)
+  public UnionFind(int size) {
+    root = new int[size];
+    rank = new int[size];
+    for (int i = 0; i < size; i++) {
+      root[i] = i;
+      rank[i] = 1;
+    }
+  }
+
+  // O(log N)
+  public int find(int x) {
+    while (x != root[x]) {
+      x = root[x];
+    }
+    return x;
+  }
+
+  // O(log N)
+  public void union(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX != rootY) {
+      if (rank[rootX] > rank[rootY]) {
+        root[rootY] = rootX;
+      } else if (rank[rootX] < rank[rootY]) {
+        root[rootX] = rootY;
+      } else {
+        root[rootY] = rootX;
+        rank[rootX] += 1;
+      }
+    }
+  }
+
+  // O(log N)
+  public boolean connected(int x, int y) {
+    return find(x) == find(y);
+  }
+}
+```
+
+### Path compression (optimization to `find` method for Quick-Union)
+
+- Quick-Find's `find` method is already optimized.
+
+```java
+class UnionFind {
+  private int[] root;
+
+  // O(N)
+  public UnionFind(int size) {
+    root = new int[size];
+    for (int i = 0; i < size; i++) {
+      root[i] = i;
+    }
+  }
+
+  // O(log N)
+  public int find(int x) {
+    if (x == root[x]) {
+      return x;
+    }
+    return root[x] = find(root[x]);
+  }
+
+  // O(log N)
+  public void union(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX != rootY) {
+      root[rootY] = rootX;
+    }
+  }
+
+  // O(log N)
+  public boolean connected(int x, int y) {
+    return find(x) == find(y);
+  }
+}
+```
+
+### Final Optimized Union-Find (with Union-by-Rank and Path-compression)
+
+```java
+class UnionFind {
+  private int[] root;
+  // Use a rank array to record the height of each vertex, i.e., the "rank" of each vertex.
+  private int[] rank;
+
+  // O(N)
+  public UnionFind(int size) {
+    root = new int[size];
+    rank = new int[size];
+    for (int i = 0; i < size; i++) {
+      root[i] = i;
+      rank[i] = 1; // The initial "rank" of each vertex is 1, because each of them is
+                    // a standalone vertex with no connection to other vertices.
+    }
+  }
+
+  // O(α(N))
+  // The find function here is the same as that in the disjoint set with path compression.
+  public int find(int x) {
+    if (x == root[x]) {
+      return x;
+    }
+    return root[x] = find(root[x]);
+  }
+
+  // O(α(N))
+  // The union function with union by rank
+  public void union(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX != rootY) {
+      if (rank[rootX] > rank[rootY]) {
+        root[rootY] = rootX;
+      } else if (rank[rootX] < rank[rootY]) {
+        root[rootX] = rootY;
+      } else {
+        root[rootY] = rootX;
+        rank[rootX] += 1;
+      }
+    }
+  }
+
+  // O(α(N))
+  public boolean connected(int x, int y) {
+    return find(x) == find(y);
+  }
+}
+```
+
+- Here `α` refers to the Inverse Ackermann function. In practice, we assume it's a constant. In other words, O(α(N)) is regarded as O(1) on average
