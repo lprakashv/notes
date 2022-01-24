@@ -2,20 +2,20 @@
 
 Contains course learnings, coding interview problems, daily learnings etc.
 
-## Leetcode problems
+## Algorithms
 
-- [DP](leetcode-problems/dynamic-programming.markdown)
-- [Backtracking](leetcode-problems/backtracking.markdown)
-- [Trees](leetcode-problems/trees.markdown)
-- [Strings and Arrays](leetcode-problems/strings-arrays.markdown)
-- [Others](leetcode-problems/others.markdown)
-
-## Coding Problem Patterns
-
-- [Backtracking problem patterns](algorithms/backtracking-patterns.markdown)
-- [DP problem patterns](algorithms/dynamic-programming-patterns.markdown)
-- [Bitwise Operations](algorithms/bitmasks.markdown)
 - [Graph Algorithms](algorithms/graph-algorithms.markdown)
+- [Backtracking problems](algorithms/backtracking-patterns.markdown)
+- [DP problems](algorithms/dynamic-programming-patterns.markdown)
+- [Bitwise Operations](algorithms/bitmasks.markdown)
+
+## Coding problems
+
+- [Strings and Arrays](leetcode-problems/strings-arrays.markdown)
+- [Trees](leetcode-problems/trees.markdown)
+- [Backtracking](leetcode-problems/backtracking.markdown)
+- [DP](leetcode-problems/dynamic-programming.markdown)
+- [Others](leetcode-problems/others.markdown)
 
 ## System Design
 
@@ -32,6 +32,10 @@ Contains course learnings, coding interview problems, daily learnings etc.
 - [System Design Inteview CheatSheet](./system-design/system-design-interview-cheatsheet.markdown)
 - Current Architectures
   - [Twitter](./system-design/architecture-twitter.markdown)
+
+## Behavioral Interviews
+
+- ["Tell Me About" Questions](./behavioral-interviews/tell-me-about.markdown)
 
 ## Concurrency, Parallelism and Reactive Programming
 
