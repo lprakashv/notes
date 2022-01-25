@@ -4,18 +4,18 @@ Contains course learnings, coding interview problems, daily learnings etc.
 
 ## Algorithms
 
-- [Graph Algorithms](algorithms/graph-algorithms.markdown)
-- [Backtracking problems](algorithms/backtracking-patterns.markdown)
-- [DP problems](algorithms/dynamic-programming-patterns.markdown)
-- [Bitwise Operations](algorithms/bitmasks.markdown)
+- [Graph Algorithms](./algorithms/graph-algorithms.markdown)
+- [Backtracking problems](./algorithms/backtracking-patterns.markdown)
+- [DP problems](./algorithms/dynamic-programming-patterns.markdown)
+- [Bitwise Operations](./algorithms/bitmasks.markdown)
 
 ## Coding problems
 
-- [Strings and Arrays](leetcode-problems/strings-arrays.markdown)
-- [Trees](leetcode-problems/trees.markdown)
-- [Backtracking](leetcode-problems/backtracking.markdown)
-- [DP](leetcode-problems/dynamic-programming.markdown)
-- [Others](leetcode-problems/others.markdown)
+- [Strings and Arrays](./coding-problems/strings-arrays.markdown)
+- [Trees](./coding-problems/trees.markdown)
+- [Backtracking](./coding-problems/backtracking.markdown)
+- [DP](./coding-problems/dynamic-programming.markdown)
+- [Others](./coding-problems/others.markdown)
 
 ## System Design
 
@@ -43,11 +43,11 @@ Contains course learnings, coding interview problems, daily learnings etc.
 
 ## Java
 
-- [Java Overview](java/java.markdown)
-- [Java Multitheading](java/java-multithreading.markdown)
-- [Java GC](java/java-gc.markdown)
-- [Java Snippets](java/java-snippets.markdown)
-- [Bitwise](algorithms/bitmasks.markdown)
+- [Java Overview](./java/java.markdown)
+- [Java Multitheading](./java/java-multithreading.markdown)
+- [Java GC](./java/java-gc.markdown)
+- [Java Snippets](./java/java-snippets.markdown)
+- [Bitwise](./algorithms/bitmasks.markdown)
 
 ## Spring
 
