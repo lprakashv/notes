@@ -4,9 +4,9 @@ Contains course learnings, coding interview problems, daily learnings etc.
 
 ## Algorithms
 
-- [Graph Algorithms](./algorithms/graph-algorithms.markdown)
-- [Backtracking problems](./algorithms/backtracking-patterns.markdown)
-- [DP problems](./algorithms/dynamic-programming-patterns.markdown)
+- [Graph Algorithms](./algorithms/graph.markdown)
+- [Backtracking problems](./algorithms/backtracking.markdown)
+- [DP problems](./algorithms/dynamic-programming.markdown)
 - [Bitwise Operations](./algorithms/bitmasks.markdown)
 
 ## Coding problems
