@@ -17,13 +17,13 @@ class RandomizedSet {
   List<Integer> list;
   Random rand = new Random();
 
-  /__ Initialize your data structure here. */
+  /** Initialize your data structure here. */
   public RandomizedSet() {
     dict = new HashMap();
     list = new ArrayList();
   }
 
-  /__ Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+  /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
   public boolean insert(int val) {
     if (dict.containsKey(val)) return false;
 
@@ -32,7 +32,7 @@ class RandomizedSet {
     return true;
   }
 
-  /__ Removes a value from the set. Returns true if the set contained the specified element. */
+  /** Removes a value from the set. Returns true if the set contained the specified element. */
   public boolean remove(int val) {
     if (! dict.containsKey(val)) return false;
 
@@ -47,7 +47,7 @@ class RandomizedSet {
     return true;
   }
 
-  /__ Get a random element from the set. */
+  /** Get a random element from the set. */
   public int getRandom() {
     return list.get(rand.nextInt(list.size()));
   }
