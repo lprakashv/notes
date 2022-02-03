@@ -1,0 +1,1354 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java Knowledge &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Java Garbage Collection" href="java-gc.html" />
+    <link rel="prev" title="Java" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Lalit’s Tech Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Interview Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algorithms/index.html">
+   Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/backtracking.html">
+     Backtracking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/divide-and-conquer.html">
+     Divide and Conquer Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/graph.html">
+     Graph Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/dynamic-programming.html">
+     Dynamic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/bitmasks.html">
+     Bitwise Tricks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../coding-problems/index.html">
+   Coding Problems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/strings-arrays.html">
+     Strings and Array coding problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/graphs.html">
+     Graph problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/trees.html">
+     Trees problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/backtracking.html">
+     Backtracking problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/dynamic-programming.html">
+     Dynamic Programmming problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/others.html">
+     Other coding problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../system-design/index.html">
+   System Design
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/distributed-systems-additional-notes.html">
+     Distributed System Notes
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../system-design/pragmatic-system-design.html">
+     Pragmatic System Design
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-uber.html">
+       Pragmatic System Design - Uber
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-whatsapp.html">
+       Pragmatic System Design - WhatsApp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-ebay.html">
+       Pragmatic System Design - eBay
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-tinyurl.html">
+       Pragmatic System Design - TinyURL
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-webcrawler.html">
+       Pragmatic System Design - Web Crawler
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-flashsale.html">
+       Pragmatic System Design - Flash coupon sale
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-twitter.html">
+       Pragmatic System Design - Twitter
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/system-design-checklist.html">
+     System Design Checklist
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/system-design-interview-cheatsheet.html">
+     System Design Interview Cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../system-design/architectures.html">
+     Architectures
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/architecture-twitter.html">
+       Twitter Architecture
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/design-ha-db.html">
+     Designing Highly Available (HA) Database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../behavioral-interviews/index.html">
+   Behavioral Interviews
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../behavioral-interviews/tell-me-about.html">
+     The Common “Tell me about a Time” or Behavioral Interview Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Java
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Java Knowledge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="java-gc.html">
+     Java Garbage Collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="java-multithreading.html">
+     Java Multi-threading
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="java-snippets.html">
+     Java Snippets
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../spring/index.html">
+     Spring
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../spring/spring-data-transactions.html">
+       Data Transactions with Spring
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../spring/spring-cloud.html">
+       Spring Cloud Fundamentals
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-distributed-config.html">
+         Spring Cloud Fundamentals: Distributed Config
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-service-discovery.html">
+         Spring Cloud Fundamentals: Service Discovery
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">
+         Spring Cloud Fundamentals: Intelligent Routing
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rust/index.html">
+   Rust
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rust/rust-snippets.html">
+     Rust Snippets
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency Parallelism and Reactive
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
+   Concurrency
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Tools and Technologies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../kubernetes/index.html">
+   Kubernetes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/kubernetes-intro.html">
+     Kubernetes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/namespaces.html">
+     Kubernetes Namespaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands and CheatSheets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">
+   Docker cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">
+   Kubectl Cheat Sheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">
+   Miscellaneous Helpful Commands - WIP
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/java/java.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/lprakashv/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fjava/java.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#garbage-collectors">
+   Garbage Collectors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operations">
+     Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gc-cycles-triggering">
+     GC Cycles - Triggering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-gc">
+     Types of GC
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#java-multithreading">
+   Java Multithreading
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-computation-into-a-separate-thread-spawning-threads">
+     Running computation into a separate thread - spawning threads
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-thread-synchronization">
+     Basic Thread synchronization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thread-pools">
+     Thread Pools
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#countdownlatch">
+     CountDownLatch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concurrent-thread-safe-data-structures">
+     Concurrent (thread-safe) Data structures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#blockingqueue">
+     BlockingQueue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wait-notify">
+     Wait-Notify
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-entrant-lock">
+     Re-Entrant Lock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deadlock">
+     Deadlock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semaphores">
+     Semaphores
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#callable-and-future">
+     Callable and Future
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interrupts">
+     Interrupts
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strings">
+   Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stream">
+   Stream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classloader">
+   ClassLoader
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-classloader">
+     Bootstrap ClassLoader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extension-classloader">
+     Extension ClassLoader
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Java Knowledge</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#garbage-collectors">
+   Garbage Collectors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operations">
+     Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gc-cycles-triggering">
+     GC Cycles - Triggering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-gc">
+     Types of GC
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#java-multithreading">
+   Java Multithreading
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-computation-into-a-separate-thread-spawning-threads">
+     Running computation into a separate thread - spawning threads
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-thread-synchronization">
+     Basic Thread synchronization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thread-pools">
+     Thread Pools
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#countdownlatch">
+     CountDownLatch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concurrent-thread-safe-data-structures">
+     Concurrent (thread-safe) Data structures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#blockingqueue">
+     BlockingQueue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wait-notify">
+     Wait-Notify
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-entrant-lock">
+     Re-Entrant Lock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deadlock">
+     Deadlock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semaphores">
+     Semaphores
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#callable-and-future">
+     Callable and Future
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interrupts">
+     Interrupts
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strings">
+   Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stream">
+   Stream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classloader">
+   ClassLoader
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-classloader">
+     Bootstrap ClassLoader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extension-classloader">
+     Extension ClassLoader
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="java-knowledge">
+<h1>Java Knowledge<a class="headerlink" href="#java-knowledge" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="garbage-collectors">
+<h2>Garbage Collectors<a class="headerlink" href="#garbage-collectors" title="Permalink to this headline">¶</a></h2>
+<p>Heap is divided into memory areas:</p>
+<ol class="simple">
+<li><p><strong>Permgen</strong>/<strong>metaspace</strong></p></li>
+<li><p><strong>NewGen</strong>
+a. Eden space
+b. Surviving space 1
+c. Surviving space 2</p></li>
+<li><p><strong>Old Gen</strong></p></li>
+</ol>
+<blockquote>
+<div><p>Only (2) and (3) are considered for GC.</p>
+</div></blockquote>
+<div class="section" id="operations">
+<h3>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mark</p></td>
+<td><p>Starts from root of application, walks through “object graph”, and marks all the reachable as live.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sweep (delete)</p></td>
+<td><p>Deletes all unreachable objects</p></td>
+</tr>
+<tr class="row-even"><td><p>Compacting</p></td>
+<td><p>Compacts the memory/defragment it/increase contiguous space.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gc-cycles-triggering">
+<h3>GC Cycles - Triggering<a class="headerlink" href="#gc-cycles-triggering" title="Permalink to this headline">¶</a></h3>
+<p>In 2 types of ways of GC triggered:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type/Cycle</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Minor</p></td>
+<td><p>Works on small amount of memory - mostly the newgen space, old is untouched</p></td>
+</tr>
+<tr class="row-odd"><td><p>Major</p></td>
+<td><p>Works on the entire heap</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Both the operations are “stop the world”</p></li>
+<li><p>Every new object creation happens in Eden space.</p></li>
+<li><p>On Eden space exhaustion, minor gc kicks in.</p>
+<ul>
+<li><p>Marks all the objects in New/young gen.</p></li>
+<li><p>Puts surviving from eden in either SS1 or SS2</p></li>
+<li><p>Also transfers surviving in other SS also (avoids compacting overhead)</p></li>
+<li><p>Sweeps</p></li>
+</ul>
+</li>
+<li><p>If an object survives <code class="docutils literal notranslate"><span class="pre">-XX:MaxTenuringThreshold</span></code> number of gc cycles, it’s promoted to older/tenured space.</p></li>
+</ul>
+</div>
+<div class="section" id="types-of-gc">
+<h3>Types of GC<a class="headerlink" href="#types-of-gc" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Serial GC - basic.</p>
+<ol class="simple">
+<li><p>Single threaded.</p></li>
+<li><p>Completely pauses every other thread (complete stop the world).</p></li>
+</ol>
+</li>
+<li><p>Concurrent Mark Sweep (CMS).</p>
+<ol class="simple">
+<li><p>When: <strong>more memory, more CPU, short pauses.</strong></p></li>
+<li><p>Performs GC along with application execution.</p></li>
+<li><p>Does not wait for the Old Gen to be full.</p></li>
+<li><p>Stops the world only during marking/re-marking.</p></li>
+</ol>
+</li>
+<li><p>Parallel GC.</p>
+<ol class="simple">
+<li><p>When: <strong>less memory, less CPU, high throughput needed, can withstand long pauses.</strong></p></li>
+<li><p>Utilizes multiple CPUs and threads.</p></li>
+<li><p>Does not kick in until heap is full/near-full.</p></li>
+<li><p>“Stop the world”.</p></li>
+</ol>
+</li>
+<li><p>G1 GC (Java 7+) - Garbase First.</p>
+<ol class="simple">
+<li><p>Divides entire memory into smaller regions (those can be Eden/Survivor/Tenured).</p></li>
+<li><p>Runs on smaller regions whichever has more garbage.</p></li>
+<li><p>Concurrent as well as parallel.</p></li>
+<li><p>Pauses for defragmentation.</p></li>
+<li><p>Better heap utilization.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="java-multithreading">
+<h2>Java Multithreading<a class="headerlink" href="#java-multithreading" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-computation-into-a-separate-thread-spawning-threads">
+<h3>Running computation into a separate thread - spawning threads<a class="headerlink" href="#running-computation-into-a-separate-thread-spawning-threads" title="Permalink to this headline">¶</a></h3>
+<p>Using Thread class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MyClass</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using Runnable interface:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">//…</span>
+ <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="basic-thread-synchronization">
+<h3>Basic Thread synchronization<a class="headerlink" href="#basic-thread-synchronization" title="Permalink to this headline">¶</a></h3>
+<p>Thread might “cache” some shared data and prevent scanning it when other threads modify it.</p>
+<blockquote>
+<div><p>Use <code class="docutils literal notranslate"><span class="pre">volatile</span></code> keyword in the data field declaration to avoid this.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">t1.join()</span></code> returns to main thread only when <code class="docutils literal notranslate"><span class="pre">t1</span></code> finishes meaning <code class="docutils literal notranslate"><span class="pre">t1</span></code> <strong>blocks</strong> the main thread.</p>
+<p>To fixing thread interleaving (on a modifiable data):</p>
+<ul class="simple">
+<li><p>Make the modification operation “atomic” by making methods for each operation <em>synchronized</em> using <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">synchronized</span> <span class="pre">void</span> <span class="pre">fn()</span></code>.</p></li>
+<li><p>Java <code class="docutils literal notranslate"><span class="pre">Object</span></code> implements and intrinsic lock (mutex) if we use <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> keyword, a thread can only access the object if the lock is available.</p></li>
+</ul>
+<p>Problem with synchronized methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">time</span> <span class="pre">taken</span> <span class="pre">=</span> <span class="pre">(no.</span> <span class="pre">of</span> <span class="pre">threads)</span> <span class="pre">*</span> <span class="pre">(unit</span> <span class="pre">work</span> <span class="pre">time)</span></code> =&gt; multithreading advantage is compromised.</p></li>
+<li><p>Independent methods still have to be executed sequentially (as the lock on object is no available while some thread accessing some orthogonal/independent method).</p></li>
+</ul>
+<p><strong>Solution:</strong></p>
+<p><strong>synchronized block</strong> with different locks for each independent code block (use n - different objects to act as locks and pass them to synchronized of each block)</p>
+<blockquote>
+<div><p>Default it is <code class="docutils literal notranslate"><span class="pre">synchronized(this)</span></code>
+Bad practice to lock on actual working object (shared data), multiple of them might point to the same (java optimization).
+Better to create separate locks.</p>
+</div></blockquote>
+</div>
+<div class="section" id="thread-pools">
+<h3>Thread Pools<a class="headerlink" href="#thread-pools" title="Permalink to this headline">¶</a></h3>
+<p>Way of managing lots of threads at the same time.</p>
+<blockquote>
+<div><p>a collection of fixed number of workers</p>
+</div></blockquote>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//no. of workers</span>
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">//defining thread pool with fixed size</span>
+<span class="n">ExecutorService</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">Executors</span><span class="p">.</span><span class="na">newFixedThreadPool</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1">//allotting tasks to the executor service</span>
+<span class="n">executor</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span><span class="k">new</span> <span class="n">myCustomThread1</span><span class="p">());</span>
+<span class="n">executor</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span><span class="k">new</span> <span class="n">myCustomThread2</span><span class="p">());</span>
+<span class="c1">//...</span>
+
+<span class="c1">//stop accepting new tasks and it will shutdown after all are completed.</span>
+<span class="n">executor</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span>
+
+<span class="c1">//waits only for specified time and then will return</span>
+<span class="n">Executor</span><span class="p">.</span><span class="na">awaitTermination</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">TimeOut</span><span class="p">.</span><span class="na">MILLIS</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Implementing thread-pool from scratch</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://tutorials.jenkov.com/java-concurrency/thread-pools.html">jenkov</a></p></li>
+<li><p><a class="reference external" href="https://www.javacodegeeks.com/2016/12/implement-thread-pool-java.html">javacodegeeeks</a></p></li>
+<li><p><a class="reference external" href="https://caffinc.github.io/2016/03/simple-threadpool/">caffinc - simple-threadpool</a></p></li>
+</ul>
+</div>
+<div class="section" id="countdownlatch">
+<h3>CountDownLatch<a class="headerlink" href="#countdownlatch" title="Permalink to this headline">¶</a></h3>
+<p>A thread safe class</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//initialize with a count</span>
+<span class="n">CountDownLatch</span> <span class="n">latch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CountDownLatch</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="c1">//counting it down</span>
+<span class="n">latch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span>
+<span class="c1">//wait till it is 0</span>
+<span class="n">latch</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="concurrent-thread-safe-data-structures">
+<h3>Concurrent (thread-safe) Data structures<a class="headerlink" href="#concurrent-thread-safe-data-structures" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>All classes in <code class="docutils literal notranslate"><span class="pre">java.util.cocurrent.*</span></code> package are concurrent and thread-safe.</p></li>
+<li><p>No need to worry about thread synchronization at all.</p></li>
+</ul>
+</div>
+<div class="section" id="blockingqueue">
+<h3>BlockingQueue<a class="headerlink" href="#blockingqueue" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+
+<span class="c1">//patiently waits till queue-size &lt; size</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">someInt</span><span class="p">);</span>
+
+<span class="c1">//patiently waits till an item is added (if queue is empty)</span>
+<span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Both the above methods makes it easy to implement producer-consumer problem.</p>
+</div></blockquote>
+</div>
+<div class="section" id="wait-notify">
+<h3>Wait-Notify<a class="headerlink" href="#wait-notify" title="Permalink to this headline">¶</a></h3>
+<p><strong>Wait</strong></p>
+<ul class="simple">
+<li><p>Can only be called inside the synchronized block</p></li>
+<li><p>Releases the lock on the object “immediately”, it is synchronized on and waits for notification/resumption.</p></li>
+</ul>
+<p><strong>Notify</strong></p>
+<ul class="simple">
+<li><p>Can only be called inside the synchronized block.</p></li>
+<li><p>Notifies the waiting thread. (does not release the lock until the block is over).</p></li>
+</ul>
+<p><strong>Notify-All</strong></p>
+<ul class="simple">
+<li><p>Notifies the waiting thread. (does not release the lock until the block is over).</p></li>
+</ul>
+</div>
+<div class="section" id="re-entrant-lock">
+<h3>Re-Entrant Lock<a class="headerlink" href="#re-entrant-lock" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//lock interface</span>
+<span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Bad way to use:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//works just like synchronized block</span>
+<span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span>
+<span class="c1">//do something -&gt; if this throws and exception lock is never released!</span>
+<span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Better way:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="c1">//do something</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+    <span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Similar to wait/notify in the synchronized block:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Condition</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">();</span>
+<span class="c1">//similar to wait()</span>
+<span class="n">condition</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
+<span class="c1">//notify</span>
+<span class="n">condition</span><span class="p">.</span><span class="na">signal</span><span class="p">();</span>
+<span class="c1">//notifyAll</span>
+<span class="n">condition</span><span class="p">.</span><span class="na">signalAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>We have to unlock before we can return to the waiting thread after calling signal()</p>
+</div></blockquote>
+</div>
+<div class="section" id="deadlock">
+<h3>Deadlock<a class="headerlink" href="#deadlock" title="Permalink to this headline">¶</a></h3>
+<p>2 threads are waiting on each other to release a lock (free the shared resource) -&gt; application frozen.</p>
+<blockquote>
+<div><p>Simple way to reproduce: lock the different re-entrant locks in different order in each thread.</p>
+</div></blockquote>
+<p>Deadlock solutions:</p>
+<ul class="simple">
+<li><p>Lock your locks in the same order in every thread.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">tryLock()</span></code> of the Lock interface.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//it returns immediately the status (if success)</span>
+<span class="kt">boolean</span> <span class="n">gotLock</span> <span class="o">=</span> <span class="n">lock</span><span class="p">.</span><span class="na">tryLock</span><span class="p">()</span>
+<span class="c1">//we should unlock the locks if partially acquired</span>
+
+<span class="c1">//either we should have all the locks (acquired in order)</span>
+
+<span class="c1">//or none (so that other can acquire them)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="semaphores">
+<h3>Semaphores<a class="headerlink" href="#semaphores" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Semaphore</span> <span class="n">sem</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Semaphore</span><span class="p">(</span><span class="n">noOfPermits</span><span class="p">);</span>
+<span class="c1">//fair semaphore -&gt; new Semaphore(permits, true);</span>
+<span class="c1">//it will provide access to the first waiting thread on releasing.</span>
+
+<span class="c1">//get current no. of available permits</span>
+<span class="n">sem</span><span class="p">.</span><span class="na">availablePermits</span><span class="p">();</span>
+
+<span class="c1">//acquire -&gt; decrements permits, waits if the permits == 0</span>
+<span class="n">sem</span><span class="p">.</span><span class="na">acquire</span><span class="p">();</span>
+
+<span class="c1">//release -&gt; increments permits.</span>
+<span class="n">sem</span><span class="p">.</span><span class="na">release</span><span class="p">();</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Semaphore with one permit = Lock</p></li>
+<li><p>Can be used to provide “limited-access” -&gt; connection singleton managing connected users - max up to a limit (say 100).</p></li>
+</ul>
+</div>
+<div class="section" id="callable-and-future">
+<h3>Callable and Future<a class="headerlink" href="#callable-and-future" title="Permalink to this headline">¶</a></h3>
+<p>To get return results in a scenario of multiple threads in a thread pool.</p>
+<p><strong>Callable</strong> - Similar to Runnable but its thread method returns something (unlike Runnable’s void run() method).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// anonymous implementation to return integer</span>
+<span class="n">executor</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span>
+    <span class="c1">//anonymous class implementing Callable&lt;T&gt; interface</span>
+    <span class="k">new</span> <span class="n">Callable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">call</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">//do something and return an int</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Future</strong> - Very useful for thread execution info/results</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>//executor.submit(..) return a Future&lt;T&gt; instance
+Future&lt;Integer&gt; future = executor.submit(…);
+
+//get returned value
+future.get();
+//get() will block until the thread associated with the future has returned/executed.
+</pre></div>
+</div>
+</div>
+<div class="section" id="interrupts">
+<h3>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span><span class="p">.</span><span class="na">interrupt</span><span class="p">()</span>
+<span class="c1">//doesn&#39;t stop the thread -&gt; there is a stop() method but it is deprecated.</span>
+<span class="c1">//it just sets an interrupted flag and continues with the normal execution.</span>
+
+<span class="c1">//we cause Thread.currentThread() instead of explicitly defining a thread</span>
+<span class="n">t1</span><span class="p">.</span><span class="na">isInterrupted</span><span class="p">()</span>
+
+<span class="c1">//catching InterruptedException will catch it if the flag is set.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>String pool was used to be in Permgen, but <strong>since java 8 it has been moved to main heap area</strong>.</p></li>
+<li><p>Since java 1.7 <code class="docutils literal notranslate"><span class="pre">+</span></code> operators are implemented using <code class="docutils literal notranslate"><span class="pre">StringBuilder</span></code>’s <code class="docutils literal notranslate"><span class="pre">.append()</span></code> method.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.concat()</span></code> can only concat 2 strings (unlike <code class="docutils literal notranslate"><span class="pre">.append()</span></code> and <code class="docutils literal notranslate"><span class="pre">+</span></code> which can concat different data types)</p></li>
+<li><p><strong>There was a memory leak in java 1.6 <code class="docutils literal notranslate"><span class="pre">String()</span></code> constructor.</strong></p></li>
+<li><p>Regex - match introduced in java 8.</p></li>
+</ul>
+</div>
+<div class="section" id="stream">
+<h2>Stream<a class="headerlink" href="#stream" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The data comes from elsewhere (a collection, array, generator function, or I/O channel) and is processed through a pipeline of computational steps to produce a result or side effect, at which point the stream is finished.</p></li>
+<li><p>Stream’s <strong>focus is on computation</strong>, <strong>not data</strong>.</p></li>
+<li><p>Streams provide <strong>no storage for the elements that they process</strong>*, and the lifecycle of a stream is more like a point in time — the invocation of the terminal operation.</p></li>
+<li><p>For streams, <strong>only the terminal operation is eager, all the others are lazy</strong>.</p></li>
+<li><p>Stream operations represent a functional transformation on their input (also a stream), rather than a mutative operation on a data set (filtering a stream produces a new stream whose elements are a subset of the input stream but doesn’t remove any elements from the source).</p></li>
+</ul>
+<p>Example of non-stream vs stream operation:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Ad-hoc query over a collection</span>
+
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Seller</span><span class="o">&gt;</span> <span class="n">sellers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">Txn</span> <span class="n">t</span> <span class="p">:</span> <span class="n">txns</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="na">getBuyer</span><span class="p">().</span><span class="na">getAge</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">)</span>
+    <span class="n">sellers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="na">getSeller</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Seller</span><span class="o">&gt;</span> <span class="n">sorted</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">sellers</span><span class="p">);</span>
+
+<span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">sorted</span><span class="p">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Seller</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="p">(</span><span class="n">Seller</span> <span class="n">a</span><span class="p">,</span> <span class="n">Seller</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="na">getName</span><span class="p">().</span><span class="na">compareTo</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">Seller</span> <span class="n">s</span> <span class="p">:</span> <span class="n">sorted</span><span class="p">)</span>
+  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">txns</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+  <span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="p">.</span><span class="na">getBuyer</span><span class="p">().</span><span class="na">getAge</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Txn</span><span class="p">::</span><span class="n">getSeller</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">distinct</span><span class="p">()</span>
+  <span class="p">.</span><span class="na">sorted</span><span class="p">(</span><span class="n">comparing</span><span class="p">(</span><span class="n">Seller</span><span class="p">::</span><span class="n">getName</span><span class="p">))</span>
+  <span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Seller</span><span class="p">::</span><span class="n">getName</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Key Advantages:</p>
+<ol class="simple">
+<li><p>No distraction of garbage variable (sellers, sorted in the above example)</p></li>
+<li><p>Don’t have to keep track of context which leads to code understanding on one glance, less error prone.</p></li>
+</ol>
+</div>
+<div class="section" id="classloader">
+<h2>ClassLoader<a class="headerlink" href="#classloader" title="Permalink to this headline">¶</a></h2>
+<p><strong>javac</strong> : <code class="docutils literal notranslate"><span class="pre">*.java</span></code> files to <code class="docutils literal notranslate"><span class="pre">*.class</span></code> files</p>
+<p><strong>Class-loader</strong> : loads the <code class="docutils literal notranslate"><span class="pre">*.class</span></code> files!</p>
+<p>Kinds of class loaders and load from locations:</p>
+<ol class="simple">
+<li><p><strong>Bootstrap</strong> (or “Primordial ClassLoader”)</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">JRE/lib/rt.jar</span></code></p></li>
+</ol>
+</li>
+<li><p><strong>Extension</strong></p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">JRE/lib/ext</span></code></p></li>
+<li><p>Or any directory denoted by : <code class="docutils literal notranslate"><span class="pre">&quot;java.ext.dirs&quot;</span></code></p></li>
+</ol>
+</li>
+<li><p>System or Application</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;CLASSPATH&quot;</span></code> environment variable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;-classmate&quot;</span></code> or “-cp” option.</p></li>
+<li><p>Classpath attribute of manifest inside JAR file.</p></li>
+</ol>
+</li>
+</ol>
+<div class="section" id="bootstrap-classloader">
+<h3>Bootstrap ClassLoader<a class="headerlink" href="#bootstrap-classloader" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Loads standard JDK class files from “rt.jar”</p></li>
+<li><p>Parent of all class loaders</p></li>
+<li><p>Doesn’t have any parent</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">String.class.getClassLoader()</span> <span class="pre">==</span> <span class="pre">null</span></code></p></li>
+</ul>
+</li>
+<li><p>Only class loader which is <strong>implemented in native language</strong>, mostly in “C” !</p>
+<ul>
+<li><p><strong>All others are implemented using <code class="docutils literal notranslate"><span class="pre">java.lang.ClassLoader</span></code></strong></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="extension-classloader">
+<h3>Extension ClassLoader<a class="headerlink" href="#extension-classloader" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Delegates class loading request to its parent (Bootstrap)</p></li>
+<li><p>If unsuccessful from parent (Bootstrap), it loads class from <code class="docutils literal notranslate"><span class="pre">&quot;jre/lib/ext&quot;</span></code> or any directory pointed by <code class="docutils literal notranslate"><span class="pre">&quot;java.ext.dirs&quot;</span></code></p></li>
+<li><p>Implemented by : <code class="docutils literal notranslate"><span class="pre">sun.misc.Launcher$ExtClassLoader</span></code></p></li>
+<li><p>Child or Extension class loader</p></li>
+</ul>
+<p><img alt="ClassLoader" src="../_images/jvm-classloader.png" /></p>
+<p>Principles:</p>
+<ol class="simple">
+<li><p>Delegation principle: A class in loaded in Java when it is needed.</p></li>
+<li><p>Visibility principle: Child ClassLoader can see class loaded by parent ClassLoader, but the vice-versa is not true.</p></li>
+</ol>
+<p>Simple test to prove visibility principle</p>
+<ul class="simple">
+<li><p>Get Current class’s ClassLoader by calling, <code class="docutils literal notranslate"><span class="pre">Abc.class.getClassLoader()</span></code> ====&gt; Abc is an Application ClassLoader class</p></li>
+<li><p>If we try to load this class using the Extension class loader like:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Class.forName(&quot;somepack.Abc&quot;,</span> <span class="pre">true,</span> <span class="pre">ClassLoaderTest.class.getClassLoader().getParent())</span></code></p></li>
+<li><p>This will fail! =====&gt; meaning extension class loader cannot see the classes loaded by application class loader</p></li>
+</ul>
+</li>
+</ul>
+<p>Extras:</p>
+<ul class="simple">
+<li><p>Class is loaded by calling <code class="docutils literal notranslate"><span class="pre">loadClass()</span></code> method of <code class="docutils literal notranslate"><span class="pre">java.lang.ClassLoader</span></code> class which calls <code class="docutils literal notranslate"><span class="pre">findClass()</span></code> method to locate bytecodes for the corresponding class</p></li>
+<li><p>Extension ClassLoader uses <code class="docutils literal notranslate"><span class="pre">java.net.URLClassLoader</span></code> which searches for class files and resources in JAR and directories. any search path which is ended using “/” is considered a directory</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">findClass()</span></code> does not found the class than it throws <code class="docutils literal notranslate"><span class="pre">java.lang.ClassNotFoundException</span></code> and if it finds it calls defineClass() to convert bytecodes into a <code class="docutils literal notranslate"><span class="pre">.class</span></code> instance which is returned to the caller</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./java"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Java</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="java-gc.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Java Garbage Collection</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

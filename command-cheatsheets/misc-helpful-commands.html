@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miscellaneous Helpful Commands - WIP &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Kubectl Cheat Sheet" href="kubectl-cheatsheet.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Lalit’s Tech Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Interview Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algorithms/index.html">
+   Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/backtracking.html">
+     Backtracking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/divide-and-conquer.html">
+     Divide and Conquer Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/graph.html">
+     Graph Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/dynamic-programming.html">
+     Dynamic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/bitmasks.html">
+     Bitwise Tricks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../coding-problems/index.html">
+   Coding Problems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/strings-arrays.html">
+     Strings and Array coding problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/graphs.html">
+     Graph problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/trees.html">
+     Trees problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/backtracking.html">
+     Backtracking problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/dynamic-programming.html">
+     Dynamic Programmming problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/others.html">
+     Other coding problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../system-design/index.html">
+   System Design
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/distributed-systems-additional-notes.html">
+     Distributed System Notes
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../system-design/pragmatic-system-design.html">
+     Pragmatic System Design
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-uber.html">
+       Pragmatic System Design - Uber
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-whatsapp.html">
+       Pragmatic System Design - WhatsApp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-ebay.html">
+       Pragmatic System Design - eBay
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-tinyurl.html">
+       Pragmatic System Design - TinyURL
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-webcrawler.html">
+       Pragmatic System Design - Web Crawler
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-flashsale.html">
+       Pragmatic System Design - Flash coupon sale
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-twitter.html">
+       Pragmatic System Design - Twitter
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/system-design-checklist.html">
+     System Design Checklist
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/system-design-interview-cheatsheet.html">
+     System Design Interview Cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../system-design/architectures.html">
+     Architectures
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/architecture-twitter.html">
+       Twitter Architecture
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/design-ha-db.html">
+     Designing Highly Available (HA) Database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../behavioral-interviews/index.html">
+   Behavioral Interviews
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../behavioral-interviews/tell-me-about.html">
+     The Common “Tell me about a Time” or Behavioral Interview Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../java/index.html">
+   Java
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java.html">
+     Java Knowledge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-gc.html">
+     Java Garbage Collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-multithreading.html">
+     Java Multi-threading
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-snippets.html">
+     Java Snippets
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../spring/index.html">
+     Spring
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../spring/spring-data-transactions.html">
+       Data Transactions with Spring
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../spring/spring-cloud.html">
+       Spring Cloud Fundamentals
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-distributed-config.html">
+         Spring Cloud Fundamentals: Distributed Config
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-service-discovery.html">
+         Spring Cloud Fundamentals: Service Discovery
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">
+         Spring Cloud Fundamentals: Intelligent Routing
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rust/index.html">
+   Rust
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rust/rust-snippets.html">
+     Rust Snippets
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency Parallelism and Reactive
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
+   Concurrency
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Tools and Technologies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../kubernetes/index.html">
+   Kubernetes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/kubernetes-intro.html">
+     Kubernetes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/namespaces.html">
+     Kubernetes Namespaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands and CheatSheets
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="docker-cheatsheet.html">
+   Docker cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kubectl-cheatsheet.html">
+   Kubectl Cheat Sheet
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Miscellaneous Helpful Commands - WIP
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/command-cheatsheets/misc-helpful-commands.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/lprakashv/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fcommand-cheatsheets/misc-helpful-commands.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jshell">
+   JShell
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#docker">
+   Docker
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jvm-arguments-wip">
+   JVM Arguments - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ms-sql-server">
+   MS SQL Server
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#git-wip">
+   Git - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-unix-commands-wip">
+   General Unix Commands - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nginx-basics-wip">
+   Nginx Basics - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#awk-wip">
+   AWK - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hdfs">
+   HDFS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kafka-debugging">
+   Kafka Debugging
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Miscellaneous Helpful Commands - WIP</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jshell">
+   JShell
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#docker">
+   Docker
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jvm-arguments-wip">
+   JVM Arguments - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ms-sql-server">
+   MS SQL Server
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#git-wip">
+   Git - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-unix-commands-wip">
+   General Unix Commands - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nginx-basics-wip">
+   Nginx Basics - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#awk-wip">
+   AWK - WIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hdfs">
+   HDFS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kafka-debugging">
+   Kafka Debugging
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="miscellaneous-helpful-commands-wip">
+<h1>Miscellaneous Helpful Commands - WIP<a class="headerlink" href="#miscellaneous-helpful-commands-wip" title="Permalink to this headline">¶</a></h1>
+<p>Commands used in personal/professional Experience</p>
+<div class="section" id="jshell">
+<h2>JShell<a class="headerlink" href="#jshell" title="Permalink to this headline">¶</a></h2>
+<p>Multiple dependencies using maven local repos, use JAR files <code class="docutils literal notranslate"><span class="pre">:</span></code> (colon) separated</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jshell --class-path ./jackson-databind-2.12.4.jar:./jackson-core-2.12.4.jar:./jackson-annotations-2.12.4.jar
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>Remove old dangling images</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker rmi <span class="sb">`</span>docker images --filter <span class="nv">dangling</span><span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>Remove container after running it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run —rm image-id
+</pre></div>
+</div>
+<p>Run an image in a container with its name</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm <span class="sb">`</span>docker images --filter <span class="nv">reference</span><span class="o">=</span><span class="s1">&#39;*/log-generator&#39;</span> --format <span class="s1">&#39;{{.ID}}&#39;</span><span class="sb">`</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jvm-arguments-wip">
+<h2>JVM Arguments - WIP<a class="headerlink" href="#jvm-arguments-wip" title="Permalink to this headline">¶</a></h2>
+<p>Hibernate enable SQL generation/logging</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-Dspring.jpa.show-sql<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+-Dspring.jpa.properties.hibernate.format_sql<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+-Dlogging.level.org.hibernate.SQL<span class="o">=</span>DEBUG <span class="se">\</span>
+-Dlogging.level.org.hibernate.type.descriptor.sql.BasicBinder<span class="o">=</span>TRACE
+</pre></div>
+</div>
+</div>
+<div class="section" id="ms-sql-server">
+<h2>MS SQL Server<a class="headerlink" href="#ms-sql-server" title="Permalink to this headline">¶</a></h2>
+<p>Running procedure</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="n">object_name</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">objectid</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ProcName</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_connections</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">qs</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="n">APPLY</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_sql_text</span><span class="p">(</span><span class="n">qs</span><span class="p">.</span><span class="n">most_recent_sql_handle</span><span class="p">)</span><span class="w"> </span><span class="n">st</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="n">object_name</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">objectid</span><span class="p">)</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Currently Running queries</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">sqltext</span><span class="p">.</span><span class="nb">TEXT</span><span class="p">,</span><span class="w"></span>
+<span class="n">req</span><span class="p">.</span><span class="n">session_id</span><span class="p">,</span><span class="w"></span>
+<span class="n">req</span><span class="p">.</span><span class="n">status</span><span class="p">,</span><span class="w"></span>
+<span class="n">req</span><span class="p">.</span><span class="n">start_time</span><span class="p">,</span><span class="w"></span>
+<span class="n">req</span><span class="p">.</span><span class="n">command</span><span class="p">,</span><span class="w"></span>
+<span class="n">req</span><span class="p">.</span><span class="n">cpu_time</span><span class="p">,</span><span class="w"></span>
+<span class="n">req</span><span class="p">.</span><span class="n">total_elapsed_time</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_requests</span><span class="w"> </span><span class="n">req</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="n">APPLY</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_sql_text</span><span class="p">(</span><span class="n">sql_handle</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">sqltext</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-wip">
+<h2>Git - WIP<a class="headerlink" href="#git-wip" title="Permalink to this headline">¶</a></h2>
+<p>Remove files from remote after adding int .gitignore:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm -r --cached .
+</pre></div>
+</div>
+<p>Then git add, commit and push</p>
+</div>
+<div class="section" id="general-unix-commands-wip">
+<h2>General Unix Commands - WIP<a class="headerlink" href="#general-unix-commands-wip" title="Permalink to this headline">¶</a></h2>
+<p>Process stats</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>top -p &lt;pid&gt;
+top -i
+</pre></div>
+</div>
+<p>User taking superuser role - ?</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -su &lt;username&gt;
+</pre></div>
+</div>
+<p>Disk space</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>df -hk <span class="p">|</span> du
+</pre></div>
+</div>
+<p>Get open ports where applications are listening</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>netstat -ap tcp <span class="p">|</span> grep -i <span class="s2">&quot;listen&quot;</span>
+
+lsof -Pn -i4
+lsof -Pn -i4 <span class="p">|</span> grep LISTEN
+sudo lsof -PiTCP -sTCP:LISTEN
+</pre></div>
+</div>
+<p>All services listening on ports</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>netstat -tunlp
+</pre></div>
+</div>
+<p>Local DNS</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/hosts
+</pre></div>
+</div>
+</div>
+<div class="section" id="nginx-basics-wip">
+<h2>Nginx Basics - WIP<a class="headerlink" href="#nginx-basics-wip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nginx -s reload<span class="p">|</span>reopen<span class="p">|</span>quit<span class="p">|</span>stop
+</pre></div>
+</div>
+<p>conf files with server specifications: <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/*.conf</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-enabled/&lt;----&gt;</span></code></p>
+</div>
+<div class="section" id="awk-wip">
+<h2>AWK - WIP<a class="headerlink" href="#awk-wip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>less image-processing.log <span class="p">|</span> sed -E -e <span class="s2">&quot;s/Img//g&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $6&quot;.jpeg&quot;}&#39;</span> <span class="p">|</span> xargs -I <span class="s1">&#39;{}&#39;</span> sudo mv ./tmp/<span class="o">{}</span> ./temp-images/
+
+
+less nginx_access.log <span class="p">|</span> sed -E -e <span class="s2">&quot;s/(\?|\&amp;)([^=]+)\=([^&amp;]+)//g&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2 &quot;\t&quot; $10}&#39;</span> <span class="p">|</span> sort -k1n
+
+
+less nginx_access.log <span class="p">|</span> grep <span class="nv">status</span><span class="o">=</span><span class="m">502</span> <span class="p">|</span> sed -E -e <span class="s2">&quot;s/(\?|\&amp;)([^=]+)\=([^&amp;]+)//g&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{arr[$10]++}END{for(a in arr) print arr[a], &quot;\t&quot; a}&#39;</span> <span class="p">|</span> sort -k1n
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sort</span> <span class="pre">-k1n</span></code> - ???</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xargs</span> <span class="pre">-I</span> <span class="pre">'{}'</span></code> - ???</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">-E</span> <span class="pre">-e</span> <span class="pre">&quot;&quot;</span></code> - ???</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">awk</span></code> with multi-line expression and for-loop.</p></li>
+</ul>
+</div>
+<div class="section" id="hdfs">
+<h2>HDFS<a class="headerlink" href="#hdfs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hadoop fs &lt;command&gt;
+</pre></div>
+</div>
+<p>Grepping across multiple files in HDFS</p>
+<p>Recursive LS on a directory</p>
+<ol class="simple">
+<li><p>GREP files</p></li>
+<li><p>capture/awk file names (after 8th char)</p></li>
+<li><p>get 1 input</p></li>
+<li><p>use caret to be replaced by input</p></li>
+<li><p>10 multiple processes</p></li>
+<li><p>execute bash script for hadoop fs -cat</p></li>
+</ol>
+<p>Impl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hadoop fs -ls -R /user/asdacd_account/feedFiles/2019/08/ <span class="p">|</span> grep .csv <span class="p">|</span> awk <span class="s1">&#39;{print $8}&#39;</span> <span class="p">|</span> <span class="se">\</span>
+xargs -n <span class="m">1</span> -I ^ -P <span class="m">10</span> bash -c <span class="se">\</span>
+<span class="s2">&quot;hadoop fs -cat ^ | grep -q 961412 &amp;&amp; echo ^&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="kafka-debugging">
+<h2>Kafka Debugging<a class="headerlink" href="#kafka-debugging" title="Permalink to this headline">¶</a></h2>
+<p>To find the last 10 records</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kafkacat <span class="se">\</span>
+-b &lt;bootstrap-servers&gt; <span class="se">\</span>
+-G lpv-kafkacat-consumer <span class="se">\</span>
+-t asda-storeinventory <span class="se">\</span>
+-o -10 <span class="se">\</span>
+-C <span class="se">\</span>
+-f <span class="s1">&#39;\nKey (%K bytes): %k\t\nValue (%S bytes): %s\nTimestamp: %T\tPartition: %p\tOffset: %o\n--\n&#39;</span>
+</pre></div>
+</div>
+<p>To find the latest offset in a topic</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kafka-run-class kafka.tools.GetOffsetShell <span class="se">\</span>
+--broker-list &lt;bootstrap-servers&gt; <span class="se">\</span>
+--topic asda-recipes-etl --time -1 <span class="se">\</span>
+<span class="p">|</span> awk -F  <span class="s2">&quot;:&quot;</span> <span class="s1">&#39;{sum += $3} END {print sum}&#39;</span>
+</pre></div>
+</div>
+<p>To find earliest offset in a topic</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kafka-run-class kafka.tools.GetOffsetShell <span class="se">\</span>
+--broker-list &lt;bootstrap-servers&gt; <span class="se">\</span>
+--topic asda-recipes-etl <span class="se">\</span>
+--time -2 <span class="se">\</span>
+<span class="p">|</span> awk -F  <span class="s2">&quot;:&quot;</span> <span class="s1">&#39;{sum += $3} END {print sum}&#39;</span>
+</pre></div>
+</div>
+<p>To find offset of topic at a particular epoch-time</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kafka-run-class kafka.tools.GetOffsetShell <span class="se">\</span>
+--broker-list &lt;bootstrap-servers&gt; <span class="se">\</span>
+--topic ukgr-recipe-hearst-etl-prod <span class="se">\</span>
+--time <span class="m">1583298000000</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./command-cheatsheets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="kubectl-cheatsheet.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Kubectl Cheat Sheet</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

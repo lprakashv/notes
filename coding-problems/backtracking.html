@@ -1,0 +1,1465 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backtracking problems &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic Programmming problems" href="dynamic-programming.html" />
+    <link rel="prev" title="Trees problems" href="trees.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Lalit’s Tech Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Interview Preparation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algorithms/index.html">
+   Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/backtracking.html">
+     Backtracking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/divide-and-conquer.html">
+     Divide and Conquer Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/graph.html">
+     Graph Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/dynamic-programming.html">
+     Dynamic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/bitmasks.html">
+     Bitwise Tricks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Coding Problems
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="strings-arrays.html">
+     Strings and Array coding problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="graphs.html">
+     Graph problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trees.html">
+     Trees problems
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Backtracking problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dynamic-programming.html">
+     Dynamic Programmming problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="others.html">
+     Other coding problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../system-design/index.html">
+   System Design
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/distributed-systems-additional-notes.html">
+     Distributed System Notes
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../system-design/pragmatic-system-design.html">
+     Pragmatic System Design
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-uber.html">
+       Pragmatic System Design - Uber
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-whatsapp.html">
+       Pragmatic System Design - WhatsApp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-ebay.html">
+       Pragmatic System Design - eBay
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-tinyurl.html">
+       Pragmatic System Design - TinyURL
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-webcrawler.html">
+       Pragmatic System Design - Web Crawler
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-flashsale.html">
+       Pragmatic System Design - Flash coupon sale
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/pragmatic-system-design-twitter.html">
+       Pragmatic System Design - Twitter
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/system-design-checklist.html">
+     System Design Checklist
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/system-design-interview-cheatsheet.html">
+     System Design Interview Cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../system-design/architectures.html">
+     Architectures
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../system-design/architecture-twitter.html">
+       Twitter Architecture
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../system-design/design-ha-db.html">
+     Designing Highly Available (HA) Database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../behavioral-interviews/index.html">
+   Behavioral Interviews
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../behavioral-interviews/tell-me-about.html">
+     The Common “Tell me about a Time” or Behavioral Interview Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../java/index.html">
+   Java
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java.html">
+     Java Knowledge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-gc.html">
+     Java Garbage Collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-multithreading.html">
+     Java Multi-threading
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-snippets.html">
+     Java Snippets
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../spring/index.html">
+     Spring
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../spring/spring-data-transactions.html">
+       Data Transactions with Spring
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../spring/spring-cloud.html">
+       Spring Cloud Fundamentals
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-distributed-config.html">
+         Spring Cloud Fundamentals: Distributed Config
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-service-discovery.html">
+         Spring Cloud Fundamentals: Service Discovery
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">
+         Spring Cloud Fundamentals: Intelligent Routing
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rust/index.html">
+   Rust
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rust/rust-snippets.html">
+     Rust Snippets
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency Parallelism and Reactive
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
+   Concurrency
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Tools and Technologies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../kubernetes/index.html">
+   Kubernetes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/kubernetes-intro.html">
+     Kubernetes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/namespaces.html">
+     Kubernetes Namespaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands and CheatSheets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">
+   Docker cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">
+   Kubectl Cheat Sheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">
+   Miscellaneous Helpful Commands - WIP
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/coding-problems/backtracking.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/lprakashv/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fcoding-problems/backtracking.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinations">
+   Combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutations-without-duplicates">
+   Permutations (without duplicates)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutations-with-duplicates">
+   Permutations with duplicates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#palindrome-partitioning">
+   Palindrome Partitioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-queens-problem">
+   N-Queens problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-queens-ii">
+   N-Queens II
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#max-jumps-from-an-array-indices-given-find-if-traversal-possible-or-not">
+   max jumps from an array indices given, find if traversal possible or not
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phone-number-combinations">
+   Phone number combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-parenthesis-given-n">
+   Generate parenthesis, given ‘n’
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutations-of-an-array">
+   Permutations of an array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-search-in-matrix-any-snaky">
+   Word search in matrix (any snaky)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Palindrome partitioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#robot-clean-the-room">
+   Robot clean the room
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#split-a-string-into-the-max-number-of-unique-substrings">
+   Split a String Into the Max Number of Unique Substrings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combination-sum-can-have-any-repeated-candidates">
+   Combination Sum, can have any repeated candidates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinations-sum-containing-duplicates">
+   Combinations Sum - containing duplicates
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sudoku-solver">
+     Sudoku Solver
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Backtracking problems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinations">
+   Combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutations-without-duplicates">
+   Permutations (without duplicates)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutations-with-duplicates">
+   Permutations with duplicates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#palindrome-partitioning">
+   Palindrome Partitioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-queens-problem">
+   N-Queens problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-queens-ii">
+   N-Queens II
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#max-jumps-from-an-array-indices-given-find-if-traversal-possible-or-not">
+   max jumps from an array indices given, find if traversal possible or not
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phone-number-combinations">
+   Phone number combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-parenthesis-given-n">
+   Generate parenthesis, given ‘n’
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutations-of-an-array">
+   Permutations of an array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-search-in-matrix-any-snaky">
+   Word search in matrix (any snaky)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Palindrome partitioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#robot-clean-the-room">
+   Robot clean the room
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#split-a-string-into-the-max-number-of-unique-substrings">
+   Split a String Into the Max Number of Unique Substrings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combination-sum-can-have-any-repeated-candidates">
+   Combination Sum, can have any repeated candidates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinations-sum-containing-duplicates">
+   Combinations Sum - containing duplicates
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sudoku-solver">
+     Sudoku Solver
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="backtracking-problems">
+<h1>Backtracking problems<a class="headerlink" href="#backtracking-problems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="combinations">
+<h2>Combinations<a class="headerlink" href="#combinations" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">subsets</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">tempList</span><span class="p">,</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">){</span>
+    <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">tempList</span><span class="p">));</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">tempList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+        <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">tempList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="permutations-without-duplicates">
+<h2>Permutations (without duplicates)<a class="headerlink" href="#permutations-without-duplicates" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">permute</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+   <span class="c1">// Arrays.sort(nums); // not necessary</span>
+   <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">nums</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">list</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">tempList</span><span class="p">,</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">nums</span><span class="p">){</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">){</span>
+      <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">tempList</span><span class="p">));</span>
+   <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span> <span class="c1">// element already exists, skip</span>
+         <span class="n">tempList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+         <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">nums</span><span class="p">);</span>
+         <span class="n">tempList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="permutations-with-duplicates">
+<h2>Permutations with duplicates<a class="headerlink" href="#permutations-with-duplicates" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">permuteUnique</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">nums</span><span class="p">,</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">list</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">tempList</span><span class="p">,</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">boolean</span> <span class="o">[]</span> <span class="n">used</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">){</span>
+        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">tempList</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">used</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">||</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">used</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+            <span class="n">used</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="n">tempList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">used</span><span class="p">);</span>
+            <span class="n">used</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="n">tempList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="palindrome-partitioning">
+<h2>Palindrome Partitioning<a class="headerlink" href="#palindrome-partitioning" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+   <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">list</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">){</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">())</span>
+      <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">tempList</span><span class="p">));</span>
+   <span class="k">else</span><span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">isPalindrome</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)){</span>
+            <span class="n">tempList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="n">tempList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+         <span class="p">}</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">){</span>
+   <span class="k">while</span><span class="p">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">)</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">low</span><span class="o">++</span><span class="p">)</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">high</span><span class="o">--</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+   <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="n-queens-problem">
+<h2>N-Queens problem<a class="headerlink" href="#n-queens-problem" title="Permalink to this headline">¶</a></h2>
+<p>placing ‘N’ chess queens on an N x N chessboard so that no two queens threaten each other</p>
+<ol class="simple">
+<li><p>Iterate row-wise and try to place <strong>1 queen on each row</strong></p></li>
+<li><p>Place a queen on first position</p>
+<ol class="simple">
+<li><p>Place subsequent queen on the <strong>first safe position</strong> in the subsequent row (i, j nested loop)</p></li>
+<li><p>If row remains empty:</p>
+<ol class="simple">
+<li><p>backtrack</p></li>
+<li><p>remove the previous queen</p></li>
+<li><p>place again</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">[][]</span> <span class="n">table</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">numQueens</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">setQueens</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// start with 0th column</span>
+  <span class="n">printTable</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">boolean</span> <span class="nf">setQueens</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// base case</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">col</span> <span class="o">==</span> <span class="n">numQueens</span> <span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">numQueens</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">isValid</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// assume/place queen</span>
+      <span class="n">table</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+      <span class="c1">// result found</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">setQueens</span><span class="p">(</span> <span class="n">col</span><span class="o">+</span><span class="mi">1</span> <span class="p">)</span> <span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+      <span class="c1">// backtrack / reset</span>
+      <span class="n">table</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="n-queens-ii">
+<h2>N-Queens II<a class="headerlink" href="#n-queens-ii" title="Permalink to this headline">¶</a></h2>
+<p>The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.</p>
+<p>Given an integer n, return the number of distinct solutions to the n-queens puzzle.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * don&#39;t need to actually place the queen,</span>
+<span class="cm"> * instead, for each row, try to place without violation on</span>
+<span class="cm"> * col/ diagonal1/ diagnol2.</span>
+<span class="cm"> * trick: to detect whether 2 positions sit on the same diagnol:</span>
+<span class="cm"> * if delta(col, row) equals, same diagnol1;</span>
+<span class="cm"> * if sum(col, row) equals, same diagnal2.</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">occupiedCols</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">occupiedDiag1s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">occupiedDiag2s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalNQueens</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">totalNQueensHelper</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">totalNQueensHelper</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">occupiedCols</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">diag1</span> <span class="o">=</span> <span class="n">row</span> <span class="o">-</span> <span class="n">col</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">occupiedDiag1s</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">diag1</span><span class="p">))</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">diag2</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">col</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">occupiedDiag2s</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">diag2</span><span class="p">))</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="c1">// we can now place a queen here</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">row</span> <span class="o">==</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">occupiedCols</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">col</span><span class="p">);</span>
+            <span class="n">occupiedDiag1s</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">diag1</span><span class="p">);</span>
+            <span class="n">occupiedDiag2s</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">diag2</span><span class="p">);</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">totalNQueensHelper</span><span class="p">(</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+            <span class="c1">// recover</span>
+            <span class="n">occupiedCols</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">col</span><span class="p">);</span>
+            <span class="n">occupiedDiag1s</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">diag1</span><span class="p">);</span>
+            <span class="n">occupiedDiag2s</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">diag2</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another solution-1:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalNQueens</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">cols</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>     <span class="c1">// columns   |</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="o">]</span><span class="p">;</span>   <span class="c1">// diagonals \</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="o">]</span><span class="p">;</span>   <span class="c1">// diagonals /</span>
+    <span class="n">backtracking</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">backtracking</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">d1</span><span class="p">,</span> <span class="kt">boolean</span> <span class="o">[]</span><span class="n">d2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">row</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">id1</span> <span class="o">=</span> <span class="n">col</span> <span class="o">-</span> <span class="n">row</span> <span class="o">+</span> <span class="n">n</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">id2</span> <span class="o">=</span> <span class="n">col</span> <span class="o">+</span> <span class="n">row</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cols</span><span class="o">[</span><span class="n">col</span><span class="o">]</span> <span class="o">||</span> <span class="n">d1</span><span class="o">[</span><span class="n">id1</span><span class="o">]</span> <span class="o">||</span> <span class="n">d2</span><span class="o">[</span><span class="n">id2</span><span class="o">]</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+
+        <span class="n">cols</span><span class="o">[</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="n">d1</span><span class="o">[</span><span class="n">id1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="n">d2</span><span class="o">[</span><span class="n">id2</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="n">backtracking</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="n">cols</span><span class="o">[</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="n">d1</span><span class="o">[</span><span class="n">id1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="n">d2</span><span class="o">[</span><span class="n">id2</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another solution-2:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalNQueens</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">step</span><span class="p">,</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">step</span><span class="o">==</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pos</span><span class="o">[</span><span class="n">step</span><span class="o">]=</span><span class="n">i</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">isValid</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="n">step</span><span class="p">))</span> <span class="n">dfs</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">int</span> <span class="n">step</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">step</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="n">pos</span><span class="o">[</span><span class="n">step</span><span class="o">]||</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">pos</span><span class="o">[</span><span class="n">i</span><span class="o">]-</span><span class="n">pos</span><span class="o">[</span><span class="n">step</span><span class="o">]</span><span class="p">))</span><span class="o">==</span><span class="p">(</span><span class="n">step</span><span class="o">-</span><span class="n">i</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="max-jumps-from-an-array-indices-given-find-if-traversal-possible-or-not">
+<h2>max jumps from an array indices given, find if traversal possible or not<a class="headerlink" href="#max-jumps-from-an-array-indices-given-find-if-traversal-possible-or-not" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Backtracking (2^n, n)</p></li>
+<li><p>DP (n^2, n)</p></li>
+<li><p>Greedy (n, 1)</p></li>
+</ul>
+<p><a class="reference external" href="https://leetcode.com/problems/jump-game/solution/">solution</a></p>
+</div>
+<div class="section" id="phone-number-combinations">
+<h2>Phone number combinations<a class="headerlink" href="#phone-number-combinations" title="Permalink to this headline">¶</a></h2>
+<p><strong>Leetcode solution:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">phone</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{{</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;abc&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">,</span> <span class="s">&quot;def&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;4&quot;</span><span class="p">,</span> <span class="s">&quot;ghi&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;5&quot;</span><span class="p">,</span> <span class="s">&quot;jkl&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;6&quot;</span><span class="p">,</span> <span class="s">&quot;mno&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;7&quot;</span><span class="p">,</span> <span class="s">&quot;pqrs&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;tuv&quot;</span><span class="p">);</span>
+    <span class="n">put</span><span class="p">(</span><span class="s">&quot;9&quot;</span><span class="p">,</span> <span class="s">&quot;wxyz&quot;</span><span class="p">);</span>
+  <span class="p">}};</span>
+
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">String</span> <span class="n">combination</span><span class="p">,</span> <span class="n">String</span> <span class="n">next_digits</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// if there is no more digits to check</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">next_digits</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// the combination is done</span>
+      <span class="n">output</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">combination</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// if there are still digits to check</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// iterate over all letters which map</span>
+      <span class="c1">// the next available digit</span>
+      <span class="n">String</span> <span class="n">digit</span> <span class="o">=</span> <span class="n">next_digits</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="n">String</span> <span class="n">letters</span> <span class="o">=</span> <span class="n">phone</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">digit</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">letters</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">String</span> <span class="n">letter</span> <span class="o">=</span> <span class="n">phone</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">digit</span><span class="p">).</span><span class="na">substring</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="c1">// append the current letter to the combination</span>
+        <span class="c1">// and proceed to the next digits</span>
+        <span class="n">backtrack</span><span class="p">(</span><span class="n">combination</span> <span class="o">+</span> <span class="n">letter</span><span class="p">,</span> <span class="n">next_digits</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">letterCombinations</span><span class="p">(</span><span class="n">String</span> <span class="n">digits</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">backtrack</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>My solution:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">letterCombinations</span><span class="p">(</span><span class="n">String</span> <span class="n">digits</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">digits</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Character</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;d&#39;</span><span class="p">,</span> <span class="sc">&#39;e&#39;</span><span class="p">,</span> <span class="sc">&#39;f&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="sc">&#39;h&#39;</span><span class="p">,</span> <span class="sc">&#39;i&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;j&#39;</span><span class="p">,</span> <span class="sc">&#39;k&#39;</span><span class="p">,</span> <span class="sc">&#39;l&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;m&#39;</span><span class="p">,</span> <span class="sc">&#39;n&#39;</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;p&#39;</span><span class="p">,</span> <span class="sc">&#39;q&#39;</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="sc">&#39;s&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;t&#39;</span><span class="p">,</span> <span class="sc">&#39;u&#39;</span><span class="p">,</span> <span class="sc">&#39;v&#39;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="sc">&#39;w&#39;</span><span class="p">,</span> <span class="sc">&#39;x&#39;</span><span class="p">,</span> <span class="sc">&#39;y&#39;</span><span class="p">,</span> <span class="sc">&#39;z&#39;</span><span class="p">));</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">sc</span><span class="p">:</span> <span class="n">digits</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">localList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">:</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="p">:</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">sc</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">localList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">localList</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-parenthesis-given-n">
+<h2>Generate parenthesis, given ‘n’<a class="headerlink" href="#generate-parenthesis-given-n" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">generateParenthesis</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">left</span> <span class="p">:</span> <span class="n">generateParenthesis</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">right</span> <span class="p">:</span> <span class="n">generateParenthesis</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">res</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">left</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span> <span class="o">+</span> <span class="n">right</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="permutations-of-an-array">
+<h2>Permutations of an array<a class="headerlink" href="#permutations-of-an-array" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span>
+                        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">,</span>
+                        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">output</span><span class="p">,</span>
+                        <span class="kt">int</span> <span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// if all integers are used up</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">first</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span>
+      <span class="n">output</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">nums</span><span class="p">));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// place i-th integer first</span>
+      <span class="c1">// in the current permutation</span>
+      <span class="n">Collections</span><span class="p">.</span><span class="na">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+      <span class="c1">// use next integers to complete the permutations</span>
+      <span class="n">backtrack</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">first</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="c1">// backtrack</span>
+      <span class="n">Collections</span><span class="p">.</span><span class="na">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">permute</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// init output list</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="p">();</span>
+
+    <span class="c1">// convert nums into list since the output is a list of lists</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nums_lst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+      <span class="n">nums_lst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nums_lst</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="word-search-in-matrix-any-snaky">
+<h2>Word search in matrix (any snaky)<a class="headerlink" href="#word-search-in-matrix-any-snaky" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>backtracking / DFS with reset visited on mismatch</p>
+</div></blockquote>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">util</span><span class="p">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="p">,</span> <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">visited</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="n">String</span> <span class="n">word</span><span class="p">,</span> <span class="kt">int</span> <span class="n">wi</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">wi</span> <span class="o">&gt;=</span> <span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">())</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">board</span><span class="p">.</span><span class="na">length</span> <span class="o">||</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span>
+    <span class="o">||</span> <span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span>
+    <span class="o">||</span> <span class="n">word</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">wi</span><span class="p">)</span> <span class="o">!=</span> <span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">util</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">wi</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">||</span> <span class="n">util</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">wi</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">||</span> <span class="n">util</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">wi</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">||</span> <span class="n">util</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">wi</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// reset for backtracking</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">exist</span><span class="p">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="p">,</span> <span class="n">String</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">board</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">board</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">word</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">board</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">l</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">w</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="n">word</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">util</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">l</span><span class="o">][</span><span class="n">w</span><span class="o">]</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Palindrome partitioning<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+   <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">list</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">){</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">())</span>
+      <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">tempList</span><span class="p">));</span>
+   <span class="k">else</span><span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">isPalindrome</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)){</span>
+            <span class="n">tempList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">tempList</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="n">tempList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">tempList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+         <span class="p">}</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">){</span>
+   <span class="k">while</span><span class="p">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">)</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">low</span><span class="o">++</span><span class="p">)</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">high</span><span class="o">--</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+   <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="robot-clean-the-room">
+<h2>Robot clean the room<a class="headerlink" href="#robot-clean-the-room" title="Permalink to this headline">¶</a></h2>
+<p>Given functions:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">move()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">clean()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">turnRight()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">turnLeft()</span></code></p></li>
+</ol>
+<p><strong>My solution:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// private fields:</span>
+
+<span class="n">Robot</span> <span class="n">robot</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">[][]</span> <span class="n">deltas</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[][]</span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span> <span class="c1">//clockwise deltas to be added in x,y</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">// utility methods:</span>
+
+<span class="kt">boolean</span> <span class="nf">visited</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">visited</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">visited</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="na">contains</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">visit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">visited</span><span class="p">.</span><span class="na">putIfAbsent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+    <span class="n">visited</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">goBackAndTurnForward</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">robot</span><span class="p">.</span><span class="na">turnRight</span><span class="p">();</span>
+    <span class="n">robot</span><span class="p">.</span><span class="na">turnRight</span><span class="p">();</span>
+    <span class="n">robot</span><span class="p">.</span><span class="na">move</span><span class="p">();</span>
+    <span class="n">robot</span><span class="p">.</span><span class="na">turnRight</span><span class="p">();</span>
+    <span class="n">robot</span><span class="p">.</span><span class="na">turnRight</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// main backtracking method:</span>
+
+<span class="kt">void</span> <span class="nf">backTrack</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dir</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">visit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">robot</span><span class="p">.</span><span class="na">clean</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">newDir</span> <span class="o">=</span> <span class="p">(</span><span class="n">dir</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">newX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">deltas</span><span class="o">[</span><span class="n">newDir</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span> <span class="c1">//next spot calculation</span>
+        <span class="kt">int</span> <span class="n">newY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">deltas</span><span class="o">[</span><span class="n">newDir</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">(</span><span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">robot</span><span class="p">.</span><span class="na">move</span><span class="p">())</span> <span class="p">{</span>
+          <span class="c1">//if next spot is not visited and can move there</span>
+            <span class="n">backTrack</span><span class="p">(</span><span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">,</span> <span class="n">newDir</span><span class="p">);</span>
+            <span class="n">goBackAndTurnForward</span><span class="p">();</span> <span class="c1">//backtracking</span>
+        <span class="p">}</span>
+
+        <span class="n">robot</span><span class="p">.</span><span class="na">turnRight</span><span class="p">();</span> <span class="c1">// next direction clockwise</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">cleanRoom</span><span class="p">(</span><span class="n">Robot</span> <span class="n">robot</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">robot</span> <span class="o">=</span> <span class="n">robot</span><span class="p">;</span>
+    <span class="n">backTrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="split-a-string-into-the-max-number-of-unique-substrings">
+<h2>Split a String Into the Max Number of Unique Substrings<a class="headerlink" href="#split-a-string-into-the-max-number-of-unique-substrings" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kt">int</span> <span class="nf">backtrackDFS</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">set</span><span class="p">.</span><span class="na">size</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">String</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sub</span><span class="p">);</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">backtrack</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">set</span><span class="p">));</span>
+
+        <span class="n">set</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">sub</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxUniqueSplit</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">backtrackDFS</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">set</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="combination-sum-can-have-any-repeated-candidates">
+<h2>Combination Sum, can have any repeated candidates<a class="headerlink" href="#combination-sum-can-have-any-repeated-candidates" title="Permalink to this headline">¶</a></h2>
+<p>Example:</p>
+<p>Input : [2,3,6,7], 7
+Output : [[2,2,3], [7]]</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">combinationSum</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">candidates</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">candidates</span><span class="p">);</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">candidates</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">res</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">sorted</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">,</span>
+                        <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">list</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sorted</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">sorted</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">sorted</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">list</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">removeLast</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="combinations-sum-containing-duplicates">
+<h2>Combinations Sum - containing duplicates<a class="headerlink" href="#combinations-sum-containing-duplicates" title="Permalink to this headline">¶</a></h2>
+<p>Use duplicates algo from permutations, and combinations algo for overall structure.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">combinationSum2</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">candidates</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">candidates</span><span class="p">);</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">candidates</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">,</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">res</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">sorted</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span>
+                        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span><span class="p">,</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">list</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">sorted</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">||</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">sorted</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="n">sorted</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+            <span class="n">visited</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sorted</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">sorted</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">sorted</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">list</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">removeLast</span><span class="p">();</span>
+            <span class="n">visited</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="sudoku-solver">
+<h3>Sudoku Solver<a class="headerlink" href="#sudoku-solver" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">solveSudoku</span><span class="p">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">doSolve</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">doSolve</span><span class="p">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="p">,</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// note: must reset col here!</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">row</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">col</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">!=</span> <span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">num</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span><span class="p">;</span> <span class="n">num</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">isValid</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">num</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">doSolve</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+                    <span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="p">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="p">,</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">char</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Block no. is i/3, first element is i/3*3</span>
+    <span class="kt">int</span> <span class="n">blkrow</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">blkcol</span> <span class="o">=</span> <span class="p">(</span><span class="n">col</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="n">num</span> <span class="o">||</span> <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">num</span> <span class="o">||</span>
+                <span class="n">board</span><span class="o">[</span><span class="n">blkrow</span> <span class="o">+</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">3</span><span class="o">][</span><span class="n">blkcol</span> <span class="o">+</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="o">]</span> <span class="o">==</span> <span class="n">num</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./coding-problems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="trees.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Trees problems</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dynamic-programming.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dynamic Programmming problems</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
