@@ -1,0 +1,1392 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Design Interview Cheatsheet &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Twitter Architecture" href="architecture-twitter.html" />
+    <link rel="prev" title="System Design Checklist" href="system-design-checklist.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Lalit’s Tech Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Interview Preparation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algorithms/index.html">
+   Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/backtracking.html">
+     Backtracking Problem patterns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/divide-and-conquer.html">
+     Divide and Conquer Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/graph.html">
+     Graph Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/dynamic-programming.html">
+     Dynamic Programming Patterns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/bitmasks.html">
+     Bitwise Tricks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../coding-problems/index.html">
+   Coding Problems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/backtracking.html">
+     Backtracking problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/dynamic-programming.html">
+     Dynamic Programmming problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/graphs.html">
+     Graph problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/others.html">
+     Other coding problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/strings-arrays.html">
+     Strings and Array coding problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../coding-problems/trees.html">
+     Trees problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   System Design
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="distributed-systems-additional-notes.html">
+     Distributed System Notes
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="pragmatic-system-design.html">
+     Pragmatic System Design
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pragmatic-system-design-uber.html">
+       Pragmatic System Design - Uber
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pragmatic-system-design-whatsapp.html">
+       Pragmatic System Design - WhatsApp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pragmatic-system-design-tinyurl.html">
+       Pragmatic System Design - TinyURL
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pragmatic-system-design-webcrawler.html">
+       Pragmatic System Design - Web Crawler
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pragmatic-system-design-flashsale.html">
+       Pragmatic System Design - Flash coupon sale
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="system-design-checklist.html">
+     System Design Checklist
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     System Design Interview Cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="architecture-twitter.html">
+     Twitter Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="design-ha-db.html">
+     Designing Highly Available (HA) Database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../behavioral-interviews/index.html">
+   Behavioral Interviews
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../behavioral-interviews/tell-me-about.html">
+     The Common “Tell me about a Time” or Behavioral Interview Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../java/index.html">
+   Java
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java.html">
+     Java Knowledge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-gc.html">
+     Java Garbage Collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-multithreading.html">
+     Java Multi-threading
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/java-snippets.html">
+     Java Snippets
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../spring/index.html">
+     Spring
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+    <label for="toctree-checkbox-7">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../spring/spring-cloud.html">
+       Spring Cloud Fundamentals
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+      <label for="toctree-checkbox-8">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-distributed-config.html">
+         Spring Cloud Fundamentals: Distributed Config
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-service-discovery.html">
+         Spring Cloud Fundamentals: Service Discovery
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">
+         Spring Cloud Fundamentals: Intelligent Routing
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../spring/spring-data-transactions.html">
+       Data Transactions with Spring
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rust/index.html">
+   Rust
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rust/rust-snippets.html">
+     Rust Snippets
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concurrency Parallelism and Reactive
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
+   Concurrency
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other Tools and Technologies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../kubernetes/index.html">
+   Kubernetes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/namespaces.html">
+     Kubernetes Namespaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kubernetes/kubernetes-intro.html">
+     Kubernetes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands and CheatSheets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">
+   Docker cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">
+   Kubectl Cheat Sheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">
+   Miscellaneous Helpful Commands - WIP
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/system-design/system-design-interview-cheatsheet.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/lprakashv/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fsystem-design/system-design-interview-cheatsheet.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-interview">
+   The Interview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#approach">
+     Approach
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributed-system-overview">
+   Distributed System overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-characteristics">
+     Key Characteristics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#components">
+   Components
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-balancer">
+     Load Balancer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cache">
+     Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#considerations">
+     Considerations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-from-cache">
+     Reading from Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-the-cache">
+     Updating the Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cache-invalidation">
+     Cache Invalidation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eviction-policies">
+     Eviction Policies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concurrency">
+     Concurrency
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cdn">
+   CDN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#message-queues">
+   Message Queues
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#message-queueing">
+     Message Queueing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#publish-subscribe">
+     Publish/Subscribe
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuration-services-zookeeper">
+   Configuration Services (Zookeeper)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-gateway-and-service-mesh">
+   API Gateway and Service Mesh
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proxies">
+   Proxies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#databases">
+   Databases
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosql-vs-sql">
+     NoSQL vs SQL
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosql-types">
+     NoSQL Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sharding-or-partitioning-data">
+     Sharding or Partitioning Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#replication">
+     Replication
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexes">
+     Indexes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-db-scaling-steps">
+     Basic DB Scaling Steps
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#acid">
+     ACID
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cap">
+   CAP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scalability-calculation-numbers">
+   Scalability Calculation Numbers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#availability">
+     Availability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandwidth">
+     Bandwidth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#throughput">
+     Throughput
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#real-world-numbers">
+     Real World Numbers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>System Design Interview Cheatsheet</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-interview">
+   The Interview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#approach">
+     Approach
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributed-system-overview">
+   Distributed System overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-characteristics">
+     Key Characteristics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#components">
+   Components
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-balancer">
+     Load Balancer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cache">
+     Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#considerations">
+     Considerations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-from-cache">
+     Reading from Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-the-cache">
+     Updating the Cache
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cache-invalidation">
+     Cache Invalidation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eviction-policies">
+     Eviction Policies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concurrency">
+     Concurrency
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cdn">
+   CDN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#message-queues">
+   Message Queues
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#message-queueing">
+     Message Queueing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#publish-subscribe">
+     Publish/Subscribe
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuration-services-zookeeper">
+   Configuration Services (Zookeeper)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-gateway-and-service-mesh">
+   API Gateway and Service Mesh
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proxies">
+   Proxies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#databases">
+   Databases
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosql-vs-sql">
+     NoSQL vs SQL
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosql-types">
+     NoSQL Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sharding-or-partitioning-data">
+     Sharding or Partitioning Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#replication">
+     Replication
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexes">
+     Indexes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-db-scaling-steps">
+     Basic DB Scaling Steps
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#acid">
+     ACID
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cap">
+   CAP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scalability-calculation-numbers">
+   Scalability Calculation Numbers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#availability">
+     Availability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandwidth">
+     Bandwidth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#throughput">
+     Throughput
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#real-world-numbers">
+     Real World Numbers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="system-design-interview-cheatsheet">
+<h1>System Design Interview Cheatsheet<a class="headerlink" href="#system-design-interview-cheatsheet" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-interview">
+<h2>The Interview<a class="headerlink" href="#the-interview" title="Permalink to this headline">¶</a></h2>
+<p>Usually 45-60 minutes.</p>
+<div class="section" id="approach">
+<h3>Approach<a class="headerlink" href="#approach" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p><strong>GATHERING REQUIREMENTS</strong></p>
+<ol class="simple">
+<li><p><strong>“Goal”</strong> of the system?</p></li>
+<li><p><strong>“Users”</strong> of the system?</p></li>
+<li><p>Why do users need the system?</p></li>
+<li><p>How will users interact with the system?</p></li>
+</ol>
+</li>
+<li><p><strong>Scope</strong></p>
+<ol class="simple">
+<li><p>List down all the features of the system</p></li>
+</ol>
+</li>
+<li><p><strong>SCALE</strong></p>
+<ol class="simple">
+<li><p>How many <strong>“DAUs”</strong> system need to serve?</p></li>
+<li><p>How many <strong>“transactions per unit-of-time”</strong>?</p></li>
+<li><p>Performance requirements (Availability, throughput, latency, consistency)?</p></li>
+<li><p>Expected <strong>“read:write”</strong> ratio?</p></li>
+<li><p>Expected response time (latency?)?</p></li>
+</ol>
+</li>
+<li><p><strong>DESIGN HLD</strong></p>
+<ol class="simple">
+<li><p>What type of DB and why?</p></li>
+<li><p>What are the <strong>“available offerings”</strong> in the market?</p></li>
+<li><p><strong>“Trade-offs”</strong> for choosing a particular technology.</p></li>
+</ol>
+</li>
+<li><p><strong>DRILL-DOWN</strong></p>
+<ol class="simple">
+<li><p>Start with the components you’re most familiar with.</p></li>
+</ol>
+</li>
+<li><p><strong>WRAP-UP</strong></p>
+<ol class="simple">
+<li><p>Summarize the solution</p></li>
+<li><p>List down important <strong>“bottlenecks”</strong></p></li>
+<li><p>List down improvements <strong>“opportunities”</strong></p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="distributed-system-overview">
+<h2>Distributed System overview<a class="headerlink" href="#distributed-system-overview" title="Permalink to this headline">¶</a></h2>
+<p>Group of computers working together to appear as a single computer to the end user.</p>
+<ul class="simple">
+<li><p>They have shared state</p></li>
+<li><p>Operate concurrently</p></li>
+<li><p>Can fail independently without affecting the whole system’s uptime</p></li>
+</ul>
+<div class="section" id="key-characteristics">
+<h3>Key Characteristics<a class="headerlink" href="#key-characteristics" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+</div>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="load-balancer">
+<h3>Load Balancer<a class="headerlink" href="#load-balancer" title="Permalink to this headline">¶</a></h3>
+<p>Component that acts as a reverse proxy and distributes network or application traffic across a number of servers to improve responsiveness and availability of applications, websites or databases.</p>
+<p><img alt="lb-usecase" src="../_images/lb-usecase.png" /></p>
+<p>Algorithms</p>
+<ul class="simple">
+<li><p>Least Connection</p></li>
+<li><p>Least response time</p></li>
+<li><p>Least bandwidth - most free / serving least traffic</p></li>
+<li><p>Round Robin</p></li>
+<li><p>Weighted Round Robin - based on capacity (processing, IO etc)</p></li>
+<li><p>IP Hash</p></li>
+</ul>
+</div>
+<div class="section" id="cache">
+<h3>Cache<a class="headerlink" href="#cache" title="Permalink to this headline">¶</a></h3>
+<p><strong>When to use it</strong>: Data read frequently but modified infrequently</p>
+</div>
+<div class="section" id="considerations">
+<h3>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Expiration policy</p></li>
+<li><p>Consistency with the Database</p></li>
+<li><p>Distributed Cache (to avoid single point of failure)</p></li>
+<li><p>Eviction policy</p></li>
+<li><p>Concurrency - reader-writer problem</p>
+<ul>
+<li><p>solution could be write back or commit-logs</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="reading-from-cache">
+<h3>Reading from Cache<a class="headerlink" href="#reading-from-cache" title="Permalink to this headline">¶</a></h3>
+<p><img alt="cache-read" src="../_images/cache-read.jpeg" /></p>
+</div>
+<div class="section" id="updating-the-cache">
+<h3>Updating the Cache<a class="headerlink" href="#updating-the-cache" title="Permalink to this headline">¶</a></h3>
+<img src="./images/cache-write-aside.jpeg" alt="cache-write-aside" width="400px"/>
+<img src="./images/cache-write-through.jpeg" alt="cache-write-through" width="400px"/>
+<img src="./images/cache-write-around.jpeg" alt="cache-write-around" width="400px"/>
+<ul class="simple">
+<li><p>Write-aside cache — data is written into the cache and the corresponding database at the same time (also known as lazy loading) — cons: higher latency</p></li>
+<li><p>Write-through cache — application adds or updates an entry in the cache. Cache synchronously writes entry to the data store. Cache returns the data to the application.</p></li>
+<li><p>Write-around cache — data is written directly to permanent storage, bypassing the cache — cons: read request for recently written data will create a “cache miss”.</p></li>
+</ul>
+<img src="./images/cache-write-back.jpeg" alt="cache-write-back" width="600px"/>
+<ul class="simple">
+<li><p>Write-back cache — data is written to cache alone and completion is immediately confirmed to the client and then data is asynchronously updated to the data store — pros: low latency and high throughput; cons: risk of data loss in case of a crash</p></li>
+</ul>
+</div>
+<div class="section" id="cache-invalidation">
+<h3>Cache Invalidation<a class="headerlink" href="#cache-invalidation" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="eviction-policies">
+<h3>Eviction Policies<a class="headerlink" href="#eviction-policies" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>First In First Out (FIFO) — evicts the first block accessed first</p></li>
+<li><p>Last In First Out (LIFO) — evicts the block accessed most recently</p></li>
+<li><p>Least Recently Used (LRU) — evicts the least recently used items first. When the client requests resource A, it happens as follow:</p>
+<ul>
+<li><p>If A exists in the cache, we just return immediately.</p></li>
+<li><p>If not and the cache has extra storage slots, we fetch resource A and return to the client. In addition, insert A into the cache.</p></li>
+<li><p>If the cache is full, we kick out the resource that is least recently used and replace it with resource A.</p></li>
+</ul>
+</li>
+<li><p>Most Recently Used (MRU) — evicts the most recently used items first</p></li>
+<li><p>Least Frequently Used (LFU) — counts how often an item is needed. Those that are used least often are discarded first.</p></li>
+<li><p>Random Replacement (RR) — randomly evicts a candidate item</p></li>
+</ul>
+</div>
+<div class="section" id="concurrency">
+<h3>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="cdn">
+<h2>CDN<a class="headerlink" href="#cdn" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="message-queues">
+<h2>Message Queues<a class="headerlink" href="#message-queues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="message-queueing">
+<h3>Message Queueing<a class="headerlink" href="#message-queueing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Used to decouple producer from consumer</p></li>
+<li><p>Can be used for event-based intra-service communication, consumer listens for events in queue</p></li>
+</ul>
+</div>
+<div class="section" id="publish-subscribe">
+<h3>Publish/Subscribe<a class="headerlink" href="#publish-subscribe" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Used in</p>
+<ul>
+<li><p>Notification systems</p></li>
+<li><p>Backend jobs which takes time</p></li>
+<li><p>Actions that trigger multiple services</p></li>
+</ul>
+</li>
+<li><p>Provides</p>
+<ul>
+<li><p>loose coupling</p></li>
+<li><p>fault tolerence</p></li>
+<li><p>retry</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="configuration-services-zookeeper">
+<h2>Configuration Services (Zookeeper)<a class="headerlink" href="#configuration-services-zookeeper" title="Permalink to this headline">¶</a></h2>
+<p>Used to manage cluster of servers, databases or caches. External services can interact with clusters via zookeeper. Zookeeper names services, knows their ips, elects leader, provides failure recovery.</p>
+</div>
+<div class="section" id="api-gateway-and-service-mesh">
+<h2>API Gateway and Service Mesh<a class="headerlink" href="#api-gateway-and-service-mesh" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>API Gateway</p></th>
+<th class="head"><p>Service Mesh</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Exposes external services to make them easily consumable</p></td>
+<td><p>Manages and controls services inside your network</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maps external traffic to internal resources</p></td>
+<td><p>Focusses on brokering internal resources</p></td>
+</tr>
+<tr class="row-even"><td><p>Exposes APIs or edge services to service specific business function</p></td>
+<td><p>Sits between network and application, no real business notion</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 7, Popular example: Zuul</p></td>
+<td><p>Layer 4, Popular example: Istio</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="proxies">
+<h2>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h2>
+<p>Types of Proxies:</p>
+<ul class="simple">
+<li><p>Open Proxy</p></li>
+<li><p>Anonymous Proxy</p></li>
+<li><p>Transparent Proxy</p></li>
+<li><p>Reverse Proxy</p></li>
+</ul>
+</div>
+<div class="section" id="databases">
+<h2>Databases<a class="headerlink" href="#databases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nosql-vs-sql">
+<h3>NoSQL vs SQL<a class="headerlink" href="#nosql-vs-sql" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>NoSQL</p></th>
+<th class="head"><p>SQL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>When to use</strong></p></td>
+<td><p>large volumes of <strong>unstructured data</strong>,  <strong>Rapid development</strong></p></td>
+<td><p>need <strong>ACID</strong> compliance, <strong>structured</strong> and <strong>unchanging</strong> data</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Model</strong></p></td>
+<td><p><strong>Non-relational</strong> - JSON docs, key-value pairs, wide column stores, graphs</p></td>
+<td><p><strong>Relational</strong> - tables</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Data</strong></p></td>
+<td><p><strong>flexibility</strong> - relationships are de-normalized, nested, in single record, on the fly property creation</p></td>
+<td><p><strong>rigid</strong> - relationships are normalized using joins, addition of fields require alter and back-filling</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Schema</strong></p></td>
+<td><p>Dynamic or flexible, DD is schema-agnostic, dictated by the application</p></td>
+<td><p>Strict schema. To be kept in sync between app and DB</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Transactions</strong></p></td>
+<td><p>ACID support varies</p></td>
+<td><p>Supports ACID</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Consistency &amp; Availability</strong></p></td>
+<td><p>Strong consistency support</p></td>
+<td><p>Strong consistency enforced and prioritized over A&amp;P</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Performance</strong></p></td>
+<td><p>Can be maximized by reducing consistency. All entity info in a single record =&gt; updates in single operation</p></td>
+<td><p>Insert &amp; update performance is dependent upon how fast a write is committed. Can be maximised by vertical scaling</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Scaling</strong></p></td>
+<td><p>Horizontally</p></td>
+<td><p>Vertically</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nosql-types">
+<h3>NoSQL Types<a class="headerlink" href="#nosql-types" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Key-Value</strong></p></td>
+<td><p>1-1 KV mapping. Key = String (hash value) Value = BLOB. No query language. They only allow to store, get/put/delete commands e.g. DynamoDB (Nike), Cassandra, Redis, Memcache, Manhattan (Twitter), Sherpa (Yahoo). Possible uses: session, shopping cart info etc</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Document</strong></p></td>
+<td><p>Similar to a key-value db. Values = XML, JSON, BSON. Supports complex data - trees, collections, dictionaries. Doesn’t support relations. e.g. MongoDb (eBay), CouchDB (LinkedIn)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Column</strong></p></td>
+<td><p>Stores data in column families as rows. Each column family = container of rows where the key identifies the row &amp; the row consists of multiple columns. Rows don’t need to have the same columns and columns can be added to any row. e.g. Cassandra (Instagram, Walmart), HBase (Salesforce, FB Messages, Imgur notifications)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Graph</strong></p></td>
+<td><p>Stores data in the form of nodes and edges where nodes = entities and edges = relationships. Stores data only once &amp; a no. of different types of relationships can be stored in these nodes. Relationships can be uni and bi direcational (as in RDBMS). Adding new relationships is easy but changing existing ones is difficult. e.g. Neo4J, OrientDB, InfiniteGraph, FlockDB (Twitter), TAO (FB Social Graph)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sharding-or-partitioning-data">
+<h3>Sharding or Partitioning Data<a class="headerlink" href="#sharding-or-partitioning-data" title="Permalink to this headline">¶</a></h3>
+<p>Process of splitting up a DB/table across multiple machines to improve the manageability, performance, availability, and load balancing of an application</p>
+<p>Partitioning Methods:</p>
+<ul class="simple">
+<li><p>Horizontal Partitioning — put different rows into different tables — cons: unbalanced servers (if the value whose range is used for sharding isn’t chosen carefully)</p></li>
+<li><p>Vertical Partitioning divide our data to store tables related to a specific feature in their own server (instagram use case — user profile information stored on one DB server, friend lists on another) — cons: if our application experiences additional growth, then it may be necessary to further partition a feature specific DB across various servers</p></li>
+<li><p>Directory Based Partitioning — create a lookup service which knows your current partitioning scheme and abstracts it away from the DB access code.</p></li>
+</ul>
+<p>Partitioning Criteria:</p>
+<ul class="simple">
+<li><p>Key or Hash-based partitioning — apply a hash function to some key attributes of the entity we are storing — cons: adding new servers means changing the hash function which would require redistribution of data and downtime for the service. (use Consistent Hashing)</p></li>
+<li><p>List partitioning — each partition is assigned a list of values, so whenever we want to insert a new record, we will see which partition contains our key and then store it there</p></li>
+<li><p>Round-robin partitioning — With ’n’ partitions, the ‘i’ tuple is assigned to partition (i mod n).</p></li>
+<li><p>Composite partitioning — combine any of the above partitioning schemes to devise a new scheme</p></li>
+</ul>
+<p>Complexities:</p>
+<ul class="simple">
+<li><p>Joins and Denormalization — not feasible to perform joins that span database shards (denormalize the database so that queries that previously required joins can be performed from a single table)</p></li>
+<li><p>Referential Integrity — enforcing foreign keys in a sharded database can be extremely difficult. (not supported by most RDBMS — has to be enforced in application code.)</p></li>
+<li><p>Celebrity problem — how would you deal with hotspots? (one way would be to add a shard for each celebrity)
+Rebalancing/Resharding — data distribution is not uniform and there is a lot of load on a shard =&gt; have to create more DB shards or have to rebalance existing shards.</p></li>
+</ul>
+<p>Strategies:</p>
+<ul class="simple">
+<li><p>Fixed number of partitions — Create many more partitions than there are nodes, and assign several partitions to each node</p></li>
+<li><p>Dynamic partitioning — when a partition grows to exceed a configured size, it is split into 2 partitions so that approximately half of the data ends up on each side of the split (no of partitions adapt to the total data volume)</p></li>
+<li><p>Partitioning proportionally to nodes — have a fixed no of partitions per node. The size of each partition grows proportionally to the dataset size while the no of nodes remains unchanged</p></li>
+</ul>
+<p>Examples of Real World Scenarios:</p>
+<ul class="simple">
+<li><p>Read about Tinder’s Geosharded Recommendations Part 1: Sharding Approach — Based on Google’s S2 which uses the Hilbert curve (=a space-filling curve that preserves spatial locality: two points that are close on the Hilbert curve are close in physical space. Each smallest Hilbert curve clone is a cell, and 4 adjacent cells form a bigger cell.) Create the geoshards by enumerating all the possible container sizes, and calculate the standard deviation of each sharding configuration, the one with smallest standard deviation will be the most balanced geo sharding configuration we are looking for.</p></li>
+<li><p>Read about Uber’s Unwinding Uber’s Most Efficient Service — using a QuadTree — Take a flat projection of your search space and divide it into quarters that we’ll call cells. You then divide each of those cells into quarters recursively until you hit a defined maximum depth which will be the leaves of the tree.</p></li>
+<li><p>Read about Instragram’s Sharding &amp; IDs at Instagram</p></li>
+</ul>
+</div>
+<div class="section" id="replication">
+<h3>Replication<a class="headerlink" href="#replication" title="Permalink to this headline">¶</a></h3>
+<p>Reasons:</p>
+<ul class="simple">
+<li><p>Latency — Keep data geographically close to your users (reduce access latency)</p></li>
+<li><p>High availability — Allow the system to continue working even if some parts of it have failed</p></li>
+<li><p>Scalability — Scale out the number of machines that can serve read queries</p></li>
+</ul>
+<p>Leader-based replication:</p>
+<ul class="simple">
+<li><p>One of the replicas is designated as the leader. When clients want to write to DB, they send their requests to the leader, which writes the data to its local storage</p></li>
+<li><p>The other replicas (followers) receive the data from the leader in a process called replication log or change stream.
+When a client wants to read from the DB, it can query both leader/any of the followers.</p></li>
+</ul>
+</div>
+<div class="section" id="indexes">
+<h3>Indexes<a class="headerlink" href="#indexes" title="Permalink to this headline">¶</a></h3>
+<p>Data structure that improves the speed of data retrieval operations on a database table at the cost of additional writes and storage space to maintain the index data structure.</p>
+</div>
+<div class="section" id="basic-db-scaling-steps">
+<h3>Basic DB Scaling Steps<a class="headerlink" href="#basic-db-scaling-steps" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Query optimization</p></li>
+<li><p>Vertical scaling (powerful machine)</p></li>
+<li><p>Master-slave (read replicas - read scaling)</p></li>
+<li><p>Multi-master (write scaling)</p></li>
+<li><p>Partitioning</p></li>
+<li><p>Sharding</p></li>
+<li><p>Multi-datacenter replication</p></li>
+</ol>
+</div>
+<div class="section" id="acid">
+<h3>ACID<a class="headerlink" href="#acid" title="Permalink to this headline">¶</a></h3>
+<p>Set of properties of database transactions intended to guarantee validity even in the event of errors, power failures, etc.</p>
+</div>
+</div>
+<div class="section" id="cap">
+<h2>CAP<a class="headerlink" href="#cap" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="scalability-calculation-numbers">
+<h2>Scalability Calculation Numbers<a class="headerlink" href="#scalability-calculation-numbers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="availability">
+<h3>Availability<a class="headerlink" href="#availability" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>99.99% - 50 minutes downtime / year</p></li>
+<li><p>99.999% - 5 minutes downtime / year</p></li>
+<li><p>99.9999% - 30 seconds downtime / year</p></li>
+</ul>
+</div>
+<div class="section" id="bandwidth">
+<h3>Bandwidth<a class="headerlink" href="#bandwidth" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Average EC2 instance - 5Gb / sec</p></li>
+</ul>
+</div>
+<div class="section" id="throughput">
+<h3>Throughput<a class="headerlink" href="#throughput" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Average server can process - 1000 req / sec</p></li>
+<li><p>Max websocket connections - 65k (65,536)</p></li>
+<li><p>Low end dedicated MySQL server (2 cores, 4GB RAM) can serve 100 req/sec on an average = 10 million/day with CPU idle rate of 90%</p></li>
+</ul>
+</div>
+<div class="section" id="real-world-numbers">
+<h3>Real World Numbers<a class="headerlink" href="#real-world-numbers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Approximation : 1 day ~ 86,400 sec =&gt; 1B DAUs =&gt; 11.5k req/sec</p></li>
+</ul>
+<p>DAUs</p>
+<ul class="simple">
+<li><p>Twitter - 200M/day (2.3k/sec)</p></li>
+<li><p>Facebook - 2B (23k/sec)</p></li>
+<li><p>Whatsapp - 200M (2.3k/sec)</p></li>
+<li><p>Netflix - 200M (2.3k/sec)</p></li>
+</ul>
+<p>Photos Uploaded</p>
+<ul class="simple">
+<li><p>Instagram - 200M/day (2.3k/sec)</p></li>
+</ul>
+<p>Videos uploaded</p>
+<ul class="simple">
+<li><p>Youtube - 500hours / minute</p></li>
+</ul>
+<p>Misc</p>
+<ul class="simple">
+<li><p>Uber - 20 million trips / day = 230/sec</p></li>
+</ul>
+<p>Bandwidth</p>
+<ul class="simple">
+<li><p>For 2000 reads / sec, with each read of 10kb (10k chars) =&gt; 2Mb / sec</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./system-design"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="system-design-checklist.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">System Design Checklist</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="architecture-twitter.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Twitter Architecture</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

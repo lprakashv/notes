@@ -1,0 +1,77 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: README
+parts:
+- caption: Interview Preparation
+  chapters:
+  - file: algorithms/index
+    sections:
+    - file: algorithms/backtracking
+    - file: algorithms/divide-and-conquer
+    - file: algorithms/graph
+    - file: algorithms/dynamic-programming
+    - file: algorithms/bitmasks
+  - file: coding-problems/index
+    sections:
+    - file: coding-problems/strings-arrays
+    - file: coding-problems/graphs
+    - file: coding-problems/trees
+    - file: coding-problems/backtracking
+    - file: coding-problems/dynamic-programming
+    - file: coding-problems/others
+  - file: system-design/index
+    sections:
+    - file: system-design/distributed-systems-additional-notes
+    - file: system-design/pragmatic-system-design
+      sections:
+      - file: system-design/pragmatic-system-design-uber
+      - file: system-design/pragmatic-system-design-whatsapp
+      - file: system-design/pragmatic-system-design-ebay
+      - file: system-design/pragmatic-system-design-tinyurl
+      - file: system-design/pragmatic-system-design-webcrawler
+      - file: system-design/pragmatic-system-design-flashsale
+      - file: system-design/pragmatic-system-design-twitter
+    - file: system-design/system-design-checklist
+    - file: system-design/system-design-interview-cheatsheet
+    - file: system-design/architectures
+      sections:
+      - file: system-design/architecture-twitter
+    - file: system-design/design-ha-db
+  - file: behavioral-interviews/index
+    sections:
+    - file: behavioral-interviews/tell-me-about
+- caption: Programming Languages
+  chapters:
+  - file: java/index
+    sections:
+    - file: java/java
+    - file: java/java-gc
+    - file: java/java-multithreading
+    - file: java/java-snippets
+    - file: spring/index
+      sections:
+      - file: spring/spring-data-transactions
+      - file: spring/spring-cloud
+        sections:
+        - file: spring/spring-cloud-distributed-config
+        - file: spring/spring-cloud-service-discovery
+        - file: spring/spring-cloud-intelligent-routing
+  - file: rust/index
+    sections:
+    - file: rust/rust-snippets
+- caption: Concurrency Parallelism and Reactive
+  chapters:
+  - file: concurrency-parallelism-reactive/concurrency
+- caption: Other Tools and Technologies
+  chapters:
+  - file: kubernetes/index
+    sections:
+    - file: kubernetes/kubernetes-intro
+    - file: kubernetes/namespaces
+- caption: Commands and CheatSheets
+  chapters:
+  - file: command-cheatsheets/docker-cheatsheet
+  - file: command-cheatsheets/kubectl-cheatsheet
+  - file: command-cheatsheets/misc-helpful-commands
