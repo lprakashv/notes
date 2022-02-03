@@ -3,3 +3,4 @@ logs/
 .vscode/
 .metals/
 .DS_Store
+_build/
