@@ -2,7 +2,9 @@
 
 Commands used in personal/professional Experience
 
-## JShell
+## Java
+
+### JShell
 
 Multiple dependencies using maven local repos, use JAR files `:` (colon) separated
 
@@ -10,27 +12,7 @@ Multiple dependencies using maven local repos, use JAR files `:` (colon) separat
 jshell --class-path ./jackson-databind-2.12.4.jar:./jackson-core-2.12.4.jar:./jackson-annotations-2.12.4.jar
 ```
 
-## Docker
-
-Remove old dangling images
-
-```bash
-docker rmi `docker images --filter dangling=true
-```
-
-Remove container after running it
-
-```bash
-docker run —rm image-id
-```
-
-Run an image in a container with its name
-
-```bash
-docker run --rm `docker images --filter reference='*/log-generator' --format '{{.ID}}'`
-```
-
-## JVM Arguments - WIP
+### JVM Arguments - WIP
 
 Hibernate enable SQL generation/logging
 
@@ -40,6 +22,75 @@ Hibernate enable SQL generation/logging
 -Dlogging.level.org.hibernate.SQL=DEBUG \
 -Dlogging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
 ```
+
+## Docker
+
+Run an image in a container with its name
+
+```bash
+docker run --rm `docker images --filter reference='*/log-generator' --format '{{.ID}}'`
+```
+
+Loading image from file
+
+```bash
+docker load < Downloads/scratch.tar.gz
+```
+
+Running an image with passing a local file as argument (after creating a volume for the file dynamically)
+
+- `-ti` for running bash into the container
+- `--rm` for removing container as soon as we exit
+
+```bash
+docker run -v /local/file/path/file.txt:/dest/file/path/file.txt -ti --rm some-docker-image:tag arg1 arg2
+```
+
+### Cleanup
+
+Remove old dangling images
+
+```bash
+docker rmi $(docker images -q -f dangling=true)
+```
+
+Remove old stopped containers
+
+```bash
+docker rm $(docker ps -a -q)
+```
+
+## Golang
+
+### Tests
+
+Test Coverage display on UI
+
+```bash
+go tool cover -html=cover.out
+```
+
+### go get
+
+To add a dependency for a package or upgrade it to its latest version:
+
+```bash
+go get example.com/pkg
+```
+
+To upgrade or downgrade a package to a specific version:
+
+```bash
+go get example.com/pkg@v1.2.3
+```
+
+To remove a dependency on a module and downgrade modules that require it:
+
+```bash
+go get example.com/mod@none
+```
+
+## Makefile
 
 ## MS SQL Server
 
@@ -79,7 +130,7 @@ git rm -r --cached .
 
 Then git add, commit and push
 
-## General Unix Commands - WIP
+## Unix Commands - WIP
 
 Process stats
 
@@ -99,6 +150,8 @@ Disk space
 ```bash
 df -hk | du
 ```
+
+### Networking
 
 Get open ports where applications are listening
 
@@ -122,17 +175,7 @@ Local DNS
 /etc/hosts
 ```
 
-## Nginx Basics - WIP
-
-```bash
-nginx -s reload|reopen|quit|stop
-```
-
-conf files with server specifications: `/etc/nginx/sites-available/*.conf`
-
-`/etc/nginx/sites-enabled/<---->`
-
-## AWK - WIP
+### AWK - WIP
 
 ```bash
 less image-processing.log | sed -E -e "s/Img//g" | awk '{print $6".jpeg"}' | xargs -I '{}' sudo mv ./tmp/{} ./temp-images/
@@ -148,6 +191,16 @@ less nginx_access.log | grep status=502 | sed -E -e "s/(\?|\&)([^=]+)\=([^&]+)//
 - `xargs -I '{}'` - ???
 - `sed -E -e ""` - ???
 - `awk` with multi-line expression and for-loop.
+
+## Nginx Basics - WIP
+
+```bash
+nginx -s reload|reopen|quit|stop
+```
+
+conf files with server specifications: `/etc/nginx/sites-available/*.conf`
+
+`/etc/nginx/sites-enabled/<---->`
 
 ## HDFS
 
