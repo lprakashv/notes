@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Miscellaneous Helpful Commands - WIP &#8212; Lalit&#39;s Tech Notebook</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,36 +20,35 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +60,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -68,9 +83,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -88,14 +104,15 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../README.html">
-   Lalit’s Tech Notes
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lalit’s Tech Notes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Java
  </span>
@@ -231,103 +248,229 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/command-cheatsheets/misc-helpful-commands.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/lprakashv/notes"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fcommand-cheatsheets/misc-helpful-commands.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/lprakashv/notes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fcommand-cheatsheets/misc-helpful-commands.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/command-cheatsheets/misc-helpful-commands.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jshell">
-   JShell
+  <a class="reference internal nav-link" href="#java">
+   Java
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jshell">
+     JShell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jvm-arguments-wip">
+     JVM Arguments - WIP
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#docker">
    Docker
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cleanup">
+     Cleanup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jvm-arguments-wip">
-   JVM Arguments - WIP
+  <a class="reference internal nav-link" href="#golang">
+   Golang
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tests">
+     Tests
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#go-get">
+     go get
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#makefile">
+   Makefile
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -341,18 +484,25 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#general-unix-commands-wip">
-   General Unix Commands - WIP
+  <a class="reference internal nav-link" href="#unix-commands-wip">
+   Unix Commands - WIP
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#networking">
+     Networking
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#awk-wip">
+     AWK - WIP
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nginx-basics-wip">
    Nginx Basics - WIP
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#awk-wip">
-   AWK - WIP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -367,12 +517,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Miscellaneous Helpful Commands - WIP</h1>
@@ -386,18 +535,54 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jshell">
-   JShell
+  <a class="reference internal nav-link" href="#java">
+   Java
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jshell">
+     JShell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jvm-arguments-wip">
+     JVM Arguments - WIP
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#docker">
    Docker
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cleanup">
+     Cleanup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jvm-arguments-wip">
-   JVM Arguments - WIP
+  <a class="reference internal nav-link" href="#golang">
+   Golang
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tests">
+     Tests
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#go-get">
+     go get
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#makefile">
+   Makefile
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -411,18 +596,25 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#general-unix-commands-wip">
-   General Unix Commands - WIP
+  <a class="reference internal nav-link" href="#unix-commands-wip">
+   Unix Commands - WIP
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#networking">
+     Networking
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#awk-wip">
+     AWK - WIP
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nginx-basics-wip">
    Nginx Basics - WIP
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#awk-wip">
-   AWK - WIP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -441,36 +633,24 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="miscellaneous-helpful-commands-wip">
-<h1>Miscellaneous Helpful Commands - WIP<a class="headerlink" href="#miscellaneous-helpful-commands-wip" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="miscellaneous-helpful-commands-wip">
+<h1>Miscellaneous Helpful Commands - WIP<a class="headerlink" href="#miscellaneous-helpful-commands-wip" title="Permalink to this headline">#</a></h1>
 <p>Commands used in personal/professional Experience</p>
-<div class="section" id="jshell">
-<h2>JShell<a class="headerlink" href="#jshell" title="Permalink to this headline">¶</a></h2>
+<section id="java">
+<h2>Java<a class="headerlink" href="#java" title="Permalink to this headline">#</a></h2>
+<section id="jshell">
+<h3>JShell<a class="headerlink" href="#jshell" title="Permalink to this headline">#</a></h3>
 <p>Multiple dependencies using maven local repos, use JAR files <code class="docutils literal notranslate"><span class="pre">:</span></code> (colon) separated</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jshell --class-path ./jackson-databind-2.12.4.jar:./jackson-core-2.12.4.jar:./jackson-annotations-2.12.4.jar
 </pre></div>
 </div>
-</div>
-<div class="section" id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
-<p>Remove old dangling images</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker rmi <span class="sb">`</span>docker images --filter <span class="nv">dangling</span><span class="o">=</span><span class="nb">true</span>
-</pre></div>
-</div>
-<p>Remove container after running it</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run —rm image-id
-</pre></div>
-</div>
-<p>Run an image in a container with its name</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm <span class="sb">`</span>docker images --filter <span class="nv">reference</span><span class="o">=</span><span class="s1">&#39;*/log-generator&#39;</span> --format <span class="s1">&#39;{{.ID}}&#39;</span><span class="sb">`</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="jvm-arguments-wip">
-<h2>JVM Arguments - WIP<a class="headerlink" href="#jvm-arguments-wip" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="jvm-arguments-wip">
+<h3>JVM Arguments - WIP<a class="headerlink" href="#jvm-arguments-wip" title="Permalink to this headline">#</a></h3>
 <p>Hibernate enable SQL generation/logging</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-Dspring.jpa.show-sql<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
 -Dspring.jpa.properties.hibernate.format_sql<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
@@ -478,9 +658,68 @@
 -Dlogging.level.org.hibernate.type.descriptor.sql.BasicBinder<span class="o">=</span>TRACE
 </pre></div>
 </div>
+</section>
+</section>
+<section id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">#</a></h2>
+<p>Run an image in a container with its name</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm <span class="sb">`</span>docker images --filter <span class="nv">reference</span><span class="o">=</span><span class="s1">&#39;*/log-generator&#39;</span> --format <span class="s1">&#39;{{.ID}}&#39;</span><span class="sb">`</span>
+</pre></div>
 </div>
-<div class="section" id="ms-sql-server">
-<h2>MS SQL Server<a class="headerlink" href="#ms-sql-server" title="Permalink to this headline">¶</a></h2>
+<p>Loading image from file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker load &lt; Downloads/scratch.tar.gz
+</pre></div>
+</div>
+<p>Running an image with passing a local file as argument (after creating a volume for the file dynamically)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-ti</span></code> for running bash into the container</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rm</span></code> for removing container as soon as we exit</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -v /local/file/path/file.txt:/dest/file/path/file.txt -ti --rm some-docker-image:tag arg1 arg2
+</pre></div>
+</div>
+<section id="cleanup">
+<h3>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this headline">#</a></h3>
+<p>Remove old dangling images</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker rmi <span class="k">$(</span>docker images -q -f <span class="nv">dangling</span><span class="o">=</span><span class="nb">true</span><span class="k">)</span>
+</pre></div>
+</div>
+<p>Remove old stopped containers</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="golang">
+<h2>Golang<a class="headerlink" href="#golang" title="Permalink to this headline">#</a></h2>
+<section id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">#</a></h3>
+<p>Test Coverage display on UI</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>go tool cover -html<span class="o">=</span>cover.out
+</pre></div>
+</div>
+</section>
+<section id="go-get">
+<h3>go get<a class="headerlink" href="#go-get" title="Permalink to this headline">#</a></h3>
+<p>To add a dependency for a package or upgrade it to its latest version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>go get example.com/pkg
+</pre></div>
+</div>
+<p>To upgrade or downgrade a package to a specific version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>go get example.com/pkg@v1.2.3
+</pre></div>
+</div>
+<p>To remove a dependency on a module and downgrade modules that require it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>go get example.com/mod@none
+</pre></div>
+</div>
+</section>
+</section>
+<section id="makefile">
+<h2>Makefile<a class="headerlink" href="#makefile" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="ms-sql-server">
+<h2>MS SQL Server<a class="headerlink" href="#ms-sql-server" title="Permalink to this headline">#</a></h2>
 <p>Running procedure</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"></span>
 <span class="w">  </span><span class="n">object_name</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">objectid</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ProcName</span><span class="w"></span>
@@ -503,17 +742,17 @@
 <span class="k">CROSS</span><span class="w"> </span><span class="n">APPLY</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_sql_text</span><span class="p">(</span><span class="n">sql_handle</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">sqltext</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="git-wip">
-<h2>Git - WIP<a class="headerlink" href="#git-wip" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="git-wip">
+<h2>Git - WIP<a class="headerlink" href="#git-wip" title="Permalink to this headline">#</a></h2>
 <p>Remove files from remote after adding int .gitignore:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm -r --cached .
 </pre></div>
 </div>
 <p>Then git add, commit and push</p>
-</div>
-<div class="section" id="general-unix-commands-wip">
-<h2>General Unix Commands - WIP<a class="headerlink" href="#general-unix-commands-wip" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="unix-commands-wip">
+<h2>Unix Commands - WIP<a class="headerlink" href="#unix-commands-wip" title="Permalink to this headline">#</a></h2>
 <p>Process stats</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>top -p &lt;pid&gt;
 top -i
@@ -527,6 +766,8 @@ top -i
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>df -hk <span class="p">|</span> du
 </pre></div>
 </div>
+<section id="networking">
+<h3>Networking<a class="headerlink" href="#networking" title="Permalink to this headline">#</a></h3>
 <p>Get open ports where applications are listening</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>netstat -ap tcp <span class="p">|</span> grep -i <span class="s2">&quot;listen&quot;</span>
 
@@ -543,17 +784,9 @@ sudo lsof -PiTCP -sTCP:LISTEN
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/hosts
 </pre></div>
 </div>
-</div>
-<div class="section" id="nginx-basics-wip">
-<h2>Nginx Basics - WIP<a class="headerlink" href="#nginx-basics-wip" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nginx -s reload<span class="p">|</span>reopen<span class="p">|</span>quit<span class="p">|</span>stop
-</pre></div>
-</div>
-<p>conf files with server specifications: <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/*.conf</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-enabled/&lt;----&gt;</span></code></p>
-</div>
-<div class="section" id="awk-wip">
-<h2>AWK - WIP<a class="headerlink" href="#awk-wip" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="awk-wip">
+<h3>AWK - WIP<a class="headerlink" href="#awk-wip" title="Permalink to this headline">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>less image-processing.log <span class="p">|</span> sed -E -e <span class="s2">&quot;s/Img//g&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $6&quot;.jpeg&quot;}&#39;</span> <span class="p">|</span> xargs -I <span class="s1">&#39;{}&#39;</span> sudo mv ./tmp/<span class="o">{}</span> ./temp-images/
 
 
@@ -569,9 +802,18 @@ less nginx_access.log <span class="p">|</span> grep <span class="nv">status</spa
 <li><p><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">-E</span> <span class="pre">-e</span> <span class="pre">&quot;&quot;</span></code> - ???</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">awk</span></code> with multi-line expression and for-loop.</p></li>
 </ul>
+</section>
+</section>
+<section id="nginx-basics-wip">
+<h2>Nginx Basics - WIP<a class="headerlink" href="#nginx-basics-wip" title="Permalink to this headline">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nginx -s reload<span class="p">|</span>reopen<span class="p">|</span>quit<span class="p">|</span>stop
+</pre></div>
 </div>
-<div class="section" id="hdfs">
-<h2>HDFS<a class="headerlink" href="#hdfs" title="Permalink to this headline">¶</a></h2>
+<p>conf files with server specifications: <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/*.conf</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-enabled/&lt;----&gt;</span></code></p>
+</section>
+<section id="hdfs">
+<h2>HDFS<a class="headerlink" href="#hdfs" title="Permalink to this headline">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hadoop fs &lt;command&gt;
 </pre></div>
 </div>
@@ -591,9 +833,9 @@ xargs -n <span class="m">1</span> -I ^ -P <span class="m">10</span> bash -c <spa
 <span class="s2">&quot;hadoop fs -cat ^ | grep -q 961412 &amp;&amp; echo ^&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="kafka-debugging">
-<h2>Kafka Debugging<a class="headerlink" href="#kafka-debugging" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="kafka-debugging">
+<h2>Kafka Debugging<a class="headerlink" href="#kafka-debugging" title="Permalink to this headline">#</a></h2>
 <p>To find the last 10 records</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kafkacat <span class="se">\</span>
 -b &lt;bootstrap-servers&gt; <span class="se">\</span>
@@ -626,8 +868,8 @@ xargs -n <span class="m">1</span> -I ^ -P <span class="m">10</span> bash -c <spa
 --time <span class="m">1583298000000</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -651,9 +893,11 @@ xargs -n <span class="m">1</span> -I ^ -P <span class="m">10</span> bash -c <spa
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="kubectl-cheatsheet.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -662,24 +906,28 @@ xargs -n <span class="m">1</span> -I ^ -P <span class="m">10</span> bash -c <spa
         </div>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Lalit Prakash Vatsal<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Lalit Prakash Vatsal<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
