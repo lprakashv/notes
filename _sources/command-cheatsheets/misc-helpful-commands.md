@@ -130,6 +130,18 @@ git rm -r --cached .
 
 Then git add, commit and push
 
+Delete all untracked files:
+
+```bash
+git ls-files -z -o --exclude-standard | xargs -0 rm
+```
+
+Removing staged files:
+
+```bash
+git reset file
+```
+
 ## Unix Commands - WIP
 
 Process stats

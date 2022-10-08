@@ -750,6 +750,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>Then git add, commit and push</p>
+<p>Delete all untracked files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git ls-files -z -o --exclude-standard <span class="p">|</span> xargs -0 rm
+</pre></div>
+</div>
+<p>Removing staged files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reset file
+</pre></div>
+</div>
 </section>
 <section id="unix-commands-wip">
 <h2>Unix Commands - WIP<a class="headerlink" href="#unix-commands-wip" title="Permalink to this headline">#</a></h2>
