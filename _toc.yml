@@ -4,33 +4,39 @@
 format: jb-book
 root: README
 parts:
-- caption: Java
-  chapters:
-  - file: java/java
-  - file: java/java-gc
-  - file: java/java-multithreading
-  - file: java/java-snippets
-  - file: java/bitmasks
-- caption: Spring
-  chapters:
-  - file: spring/spring-data-transactions
-  - file: spring/spring-cloud
-    sections:
-    - file: spring/spring-cloud-distributed-config
-    - file: spring/spring-cloud-service-discovery
-    - file: spring/spring-cloud-intelligent-routing
-- caption: Rust
-  chapters:
-  - file: rust/rust-snippets
-- caption: Concurrency Parallelism and Reactive
-  chapters:
-  - file: concurrency-parallelism-reactive/concurrency
-- caption: Kubernetes
-  chapters:
-  - file: kubernetes/kubernetes-intro
-  - file: kubernetes/namespaces
-- caption: Commands and CheatSheets
-  chapters:
-  - file: command-cheatsheets/docker-cheatsheet
-  - file: command-cheatsheets/kubectl-cheatsheet
-  - file: command-cheatsheets/misc-helpful-commands
+  - caption: Java
+    chapters:
+      - file: java/java
+      - file: java/java-gc
+      - file: java/java-multithreading
+      - file: java/java-snippets
+      - file: java/bitmasks
+  - caption: Spring
+    chapters:
+      - file: spring/spring-data-transactions
+      - file: spring/spring-cloud
+        sections:
+          - file: spring/spring-cloud-distributed-config
+          - file: spring/spring-cloud-service-discovery
+          - file: spring/spring-cloud-intelligent-routing
+  - caption: Rust
+    chapters:
+      - file: rust/rust-snippets
+  - caption: Concurrency Parallelism and Reactive
+    chapters:
+      - file: concurrency-parallelism-reactive/concurrency
+  - caption: Kubernetes
+    chapters:
+      - file: kubernetes/kubernetes-intro
+      - file: kubernetes/namespaces
+  - caption: Apache Spark
+    chapters:
+      - file: apache-spark/apache-spark
+  - caption: Commands and CheatSheets
+    chapters:
+      - file: command-cheatsheets/docker-cheatsheet
+      - file: command-cheatsheets/kubectl-cheatsheet
+      - file: command-cheatsheets/misc-helpful-commands
+  - caption: Work Learnings Journal
+    chapters:
+      - file: journal/journal
