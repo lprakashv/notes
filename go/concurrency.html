@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Concurrency in Go &#8212; Lalit&#39;s Tech Notebook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'go/concurrency';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Context" href="context.html" />
+    <link rel="prev" title="Code Generation" href="code-generation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../BOOK.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lalit's Tech Notebook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lalit's Tech Notebook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../BOOK.html">
+                    Lalit’s Tech Notes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../java/java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-gc.html">Java Garbage Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-multithreading.html">Java Multi-threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-snippets.html">Java Snippets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../spring/spring-data-transactions.html">Data Transactions with Spring</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spring/spring-cloud.html">Spring Cloud Fundamentals</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-distributed-config.html">Spring Cloud Fundamentals: Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">Spring Cloud Fundamentals: Intelligent Routing</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Golang</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basic-syntax.html">Basic Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-generation.html">Code Generation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Concurrency in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Programming in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grpc-app.html">gRPC in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http-services.html">HTTP in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in Go</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rust</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../rust/rust-snippets.html">Rust Snippets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/kubernetes-intro.html">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/namespaces.html">Kubernetes Namespaces</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apache Spark</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../apache-spark.html">Apache Spark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Commands and CheatSheets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">Miscellaneous Helpful Commands - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../journal.html">Work Learnings Journal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fgo/concurrency.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/go/concurrency.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Concurrency in Go</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">Intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-constructs">Basic Constructs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wait-groups">Wait Groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-state-with-concurrency">Managing State with Concurrency</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#communication-b-w-go-routines">Communication b/w Go-Routines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-streaming">Concurrency - Streaming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-channels">Multiple Channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffered-channels">Buffered Channels</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-patterns">Concurrency - Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runner">Runner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pool">Pool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worker">Worker</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="concurrency-in-go">
+<h1>Concurrency in Go<a class="headerlink" href="#concurrency-in-go" title="Permalink to this heading">#</a></h1>
+<section id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Golang binary includes machine code + “GC” + “Scheduler”.</p></li>
+<li><p>There is no runtime like JVM.</p></li>
+<li><p>In Go application, Built-in “Scheduler” is the entry-point instead of main() function, scheduler in-turn executes the main() function.</p></li>
+<li><p>Scheduler takes care of borrowing Threads from OS.</p></li>
+<li><p>Instruction which are handed to the scheduler to execute are called “go-routines” ( “Managed Concurrency” ).</p>
+<ul>
+<li><p>bare minimum OS thread (in Linux) takes ~ 2 MB memory</p></li>
+<li><p>bare minimum go-routine takes ~ 2 KB memory  (it was 8 earlier, then became 4 and now it is 2 KB)</p></li>
+</ul>
+</li>
+<li><p>Concurrency is built into the language instead of SDK / Library / API like Java etc.</p>
+<ul>
+<li><p>“go” keyword</p></li>
+<li><p>channel data type</p></li>
+<li><p>channel operator ( &lt;- )</p></li>
+<li><p>range, select-case constructs</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="basic-constructs">
+<h2>Basic Constructs<a class="headerlink" href="#basic-constructs" title="Permalink to this heading">#</a></h2>
+<section id="wait-groups">
+<h3>Wait Groups<a class="headerlink" href="#wait-groups" title="Permalink to this heading">#</a></h3>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">wg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">{}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">f1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;f1 started&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Seconds</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;f1 stopped&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">f2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;f2 started&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Seconds</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;f2 stopped&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">f1</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">f2</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Wait group detects the deadlock in case if all the the go-routines are in sleep state (non-runnable state).</p></li>
+<li><p>it is better to was WaitGroup ref as an arg to functions to be executed as go-routines.</p></li>
+</ul>
+</section>
+<section id="managing-state-with-concurrency">
+<h3>Managing State with Concurrency<a class="headerlink" href="#managing-state-with-concurrency" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>“data-races” will happen on mutations happening in go-routines</p>
+<ul>
+<li><p>“-race” flag/switch in go command : <code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">run</span> <span class="pre">-race</span> <span class="pre">{x}</span></code> shows if there are race conditions and result may not be correct.</p></li>
+<li><p>we can have same <code class="docutils literal notranslate"><span class="pre">-race</span></code> flag in <code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">build</span></code> command as well but DO NOT USE THE BUILD FOR PRODUCTION as there may be some performance degradation.</p></li>
+</ul>
+</li>
+</ul>
+<p>We can use Mutexes</p>
+<ul class="simple">
+<li><p>we will have to <code class="docutils literal notranslate"><span class="pre">Lock()</span></code> and <code class="docutils literal notranslate"><span class="pre">Unlock</span></code> everytime!</p></li>
+</ul>
+<p>Or, we can encapsulate our state</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+<span class="w">    </span><span class="nx">count</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Counter</span><span class="p">)</span><span class="w"> </span><span class="nx">Inc</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">count</span><span class="o">++</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or, we can use <code class="docutils literal notranslate"><span class="pre">atomic</span></code> library</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="kt">int64</span>
+<span class="nx">atomic</span><span class="p">.</span><span class="nx">AddInt64</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">count</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">atomicCount</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int64</span>
+<span class="nx">atomicCount</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="communication-b-w-go-routines">
+<h4>Communication b/w Go-Routines<a class="headerlink" href="#communication-b-w-go-routines" title="Permalink to this heading">#</a></h4>
+<blockquote>
+<div><p>“Communicate by sharing memory”</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>We can Communicate by sharing memory</p>
+<ul>
+<li><p>we can have common variable(s)</p></li>
+<li><p>there are many challenges with this approach</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>“Share memory by communicating”</p>
+</div></blockquote>
+<p>Channels</p>
+<ul class="simple">
+<li><p>Channels don’t behave exactly like a “queue”.</p></li>
+<li><p>It can be visualized as a “door”.</p></li>
+<li><p>We can use channels for synchronization as well, we do not need to be dependent on Wait-Groups.</p>
+<ul>
+<li><p>because of their blocking / non-blocking nature in certain scenarios of send and receive.</p></li>
+</ul>
+</li>
+</ul>
+<p>Declaration and Initialization:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">ch</span> <span class="pre">chan</span> <span class="pre">int;</span> <span class="pre">ch</span> <span class="pre">=</span> <span class="pre">make(chan</span> <span class="pre">int)</span></code></p></li>
+<li><p>Or : <code class="docutils literal notranslate"><span class="pre">ch</span> <span class="pre">:=</span> <span class="pre">make(chan</span> <span class="pre">int)</span></code></p></li>
+</ul>
+<p>Operations:</p>
+<ul class="simple">
+<li><p>Send: <code class="docutils literal notranslate"><span class="pre">ch</span> <span class="pre">&lt;-</span> <span class="pre">{data}</span></code></p>
+<ul>
+<li><p>it is “blocked” until a receive operation is “initiated”</p></li>
+</ul>
+</li>
+<li><p>Receive: <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">:=</span> <span class="pre">&lt;-</span> <span class="pre">ch</span></code></p>
+<ul>
+<li><p>it is also a blocked until the data is sent through the channel</p></li>
+</ul>
+</li>
+<li><p>Channel constraints:</p>
+<ul>
+<li><p>receive only channel with <code class="docutils literal notranslate"><span class="pre">&lt;-chan</span> <span class="pre">{type}</span></code></p></li>
+<li><p>send only channel with <code class="docutils literal notranslate"><span class="pre">chan&lt;-</span> <span class="pre">{type}</span></code></p></li>
+<li><p>we can use these syntaxes at parameters of functions or return type of functions</p></li>
+<li><p>e.g., <code class="docutils literal notranslate"><span class="pre">func</span> <span class="pre">Producer(...)</span> <span class="pre">&lt;-chan</span> <span class="pre">int</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code></p></li>
+</ul>
+</li>
+<li><p>In case of streaming, on <code class="docutils literal notranslate"><span class="pre">close(ch)</span></code> the receiver will keep reading “zero” value (in a non-blocking manner) for the data-type.</p>
+<ul>
+<li><p>To avoid this, we can use <code class="docutils literal notranslate"><span class="pre">data,</span> <span class="pre">isOpen</span> <span class="pre">:=</span> <span class="pre">&lt;-</span> <span class="pre">ch;</span> <span class="pre">isOpen</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code></p></li>
+<li><p>Or, we can range over a channel like: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">data</span> <span class="pre">:=</span> <span class="pre">range</span> <span class="pre">ch</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="concurrency-streaming">
+<h2>Concurrency - Streaming<a class="headerlink" href="#concurrency-streaming" title="Permalink to this heading">#</a></h2>
+<section id="multiple-channels">
+<h3>Multiple Channels<a class="headerlink" href="#multiple-channels" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="buffered-channels">
+<h3>Buffered Channels<a class="headerlink" href="#buffered-channels" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+<section id="concurrency-patterns">
+<h2>Concurrency - Patterns<a class="headerlink" href="#concurrency-patterns" title="Permalink to this heading">#</a></h2>
+<section id="runner">
+<h3>Runner<a class="headerlink" href="#runner" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="pool">
+<h3>Pool<a class="headerlink" href="#pool" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="worker">
+<h3>Worker<a class="headerlink" href="#worker" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./go"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="code-generation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Code Generation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="context.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Context</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">Intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-constructs">Basic Constructs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wait-groups">Wait Groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-state-with-concurrency">Managing State with Concurrency</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#communication-b-w-go-routines">Communication b/w Go-Routines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-streaming">Concurrency - Streaming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-channels">Multiple Channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffered-channels">Buffered Channels</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-patterns">Concurrency - Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runner">Runner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pool">Pool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worker">Worker</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lalit Prakash Vatsal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

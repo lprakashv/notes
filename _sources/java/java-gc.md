@@ -26,6 +26,29 @@ Key Heap features:
 - To remove unused objects from the memory in the Heap, a Garbage collector is used
 - Unlike stack, a heap isn't thread-safe and needs to be guarded by properly synchronizing the code
 
+--
+
+### Notes
+
+Heap is divided into memory areas:
+
+1. __Permgen__/__metaspace__
+2. __NewGen__
+    a. Eden space
+    b. Surviving space 1
+    c. Surviving space 2
+3. __Old Gen__
+
+> Only (2) and (3) are considered for GC.
+
+Operations:
+
+| Operation      | Description |
+|----------------|-------------|
+| Mark           | Starts from root of application, walks through "object graph", and marks all the reachable as live. |
+| Sweep (delete) | Deletes all unreachable objects |
+| Compacting     | Compacts the memory/defragment it/increase contiguous space. |
+
 ## Garbage Collector
 
 Garbage collector is a programme that works in JVM and is intended to delete objects that are no longer used or needed.
@@ -41,6 +64,46 @@ New generation includes 3 regions: Eden, Survivor 0, and Survivor 1.
 Old generation includes the Tenured region.
 
 > So what happens when we create a new object in Java?
+
+### GC Cycles - Triggering
+
+In 2 types of ways of GC triggered:
+
+| Type/Cycle |    |
+|------------|----|
+| Minor      | Works on small amount of memory - mostly the newgen space, old is untouched |
+| Major      | Works on the entire heap |
+
+- Both the operations are "stop the world"
+- Every new object creation happens in Eden space.
+- On Eden space exhaustion, minor gc kicks in.
+  - Marks all the objects in New/young gen.
+  - Puts surviving from eden in either SS1 or SS2
+  - Also transfers surviving in other SS also (avoids compacting overhead)
+  - Sweeps
+- If an object survives `-XX:MaxTenuringThreshold` number of gc cycles, it's promoted to older/tenured space.
+
+### Types of GC
+
+1. Serial GC - basic.
+   1. Single threaded.
+   2. Completely pauses every other thread (complete stop the world).
+2. Concurrent Mark Sweep (CMS).
+   1. When: __more memory, more CPU, short pauses.__
+   2. Performs GC along with application execution.
+   3. Does not wait for the Old Gen to be full.
+   4. Stops the world only during marking/re-marking.
+3. Parallel GC.
+   1. When: __less memory, less CPU, high throughput needed, can withstand long pauses.__
+   2. Utilizes multiple CPUs and threads.
+   3. Does not kick in until heap is full/near-full.
+   4. "Stop the world".
+4. G1 GC (Java 7+) - Garbage First.
+   1. Divides entire memory into smaller regions (those can be Eden/Survivor/Tenured).
+   2. Runs on smaller regions whichever has more garbage.
+   3. Concurrent as well as parallel.
+   4. Pauses for defragmentation.
+   5. Better heap utilization.
 
 ---
 
@@ -121,7 +184,7 @@ It is a scalable low latency garbage collector designed to meet the following go
 - Pause times __do not__ increase with the heap or live-set size.
 - Handle heaps ranging from a few hundred megabytes to multi terabytes in size.
 
-#### Properties
+Properties:
 
 - Concurrent
 - Region-based

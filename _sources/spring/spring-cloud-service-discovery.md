@@ -69,7 +69,7 @@ spring-application.name=my-discovery-server
 
 application.yml
 
-```yml
+```yaml
 spring:
   application:
     name: my-discovery-server
@@ -141,7 +141,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 application.yml
 
-```yml
+```yaml
 spring:
   application:
     name: my-discovery-server

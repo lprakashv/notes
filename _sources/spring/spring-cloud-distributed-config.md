@@ -94,7 +94,7 @@ spring.cloud.config.server.git.uri=<uri_to_git_repo>
 
 application.yml
 
-```yml
+```yaml
 server:
   port: 8888
 spring:
@@ -188,7 +188,7 @@ spring.cloud.config.discovery.enabled=true
 
 __bootstrap.yml__:
 
-```yml
+```yaml
 spring:
   application:
     name: <your_application_name>
@@ -211,7 +211,7 @@ spring.cloud.config.uri=http://localhost:8888/
 
 __bootstrap.yml__:
 
-```yml
+```yaml
 spring:
   application:
     name: <your_application_name>
@@ -280,7 +280,7 @@ my.datasource.password={cypher}AASFDSFJSRFAFESECCSE
 
 application.yml
 
-```yml
+```yaml
 my:
   datasource:
     usernmae: foobar

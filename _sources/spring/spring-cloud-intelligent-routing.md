@@ -54,7 +54,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 application.yml
 
-```yml
+```yaml
 spring:
   application:
     name: gateway-service
@@ -75,7 +75,7 @@ ribbon.eureka.enabled=false
 
 application.yml
 
-```yml
+```yaml
 spring:
   application:
     name: gateway-service

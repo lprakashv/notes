@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Java Garbage Collection &#8212; Lalit&#39;s Tech Notebook</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,572 +62,404 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'java/java-gc';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Java Multi-threading" href="java-multithreading.html" />
-    <link rel="prev" title="Java Knowledge" href="java.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="prev" title="Java" href="java.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../BOOK.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Lalit's Tech Notebook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lalit's Tech Notebook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lalit's Tech Notebook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../README.html">
+                <a class="reference internal" href="../BOOK.html">
                     Lalit’s Tech Notes
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Java
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="java.html">
-   Java Knowledge
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Java Garbage Collection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="java-multithreading.html">
-   Java Multi-threading
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="java-snippets.html">
-   Java Snippets
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bitmasks.html">
-   Bitwise Tricks
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="java.html">Java</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Java Garbage Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java-multithreading.html">Java Multi-threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java-snippets.html">Java Snippets</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Spring
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../spring/spring-data-transactions.html">
-   Data Transactions with Spring
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../spring/spring-cloud.html">
-   Spring Cloud Fundamentals
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../spring/spring-cloud-distributed-config.html">
-     Spring Cloud Fundamentals: Distributed Config
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../spring/spring-cloud-service-discovery.html">
-     Spring Cloud Fundamentals: Service Discovery
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">
-     Spring Cloud Fundamentals: Intelligent Routing
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../spring/spring-data-transactions.html">Data Transactions with Spring</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spring/spring-cloud.html">Spring Cloud Fundamentals</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-distributed-config.html">Spring Cloud Fundamentals: Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">Spring Cloud Fundamentals: Intelligent Routing</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Rust
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../rust/rust-snippets.html">
-   Rust Snippets
-  </a>
- </li>
+</li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Concurrency Parallelism and Reactive
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Golang</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
-   Concurrency
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../go/basic-syntax.html">Basic Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/code-generation.html">Code Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/concurrency.html">Concurrency in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/context.html">Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/database.html">Database Programming in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/grpc-app.html">gRPC in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/http-services.html">HTTP in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/testing.html">Testing in Go</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Kubernetes
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rust</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../kubernetes/kubernetes-intro.html">
-   Kubernetes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../kubernetes/namespaces.html">
-   Kubernetes Namespaces
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../rust/rust-snippets.html">Rust Snippets</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Apache Spark
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../apache-spark/apache-spark.html">
-   Apache Spark
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Commands and CheatSheets
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">
-   Docker cheatsheet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">
-   Kubectl Cheat Sheet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">
-   Miscellaneous Helpful Commands - WIP
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/kubernetes-intro.html">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/namespaces.html">Kubernetes Namespaces</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Work Learnings Journal
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apache Spark</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../journal/journal.html">
-   Work Learnings Journal
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../apache-spark.html">Apache Spark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Commands and CheatSheets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">Miscellaneous Helpful Commands - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../journal.html">Work Learnings Journal</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fjava/java-gc.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/java/java-gc.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/lprakashv/notes"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fjava/java-gc.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/java/java-gc.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#heap">
-   Heap
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#garbage-collector">
-   Garbage Collector
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#garbage-collectors-in-java">
-   Garbage Collectors in Java
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#g1-garbage-collector">
-     G1 Garbage Collector
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#g1-working">
-       G1 Working
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#g1-extras">
-       G1 Extras
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#string-deduplication">
-         String deduplication
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#zgc">
-     ZGC
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#properties">
-       Properties
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#working-of-zgc">
-       Working of ZGC
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#phases-of-z-garbage-collection">
-       Phases of Z Garbage Collection
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#colored-pointers">
-       Colored Pointers
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Java Garbage Collection</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#heap">
-   Heap
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#garbage-collector">
-   Garbage Collector
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#garbage-collectors-in-java">
-   Garbage Collectors in Java
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#g1-garbage-collector">
-     G1 Garbage Collector
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#g1-working">
-       G1 Working
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#g1-extras">
-       G1 Extras
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#string-deduplication">
-         String deduplication
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#zgc">
-     ZGC
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#properties">
-       Properties
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#working-of-zgc">
-       Working of ZGC
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#phases-of-z-garbage-collection">
-       Phases of Z Garbage Collection
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#colored-pointers">
-       Colored Pointers
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Java Garbage Collection</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heap">Heap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#garbage-collector">Garbage Collector</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gc-cycles-triggering">GC Cycles - Triggering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-gc">Types of GC</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#garbage-collectors-in-java">Garbage Collectors in Java</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g1-garbage-collector">G1 Garbage Collector</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g1-working">G1 Working</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g1-extras">G1 Extras</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#string-deduplication">String deduplication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zgc">ZGC</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-of-zgc">Working of ZGC</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phases-of-z-garbage-collection">Phases of Z Garbage Collection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#colored-pointers">Colored Pointers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="java-garbage-collection">
-<h1>Java Garbage Collection<a class="headerlink" href="#java-garbage-collection" title="Permalink to this headline">#</a></h1>
+<h1>Java Garbage Collection<a class="headerlink" href="#java-garbage-collection" title="Permalink to this heading">#</a></h1>
 <section id="heap">
-<h2>Heap<a class="headerlink" href="#heap" title="Permalink to this headline">#</a></h2>
+<h2>Heap<a class="headerlink" href="#heap" title="Permalink to this heading">#</a></h2>
 <p>The Heap is divided into several parts called generations:</p>
 <ul class="simple">
 <li><p>Young generation is a field, where recently created objects are stored;</p></li>
@@ -638,9 +482,44 @@ title="Print to PDF"
 <li><p>To remove unused objects from the memory in the Heap, a Garbage collector is used</p></li>
 <li><p>Unlike stack, a heap isn’t thread-safe and needs to be guarded by properly synchronizing the code</p></li>
 </ul>
+<p>–</p>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h3>
+<p>Heap is divided into memory areas:</p>
+<ol class="arabic simple">
+<li><p><strong>Permgen</strong>/<strong>metaspace</strong></p></li>
+<li><p><strong>NewGen</strong>
+a. Eden space
+b. Surviving space 1
+c. Surviving space 2</p></li>
+<li><p><strong>Old Gen</strong></p></li>
+</ol>
+<blockquote>
+<div><p>Only (2) and (3) are considered for GC.</p>
+</div></blockquote>
+<p>Operations:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mark</p></td>
+<td><p>Starts from root of application, walks through “object graph”, and marks all the reachable as live.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sweep (delete)</p></td>
+<td><p>Deletes all unreachable objects</p></td>
+</tr>
+<tr class="row-even"><td><p>Compacting</p></td>
+<td><p>Compacts the memory/defragment it/increase contiguous space.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="garbage-collector">
-<h2>Garbage Collector<a class="headerlink" href="#garbage-collector" title="Permalink to this headline">#</a></h2>
+<h2>Garbage Collector<a class="headerlink" href="#garbage-collector" title="Permalink to this heading">#</a></h2>
 <p>Garbage collector is a programme that works in JVM and is intended to delete objects that are no longer used or needed.</p>
 <blockquote>
 <div><p>Different JVMs can have different algorithms of garbage collection, so there are a variety of different garbage collectors in Java.</p>
@@ -652,19 +531,87 @@ title="Print to PDF"
 <blockquote>
 <div><p>So what happens when we create a new object in Java?</p>
 </div></blockquote>
+<section id="gc-cycles-triggering">
+<h3>GC Cycles - Triggering<a class="headerlink" href="#gc-cycles-triggering" title="Permalink to this heading">#</a></h3>
+<p>In 2 types of ways of GC triggered:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type/Cycle</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Minor</p></td>
+<td><p>Works on small amount of memory - mostly the newgen space, old is untouched</p></td>
+</tr>
+<tr class="row-odd"><td><p>Major</p></td>
+<td><p>Works on the entire heap</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Both the operations are “stop the world”</p></li>
+<li><p>Every new object creation happens in Eden space.</p></li>
+<li><p>On Eden space exhaustion, minor gc kicks in.</p>
+<ul>
+<li><p>Marks all the objects in New/young gen.</p></li>
+<li><p>Puts surviving from eden in either SS1 or SS2</p></li>
+<li><p>Also transfers surviving in other SS also (avoids compacting overhead)</p></li>
+<li><p>Sweeps</p></li>
+</ul>
+</li>
+<li><p>If an object survives <code class="docutils literal notranslate"><span class="pre">-XX:MaxTenuringThreshold</span></code> number of gc cycles, it’s promoted to older/tenured space.</p></li>
+</ul>
+</section>
+<section id="types-of-gc">
+<h3>Types of GC<a class="headerlink" href="#types-of-gc" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Serial GC - basic.</p>
+<ol class="arabic simple">
+<li><p>Single threaded.</p></li>
+<li><p>Completely pauses every other thread (complete stop the world).</p></li>
+</ol>
+</li>
+<li><p>Concurrent Mark Sweep (CMS).</p>
+<ol class="arabic simple">
+<li><p>When: <strong>more memory, more CPU, short pauses.</strong></p></li>
+<li><p>Performs GC along with application execution.</p></li>
+<li><p>Does not wait for the Old Gen to be full.</p></li>
+<li><p>Stops the world only during marking/re-marking.</p></li>
+</ol>
+</li>
+<li><p>Parallel GC.</p>
+<ol class="arabic simple">
+<li><p>When: <strong>less memory, less CPU, high throughput needed, can withstand long pauses.</strong></p></li>
+<li><p>Utilizes multiple CPUs and threads.</p></li>
+<li><p>Does not kick in until heap is full/near-full.</p></li>
+<li><p>“Stop the world”.</p></li>
+</ol>
+</li>
+<li><p>G1 GC (Java 7+) - Garbage First.</p>
+<ol class="arabic simple">
+<li><p>Divides entire memory into smaller regions (those can be Eden/Survivor/Tenured).</p></li>
+<li><p>Runs on smaller regions whichever has more garbage.</p></li>
+<li><p>Concurrent as well as parallel.</p></li>
+<li><p>Pauses for defragmentation.</p></li>
+<li><p>Better heap utilization.</p></li>
+</ol>
+</li>
+</ol>
+</section>
 </section>
 <hr class="docutils" />
 <section id="garbage-collectors-in-java">
-<h2>Garbage Collectors in Java<a class="headerlink" href="#garbage-collectors-in-java" title="Permalink to this headline">#</a></h2>
+<h2>Garbage Collectors in Java<a class="headerlink" href="#garbage-collectors-in-java" title="Permalink to this heading">#</a></h2>
 <section id="g1-garbage-collector">
-<h3>G1 Garbage Collector<a class="headerlink" href="#g1-garbage-collector" title="Permalink to this headline">#</a></h3>
+<h3>G1 Garbage Collector<a class="headerlink" href="#g1-garbage-collector" title="Permalink to this heading">#</a></h3>
 <p>G1 is introduced in <strong>Java7</strong>. Oracle 9 Hotspot JVM comes with default G1 Garbage collection.</p>
 <p>You can configure this for maximum pause time using flag <code class="docutils literal notranslate"> <span class="pre">-XX:MaxGCPauseMillis=n</span></code>.</p>
 <blockquote>
 <div><p>Lots of real-world studies say most of the objects (90%) garbage collected in a young generation or in first garbage collection or minor GC (also it depends upon applications). Who survived a couple of GCs(major GC), present in old memory (old objects) they will remain survive more than 95% times.</p>
 </div></blockquote>
 <section id="g1-working">
-<h4>G1 Working<a class="headerlink" href="#g1-working" title="Permalink to this headline">#</a></h4>
+<h4>G1 Working<a class="headerlink" href="#g1-working" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>It does most of the work concurrently.</p></li>
 <li><p>It uses non-continuous which enables G1 to deal with the very large heap efficiently.</p></li>
@@ -687,16 +634,16 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="g1-extras">
-<h4>G1 Extras<a class="headerlink" href="#g1-extras" title="Permalink to this headline">#</a></h4>
+<h4>G1 Extras<a class="headerlink" href="#g1-extras" title="Permalink to this heading">#</a></h4>
 <section id="string-deduplication">
-<h5>String deduplication<a class="headerlink" href="#string-deduplication" title="Permalink to this headline">#</a></h5>
+<h5>String deduplication<a class="headerlink" href="#string-deduplication" title="Permalink to this heading">#</a></h5>
 <blockquote>
 <div><p>Many large-scale Java applications are currently bottlenecked on memory. Measurements have shown that <strong>roughly 25% of the Java heap live data set in these types of applications is consumed by String objects</strong>. Further, <strong>roughly half of those String objects are duplicates</strong>, where duplicates means string1.equals(string2)is true. Having duplicate String objects on the heap is, essentially, just a waste of memory.</p>
 </div></blockquote>
 <p>Java provides two ways to handle duplicate strings and eliminate memory usage</p>
 <p><strong>1. By using <code class="docutils literal notranslate"><span class="pre">String.intern()</span></code> method:</strong></p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">).</span><span class="na">intern</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">).</span><span class="na">intern</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Notes:</p>
@@ -706,7 +653,7 @@ title="Print to PDF"
 <li><p>The implementation used a fixed size (<strong>default 1009, can be set using <code class="docutils literal notranslate"><span class="pre">-XX:StringTableSize=N</span></code></strong>) hashtable so as the number entries grew, the performance became O(n).</p></li>
 </ul>
 <p><strong>2. By enabling string deduplication (only available with G1 garbage collector):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>XX:+UseG1GC -XX:+UseStringDeduplication
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>XX:+UseG1GC<span class="w"> </span>-XX:+UseStringDeduplication
 </pre></div>
 </div>
 <p>Notes:</p>
@@ -721,7 +668,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="zgc">
-<h3>ZGC<a class="headerlink" href="#zgc" title="Permalink to this headline">#</a></h3>
+<h3>ZGC<a class="headerlink" href="#zgc" title="Permalink to this heading">#</a></h3>
 <p>It is a scalable low latency garbage collector designed to meet the following goals:</p>
 <ul class="simple">
 <li><p>Z Garbage Collector (ZGC) is introduced in JAVA-11 as an experimental GC.</p></li>
@@ -729,8 +676,7 @@ title="Print to PDF"
 <li><p>Pause times <strong>do not</strong> increase with the heap or live-set size.</p></li>
 <li><p>Handle heaps ranging from a few hundred megabytes to multi terabytes in size.</p></li>
 </ul>
-<section id="properties">
-<h4>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">#</a></h4>
+<p>Properties:</p>
 <ul class="simple">
 <li><p>Concurrent</p></li>
 <li><p>Region-based</p></li>
@@ -739,9 +685,8 @@ title="Print to PDF"
 <li><p>Using colored pointers</p></li>
 <li><p>Using load barriers</p></li>
 </ul>
-</section>
 <section id="working-of-zgc">
-<h4>Working of ZGC<a class="headerlink" href="#working-of-zgc" title="Permalink to this headline">#</a></h4>
+<h4>Working of ZGC<a class="headerlink" href="#working-of-zgc" title="Permalink to this heading">#</a></h4>
 <p>ZGC divides memory into regions, also called <strong>ZPages</strong>. ZPages are dynamically sized (unlike the G1 GC), which are multiples of 2 MB can be dynamically created and destroyed.</p>
 <p>Here are the size groups of heap regions:</p>
 <ul class="simple">
@@ -760,7 +705,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="phases-of-z-garbage-collection">
-<h4>Phases of Z Garbage Collection<a class="headerlink" href="#phases-of-z-garbage-collection" title="Permalink to this headline">#</a></h4>
+<h4>Phases of Z Garbage Collection<a class="headerlink" href="#phases-of-z-garbage-collection" title="Permalink to this heading">#</a></h4>
 <p><img alt="ZGC" src="../_images/zgcphases.jpeg" /></p>
 <p><strong>1. Pause Mark Start:</strong></p>
 <ul class="simple">
@@ -784,7 +729,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="colored-pointers">
-<h4>Colored Pointers<a class="headerlink" href="#colored-pointers" title="Permalink to this headline">#</a></h4>
+<h4>Colored Pointers<a class="headerlink" href="#colored-pointers" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Colored pointers are one of the core concepts of ZGC.</p></li>
 <li><p>It enables ZGC to find, mark, locate, and remap the objects.</p></li>
@@ -825,7 +770,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./java"
         },
         predefinedOutput: true
@@ -833,50 +778,128 @@ title="Print to PDF"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="java.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Java Knowledge</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="java.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Java</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="java-multithreading.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="java-multithreading.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Java Multi-threading</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heap">Heap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#garbage-collector">Garbage Collector</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gc-cycles-triggering">GC Cycles - Triggering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-gc">Types of GC</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#garbage-collectors-in-java">Garbage Collectors in Java</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g1-garbage-collector">G1 Garbage Collector</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g1-working">G1 Working</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g1-extras">G1 Extras</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#string-deduplication">String deduplication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zgc">ZGC</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-of-zgc">Working of ZGC</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phases-of-z-garbage-collection">Phases of Z Garbage Collection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#colored-pointers">Colored Pointers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Lalit Prakash Vatsal<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Lalit Prakash Vatsal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Spring Cloud Fundamentals: Distributed Config &#8212; Lalit&#39;s Tech Notebook</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,670 +62,410 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'spring/spring-cloud-distributed-config';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Spring Cloud Fundamentals: Service Discovery" href="spring-cloud-service-discovery.html" />
     <link rel="prev" title="Spring Cloud Fundamentals" href="spring-cloud.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../BOOK.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Lalit's Tech Notebook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lalit's Tech Notebook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lalit's Tech Notebook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../README.html">
+                <a class="reference internal" href="../BOOK.html">
                     Lalit’s Tech Notes
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Java
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java.html">
-   Java Knowledge
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java-gc.html">
-   Java Garbage Collection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java-multithreading.html">
-   Java Multi-threading
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java-snippets.html">
-   Java Snippets
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/bitmasks.html">
-   Bitwise Tricks
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-gc.html">Java Garbage Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-multithreading.html">Java Multi-threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-snippets.html">Java Snippets</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Spring
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="spring-data-transactions.html">
-   Data Transactions with Spring
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="spring-cloud.html">
-   Spring Cloud Fundamentals
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Spring Cloud Fundamentals: Distributed Config
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="spring-cloud-service-discovery.html">
-     Spring Cloud Fundamentals: Service Discovery
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="spring-cloud-intelligent-routing.html">
-     Spring Cloud Fundamentals: Intelligent Routing
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="spring-data-transactions.html">Data Transactions with Spring</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spring-cloud.html">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Spring Cloud Fundamentals: Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-intelligent-routing.html">Spring Cloud Fundamentals: Intelligent Routing</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Rust
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../rust/rust-snippets.html">
-   Rust Snippets
-  </a>
- </li>
+</li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Concurrency Parallelism and Reactive
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Golang</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
-   Concurrency
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../go/basic-syntax.html">Basic Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/code-generation.html">Code Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/concurrency.html">Concurrency in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/context.html">Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/database.html">Database Programming in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/grpc-app.html">gRPC in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/http-services.html">HTTP in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/testing.html">Testing in Go</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Kubernetes
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rust</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../kubernetes/kubernetes-intro.html">
-   Kubernetes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../kubernetes/namespaces.html">
-   Kubernetes Namespaces
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../rust/rust-snippets.html">Rust Snippets</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Apache Spark
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../apache-spark/apache-spark.html">
-   Apache Spark
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Commands and CheatSheets
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">
-   Docker cheatsheet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">
-   Kubectl Cheat Sheet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">
-   Miscellaneous Helpful Commands - WIP
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/kubernetes-intro.html">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/namespaces.html">Kubernetes Namespaces</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Work Learnings Journal
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apache Spark</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../journal/journal.html">
-   Work Learnings Journal
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../apache-spark.html">Apache Spark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Commands and CheatSheets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">Miscellaneous Helpful Commands - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../journal.html">Work Learnings Journal</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fspring/spring-cloud-distributed-config.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/spring/spring-cloud-distributed-config.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/lprakashv/notes"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fspring/spring-cloud-distributed-config.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/spring/spring-cloud-distributed-config.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-configuration-server">
-   Application Configuration Server
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#integration-with-spring-applications">
-   Integration with Spring Applications
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#spring-cloud-config-config-server">
-   Spring Cloud Config: Config Server
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-spring-cloud-config-server">
-     Using Spring Cloud Config Server
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rest-endpoint-parameters">
-     REST Endpoint Parameters
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-application-profile-label">
-       GET /{application}/{profile}[/{label}]
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-application-profile-yml-properties">
-       GET /{application}-{profile}.(yml | properties)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-label-application-profile-yml-properties">
-       GET /{label}/{application}-{profile}.{yml | properties}
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#spring-cloud-config-config-client">
-   Spring Cloud Config: Config Client
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spring-config-client">
-     Spring Config Client
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#config-first">
-       Config First
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#discovery-first">
-       Discovery First
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#refreshing-configuration-properties">
-     Refreshing configuration properties
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#configuration-changes">
-       #1: Configuration changes
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#notify-application-s-to-refresh-configuration">
-       #2: Notify Application(s) to refresh configuration
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#refreshing-config-what-s-covered-and-what-s-not">
-     Refreshing Config: What’s covered and what’s not
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#refreshscope">
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         @RefreshScope
-        </span>
-       </code>
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#additional-features-supported">
-     Additional Features Supported
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#what-does-encrypted-configuration-look-like">
-       What does encrypted configuration look like?
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#at-what-point-the-configuration-is-decrypted">
-       At what point the configuration is decrypted?
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Spring Cloud Fundamentals: Distributed Config</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-configuration-server">
-   Application Configuration Server
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#integration-with-spring-applications">
-   Integration with Spring Applications
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#spring-cloud-config-config-server">
-   Spring Cloud Config: Config Server
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-spring-cloud-config-server">
-     Using Spring Cloud Config Server
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rest-endpoint-parameters">
-     REST Endpoint Parameters
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-application-profile-label">
-       GET /{application}/{profile}[/{label}]
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-application-profile-yml-properties">
-       GET /{application}-{profile}.(yml | properties)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-label-application-profile-yml-properties">
-       GET /{label}/{application}-{profile}.{yml | properties}
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#spring-cloud-config-config-client">
-   Spring Cloud Config: Config Client
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spring-config-client">
-     Spring Config Client
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#config-first">
-       Config First
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#discovery-first">
-       Discovery First
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#refreshing-configuration-properties">
-     Refreshing configuration properties
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#configuration-changes">
-       #1: Configuration changes
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#notify-application-s-to-refresh-configuration">
-       #2: Notify Application(s) to refresh configuration
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#refreshing-config-what-s-covered-and-what-s-not">
-     Refreshing Config: What’s covered and what’s not
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#refreshscope">
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         @RefreshScope
-        </span>
-       </code>
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#additional-features-supported">
-     Additional Features Supported
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#what-does-encrypted-configuration-look-like">
-       What does encrypted configuration look like?
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#at-what-point-the-configuration-is-decrypted">
-       At what point the configuration is decrypted?
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spring Cloud Fundamentals: Distributed Config</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-configuration-server">Application Configuration Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-spring-applications">Integration with Spring Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-config-config-server">Spring Cloud Config: Config Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-config-server">Using Spring Cloud Config Server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-endpoint-parameters">REST Endpoint Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-application-profile-label">GET /{application}/{profile}[/{label}]</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-application-profile-yml-properties">GET /{application}-{profile}.(yml | properties)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-label-application-profile-yml-properties">GET /{label}/{application}-{profile}.{yml | properties}</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-config-config-client">Spring Cloud Config: Config Client</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-config-client">Spring Config Client</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#config-first">Config First</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discovery-first">Discovery First</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refreshing-configuration-properties">Refreshing configuration properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-changes">#1: Configuration changes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notify-application-s-to-refresh-configuration">#2: Notify Application(s) to refresh configuration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refreshing-config-what-s-covered-and-what-s-not">Refreshing Config: What’s covered and what’s not</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#refreshscope"><code class="docutils literal notranslate"><span class="pre">@RefreshScope</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-features-supported">Additional Features Supported</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-encrypted-configuration-look-like">What does encrypted configuration look like?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#at-what-point-the-configuration-is-decrypted">At what point the configuration is decrypted?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="spring-cloud-fundamentals-distributed-config">
-<h1>Spring Cloud Fundamentals: Distributed Config<a class="headerlink" href="#spring-cloud-fundamentals-distributed-config" title="Permalink to this headline">#</a></h1>
+<h1>Spring Cloud Fundamentals: Distributed Config<a class="headerlink" href="#spring-cloud-fundamentals-distributed-config" title="Permalink to this heading">#</a></h1>
 <p>Configuration in a non-distributed to distributed explodes really rapidly, from a handlful of configuration files to many-many ones.</p>
 <p>We can still live with configuration management tools like Puppet, Chef etc. But there are issues with typical configuration management:</p>
 <ul class="simple">
@@ -723,7 +475,7 @@ title="Print to PDF"
 </ul>
 <p><strong>Configuration Server</strong> can solve our problems!</p>
 <section id="application-configuration-server">
-<h2>Application Configuration Server<a class="headerlink" href="#application-configuration-server" title="Permalink to this headline">#</a></h2>
+<h2>Application Configuration Server<a class="headerlink" href="#application-configuration-server" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Dedicated, dynamic and centralized key/value store (maybe distributed).</p></li>
 <li><p>Authoritative source.</p></li>
@@ -732,21 +484,21 @@ title="Print to PDF"
 <li><p>Cryptography support.</p></li>
 </ul>
 <p>Options available for configuration management backend:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Spring Cloud Consul</p></li>
 <li><p>Spring Cloud Zookeeper</p></li>
 <li><p><strong>Spring Cloud Config</strong></p></li>
 </ol>
 </section>
 <section id="integration-with-spring-applications">
-<h2>Integration with Spring Applications<a class="headerlink" href="#integration-with-spring-applications" title="Permalink to this headline">#</a></h2>
+<h2>Integration with Spring Applications<a class="headerlink" href="#integration-with-spring-applications" title="Permalink to this heading">#</a></h2>
 <p><strong>Config Client:</strong></p>
 <ul class="simple">
 <li><p>Embedded in application</p></li>
 <li><p>Spring <strong><code class="docutils literal notranslate"><span class="pre">Environment</span></code></strong> abstraction:</p></li>
 </ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Inject</span><span class="w"></span>
-<span class="n">Environment</span><span class="w"> </span><span class="n">environment</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Inject</span>
+<span class="n">Environment</span><span class="w"> </span><span class="n">environment</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><strong>Config Server:</strong></p>
@@ -754,12 +506,12 @@ title="Print to PDF"
 <li><p>Standalone (can be embedded)</p></li>
 <li><p>Spring <strong><code class="docutils literal notranslate"><span class="pre">PropertySource</span></code></strong> abstraction</p></li>
 </ul>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">classpath</span><span class="o">:</span><span class="s">file.properties</span><span class="w"></span>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">classpath</span><span class="o">:</span><span class="s">file.properties</span>
 </pre></div>
 </div>
 </section>
 <section id="spring-cloud-config-config-server">
-<h2>Spring Cloud Config: Config Server<a class="headerlink" href="#spring-cloud-config-config-server" title="Permalink to this headline">#</a></h2>
+<h2>Spring Cloud Config: Config Server<a class="headerlink" href="#spring-cloud-config-config-server" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>HTTP REST Access</p></li>
 <li><p>Output formats</p>
@@ -779,58 +531,58 @@ title="Print to PDF"
 <li><p>Configuration scopes</p></li>
 </ul>
 <section id="using-spring-cloud-config-server">
-<h3>Using Spring Cloud Config Server<a class="headerlink" href="#using-spring-cloud-config-server" title="Permalink to this headline">#</a></h3>
+<h3>Using Spring Cloud Config Server<a class="headerlink" href="#using-spring-cloud-config-server" title="Permalink to this heading">#</a></h3>
 <p>pom.xml</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependencyManagement&gt;</span>
-  <span class="nt">&lt;dependencies&gt;</span>
-    <span class="nt">&lt;dependency&gt;</span>
-      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
-      <span class="nt">&lt;version&gt;</span>Camden-SR2<span class="nt">&lt;/version&gt;</span>
-      <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
-      <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-  <span class="nt">&lt;/dependencies&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">      </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">      </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">      </span><span class="nt">&lt;version&gt;</span>Camden-SR2<span class="nt">&lt;/version&gt;</span>
+<span class="w">      </span><span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+<span class="w">      </span><span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/dependencies&gt;</span>
 <span class="nt">&lt;/dependencyManagement&gt;</span>
 </pre></div>
 </div>
 <p>pom.xml</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>spring-cloud-config-server<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-config-server<span class="nt">&lt;/artifactId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
 </div>
 <p>application.properties</p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">server.port</span><span class="o">=</span><span class="s">8888</span><span class="w"></span>
-<span class="na">spring.cloud.config.server.git.uri</span><span class="o">=</span><span class="s">&lt;uri_to_git_repo&gt;</span><span class="w"></span>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">server.port</span><span class="o">=</span><span class="s">8888</span>
+<span class="na">spring.cloud.config.server.git.uri</span><span class="o">=</span><span class="s">&lt;uri_to_git_repo&gt;</span>
 </pre></div>
 </div>
 <p>application.yml</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>server:
-  port: 8888
-spring:
-  cloud:
-    config:
-      server:
-        git:
-          uri: &lt;uri_to_git_repo&gt;
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8888</span>
+<span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">git</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;uri_to_git_repo&gt;</span>
 </pre></div>
 </div>
 <p>Application.java</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span><span class="w"></span>
-<span class="nd">@EnableConfigServer</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableConfigServer</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>TIP:</strong> Add Eureka client dependencies, service-url configuration and <code class="docutils literal notranslate"><span class="pre">&#64;EnableDiscoveryClient</span></code> to make the config server discoverable.</p>
 <p><strong>Configuring backend store:</strong></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Create a folder to store configuration.</p></li>
 <li><p>(optional) Add a <code class="docutils literal notranslate"><span class="pre">properties</span></code> or <code class="docutils literal notranslate"><span class="pre">yml</span></code> file with name <strong><code class="docutils literal notranslate"><span class="pre">application</span></code></strong>.</p></li>
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">properties</span></code> or <code class="docutils literal notranslate"><span class="pre">yml</span></code> file with name <strong><code class="docutils literal notranslate"><span class="pre">{application}-{profile}</span></code></strong>.</p></li>
@@ -849,14 +601,14 @@ spring:
 </ul>
 </section>
 <section id="rest-endpoint-parameters">
-<h3>REST Endpoint Parameters<a class="headerlink" href="#rest-endpoint-parameters" title="Permalink to this headline">#</a></h3>
+<h3>REST Endpoint Parameters<a class="headerlink" href="#rest-endpoint-parameters" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>{application}</strong> - maps to <strong><code class="docutils literal notranslate"><span class="pre">spring.application.name</span></code></strong> on <strong>client</strong>.</p></li>
 <li><p><strong>{profile}</strong> - maps to <strong><code class="docutils literal notranslate"><span class="pre">spring.profiles.active</span></code></strong> on <strong>client</strong>.</p></li>
 <li><p><strong>{label}</strong> - server side feature to refer to set of config files by name.</p></li>
 </ul>
 <section id="get-application-profile-label">
-<h4>GET /{application}/{profile}[/{label}]<a class="headerlink" href="#get-application-profile-label" title="Permalink to this headline">#</a></h4>
+<h4>GET /{application}/{profile}[/{label}]<a class="headerlink" href="#get-application-profile-label" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/myapp/dev/master</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/myapp/prod/v2</span></code></p></li>
@@ -864,7 +616,7 @@ spring:
 </ul>
 </section>
 <section id="get-application-profile-yml-properties">
-<h4>GET /{application}-{profile}.(yml | properties)<a class="headerlink" href="#get-application-profile-yml-properties" title="Permalink to this headline">#</a></h4>
+<h4>GET /{application}-{profile}.(yml | properties)<a class="headerlink" href="#get-application-profile-yml-properties" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/myapp-dev.yml</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/myapp-prod.properties</span></code></p></li>
@@ -872,7 +624,7 @@ spring:
 </ul>
 </section>
 <section id="get-label-application-profile-yml-properties">
-<h4>GET /{label}/{application}-{profile}.{yml | properties}<a class="headerlink" href="#get-label-application-profile-yml-properties" title="Permalink to this headline">#</a></h4>
+<h4>GET /{label}/{application}-{profile}.{yml | properties}<a class="headerlink" href="#get-label-application-profile-yml-properties" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/master/myapp-dev.yml</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/v2/myapp-prod.properties</span></code></p></li>
@@ -882,66 +634,66 @@ spring:
 </section>
 </section>
 <section id="spring-cloud-config-config-client">
-<h2>Spring Cloud Config: Config Client<a class="headerlink" href="#spring-cloud-config-config-client" title="Permalink to this headline">#</a></h2>
+<h2>Spring Cloud Config: Config Client<a class="headerlink" href="#spring-cloud-config-config-client" title="Permalink to this heading">#</a></h2>
 <section id="spring-config-client">
-<h3>Spring Config Client<a class="headerlink" href="#spring-config-client" title="Permalink to this headline">#</a></h3>
+<h3>Spring Config Client<a class="headerlink" href="#spring-config-client" title="Permalink to this heading">#</a></h3>
 <p>pom.xml</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>spring-cloud-config-client<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-config-client<span class="nt">&lt;/artifactId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
 </div>
 <section id="config-first">
-<h4>Config First<a class="headerlink" href="#config-first" title="Permalink to this headline">#</a></h4>
+<h4>Config First<a class="headerlink" href="#config-first" title="Permalink to this heading">#</a></h4>
 <p>Specify the location of the config server.</p>
 <p><strong>bootstrap.properties</strong>:</p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">&lt;your_application_name&gt;</span><span class="w"></span>
-<span class="na">spring.cloud.config.discovery.enabled</span><span class="o">=</span><span class="s">true</span><span class="w"></span>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">&lt;your_application_name&gt;</span>
+<span class="na">spring.cloud.config.discovery.enabled</span><span class="o">=</span><span class="s">true</span>
 </pre></div>
 </div>
 <p><strong>bootstrap.yml</strong>:</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>spring:
-  application:
-    name: &lt;your_application_name&gt;
-  cloud:
-    config:
-      discovery:
-        enabled: true
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your_application_name&gt;</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">discovery</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </section>
 <section id="discovery-first">
-<h4>Discovery First<a class="headerlink" href="#discovery-first" title="Permalink to this headline">#</a></h4>
+<h4>Discovery First<a class="headerlink" href="#discovery-first" title="Permalink to this heading">#</a></h4>
 <p>Discover the location of the config server.</p>
 <p><strong>bootstrap.properties</strong>:</p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">&lt;your_application_name&gt;</span><span class="w"></span>
-<span class="na">spring.cloud.config.uri</span><span class="o">=</span><span class="s">http://localhost:8888/</span><span class="w"></span>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">&lt;your_application_name&gt;</span>
+<span class="na">spring.cloud.config.uri</span><span class="o">=</span><span class="s">http://localhost:8888/</span>
 </pre></div>
 </div>
 <p><strong>bootstrap.yml</strong>:</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>spring:
-  application:
-    name: &lt;your_application_name&gt;
-  cloud:
-    config:
-      uri: http://localhost:8888/
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your_application_name&gt;</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:8888/</span>
 </pre></div>
 </div>
 <p><strong>NOTE:</strong> Don’t forget to add eureka client dependencies, service-url configuration and <code class="docutils literal notranslate"><span class="pre">&#64;EnableDiscoveryClient</span></code></p>
 </section>
 </section>
 <section id="refreshing-configuration-properties">
-<h3>Refreshing configuration properties<a class="headerlink" href="#refreshing-configuration-properties" title="Permalink to this headline">#</a></h3>
+<h3>Refreshing configuration properties<a class="headerlink" href="#refreshing-configuration-properties" title="Permalink to this heading">#</a></h3>
 <section id="configuration-changes">
-<h4>#1: Configuration changes<a class="headerlink" href="#configuration-changes" title="Permalink to this headline">#</a></h4>
+<h4>#1: Configuration changes<a class="headerlink" href="#configuration-changes" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Edit and save configuration file(s).</p></li>
 <li><p>Commit and/or push changes to a VCS.</p></li>
 </ul>
 </section>
 <section id="notify-application-s-to-refresh-configuration">
-<h4>#2: Notify Application(s) to refresh configuration<a class="headerlink" href="#notify-application-s-to-refresh-configuration" title="Permalink to this headline">#</a></h4>
+<h4>#2: Notify Application(s) to refresh configuration<a class="headerlink" href="#notify-application-s-to-refresh-configuration" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">/refresh</span></code></strong> with <strong><code class="docutils literal notranslate"><span class="pre">spring-boot-actuator</span></code></strong>.</p>
 <ul>
@@ -965,29 +717,29 @@ spring:
 </section>
 </section>
 <section id="refreshing-config-what-s-covered-and-what-s-not">
-<h3>Refreshing Config: What’s covered and what’s not<a class="headerlink" href="#refreshing-config-what-s-covered-and-what-s-not" title="Permalink to this headline">#</a></h3>
+<h3>Refreshing Config: What’s covered and what’s not<a class="headerlink" href="#refreshing-config-what-s-covered-and-what-s-not" title="Permalink to this heading">#</a></h3>
 <ul class="contains-task-list simple">
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <strong><code class="docutils literal notranslate"><span class="pre">&#64;ConfigurationProperties</span></code></strong></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> All logging levels defined by <strong><code class="docutils literal notranslate"><span class="pre">logging.level.*</span></code></strong> are updated.</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Any <strong><code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code></strong> or <strong><code class="docutils literal notranslate"><span class="pre">&#64;Value</span></code></strong> that only gets its configuration upon initialization.</p></li>
 </ul>
 <section id="refreshscope">
-<h4><code class="docutils literal notranslate"><span class="pre">&#64;RefreshScope</span></code><a class="headerlink" href="#refreshscope" title="Permalink to this headline">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">&#64;RefreshScope</span></code><a class="headerlink" href="#refreshscope" title="Permalink to this heading">#</a></h4>
 <p>To refresh a <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> or a <code class="docutils literal notranslate"><span class="pre">&#64;Value</span></code> that only gets its configuration upon initialization.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SomeConfiguration</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Bean</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@RefreshScope</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">FooService</span><span class="w"> </span><span class="nf">fooService</span><span class="p">(</span><span class="n">FooProperties</span><span class="w"> </span><span class="n">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FooService</span><span class="p">(</span><span class="n">properties</span><span class="p">.</span><span class="na">getConfigValue</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SomeConfiguration</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nd">@Bean</span>
+<span class="w">  </span><span class="nd">@RefreshScope</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">FooService</span><span class="w"> </span><span class="nf">fooService</span><span class="p">(</span><span class="n">FooProperties</span><span class="w"> </span><span class="n">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FooService</span><span class="p">(</span><span class="n">properties</span><span class="p">.</span><span class="na">getConfigValue</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="additional-features-supported">
-<h3>Additional Features Supported<a class="headerlink" href="#additional-features-supported" title="Permalink to this headline">#</a></h3>
+<h3>Additional Features Supported<a class="headerlink" href="#additional-features-supported" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Encrypted configuration at rest and/or in-flight.</p></li>
 <li><p>An <code class="docutils literal notranslate"><span class="pre">/encrypt</span></code> endpoint to encrypt configuration.</p></li>
@@ -995,22 +747,22 @@ spring:
 <li><p>Encrypting and decrypting with symmetric or asymmetric keys.</p></li>
 </ul>
 <section id="what-does-encrypted-configuration-look-like">
-<h4>What does encrypted configuration look like?<a class="headerlink" href="#what-does-encrypted-configuration-look-like" title="Permalink to this headline">#</a></h4>
+<h4>What does encrypted configuration look like?<a class="headerlink" href="#what-does-encrypted-configuration-look-like" title="Permalink to this heading">#</a></h4>
 <p>application.properties</p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">my.datasource.username</span><span class="o">=</span><span class="s">foobar</span><span class="w"></span>
-<span class="na">my.datasource.password</span><span class="o">=</span><span class="s">{cypher}AASFDSFJSRFAFESECCSE</span><span class="w"></span>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">my.datasource.username</span><span class="o">=</span><span class="s">foobar</span>
+<span class="na">my.datasource.password</span><span class="o">=</span><span class="s">{cypher}AASFDSFJSRFAFESECCSE</span>
 </pre></div>
 </div>
 <p>application.yml</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>my:
-  datasource:
-    usernmae: foobar
-    password: &#39;{cipher}AASFDSFJSRFAFESECCSE&#39;
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">my</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">usernmae</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foobar</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{cipher}AASFDSFJSRFAFESECCSE&#39;</span>
 </pre></div>
 </div>
 </section>
 <section id="at-what-point-the-configuration-is-decrypted">
-<h4>At what point the configuration is decrypted?<a class="headerlink" href="#at-what-point-the-configuration-is-decrypted" title="Permalink to this headline">#</a></h4>
+<h4>At what point the configuration is decrypted?<a class="headerlink" href="#at-what-point-the-configuration-is-decrypted" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Upon request at the server (default).</p></li>
 <li><p>Locally at the client on response.</p></li>
@@ -1034,7 +786,7 @@ spring:
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./spring"
         },
         predefinedOutput: true
@@ -1042,50 +794,136 @@ spring:
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="spring-cloud.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Spring Cloud Fundamentals</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spring-cloud.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Spring Cloud Fundamentals</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="spring-cloud-service-discovery.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="spring-cloud-service-discovery.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Spring Cloud Fundamentals: Service Discovery</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-configuration-server">Application Configuration Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-spring-applications">Integration with Spring Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-config-config-server">Spring Cloud Config: Config Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-config-server">Using Spring Cloud Config Server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-endpoint-parameters">REST Endpoint Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-application-profile-label">GET /{application}/{profile}[/{label}]</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-application-profile-yml-properties">GET /{application}-{profile}.(yml | properties)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-label-application-profile-yml-properties">GET /{label}/{application}-{profile}.{yml | properties}</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-config-config-client">Spring Cloud Config: Config Client</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-config-client">Spring Config Client</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#config-first">Config First</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discovery-first">Discovery First</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refreshing-configuration-properties">Refreshing configuration properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-changes">#1: Configuration changes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notify-application-s-to-refresh-configuration">#2: Notify Application(s) to refresh configuration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refreshing-config-what-s-covered-and-what-s-not">Refreshing Config: What’s covered and what’s not</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#refreshscope"><code class="docutils literal notranslate"><span class="pre">@RefreshScope</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-features-supported">Additional Features Supported</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-encrypted-configuration-look-like">What does encrypted configuration look like?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#at-what-point-the-configuration-is-decrypted">At what point the configuration is decrypted?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Lalit Prakash Vatsal<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Lalit Prakash Vatsal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

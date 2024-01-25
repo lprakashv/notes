@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Kubernetes &#8212; Lalit&#39;s Tech Notebook</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,544 +62,399 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'kubernetes/kubernetes-intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Kubernetes Namespaces" href="namespaces.html" />
-    <link rel="prev" title="Concurrency" href="../concurrency-parallelism-reactive/concurrency.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="prev" title="Concurrency" href="../concepts/concurrency.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../BOOK.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Lalit's Tech Notebook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lalit's Tech Notebook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lalit's Tech Notebook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../README.html">
+                <a class="reference internal" href="../BOOK.html">
                     Lalit’s Tech Notes
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Java
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java.html">
-   Java Knowledge
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java-gc.html">
-   Java Garbage Collection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java-multithreading.html">
-   Java Multi-threading
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/java-snippets.html">
-   Java Snippets
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../java/bitmasks.html">
-   Bitwise Tricks
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java.html">Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-gc.html">Java Garbage Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-multithreading.html">Java Multi-threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-snippets.html">Java Snippets</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Spring
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../spring/spring-data-transactions.html">
-   Data Transactions with Spring
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../spring/spring-cloud.html">
-   Spring Cloud Fundamentals
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../spring/spring-cloud-distributed-config.html">
-     Spring Cloud Fundamentals: Distributed Config
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../spring/spring-cloud-service-discovery.html">
-     Spring Cloud Fundamentals: Service Discovery
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">
-     Spring Cloud Fundamentals: Intelligent Routing
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../spring/spring-data-transactions.html">Data Transactions with Spring</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spring/spring-cloud.html">Spring Cloud Fundamentals</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-distributed-config.html">Spring Cloud Fundamentals: Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-intelligent-routing.html">Spring Cloud Fundamentals: Intelligent Routing</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Rust
- </span>
-</p>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Golang</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../rust/rust-snippets.html">
-   Rust Snippets
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../go/basic-syntax.html">Basic Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/code-generation.html">Code Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/concurrency.html">Concurrency in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/context.html">Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/database.html">Database Programming in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/grpc-app.html">gRPC in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/http-services.html">HTTP in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/testing.html">Testing in Go</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Concurrency Parallelism and Reactive
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rust</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../concurrency-parallelism-reactive/concurrency.html">
-   Concurrency
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../rust/rust-snippets.html">Rust Snippets</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Kubernetes
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Kubernetes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="namespaces.html">
-   Kubernetes Namespaces
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespaces.html">Kubernetes Namespaces</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Apache Spark
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apache Spark</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../apache-spark/apache-spark.html">
-   Apache Spark
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../apache-spark.html">Apache Spark</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Commands and CheatSheets
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Commands and CheatSheets</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">
-   Docker cheatsheet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">
-   Kubectl Cheat Sheet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">
-   Miscellaneous Helpful Commands - WIP
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">Miscellaneous Helpful Commands - WIP</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Work Learnings Journal
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../journal/journal.html">
-   Work Learnings Journal
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../journal.html">Work Learnings Journal</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fkubernetes/kubernetes-intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/kubernetes/kubernetes-intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/lprakashv/notes"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fkubernetes/kubernetes-intro.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/kubernetes/kubernetes-intro.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#yaml-in-kubernetes">
-   YAML in Kubernetes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pod">
-   Pod
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#replicationcontrollers-and-replicasets">
-   ReplicationControllers and ReplicaSets
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#replicationcontroller-deprecated-definition">
-     ReplicationController (
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       deprecated
-      </span>
-     </code>
-     ) Definition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#replicaset-definition-similar-to-rc">
-     ReplicaSet Definition (similar to RC)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#service">
-   Service
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#nodeport">
-     NodePort
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#clusterip">
-     ClusterIP
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Kubernetes</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#yaml-in-kubernetes">
-   YAML in Kubernetes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pod">
-   Pod
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#replicationcontrollers-and-replicasets">
-   ReplicationControllers and ReplicaSets
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#replicationcontroller-deprecated-definition">
-     ReplicationController (
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       deprecated
-      </span>
-     </code>
-     ) Definition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#replicaset-definition-similar-to-rc">
-     ReplicaSet Definition (similar to RC)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#service">
-   Service
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#nodeport">
-     NodePort
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#clusterip">
-     ClusterIP
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Kubernetes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="kubernetes">
-<h1>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this headline">#</a></h1>
-<section id="yaml-in-kubernetes">
-<h2>YAML in Kubernetes<a class="headerlink" href="#yaml-in-kubernetes" title="Permalink to this headline">#</a></h2>
-<p><strong>Standard Template:</strong></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span><span class="w"></span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-in-kubernetes">YAML in Kubernetes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pod">Pod</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replicationcontrollers-and-replicasets">ReplicationControllers and ReplicaSets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replicationcontroller-deprecated-definition">ReplicationController (<code class="docutils literal notranslate"><span class="pre">deprecated</span></code>) Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replicaset-definition-similar-to-rc">ReplicaSet Definition (similar to RC)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service">Service</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodeport">NodePort</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clusterip">ClusterIP</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="kubernetes">
+<h1>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this heading">#</a></h1>
+<p>Introduction to Kubernetes</p>
+<section id="yaml-in-kubernetes">
+<h2>YAML in Kubernetes<a class="headerlink" href="#yaml-in-kubernetes" title="Permalink to this heading">#</a></h2>
+<p><strong>Standard Template:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+
+<span class="nt">spec</span><span class="p">:</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -596,129 +463,129 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code> defines the type of the resource</p></li>
 </ul>
 <p><strong>Creating resource with YAML:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl create -f resource-definition.yaml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>resource-definition.yaml
 </pre></div>
 </div>
 </section>
 <section id="pod">
-<h2>Pod<a class="headerlink" href="#pod" title="Permalink to this headline">#</a></h2>
+<h2>Pod<a class="headerlink" href="#pod" title="Permalink to this heading">#</a></h2>
 <p>Pods are the smallest unit in Kubernetes cluster which usually contain and run a single container but there can also be multi-container pods (helper containers).</p>
 <p><strong>Running a Container:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜  notes git:<span class="o">(</span>master<span class="o">)</span> ✗ kubectl run nginx --image nginx
-pod/nginx created
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>notes<span class="w"> </span>git:<span class="o">(</span>master<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>kubectl<span class="w"> </span>run<span class="w"> </span>nginx<span class="w"> </span>--image<span class="w"> </span>nginx
+pod/nginx<span class="w"> </span>created
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>image name is the docker image name (if kubernetes cluster container backend is docker).</p></li>
 </ul>
 <p><strong>Getting Pods:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜  notes git:<span class="o">(</span>master<span class="o">)</span> ✗ kubectl get pods
-NAME    READY   STATUS    RESTARTS   AGE
-nginx   <span class="m">1</span>/1     Running   <span class="m">0</span>          7s
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>notes<span class="w"> </span>git:<span class="o">(</span>master<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods
+NAME<span class="w">    </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE
+nginx<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>7s
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>1/1 means 1 out of 1 containers is available and ready</p></li>
 </ul>
 <p><strong>Describing Pods:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜  notes git:<span class="o">(</span>master<span class="o">)</span> ✗ kubectl describe pod nginx
-Name:         nginx
-Namespace:    default
-Priority:     <span class="m">0</span>
-Node:         docker-desktop/192.168.65.4
-Start Time:   Sat, <span class="m">08</span> Jan <span class="m">2022</span> <span class="m">18</span>:03:26 +0530
-Labels:       <span class="nv">run</span><span class="o">=</span>nginx
-Annotations:  &lt;none&gt;
-Status:       Running
-IP:           <span class="m">10</span>.1.0.147
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>notes<span class="w"> </span>git:<span class="o">(</span>master<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>nginx
+Name:<span class="w">         </span>nginx
+Namespace:<span class="w">    </span>default
+Priority:<span class="w">     </span><span class="m">0</span>
+Node:<span class="w">         </span>docker-desktop/192.168.65.4
+Start<span class="w"> </span>Time:<span class="w">   </span>Sat,<span class="w"> </span><span class="m">08</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2022</span><span class="w"> </span><span class="m">18</span>:03:26<span class="w"> </span>+0530
+Labels:<span class="w">       </span><span class="nv">run</span><span class="o">=</span>nginx
+Annotations:<span class="w">  </span>&lt;none&gt;
+Status:<span class="w">       </span>Running
+IP:<span class="w">           </span><span class="m">10</span>.1.0.147
 IPs:
-  IP:  <span class="m">10</span>.1.0.147
+<span class="w">  </span>IP:<span class="w">  </span><span class="m">10</span>.1.0.147
 Containers:
-  nginx:
-    Container ID:   docker://66faa22bb05f77c07b51f1edf45ac207f3e4c3899390ef971223792754a8a059
-    Image:          nginx
-    Image ID:       docker-pullable://nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31
-    Port:           &lt;none&gt;
-    Host Port:      &lt;none&gt;
-    State:          Running
-      Started:      Sat, <span class="m">08</span> Jan <span class="m">2022</span> <span class="m">18</span>:03:31 +0530
-    Ready:          True
-    Restart Count:  <span class="m">0</span>
-    Environment:    &lt;none&gt;
-    Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dn6w2 <span class="o">(</span>ro<span class="o">)</span>
+<span class="w">  </span>nginx:
+<span class="w">    </span>Container<span class="w"> </span>ID:<span class="w">   </span>docker://66faa22bb05f77c07b51f1edf45ac207f3e4c3899390ef971223792754a8a059
+<span class="w">    </span>Image:<span class="w">          </span>nginx
+<span class="w">    </span>Image<span class="w"> </span>ID:<span class="w">       </span>docker-pullable://nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31
+<span class="w">    </span>Port:<span class="w">           </span>&lt;none&gt;
+<span class="w">    </span>Host<span class="w"> </span>Port:<span class="w">      </span>&lt;none&gt;
+<span class="w">    </span>State:<span class="w">          </span>Running
+<span class="w">      </span>Started:<span class="w">      </span>Sat,<span class="w"> </span><span class="m">08</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2022</span><span class="w"> </span><span class="m">18</span>:03:31<span class="w"> </span>+0530
+<span class="w">    </span>Ready:<span class="w">          </span>True
+<span class="w">    </span>Restart<span class="w"> </span>Count:<span class="w">  </span><span class="m">0</span>
+<span class="w">    </span>Environment:<span class="w">    </span>&lt;none&gt;
+<span class="w">    </span>Mounts:
+<span class="w">      </span>/var/run/secrets/kubernetes.io/serviceaccount<span class="w"> </span>from<span class="w"> </span>kube-api-access-dn6w2<span class="w"> </span><span class="o">(</span>ro<span class="o">)</span>
 Conditions:
-  Type              Status
-  Initialized       True
-  Ready             True
-  ContainersReady   True
-  PodScheduled      True
+<span class="w">  </span>Type<span class="w">              </span>Status
+<span class="w">  </span>Initialized<span class="w">       </span>True
+<span class="w">  </span>Ready<span class="w">             </span>True
+<span class="w">  </span>ContainersReady<span class="w">   </span>True
+<span class="w">  </span>PodScheduled<span class="w">      </span>True
 Volumes:
-  kube-api-access-dn6w2:
-    Type:                    Projected <span class="o">(</span>a volume that contains injected data from multiple sources<span class="o">)</span>
-    TokenExpirationSeconds:  <span class="m">3607</span>
-    ConfigMapName:           kube-root-ca.crt
-    ConfigMapOptional:       &lt;nil&gt;
-    DownwardAPI:             <span class="nb">true</span>
-QoS Class:                   BestEffort
-Node-Selectors:              &lt;none&gt;
-Tolerations:                 node.kubernetes.io/not-ready:NoExecute <span class="nv">op</span><span class="o">=</span>Exists <span class="k">for</span> 300s
-                             node.kubernetes.io/unreachable:NoExecute <span class="nv">op</span><span class="o">=</span>Exists <span class="k">for</span> 300s
+<span class="w">  </span>kube-api-access-dn6w2:
+<span class="w">    </span>Type:<span class="w">                    </span>Projected<span class="w"> </span><span class="o">(</span>a<span class="w"> </span>volume<span class="w"> </span>that<span class="w"> </span>contains<span class="w"> </span>injected<span class="w"> </span>data<span class="w"> </span>from<span class="w"> </span>multiple<span class="w"> </span>sources<span class="o">)</span>
+<span class="w">    </span>TokenExpirationSeconds:<span class="w">  </span><span class="m">3607</span>
+<span class="w">    </span>ConfigMapName:<span class="w">           </span>kube-root-ca.crt
+<span class="w">    </span>ConfigMapOptional:<span class="w">       </span>&lt;nil&gt;
+<span class="w">    </span>DownwardAPI:<span class="w">             </span><span class="nb">true</span>
+QoS<span class="w"> </span>Class:<span class="w">                   </span>BestEffort
+Node-Selectors:<span class="w">              </span>&lt;none&gt;
+Tolerations:<span class="w">                 </span>node.kubernetes.io/not-ready:NoExecute<span class="w"> </span><span class="nv">op</span><span class="o">=</span>Exists<span class="w"> </span><span class="k">for</span><span class="w"> </span>300s
+<span class="w">                             </span>node.kubernetes.io/unreachable:NoExecute<span class="w"> </span><span class="nv">op</span><span class="o">=</span>Exists<span class="w"> </span><span class="k">for</span><span class="w"> </span>300s
 Events:
-  Type    Reason     Age   From               Message
-  ----    ------     ----  ----               -------
-  Normal  Scheduled  27s   default-scheduler  Successfully assigned default/nginx to docker-desktop
-  Normal  Pulling    26s   kubelet            Pulling image <span class="s2">&quot;nginx&quot;</span>
-  Normal  Pulled     22s   kubelet            Successfully pulled image <span class="s2">&quot;nginx&quot;</span> <span class="k">in</span> <span class="m">3</span>.7617608s
-  Normal  Created    22s   kubelet            Created container nginx
-  Normal  Started    22s   kubelet            Started container nginx
+<span class="w">  </span>Type<span class="w">    </span>Reason<span class="w">     </span>Age<span class="w">   </span>From<span class="w">               </span>Message
+<span class="w">  </span>----<span class="w">    </span>------<span class="w">     </span>----<span class="w">  </span>----<span class="w">               </span>-------
+<span class="w">  </span>Normal<span class="w">  </span>Scheduled<span class="w">  </span>27s<span class="w">   </span>default-scheduler<span class="w">  </span>Successfully<span class="w"> </span>assigned<span class="w"> </span>default/nginx<span class="w"> </span>to<span class="w"> </span>docker-desktop
+<span class="w">  </span>Normal<span class="w">  </span>Pulling<span class="w">    </span>26s<span class="w">   </span>kubelet<span class="w">            </span>Pulling<span class="w"> </span>image<span class="w"> </span><span class="s2">&quot;nginx&quot;</span>
+<span class="w">  </span>Normal<span class="w">  </span>Pulled<span class="w">     </span>22s<span class="w">   </span>kubelet<span class="w">            </span>Successfully<span class="w"> </span>pulled<span class="w"> </span>image<span class="w"> </span><span class="s2">&quot;nginx&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span>.7617608s
+<span class="w">  </span>Normal<span class="w">  </span>Created<span class="w">    </span>22s<span class="w">   </span>kubelet<span class="w">            </span>Created<span class="w"> </span>container<span class="w"> </span>nginx
+<span class="w">  </span>Normal<span class="w">  </span>Started<span class="w">    </span>22s<span class="w">   </span>kubelet<span class="w">            </span>Started<span class="w"> </span>container<span class="w"> </span>nginx
 </pre></div>
 </div>
 <p><strong>Getting Pods in “wide” format:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜  notes git:<span class="o">(</span>master<span class="o">)</span> ✗ kubectl get pods -o wide
-NAME    READY   STATUS    RESTARTS   AGE     IP           NODE             NOMINATED NODE   READINESS GATES
-nginx   <span class="m">1</span>/1     Running   <span class="m">0</span>          2m48s   <span class="m">10</span>.1.0.147   docker-desktop   &lt;none&gt;           &lt;none&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>notes<span class="w"> </span>git:<span class="o">(</span>master<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide
+NAME<span class="w">    </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE<span class="w">     </span>IP<span class="w">           </span>NODE<span class="w">             </span>NOMINATED<span class="w"> </span>NODE<span class="w">   </span>READINESS<span class="w"> </span>GATES
+nginx<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>2m48s<span class="w">   </span><span class="m">10</span>.1.0.147<span class="w">   </span>docker-desktop<span class="w">   </span>&lt;none&gt;<span class="w">           </span>&lt;none&gt;
 </pre></div>
 </div>
 <p><strong>Creating Pod using YAML:</strong></p>
 <p>pod-definition.yaml</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span><span class="w"></span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-pod</span><span class="w"></span>
-<span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span><span class="w"></span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span><span class="w"></span>
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-container</span><span class="w"></span>
-<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-pod</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-container</span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">containers</span></code> is an array</p></li>
 </ul>
 <p><strong>Using environment variables in a Container:</strong></p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nn">...</span><span class="w"></span>
-<span class="nn">...</span><span class="w"></span>
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
-<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
-<span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWD</span><span class="w"></span>
-<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysecretpassword</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nn">...</span>
+<span class="nn">...</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWD</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysecretpassword</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>There are better ways to store the “sensitive” data like passwords. e.g., <code class="docutils literal notranslate"><span class="pre">Secrets</span></code></p></li>
 </ul>
 <p><strong>Creating a Pod Description File from Command line:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl run redis --image<span class="o">=</span>redis123 --dry-run<span class="o">=</span>client -o yaml &gt; pod.yaml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>run<span class="w"> </span>redis<span class="w"> </span>--image<span class="o">=</span>redis123<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span>&gt;<span class="w"> </span>pod.yaml
 </pre></div>
 </div>
 <p><strong>Editing Pod on the Fly:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl edit pod redis
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>edit<span class="w"> </span>pod<span class="w"> </span>redis
 </pre></div>
 </div>
 <ul class="simple">
@@ -726,24 +593,24 @@ nginx   <span class="m">1</span>/1     Running   <span class="m">0</span>       
 </ul>
 </section>
 <section id="replicationcontrollers-and-replicasets">
-<h2>ReplicationControllers and ReplicaSets<a class="headerlink" href="#replicationcontrollers-and-replicasets" title="Permalink to this headline">#</a></h2>
+<h2>ReplicationControllers and ReplicaSets<a class="headerlink" href="#replicationcontrollers-and-replicasets" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Maintains HA with required number of pods (within a node or cluster)</p></li>
 <li><p>Provides Load balancing and scalability</p></li>
 </ul>
 <section id="replicationcontroller-deprecated-definition">
-<h3>ReplicationController (<code class="docutils literal notranslate"><span class="pre">deprecated</span></code>) Definition<a class="headerlink" href="#replicationcontroller-deprecated-definition" title="Permalink to this headline">#</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span><span class="w"></span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplicationController</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-rc</span><span class="w"></span>
-<span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span><span class="w"></span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span><span class="w"></span>
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;POD-SPEC-WITHOUT-VERSION-AND-METADATA&gt;</span><span class="w"></span>
-<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span><span class="c1"># number of required replicas</span><span class="w"></span>
+<h3>ReplicationController (<code class="docutils literal notranslate"><span class="pre">deprecated</span></code>) Definition<a class="headerlink" href="#replicationcontroller-deprecated-definition" title="Permalink to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplicationController</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-rc</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;POD-SPEC-WITHOUT-VERSION-AND-METADATA&gt;</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span><span class="c1"># number of required replicas</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -752,21 +619,21 @@ nginx   <span class="m">1</span>/1     Running   <span class="m">0</span>       
 </ul>
 </section>
 <section id="replicaset-definition-similar-to-rc">
-<h3>ReplicaSet Definition (similar to RC)<a class="headerlink" href="#replicaset-definition-similar-to-rc" title="Permalink to this headline">#</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span><span class="w">   </span><span class="c1"># Difference</span><span class="w"></span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplicaSet</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-replicaset</span><span class="w"></span>
-<span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span><span class="w"></span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span><span class="w"></span>
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;POD-SPEC-WITHOUT-VERSION-AND-METADATA&gt;</span><span class="w"></span>
-<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
-<span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">           </span><span class="c1"># Difference</span><span class="w"></span>
-<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span><span class="w"></span>
+<h3>ReplicaSet Definition (similar to RC)<a class="headerlink" href="#replicaset-definition-similar-to-rc" title="Permalink to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span><span class="w">   </span><span class="c1"># Difference</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplicaSet</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-replicaset</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;POD-SPEC-WITHOUT-VERSION-AND-METADATA&gt;</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">           </span><span class="c1"># Difference</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -775,18 +642,18 @@ nginx   <span class="m">1</span>/1     Running   <span class="m">0</span>       
 </ul>
 <p><strong>Scaling ReplicaSet:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># after update replicas in the definition file</span>
-kubectl replace -f replicaset-definition.yaml
+kubectl<span class="w"> </span>replace<span class="w"> </span>-f<span class="w"> </span>replicaset-definition.yaml
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl scale --replicas<span class="o">=</span><span class="m">6</span> -f replicaset-definition.yaml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>scale<span class="w"> </span>--replicas<span class="o">=</span><span class="m">6</span><span class="w"> </span>-f<span class="w"> </span>replicaset-definition.yaml
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl scale --replicas<span class="o">=</span><span class="m">6</span> replicaset myapp-replicaset
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>scale<span class="w"> </span>--replicas<span class="o">=</span><span class="m">6</span><span class="w"> </span>replicaset<span class="w"> </span>myapp-replicaset
 <span class="c1">#                          ^ type     ^ name</span>
 </pre></div>
 </div>
 <p><strong>Deleting ReplicaSet:</strong>_</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl delete replicaset myapp-replicaset
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>replicaset<span class="w"> </span>myapp-replicaset
 </pre></div>
 </div>
 <ul class="simple">
@@ -795,7 +662,7 @@ kubectl replace -f replicaset-definition.yaml
 </section>
 </section>
 <section id="service">
-<h2>Service<a class="headerlink" href="#service" title="Permalink to this headline">#</a></h2>
+<h2>Service<a class="headerlink" href="#service" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>External Access to the App</p></li>
 <li><p>Load balancing</p></li>
@@ -807,30 +674,30 @@ kubectl replace -f replicaset-definition.yaml
 </li>
 </ul>
 <section id="nodeport">
-<h3>NodePort<a class="headerlink" href="#nodeport" title="Permalink to this headline">#</a></h3>
+<h3>NodePort<a class="headerlink" href="#nodeport" title="Permalink to this heading">#</a></h3>
 <p>NodePort Service in single Node</p>
 <p><img alt="NodePort Single Node" src="../_images/nodeport.png" /></p>
 <p>NodePort Service in multi-node Cluster</p>
 <p><img alt="NodePort Cluster" src="../_images/nodeport1.png" /></p>
 </section>
 <section id="clusterip">
-<h3>ClusterIP<a class="headerlink" href="#clusterip" title="Permalink to this headline">#</a></h3>
+<h3>ClusterIP<a class="headerlink" href="#clusterip" title="Permalink to this heading">#</a></h3>
 <p><img alt="ClusterIP" src="../_images/clusterip.png" /></p>
 <p>service-definition.yaml</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span><span class="w"></span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
 
-<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span><span class="w"></span>
-<span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"></span>
-<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"></span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 
-<span class="w">    </span><span class="nt">selector</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span><span class="w"></span>
+<span class="w">    </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
 </pre></div>
 </div>
 </section>
@@ -849,7 +716,7 @@ kubectl replace -f replicaset-definition.yaml
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./kubernetes"
         },
         predefinedOutput: true
@@ -857,50 +724,114 @@ kubectl replace -f replicaset-definition.yaml
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../concurrency-parallelism-reactive/concurrency.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Concurrency</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../concepts/concurrency.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Concurrency</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="namespaces.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="namespaces.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Kubernetes Namespaces</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-in-kubernetes">YAML in Kubernetes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pod">Pod</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replicationcontrollers-and-replicasets">ReplicationControllers and ReplicaSets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replicationcontroller-deprecated-definition">ReplicationController (<code class="docutils literal notranslate"><span class="pre">deprecated</span></code>) Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replicaset-definition-similar-to-rc">ReplicaSet Definition (similar to RC)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service">Service</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodeport">NodePort</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clusterip">ClusterIP</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Lalit Prakash Vatsal<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Lalit Prakash Vatsal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
