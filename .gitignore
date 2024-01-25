@@ -4,3 +4,4 @@ logs/
 .metals/
 .DS_Store
 _build/
+.venv*/

@@ -1,4 +1,4 @@
-# Golang Syntax
+# Basic Syntax
 
 ## Variables
 
@@ -156,6 +156,31 @@ func main() {
 ```
 
 ## Interfaces
+
+Interface as a "God" type:
+
+```go
+```
+
+Type assertions:
+
+```go
+```
+
+Type assertions with type-switch (runtime):
+
+```go
+```
+
+Compile time type contract:
+
+```go
+```
+
+Composing types using `interface{ interface{ SomeFunc any } }` or with named one `interface{ Contract1, Contract2 }`:
+
+```go
+```
 
 ```go
 type Animal interface {

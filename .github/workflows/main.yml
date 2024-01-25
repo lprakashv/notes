@@ -20,21 +20,21 @@ jobs:
     - uses: actions/checkout@v2
 
     # Install dependencies
-    - name: Set up Python 3.9
+    - name: Set up Python 3.11
       uses: actions/setup-python@v1
       with:
-        python-version: 3.9
+        python-version: 3.11
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        python3 -m pip install pipenv && python3 -m pipenv install
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build .
+        python3 -m pipenv run jupyter-book build ./notes-book/
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_build/html
+        publish_dir: ./notes-book/_build/html

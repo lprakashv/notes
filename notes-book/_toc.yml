@@ -2,15 +2,12 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: README
+root: BOOK
 parts:
   - caption: Java
     chapters:
       - file: java/java
-      - file: java/java-gc
-      - file: java/java-multithreading
-      - file: java/java-snippets
-      - file: java/bitmasks
+      - glob: java/java-*
   - caption: Spring
     chapters:
       - file: spring/spring-data-transactions
@@ -19,24 +16,24 @@ parts:
           - file: spring/spring-cloud-distributed-config
           - file: spring/spring-cloud-service-discovery
           - file: spring/spring-cloud-intelligent-routing
+  - caption: Golang
+    chapters:
+      - glob: go/*
   - caption: Rust
     chapters:
       - file: rust/rust-snippets
-  - caption: Concurrency Parallelism and Reactive
+  - caption: Concepts
     chapters:
-      - file: concurrency-parallelism-reactive/concurrency
+      - glob: concepts/*
   - caption: Kubernetes
     chapters:
-      - file: kubernetes/kubernetes-intro
-      - file: kubernetes/namespaces
+      - glob: kubernetes/*
   - caption: Apache Spark
     chapters:
-      - file: apache-spark/apache-spark
+      - file: apache-spark
   - caption: Commands and CheatSheets
     chapters:
-      - file: command-cheatsheets/docker-cheatsheet
-      - file: command-cheatsheets/kubectl-cheatsheet
-      - file: command-cheatsheets/misc-helpful-commands
+      - glob: command-cheatsheets/*
   - caption: Work Learnings Journal
     chapters:
-      - file: journal/journal
+      - file: journal
