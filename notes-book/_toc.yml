@@ -11,7 +11,7 @@ parts:
   - caption: Spring
     chapters:
       - file: spring/spring-data-transactions
-      - file: spring/spring-cloud
+      - file: spring/spring-cloud-0
         sections:
           - glob: spring/spring-cloud-*
   - caption: Golang
