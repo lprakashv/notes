@@ -32,7 +32,7 @@ jobs:
     - name: Build the book
       run: |
         python3 -m pipenv run jupyter-book build ./notes-book/
-    # Push the book's HTML to github-pages
+    # Push the book's static files to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:

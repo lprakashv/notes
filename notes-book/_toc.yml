@@ -13,9 +13,7 @@ parts:
       - file: spring/spring-data-transactions
       - file: spring/spring-cloud
         sections:
-          - file: spring/spring-cloud-distributed-config
-          - file: spring/spring-cloud-service-discovery
-          - file: spring/spring-cloud-intelligent-routing
+          - glob: spring/spring-cloud-*
   - caption: Golang
     chapters:
       - glob: go/*
