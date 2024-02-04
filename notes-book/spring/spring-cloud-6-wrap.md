@@ -1,10 +1,10 @@
 # Wrap - Big Picture
 
-![parts](./images/The%20Parts%20of%20a%20Cloud%20Native%20System.png)
+![parts](./images/parts-of-system.png)
 
-![putting together on startup](./images/Putting%20It%20All%20Together%20On%20Startup.png)
+![putting together on startup](./images/system-on-startup-1.png)
 
-![putting together on startup 2](./images/Putting%20It%20All%20Together%20On%20Startup%202.png)
+![putting together on startup 2](./images/system-on-startup-2.png)
 
 On Request (example to service A):
 
