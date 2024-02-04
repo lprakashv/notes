@@ -14,6 +14,12 @@ parts:
       - file: spring/spring-cloud-0
         sections:
           - glob: spring/spring-cloud-*
+  - caption: Apache Spark
+    chapters:
+      - glob: apache-spark/*
+  - caption: Gradle
+    chapters:
+      - glob: gradle/*
   - caption: Golang
     chapters:
       - glob: go/*
@@ -26,12 +32,15 @@ parts:
   - caption: Kubernetes
     chapters:
       - glob: kubernetes/*
-  - caption: Apache Spark
-    chapters:
-      - file: apache-spark
   - caption: Commands and CheatSheets
     chapters:
       - glob: command-cheatsheets/*
+  - caption: Generative AI
+    chapters:
+      - glob: generative-ai/*
+  - caption: MLOps
+    chapters:
+      - glob: mlops/*
   - caption: Work Learnings Journal
     chapters:
       - file: journal
