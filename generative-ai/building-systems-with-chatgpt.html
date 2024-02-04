@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Kubernetes Namespaces &#8212; Lalit&#39;s Tech Notebook</title>
+    <title>Building Systems with ChatGPT AI &#8212; Lalit&#39;s Tech Notebook</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'kubernetes/namespaces';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generative-ai/building-systems-with-chatgpt';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Docker cheatsheet" href="../command-cheatsheets/docker-cheatsheet.html" />
-    <link rel="prev" title="Kubernetes" href="kubernetes-intro.html" />
+    <link rel="next" title="ChatGPT Prompt Engineering" href="prompt-engineering.html" />
+    <link rel="prev" title="Miscellaneous Helpful Commands - WIP" href="../command-cheatsheets/misc-helpful-commands.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -218,9 +218,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="kubernetes-intro.html">Kubernetes</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Kubernetes Namespaces</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/kubernetes-intro.html">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/namespaces.html">Kubernetes Namespaces</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Commands and CheatSheets</span></p>
 <ul class="nav bd-sidenav">
@@ -229,9 +229,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../command-cheatsheets/misc-helpful-commands.html">Miscellaneous Helpful Commands - WIP</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Generative AI</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../generative-ai/building-systems-with-chatgpt.html">Building Systems with ChatGPT AI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../generative-ai/prompt-engineering.html">ChatGPT Prompt Engineering</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Building Systems with ChatGPT AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt-engineering.html">ChatGPT Prompt Engineering</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MLOps</span></p>
 <ul class="nav bd-sidenav">
@@ -311,7 +311,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fkubernetes/namespaces.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fgenerative-ai/building-systems-with-chatgpt.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +341,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/kubernetes/namespaces.md" target="_blank"
+      <li><a href="../_sources/generative-ai/building-systems-with-chatgpt.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -412,9 +412,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -425,22 +423,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Kubernetes Namespaces</h1>
+    <h1>Building Systems with ChatGPT AI</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-namespaces">Standard namespaces</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces-resources">Namespaces Resources</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-to-namespace">Switching to Namespace</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resourcequota">ResourceQuota</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -450,84 +437,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="kubernetes-namespaces">
-<h1>Kubernetes Namespaces<a class="headerlink" href="#kubernetes-namespaces" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p><strong>Isolation</strong> - provides isolation among different groups, e.g., prod, dev, team1, team2.</p></li>
-<li><p><strong>Resource Limits</strong> - we can put resource limits (memory. cpu, disk) on each “groups” / namespaces.</p></li>
-<li><p><strong>Policies</strong> - we can put certain policies for each “groups” / namespaces.</p></li>
-<li><p><strong>DNS</strong> - simplified name resolution, e.g. <code class="docutils literal notranslate"><span class="pre">mysql.connect(&quot;db-service&quot;)</span></code>, <code class="docutils literal notranslate"><span class="pre">mysql.connect(&quot;db-service.dev.svc.cluster.local&quot;)</span></code>.</p></li>
-</ul>
-<p>DNS explained for: <strong>“db-service.dev.svc.cluster.local”</strong></p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>“db-service”</p></th>
-<th class="head"><p>“dev”</p></th>
-<th class="head"><p>“svc”</p></th>
-<th class="head"><p>“cluster.local”</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>service name</p></td>
-<td><p>namespace</p></td>
-<td><p><strong>Service</strong></p></td>
-<td><p>domain</p></td>
-</tr>
-</tbody>
-</table>
-<section id="standard-namespaces">
-<h2>Standard namespaces<a class="headerlink" href="#standard-namespaces" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>default</strong></p></li>
-<li><p>kube-system</p></li>
-<li><p>kube-public</p></li>
-</ul>
-</section>
-<section id="namespaces-resources">
-<h2>Namespaces Resources<a class="headerlink" href="#namespaces-resources" title="Permalink to this heading">#</a></h2>
-<p>YAML:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ns-name</span>
-<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-</pre></div>
-</div>
-<p>Command: <strong><code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">[command]</span> <span class="pre">[TYPE]</span> <span class="pre">[NAME]</span> <span class="pre">[--additional-options=value]</span> <span class="pre">--namespace=ns-name</span></code></strong></p>
-<p>Getting Resources in all namespaces:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>get<span class="w"> </span><span class="o">[</span>TYPE<span class="o">]</span><span class="w"> </span><span class="o">[</span>NAME<span class="o">]</span><span class="w"> </span>--all-namespaces
-</pre></div>
-</div>
-</section>
-<section id="switching-to-namespace">
-<h2>Switching to Namespace<a class="headerlink" href="#switching-to-namespace" title="Permalink to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>config<span class="w"> </span>set-context<span class="w"> </span><span class="k">$(</span>kubectl<span class="w"> </span>config<span class="w"> </span>current-context<span class="k">)</span><span class="w"> </span>--namespace<span class="o">=</span>new-ns
-</pre></div>
-</div>
-</section>
-<section id="resourcequota">
-<h2>ResourceQuota<a class="headerlink" href="#resourcequota" title="Permalink to this heading">#</a></h2>
-<p>For putting limitations on the resources in a namespace</p>
-<p>compute-quota.yaml</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ResourceQuota</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">compute-quota</span>
-<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">hard</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">pods</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10&quot;</span>
-<span class="w">    </span><span class="nt">requests.cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span>
-<span class="w">    </span><span class="nt">requests.memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5Gi</span>
-<span class="w">    </span><span class="nt">limits.cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10&quot;</span>
-<span class="w">    </span><span class="nt">limits.memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
-</pre></div>
-</div>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="building-systems-with-chatgpt-ai">
+<h1>Building Systems with ChatGPT AI<a class="headerlink" href="#building-systems-with-chatgpt-ai" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -543,7 +454,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./kubernetes"
+            path: "./generative-ai"
         },
         predefinedOutput: true
     }
@@ -561,20 +472,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="kubernetes-intro.html"
+       href="../command-cheatsheets/misc-helpful-commands.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Kubernetes</p>
+        <p class="prev-next-title">Miscellaneous Helpful Commands - WIP</p>
       </div>
     </a>
     <a class="right-next"
-       href="../command-cheatsheets/docker-cheatsheet.html"
+       href="prompt-engineering.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Docker cheatsheet</p>
+        <p class="prev-next-title">ChatGPT Prompt Engineering</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -585,23 +496,7 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-namespaces">Standard namespaces</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces-resources">Namespaces Resources</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-to-namespace">Switching to Namespace</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resourcequota">ResourceQuota</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
+                <div class="bd-sidebar-secondary bd-toc"></div>
               
             
           </div>
