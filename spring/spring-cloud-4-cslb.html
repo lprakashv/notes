@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'spring/spring-cloud-4-cslb';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Basic Syntax" href="../go/basic-syntax.html" />
-    <link rel="prev" title="Spring Cloud Fundamentals: Intelligent Routing" href="spring-cloud-3-intelligent-routing.html" />
+    <link rel="next" title="Self Healing Services" href="spring-cloud-5-self-healing-services.html" />
+    <link rel="prev" title="Intelligent Routing" href="spring-cloud-3-intelligent-routing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,10 +181,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="spring-data-transactions.html">Data Transactions with Spring</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spring-cloud-0.html">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-1-distributed-config.html">Spring Cloud Fundamentals: Distributed Config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-3-intelligent-routing.html">Spring Cloud Fundamentals: Intelligent Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-1-distributed-config.html">Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-3-intelligent-routing.html">Intelligent Routing</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">CSLB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-5-self-healing-services.html">Self Healing Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-6-wrap.html">Wrap - Big Picture</a></li>
 </ul>
 </li>
 </ul>
@@ -428,7 +430,11 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-service-discovery">Without service discovery</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-configuration-of-ribbon-clients">Custom Configuration of Ribbon Clients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-configuration-of-ribbon-clients">Custom Configuration of Ribbon Clients</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#irule"><code class="docutils literal notranslate"><span class="pre">IRule</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#iping"><code class="docutils literal notranslate"><span class="pre">IPing</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -564,7 +570,7 @@ document.write(`
 <span class="na">&lt;ribbon-client-name&gt;.ribbon.listOfServers</span><span class="o">=</span><span class="s">http://host:9090, http://host:9091</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">application.yml</span></code>:</p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ribbon-client-name&gt;</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ribbon</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">eureka</span><span class="p">:</span>
@@ -584,6 +590,100 @@ document.write(`
 </section>
 <section id="custom-configuration-of-ribbon-clients">
 <h3>Custom Configuration of Ribbon Clients<a class="headerlink" href="#custom-configuration-of-ribbon-clients" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MyConfiguration.java</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="nd">@RibbonClient</span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;otherservice&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OtherServiceConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyConfiguration</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">OtherServiceConfig.java</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OtherServiceConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Benefits:</p>
+<ul class="simple">
+<li><p>Can have different package so that it is not picked up by <code class="docutils literal notranslate"><span class="pre">&#64;ComponentScan</span></code></p></li>
+<li><p>Standard <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> class</p></li>
+<li><p>Can define <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code>s for customization</p></li>
+</ul>
+<p>Spring Cloud Netflix provides the following beans by default for ribbon (<code class="docutils literal notranslate"><span class="pre">BeanType</span></code> beanName: <code class="docutils literal notranslate"><span class="pre">ClassName</span></code> ):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IClientConfig</span></code> ribbonClientConfig: <code class="docutils literal notranslate"><span class="pre">DefaultClientConfigImpl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IRule</span></code> ribbonRule: <code class="docutils literal notranslate"><span class="pre">ZoneAvoidanceRule</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IPing</span></code> ribbonPing: <code class="docutils literal notranslate"><span class="pre">NoOpPing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ServerList&lt;Server&gt;</span></code> ribbonServerList: <code class="docutils literal notranslate"><span class="pre">ConfigurationBasedServerList</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ServerListFilter&lt;Server&gt;</span></code> ribbonServerListFilter: <code class="docutils literal notranslate"><span class="pre">ZonePreferenceServerListFilter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ILoadBalancer</span></code> ribbonLoadBalancer: <code class="docutils literal notranslate"><span class="pre">ZoneAwareLoadBalancer</span></code></p></li>
+</ul>
+<p>Creating a bean of one of those type and placing it in a <code class="docutils literal notranslate"><span class="pre">&#64;RibbonClient</span></code> configuration (such as FooConfiguration above) allows you to override each one of the beans described. Example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FooConfiguration</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">IPing</span><span class="w"> </span><span class="nf">ribbonPing</span><span class="p">(</span><span class="n">IClientConfig</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PingUrl</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>2 Key beans:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IRule</span></code> : load balancing algorithm.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IPing</span></code> : availability checks.</p></li>
+</ul>
+<section id="irule">
+<h4><code class="docutils literal notranslate"><span class="pre">IRule</span></code><a class="headerlink" href="#irule" title="Permalink to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">IRule</span></code> implementations:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RoundRobinRule</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ResponseTimeWeightedRule</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomRule</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ZoneAvoidanceRule</span></code></p></li>
+</ol>
+<p><strong>NOTEs:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ResponseTimeWeightedRule</span></code> and <code class="docutils literal notranslate"><span class="pre">ZoneAvoidanceRule</span></code> are both “round-robin” they just re-order based on different strategies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ZoneAvoidanceRule</span></code> is AWS specific.</p></li>
+</ul>
+<p>Example LB strategy <code class="docutils literal notranslate"><span class="pre">IRule</span></code> Bean:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OtherServiceConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">IRule</span><span class="w"> </span><span class="nf">ribbonRule</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RoundRobinRule</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="iping">
+<h4><code class="docutils literal notranslate"><span class="pre">IPing</span></code><a class="headerlink" href="#iping" title="Permalink to this heading">#</a></h4>
+<p>Checks the liveliness of the services being load-balanced.</p>
+<p>Default implementations:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DummyPing</span></code> : Always returns true, route requests to all the services regardless of their liveliness.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PingUrl</span></code> : Typically a health check URL, validate an expected response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NIWSDiscoveryPing</span></code> : Automatically setup when we are using SD / Eureka.</p></li>
+</ol>
+<p>Example Liveness check <code class="docutils literal notranslate"><span class="pre">IPing</span></code> bean:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OtherServiceConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">IPing</span><span class="w"> </span><span class="nf">ribbonPing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">PingUrl</span><span class="w"> </span><span class="n">pingUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PingUrl</span><span class="p">();</span>
+<span class="w">        </span><span class="n">pingUrl</span><span class="p">.</span><span class="na">setExpectedContent</span><span class="p">(</span><span class="s">&quot;true&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pingUrl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 </section>
@@ -624,15 +724,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Spring Cloud Fundamentals: Intelligent Routing</p>
+        <p class="prev-next-title">Intelligent Routing</p>
       </div>
     </a>
     <a class="right-next"
-       href="../go/basic-syntax.html"
+       href="spring-cloud-5-self-healing-services.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basic Syntax</p>
+        <p class="prev-next-title">Self Healing Services</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -660,7 +760,11 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-service-discovery">Without service discovery</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-configuration-of-ribbon-clients">Custom Configuration of Ribbon Clients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-configuration-of-ribbon-clients">Custom Configuration of Ribbon Clients</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#irule"><code class="docutils literal notranslate"><span class="pre">IRule</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#iping"><code class="docutils literal notranslate"><span class="pre">IPing</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

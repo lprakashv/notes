@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Spring Cloud Fundamentals: Intelligent Routing &#8212; Lalit&#39;s Tech Notebook</title>
+    <title>Intelligent Routing &#8212; Lalit&#39;s Tech Notebook</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CSLB" href="spring-cloud-4-cslb.html" />
-    <link rel="prev" title="Spring Cloud Fundamentals: Service Discovery" href="spring-cloud-2-service-discovery.html" />
+    <link rel="prev" title="Service Discovery" href="spring-cloud-2-service-discovery.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,10 +181,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="spring-data-transactions.html">Data Transactions with Spring</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spring-cloud-0.html">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-1-distributed-config.html">Spring Cloud Fundamentals: Distributed Config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Spring Cloud Fundamentals: Intelligent Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-1-distributed-config.html">Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Service Discovery</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Intelligent Routing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-4-cslb.html">CSLB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-5-self-healing-services.html">Self Healing Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-6-wrap.html">Wrap - Big Picture</a></li>
 </ul>
 </li>
 </ul>
@@ -410,7 +412,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Spring Cloud Fundamentals: Intelligent Routing</h1>
+    <h1>Intelligent Routing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -450,8 +452,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="spring-cloud-fundamentals-intelligent-routing">
-<h1>Spring Cloud Fundamentals: Intelligent Routing<a class="headerlink" href="#spring-cloud-fundamentals-intelligent-routing" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="intelligent-routing">
+<h1>Intelligent Routing<a class="headerlink" href="#intelligent-routing" title="Permalink to this heading">#</a></h1>
 <section id="challenges-with-individual-services">
 <h2>Challenges with Individual Services<a class="headerlink" href="#challenges-with-individual-services" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -511,7 +513,7 @@ document.write(`
 <span class="na">eureka.client.service-url.defaultZone</span><span class="o">=</span><span class="s">http://localhost:8761/eureka</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">application</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
@@ -529,7 +531,7 @@ document.write(`
 <span class="na">ribbon.eureka.enabled</span><span class="o">=</span><span class="s">false</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">application</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
@@ -569,7 +571,7 @@ document.write(`
 <span class="na">zuul.ignored-services</span><span class="o">=</span><span class="s">some_service_id</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">application</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
@@ -590,7 +592,7 @@ document.write(`
 <span class="na">zuul.routes.&lt;route_name&gt;.url</span><span class="o">=</span><span class="s">http://some_url_address/</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">application</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
@@ -746,7 +748,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Spring Cloud Fundamentals: Service Discovery</p>
+        <p class="prev-next-title">Service Discovery</p>
       </div>
     </a>
     <a class="right-next"

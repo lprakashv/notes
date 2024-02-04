@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Spring Cloud Fundamentals &#8212; Lalit&#39;s Tech Notebook</title>
+    <title>Self Healing Services &#8212; Lalit&#39;s Tech Notebook</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'spring/spring-cloud-0';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'spring/spring-cloud-5-self-healing-services';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Distributed Config" href="spring-cloud-1-distributed-config.html" />
-    <link rel="prev" title="Data Transactions with Spring" href="spring-data-transactions.html" />
+    <link rel="next" title="Wrap - Big Picture" href="spring-cloud-6-wrap.html" />
+    <link rel="prev" title="CSLB" href="spring-cloud-4-cslb.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,12 +180,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="spring-data-transactions.html">Data Transactions with Spring</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spring-cloud-0.html">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-1-distributed-config.html">Distributed Config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Service Discovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-3-intelligent-routing.html">Intelligent Routing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-4-cslb.html">CSLB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-5-self-healing-services.html">Self Healing Services</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Self Healing Services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-6-wrap.html">Wrap - Big Picture</a></li>
 </ul>
 </li>
@@ -298,7 +298,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fspring/spring-cloud-0.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fspring/spring-cloud-5-self-healing-services.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -328,7 +328,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/spring/spring-cloud-0.md" target="_blank"
+      <li><a href="../_sources/spring/spring-cloud-5-self-healing-services.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -412,7 +412,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Spring Cloud Fundamentals</h1>
+    <h1>Self Healing Services</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -422,8 +422,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-stack">Spring cloud stack</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-netflix">Spring Cloud Netflix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failures-in-distributed-systems">Failures in Distributed Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cascading-failures">Cascading Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#circuit-breaker-pattern">Circuit Breaker Pattern</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netflix-hystrix">Netflix Hystrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-hystrix">Using Spring cloud + Netflix Hystrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hystrix-dashboard">Hystrix Dashboard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-hystrix-dashboard">Reading Hystrix Dashboard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netflix-turbine">Netflix Turbine</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-turbine">Using Spring cloud + Netflix Turbine</a></li>
 </ul>
 </li>
 </ul>
@@ -437,40 +450,191 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="spring-cloud-fundamentals">
-<h1>Spring Cloud Fundamentals<a class="headerlink" href="#spring-cloud-fundamentals" title="Permalink to this heading">#</a></h1>
-<p>Netflix OSS + Spring + Spring Boot = Spring Cloud!</p>
-<section id="spring-cloud-stack">
-<h2>Spring cloud stack<a class="headerlink" href="#spring-cloud-stack" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><span class="xref myst">Service Discovery</span></p></li>
-<li><p><span class="xref myst">Distributed Configuration</span></p></li>
-<li><p>Client-side Load balancing (CSLB)</p></li>
-<li><p><span class="xref myst">Intelligent routing</span></p></li>
-<li><p>Fault tolerance</p></li>
-</ol>
-<p>Spring Cloud projects:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="self-healing-services">
+<h1>Self Healing Services<a class="headerlink" href="#self-healing-services" title="Permalink to this heading">#</a></h1>
+<p>Covers:</p>
 <ul class="simple">
-<li><p><strong>Spring Cloud Config</strong></p></li>
-<li><p>Spring Cloud Cluster</p></li>
-<li><p>Spring Cloud Consul</p></li>
-<li><p>Spring Cloud Stream</p></li>
-<li><p><strong>Spring Cloud Netflix</strong></p></li>
-<li><p>Spring Cloud Sleuth</p></li>
-<li><p>More…</p></li>
+<li><p>Fault Tolerance</p></li>
+<li><p>Self-healing</p></li>
 </ul>
-<p>Spring Cloud Fundamentals ==&gt; <strong>Spring Cloud Config</strong> + <strong>Spring Cloud Netflix</strong></p>
-<section id="spring-cloud-netflix">
-<h3>Spring Cloud Netflix<a class="headerlink" href="#spring-cloud-netflix" title="Permalink to this heading">#</a></h3>
+<section id="failures-in-distributed-systems">
+<h2>Failures in Distributed Systems<a class="headerlink" href="#failures-in-distributed-systems" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>“Failures are Inevitable”</p>
+</div></blockquote>
+<p>Few areas where failures can occur</p>
 <ul class="simple">
-<li><p>Spring Cloud Netflix Eureka Server</p></li>
-<li><p>Spring Cloud Netflix Eureka Client</p></li>
-<li><p>Other Spring Cloud Netflix projects…</p></li>
+<li><p>hardware fails</p></li>
+<li><p>software fails</p></li>
+<li><p>network fails</p></li>
 </ul>
+<blockquote>
+<div><p>Chance of failure becomes “multiplied” in Distributed systems</p>
+</div></blockquote>
+<section id="cascading-failures">
+<h3>Cascading Failures<a class="headerlink" href="#cascading-failures" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>“… a failure in a system of interconnected parts in which a failure of a part can trigger the failure of successive parts”
+- Wikipedia</p>
+</div></blockquote>
+<p>Multiple issues due to cascading failures:</p>
+<ul class="simple">
+<li><p>fault tolerance problem</p></li>
+<li><p>resource overloading problem</p></li>
+</ul>
+<p>Solutions:</p>
+<ul class="simple">
+<li><p>Learn to embrace failures:</p>
+<ul>
+<li><p>Tolerate failures</p></li>
+<li><p>Gracefully degrade : examples are, empty/null/dummy response instead of failure.</p></li>
+</ul>
+</li>
+<li><p>Limit resource consumed</p>
+<ul>
+<li><p>Constrain usage : put limited resources and not allowing requests stacking up.</p></li>
+</ul>
+</li>
+</ul>
+<section id="circuit-breaker-pattern">
+<h4>Circuit Breaker Pattern<a class="headerlink" href="#circuit-breaker-pattern" title="Permalink to this heading">#</a></h4>
+<blockquote>
+<div><p>“… a design pattern in modern software development used to detect failures and encapsulates logic of preventing a failure to reoccur constantly …”
+- Wikipedia</p>
+</div></blockquote>
 </section>
 </section>
-<div class="toctree-wrapper compound">
+</section>
+<section id="netflix-hystrix">
+<h2>Netflix Hystrix<a class="headerlink" href="#netflix-hystrix" title="Permalink to this heading">#</a></h2>
+<p>Hystrix is a latency and <strong>fault tolerance</strong> library designed to stop <strong>cascading failure</strong> and enable resilience in complex distributed systems <strong>where failure is inevitable</strong>.</p>
+<p>Implements the circuit breaker pattern:</p>
+<ul class="simple">
+<li><p>Wraps calls and watches for failures</p>
+<ul>
+<li><p><strong>10 sec rolling window</strong> : Detects failures within a “10 sec rolling window”</p></li>
+<li><p><strong>20 request volume</strong> : Request should be at least 20 requests</p></li>
+<li><p><strong>&gt;= 50% error rate</strong> : Circuit tripped when &gt;= 50% are errors in a rolling window</p></li>
+</ul>
+</li>
+<li><p><strong>Waits &amp; tries a single request after 5 sec</strong> : Waits and tries a single request every 5 sec and determines whether to close the circuit</p></li>
+<li><p><strong>Fallbacks</strong> : Short-circuited, timed-out, rejected or failed requests results in “fallbacks”</p></li>
+</ul>
+<p>Protects services from being overloaded:</p>
+<ul class="simple">
+<li><p><strong>Thread pools, semaphores, &amp; cascading failures</strong> : If no resource is available (in threadpool) all the subsequent requests fail immediately with a fallback</p></li>
+</ul>
+<section id="using-spring-cloud-netflix-hystrix">
+<h3>Using Spring cloud + Netflix Hystrix<a class="headerlink" href="#using-spring-cloud-netflix-hystrix" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Application.java</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableCircuitBreaker</span><span class="w"> </span><span class="c1">// &lt;----</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">Service.java</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Service</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@HystrixCommand</span><span class="p">(</span><span class="n">fallbackMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;somethingElse&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">somethingElse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>NOTEs:</strong></p>
+<ul class="simple">
+<li><p>If you want hystrix metric as well, add spring-boot-actuator dependency as well.</p></li>
+<li><p>Be careful with Hystrix timeouts:</p>
+<ul>
+<li><p>Ensure timeouts encompass caller timeouts plus any retries</p></li>
+<li><p>Default: <code class="docutils literal notranslate"><span class="pre">1000ms</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=&lt;timeout_ms&gt;</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="hystrix-dashboard">
+<h3>Hystrix Dashboard<a class="headerlink" href="#hystrix-dashboard" title="Permalink to this heading">#</a></h3>
+<p>Tracks metrics such as:</p>
+<ul class="simple">
+<li><p>Circuit state</p></li>
+<li><p>Error rate</p></li>
+<li><p>Traffic volume</p></li>
+<li><p>Successful requests</p></li>
+<li><p>Rejected requests</p></li>
+<li><p>Timeouts</p></li>
+<li><p>Latency percentiles</p></li>
+</ul>
+<p>Monitor protected calls:</p>
+<ul class="simple">
+<li><p>Single server or cluster</p></li>
+</ul>
+<p>To use is, just add a dependency and add an annotation:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableHystrixDashboard</span><span class="w"> </span><span class="c1">// &lt;----</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-hystrix-dashboard">
+<h3>Reading Hystrix Dashboard<a class="headerlink" href="#reading-hystrix-dashboard" title="Permalink to this heading">#</a></h3>
+<p><img alt="Reading Dashboard" src="../_images/reading-hystrix-dashboard.png" /></p>
+<p><img alt="Dashboard" src="../_images/hystrix-dashboard.png" /></p>
+<ul class="simple">
+<li><p>Start a standalone hystrix server (just like standalone discovery server)</p></li>
+<li><p>Put a server’s / <code class="docutils literal notranslate"><span class="pre">hystrix.stream</span></code> endpoint</p></li>
+<li><p>Give a name</p></li>
+</ul>
+</section>
+</section>
+<section id="netflix-turbine">
+<h2>Netflix Turbine<a class="headerlink" href="#netflix-turbine" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>“Turbine is a tool for aggregating streams of Server-Sent Event (SSE) JSON data into a single stream…”</p>
+</div></blockquote>
+<p>Why?</p>
+<ul class="simple">
+<li><p>Hystrix stream is for a service</p></li>
+<li><p>To track multiple services, we need to open multiple dashboards and track them independently.</p></li>
+</ul>
+<section id="using-spring-cloud-netflix-turbine">
+<h3>Using Spring cloud + Netflix Turbine<a class="headerlink" href="#using-spring-cloud-netflix-turbine" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Application.java</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableTurbine</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">turbine.app-configs</span><span class="o">=</span><span class="s">&lt;list_of_service_ids&gt;</span>
+<span class="na">turbine.cluster-name-expression</span><span class="o">=</span><span class="s">&#39;default&#39;</span>
+</pre></div>
+</div>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">turbine</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">appConfig</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;list_of_service_ids&gt;</span>
+<span class="w">  </span><span class="nt">clusterNameExpression</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&#39;default&#39;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -504,20 +668,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="spring-data-transactions.html"
+       href="spring-cloud-4-cslb.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Transactions with Spring</p>
+        <p class="prev-next-title">CSLB</p>
       </div>
     </a>
     <a class="right-next"
-       href="spring-cloud-1-distributed-config.html"
+       href="spring-cloud-6-wrap.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Distributed Config</p>
+        <p class="prev-next-title">Wrap - Big Picture</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -537,8 +701,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-stack">Spring cloud stack</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-cloud-netflix">Spring Cloud Netflix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failures-in-distributed-systems">Failures in Distributed Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cascading-failures">Cascading Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#circuit-breaker-pattern">Circuit Breaker Pattern</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netflix-hystrix">Netflix Hystrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-hystrix">Using Spring cloud + Netflix Hystrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hystrix-dashboard">Hystrix Dashboard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-hystrix-dashboard">Reading Hystrix Dashboard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netflix-turbine">Netflix Turbine</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-turbine">Using Spring cloud + Netflix Turbine</a></li>
 </ul>
 </li>
 </ul>

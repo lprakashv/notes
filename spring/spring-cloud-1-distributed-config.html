@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Spring Cloud Fundamentals: Distributed Config &#8212; Lalit&#39;s Tech Notebook</title>
+    <title>Distributed Config &#8212; Lalit&#39;s Tech Notebook</title>
   
   
   
@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'spring/spring-cloud-1-distributed-config';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Spring Cloud Fundamentals: Service Discovery" href="spring-cloud-2-service-discovery.html" />
+    <link rel="next" title="Service Discovery" href="spring-cloud-2-service-discovery.html" />
     <link rel="prev" title="Spring Cloud Fundamentals" href="spring-cloud-0.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,10 +181,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="spring-data-transactions.html">Data Transactions with Spring</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spring-cloud-0.html">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Spring Cloud Fundamentals: Distributed Config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Spring Cloud Fundamentals: Service Discovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-3-intelligent-routing.html">Spring Cloud Fundamentals: Intelligent Routing</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-3-intelligent-routing.html">Intelligent Routing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring-cloud-4-cslb.html">CSLB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-5-self-healing-services.html">Self Healing Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring-cloud-6-wrap.html">Wrap - Big Picture</a></li>
 </ul>
 </li>
 </ul>
@@ -410,7 +412,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Spring Cloud Fundamentals: Distributed Config</h1>
+    <h1>Distributed Config</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -465,8 +467,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="spring-cloud-fundamentals-distributed-config">
-<h1>Spring Cloud Fundamentals: Distributed Config<a class="headerlink" href="#spring-cloud-fundamentals-distributed-config" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="distributed-config">
+<h1>Distributed Config<a class="headerlink" href="#distributed-config" title="Permalink to this heading">#</a></h1>
 <p>Configuration in a non-distributed to distributed explodes really rapidly, from a handlful of configuration files to many-many ones.</p>
 <p>We can still live with configuration management tools like Puppet, Chef etc. But there are issues with typical configuration management:</p>
 <ul class="simple">
@@ -533,7 +535,7 @@ document.write(`
 </ul>
 <section id="using-spring-cloud-config-server">
 <h3>Using Spring Cloud Config Server<a class="headerlink" href="#using-spring-cloud-config-server" title="Permalink to this heading">#</a></h3>
-<p>pom.xml</p>
+<p><code class="docutils literal notranslate"><span class="pre">pom.xml</span></code></p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependencyManagement&gt;</span>
 <span class="w">  </span><span class="nt">&lt;dependencies&gt;</span>
 <span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
@@ -547,19 +549,19 @@ document.write(`
 <span class="nt">&lt;/dependencyManagement&gt;</span>
 </pre></div>
 </div>
-<p>pom.xml</p>
+<p><code class="docutils literal notranslate"><span class="pre">pom.xml</span></code></p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-config-server<span class="nt">&lt;/artifactId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
 </div>
-<p>application.properties</p>
+<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
 <div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">server.port</span><span class="o">=</span><span class="s">8888</span>
 <span class="na">spring.cloud.config.server.git.uri</span><span class="o">=</span><span class="s">&lt;uri_to_git_repo&gt;</span>
 </pre></div>
 </div>
-<p>application.yml</p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8888</span>
 <span class="nt">spring</span><span class="p">:</span>
@@ -648,12 +650,12 @@ document.write(`
 <section id="config-first">
 <h4>Config First<a class="headerlink" href="#config-first" title="Permalink to this heading">#</a></h4>
 <p>Specify the location of the config server.</p>
-<p><strong>bootstrap.properties</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bootstrap.properties</span></code></p>
 <div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">&lt;your_application_name&gt;</span>
 <span class="na">spring.cloud.config.discovery.enabled</span><span class="o">=</span><span class="s">true</span>
 </pre></div>
 </div>
-<p><strong>bootstrap.yml</strong>:</p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">bootstrap.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">application</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your_application_name&gt;</span>
@@ -667,12 +669,12 @@ document.write(`
 <section id="discovery-first">
 <h4>Discovery First<a class="headerlink" href="#discovery-first" title="Permalink to this heading">#</a></h4>
 <p>Discover the location of the config server.</p>
-<p><strong>bootstrap.properties</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bootstrap.properties</span></code></p>
 <div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">&lt;your_application_name&gt;</span>
 <span class="na">spring.cloud.config.uri</span><span class="o">=</span><span class="s">http://localhost:8888/</span>
 </pre></div>
 </div>
-<p><strong>bootstrap.yml</strong>:</p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">bootstrap.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">application</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your_application_name&gt;</span>
@@ -749,12 +751,12 @@ document.write(`
 </ul>
 <section id="what-does-encrypted-configuration-look-like">
 <h4>What does encrypted configuration look like?<a class="headerlink" href="#what-does-encrypted-configuration-look-like" title="Permalink to this heading">#</a></h4>
-<p>application.properties</p>
+<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
 <div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">my.datasource.username</span><span class="o">=</span><span class="s">foobar</span>
 <span class="na">my.datasource.password</span><span class="o">=</span><span class="s">{cypher}AASFDSFJSRFAFESECCSE</span>
 </pre></div>
 </div>
-<p>application.yml</p>
+<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">my</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">usernmae</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foobar</span>
@@ -819,7 +821,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Spring Cloud Fundamentals: Service Discovery</p>
+        <p class="prev-next-title">Service Discovery</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

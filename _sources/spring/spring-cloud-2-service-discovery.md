@@ -1,4 +1,4 @@
-# Spring Cloud Fundamentals: Service Discovery
+# Service Discovery
 
 __Question:__ In microservice environment, how does one service know where the other service is located at?
 
@@ -36,7 +36,7 @@ Multiple ways to discover services in Spring Cloud:
 
 ### Using Spring Cloud Eureka Server
 
-pom.xml
+`pom.xml`
 
 ```xml
 <dependencyManagement>
@@ -52,7 +52,7 @@ pom.xml
 </dependencyManagement>
 ```
 
-pom.xml
+`pom.xml`
 
 ```xml
 <dependency>
@@ -61,13 +61,13 @@ pom.xml
 </dependency>
 ```
 
-application.properties
+`application.properties`
 
 ```properties
 spring-application.name=my-discovery-server
 ```
 
-application.yml
+OR `application.yml`
 
 ```yaml
 spring:
@@ -75,7 +75,7 @@ spring:
     name: my-discovery-server
 ```
 
-Application.java
+`Application.java`
 
 ```java
 @SpringBootApplication
@@ -107,7 +107,7 @@ User of the Service discovery client.
 
 ### Using Spring Cloud Eureka Client
 
-pom.xml
+`pom.xml`
 
 ```xml
 <dependencyManagement>
@@ -123,7 +123,7 @@ pom.xml
 </dependencyManagement>
 ```
 
-pom.xml
+`pom.xml`
 
 ```xml
 <dependency>
@@ -132,14 +132,14 @@ pom.xml
 </dependency>
 ```
 
-application.properties
+`application.properties`
 
 ```properties
 spring-application.name=my-service
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 ```
 
-application.yml
+OR `application.yml`
 
 ```yaml
 spring:
@@ -151,7 +151,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 ```
 
-Application.java
+`Application.java`
 
 ```java
 @SpringBootApplication
