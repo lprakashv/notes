@@ -34,3 +34,15 @@
   ```
 
   it does not matter if any of the above dependencies are unsatisfied/failed, the whole command will still forcefully be executed
+
+## ... - 02-2024
+
+[TODO] Linux Services - sigterm, sigkill
+[TODO] AWS - ECS - EC2 (setup), ECS Fargate, ELB, VPC
+[TODO] k8s - resource limits vs requests
+[TODO] go - build flags (and commented tags etc.), cgo, select, channels concurrency etc.
+[TODO] docker - host specific builds, golang-crossbuild
+[TODO] python - pipenv, venv
+[TODO] OAuth2
+[TODO] TLS, mTLS
+[TODO] HTTP2, gRPC
