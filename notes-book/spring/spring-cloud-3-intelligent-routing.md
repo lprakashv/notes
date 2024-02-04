@@ -1,4 +1,4 @@
-# Spring Cloud Fundamentals: Intelligent Routing
+# Intelligent Routing
 
 ## Challenges with Individual Services
 
@@ -58,7 +58,7 @@ spring.application.name=gateway-service
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 ```
 
-`application.yml`
+OR `application.yml`
 
 ```yaml
 spring:
@@ -79,7 +79,7 @@ spring.application.name=gateway-service
 ribbon.eureka.enabled=false
 ```
 
-`application.yml`
+OR `application.yml`
 
 ```yaml
 spring:
@@ -113,7 +113,7 @@ zuul.routes.<route_name>.serviceld=some_service_id
 zuul.ignored-services=some_service_id
 ```
 
-`application.yml`
+OR `application.yml`
 
 ```yaml
 spring:
@@ -137,7 +137,7 @@ zuul.routes.<route_name>.path=/somepath/**
 zuul.routes.<route_name>.url=http://some_url_address/
 ```
 
-`application.yml`
+OR `application.yml`
 
 ```yaml
 spring:

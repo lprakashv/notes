@@ -1,4 +1,4 @@
-# Spring Cloud Fundamentals: Distributed Config
+# Distributed Config
 
 Configuration in a non-distributed to distributed explodes really rapidly, from a handlful of configuration files to many-many ones.
 
@@ -60,7 +60,7 @@ classpath:file.properties
 
 ### Using Spring Cloud Config Server
 
-pom.xml
+`pom.xml`
 
 ```xml
 <dependencyManagement>
@@ -76,7 +76,7 @@ pom.xml
 </dependencyManagement>
 ```
 
-pom.xml
+`pom.xml`
 
 ```xml
 <dependency>
@@ -85,14 +85,14 @@ pom.xml
 </dependency>
 ```
 
-application.properties
+`application.properties`
 
 ```properties
 server.port=8888
 spring.cloud.config.server.git.uri=<uri_to_git_repo>
 ```
 
-application.yml
+OR `application.yml`
 
 ```yaml
 server:
@@ -179,14 +179,14 @@ pom.xml
 
 Specify the location of the config server.
 
-__bootstrap.properties__:
+`bootstrap.properties`
 
 ```properties
 spring.application.name=<your_application_name>
 spring.cloud.config.discovery.enabled=true
 ```
 
-__bootstrap.yml__:
+OR `bootstrap.yml`
 
 ```yaml
 spring:
@@ -202,14 +202,14 @@ spring:
 
 Discover the location of the config server.
 
-__bootstrap.properties__:
+`bootstrap.properties`
 
 ```properties
 spring.application.name=<your_application_name>
 spring.cloud.config.uri=http://localhost:8888/
 ```
 
-__bootstrap.yml__:
+OR `bootstrap.yml`
 
 ```yaml
 spring:
@@ -271,14 +271,14 @@ public class SomeConfiguration {
 
 #### What does encrypted configuration look like?
 
-application.properties
+`application.properties`
 
 ```properties
 my.datasource.username=foobar
 my.datasource.password={cypher}AASFDSFJSRFAFESECCSE
 ```
 
-application.yml
+OR `application.yml`
 
 ```yaml
 my:
