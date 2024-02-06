@@ -226,7 +226,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Docker cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="misc-helpful-commands.html">Miscellaneous Helpful Commands - WIP</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Generative AI</span></p>
 <ul class="nav bd-sidenav">
@@ -443,6 +442,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking">Networking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-docker">Cleaning Docker</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-swarm">Docker Swarm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misc">Misc</a></li>
 </ul>
             </nav>
         </div>
@@ -752,6 +752,37 @@ docker<span class="w"> </span>service<span class="w"> </span>update<span class="
 </pre></div>
 </div>
 </section>
+<section id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="Permalink to this heading">#</a></h2>
+<p>Run an image in a container with its name</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="sb">`</span>docker<span class="w"> </span>images<span class="w"> </span>--filter<span class="w"> </span><span class="nv">reference</span><span class="o">=</span><span class="s1">&#39;*/log-generator&#39;</span><span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.ID}}&#39;</span><span class="sb">`</span>
+</pre></div>
+</div>
+<p>Running a container from an image and open a shell into it with root privileges</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--entrypoint<span class="o">=</span><span class="s2">&quot;sh&quot;</span><span class="w"> </span>--user<span class="o">=</span><span class="m">0</span><span class="w"> </span>--privileged<span class="o">=</span><span class="nb">true</span><span class="w"> </span>&lt;image&gt;:&lt;tag&gt;
+</pre></div>
+</div>
+<p>Loading image from file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>load<span class="w"> </span>&lt;<span class="w"> </span>Downloads/scratch.tar.gz
+</pre></div>
+</div>
+<p>Running an image with passing a local file as argument (after creating a volume for the file dynamically)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-ti</span></code> for running bash into the container</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rm</span></code> for removing container as soon as we exit</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/local/file/path/file.txt:/dest/file/path/file.txt<span class="w"> </span>-ti<span class="w"> </span>--rm<span class="w"> </span>some-docker-image:tag<span class="w"> </span>arg1<span class="w"> </span>arg2
+</pre></div>
+</div>
+<p>Logging into AWS-ECR to pull docker images</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>&lt;region&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="s2">&quot;&lt;account&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com&quot;</span><span class="w">                          </span>
+</pre></div>
+</div>
+<p>See the contents (file and directories) inside a docker container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&lt;container-id&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-t
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -826,6 +857,7 @@ docker<span class="w"> </span>service<span class="w"> </span>update<span class="
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking">Networking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-docker">Cleaning Docker</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-swarm">Docker Swarm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misc">Misc</a></li>
 </ul>
   </nav></div>
 
