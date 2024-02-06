@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Work Learnings Journal &#8212; Lalit&#39;s Tech Notebook</title>
+    <title>Work Learnings Journal (Appended to each topic section) &#8212; Lalit&#39;s Tech Notebook</title>
   
   
   
@@ -171,8 +171,8 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="java/java.html">Java</a></li>
 <li class="toctree-l1"><a class="reference internal" href="java/java-gc.html">Java Garbage Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java/java-misc.html">Java - Misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="java/java-multithreading.html">Java Multi-threading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="java/java-snippets.html">Java Snippets</a></li>
 </ul>
@@ -225,6 +225,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="command-cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-cheatsheets/misc-commands.html">Miscellaneous Helpful Commands</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Generative AI</span></p>
 <ul class="nav bd-sidenav">
@@ -237,7 +238,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Work Learnings Journal</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Work Learnings Journal (Appended to each topic section)</a></li>
 </ul>
 
     </div>
@@ -423,7 +424,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Work Learnings Journal</h1>
+    <h1>Work Learnings Journal (Appended to each topic section)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -433,10 +434,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">19-10-2022</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">20-10-2022</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">… - 13-11-2022</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">… - 02-2024</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kubernetes">Kubernetes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#go">Go</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todos">TODOs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yearly-learning-journal">Yearly Learning Journal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2024</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2023</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2022</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2021</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2020</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2019</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -448,35 +458,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="work-learnings-journal">
-<h1>Work Learnings Journal<a class="headerlink" href="#work-learnings-journal" title="Permalink to this heading">#</a></h1>
-<section id="id1">
-<h2>19-10-2022<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="work-learnings-journal-appended-to-each-topic-section">
+<h1>Work Learnings Journal (Appended to each topic section)<a class="headerlink" href="#work-learnings-journal-appended-to-each-topic-section" title="Permalink to this heading">#</a></h1>
+<section id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Kubernetes:</p>
-<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">initContainers</span></code> (for <code class="docutils literal notranslate"><span class="pre">DaemonSet</span></code>) - step by step short lived containers, can be used to fixing privileges and setup tasks</p></li>
+<li><p>Kubernetes hostPath ownership are set based on kubelet’s</p></li>
+<li><p>Kubernetes pod logs are stored under <code class="docutils literal notranslate"><span class="pre">/var/log/containers/&lt;pod-name&gt;*&lt;container-id&gt;/*.log</span></code> (by container runtime)</p></li>
 </ul>
-</li>
-<li><p>Linux:</p>
-<ul>
+</section>
+<section id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>list users : <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code></p></li>
 <li><p>list groups : <code class="docutils literal notranslate"><span class="pre">/etc/group</span></code></p></li>
 <li><p>members of group : <code class="docutils literal notranslate"><span class="pre">lid</span> <span class="pre">&lt;group-name&gt;</span></code></p></li>
 <li><p>owning directory (recursively) <code class="docutils literal notranslate"><span class="pre">chown</span> <span class="pre">-R</span> <span class="pre">&lt;uid&gt;:&lt;gid&gt;</span> <span class="pre">&lt;dir-path&gt;</span></code></p></li>
 </ul>
-</li>
-</ul>
 </section>
-<section id="id2">
-<h2>20-10-2022<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Kubernetes hostPath ownership are set based on kubelet’s</p></li>
-<li><p>Kubernetes pod logs are stored under <code class="docutils literal notranslate"><span class="pre">/var/log/containers/&lt;pod-name&gt;*&lt;container-id&gt;/*.log</span></code> (by container runtime)</p></li>
-</ul>
-</section>
-<section id="id3">
-<h2>… - 13-11-2022<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="go">
+<h2>Go<a class="headerlink" href="#go" title="Permalink to this heading">#</a></h2>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">mod</span> <span class="pre">init</span> <span class="pre">&lt;current-module-name&gt;</span></code> - initializing module for a new app/project</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">get</span> <span class="pre">&lt;dep-name&gt;</span></code> - install dependencies manually</p></li>
@@ -495,17 +497,47 @@ recipe-command2
 </li>
 </ul>
 </section>
+<section id="todos">
+<h2>TODOs<a class="headerlink" href="#todos" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Linux Services - sigterm, sigkill</p></li>
+<li><p>AWS - ECS - EC2 (setup), ECS Fargate, ELB, VPC</p></li>
+<li><p>k8s - resource limits vs requests</p></li>
+<li><p>go - build flags (and commented tags etc.), cgo, select, channels concurrency etc.</p></li>
+<li><p>docker - host specific builds, golang-crossbuild</p></li>
+<li><p>python - pipenv, venv</p></li>
+<li><p>OAuth2</p></li>
+<li><p>TLS, mTLS</p></li>
+<li><p>HTTP2, gRPC</p></li>
+</ul>
+</section>
+<section id="yearly-learning-journal">
+<h2>Yearly Learning Journal<a class="headerlink" href="#yearly-learning-journal" title="Permalink to this heading">#</a></h2>
+<p>TODO</p>
+<section id="id1">
+<h3>2024<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+<section id="id2">
+<h3>2023<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+<section id="id3">
+<h3>2022<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
 <section id="id4">
-<h2>… - 02-2024<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>[TODO] Linux Services - sigterm, sigkill
-[TODO] AWS - ECS - EC2 (setup), ECS Fargate, ELB, VPC
-[TODO] k8s - resource limits vs requests
-[TODO] go - build flags (and commented tags etc.), cgo, select, channels concurrency etc.
-[TODO] docker - host specific builds, golang-crossbuild
-[TODO] python - pipenv, venv
-[TODO] OAuth2
-[TODO] TLS, mTLS
-[TODO] HTTP2, gRPC</p>
+<h3>2021<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+<section id="id5">
+<h3>2020<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+<section id="id6">
+<h3>2019<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
 </section>
 </section>
 
@@ -564,10 +596,19 @@ recipe-command2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">19-10-2022</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">20-10-2022</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">… - 13-11-2022</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">… - 02-2024</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kubernetes">Kubernetes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#go">Go</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todos">TODOs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yearly-learning-journal">Yearly Learning Journal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2024</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2023</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2022</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2021</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2020</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2019</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -1,21 +1,19 @@
-# Work Learnings Journal
+# Work Learnings Journal (Appended to each topic section)
 
-## 19-10-2022
-
-- Kubernetes:
-  - `initContainers` (for `DaemonSet`) - step by step short lived containers, can be used to fixing privileges and setup tasks
-- Linux:
-  - list users : `/etc/passwd`
-  - list groups : `/etc/group`
-  - members of group : `lid <group-name>`
-  - owning directory (recursively) `chown -R <uid>:<gid> <dir-path>`
-
-## 20-10-2022
-
+## Kubernetes
+  
+- `initContainers` (for `DaemonSet`) - step by step short lived containers, can be used to fixing privileges and setup tasks
 - Kubernetes hostPath ownership are set based on kubelet's
 - Kubernetes pod logs are stored under `/var/log/containers/<pod-name>*<container-id>/*.log` (by container runtime)
 
-## ... - 13-11-2022
+## Linux
+
+- list users : `/etc/passwd`
+- list groups : `/etc/group`
+- members of group : `lid <group-name>`
+- owning directory (recursively) `chown -R <uid>:<gid> <dir-path>`
+
+## Go
 
 - `go mod init <current-module-name>` - initializing module for a new app/project
 - `go get <dep-name>` - install dependencies manually
@@ -35,14 +33,42 @@
 
   it does not matter if any of the above dependencies are unsatisfied/failed, the whole command will still forcefully be executed
 
-## ... - 02-2024
+## TODOs
 
-[TODO] Linux Services - sigterm, sigkill
-[TODO] AWS - ECS - EC2 (setup), ECS Fargate, ELB, VPC
-[TODO] k8s - resource limits vs requests
-[TODO] go - build flags (and commented tags etc.), cgo, select, channels concurrency etc.
-[TODO] docker - host specific builds, golang-crossbuild
-[TODO] python - pipenv, venv
-[TODO] OAuth2
-[TODO] TLS, mTLS
-[TODO] HTTP2, gRPC
+- Linux Services - sigterm, sigkill
+- AWS - ECS - EC2 (setup), ECS Fargate, ELB, VPC
+- k8s - resource limits vs requests
+- go - build flags (and commented tags etc.), cgo, select, channels concurrency etc.
+- docker - host specific builds, golang-crossbuild
+- python - pipenv, venv
+- OAuth2
+- TLS, mTLS
+- HTTP2, gRPC
+
+## Yearly Learning Journal
+
+TODO
+
+### 2024
+
+TODO
+
+### 2023
+
+TODO
+
+### 2022
+
+TODO
+
+### 2021
+
+TODO
+
+### 2020
+
+TODO
+
+### 2019
+
+TODO
