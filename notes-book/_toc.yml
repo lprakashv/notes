@@ -6,7 +6,6 @@ root: BOOK
 parts:
   - caption: Java
     chapters:
-      - file: java/java
       - glob: java/java-*
   - caption: Spring
     chapters:
