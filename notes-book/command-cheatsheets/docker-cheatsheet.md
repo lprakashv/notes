@@ -409,3 +409,44 @@ docker service update --update-parallelism 5--update-delay 2s --image instavote/
 docker service update --limit-cpu 2 nginx
 docker service update --replicas=5 nginx
 ```
+
+## Misc
+
+Run an image in a container with its name
+
+```bash
+docker run --rm `docker images --filter reference='*/log-generator' --format '{{.ID}}'`
+```
+
+Running a container from an image and open a shell into it with root privileges
+
+```bash
+docker run --entrypoint="sh" --user=0 --privileged=true <image>:<tag>
+```
+
+Loading image from file
+
+```bash
+docker load < Downloads/scratch.tar.gz
+```
+
+Running an image with passing a local file as argument (after creating a volume for the file dynamically)
+
+- `-ti` for running bash into the container
+- `--rm` for removing container as soon as we exit
+
+```bash
+docker run -v /local/file/path/file.txt:/dest/file/path/file.txt -ti --rm some-docker-image:tag arg1 arg2
+```
+
+Logging into AWS-ECR to pull docker images
+
+```bash
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin "<account>.dkr.ecr.<region>.amazonaws.com"                          
+```
+
+See the contents (file and directories) inside a docker container:
+
+```bash
+docker export <container-id> | tar -t
+```
