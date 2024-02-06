@@ -47,28 +47,54 @@
 
 ## Yearly Learning Journal
 
-TODO
-
 ### 2024
 
-TODO
+- TLS
 
 ### 2023
 
-TODO
+- AWS Kinesis Firehose - buffering, processor lambda (lambda buffering), output, intput (kinesis data streams, direct put), failure etc.
+- AWS Cloudformation - custom event, constants, conditions, roles, resources, output, parameters, custom lambda (init processing)
+- AWS S3 events - triggering Lambdas
+- Lambda - cloudwatch loggroup, logstream, event, timeout, cost calc, cold-start and lambda (container) level caching.
+- Eventbridge rules and schedules
+- AWS VPC and Subnets
+- AWS Secrets Manager
+- Linux packages - deb, rpm
+- Oauth2
+- AWS ECS (EC2) - cluster bootstrapping (joining), task-def, service, task, daemon, execution role, volumes and mounts
+- AWS EFS
+- Docker - inspects contents, download files from containers, live debugging and inspection
+- Wrapping executor application with piping STDOUT output and taking input
+- Go - Cobra, flag, options etc.
 
 ### 2022
 
-TODO
+- Kubernetes (kubectl), Daemonset, ConfigMap, Service, Deployment, ServiceAccount, ClusterRole, ClusterRoleBindings
+- Kubernetes Operators (pattern), Go Operator SDK
+- Go, Go string templates
+- Helm charts, Helm templates, Helm repos
+- Kubectx
+- OTel protocol, SDK - logs, metrics
+- OTel collector - receivers (otlp, filelog), exporters (otlp, logging, prometheus), processors (batch, resourcedetection, attribute), extensions
+- OpAMP protocol, SDK - client, server, deployment patterns
+- Elastic Filebeat
 
 ### 2021
 
-TODO
+- Java Agents, Java Instrumentation, Java Bytecode Injection
+- Java Vertx framework internals
+- Java remote debugging, conditional breakpoints, thread debugging
+- Angular, RxJS, Typescript, Jest
 
 ### 2020
 
-TODO
+- React, Redux
 
 ### 2019
 
-TODO
+- Spring Boot, Spring Batch, Spring-Kafka, Spring Data JPA, Spring Data JDBC, Kafka Consumers
+- Apache Camel (pipelines) with Kafka, batch etc.
+- Oracle, MS SQL Server, Stored Procedures
+- Apache Livy
+- Maven
