@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>AWS Essentials &#8212; Lalit&#39;s Tech Notebook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'aws/aws-assentials';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Apache Spark" href="../apache-spark/apache-spark.html" />
+    <link rel="prev" title="Gradle" href="../gradle/gradle.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../BOOK.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Lalit-new-logo-3.png" class="logo__image only-light" alt="Lalit's Tech Notebook - Home"/>
+    <script>document.write(`<img src="../_static/Lalit-new-logo-3.png" class="logo__image only-dark" alt="Lalit's Tech Notebook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../BOOK.html">
+                    Lalit’s Tech Notes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../java/java-gc.html">Java Garbage Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-misc.html">Java - Misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-multithreading.html">Java Multi-threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java/java-snippets.html">Java Snippets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../spring/spring-data-transactions.html">Data Transactions with Spring</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spring/spring-cloud-0.html">Spring Cloud Fundamentals</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-1-distributed-config.html">Distributed Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-2-service-discovery.html">Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-3-intelligent-routing.html">Intelligent Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-4-cslb.html">CSLB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-5-self-healing-services.html">Self Healing Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spring/spring-cloud-6-wrap.html">Wrap - Big Picture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spring/spring-misc.html">Spring Miscellaneous</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gradle</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gradle/gradle.html">Gradle</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">AWS</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">AWS Essentials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apache Spark</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../apache-spark/apache-spark.html">Apache Spark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Golang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../go/basic-syntax.html">Basic Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/code-generation.html">Code Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/concurrency.html">Concurrency in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/context.html">Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/database.html">Database Programming in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/grpc-app.html">gRPC in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/http-services.html">HTTP in Go</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../go/testing.html">Testing in Go</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rust</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../rust/rust-snippets.html">Rust Snippets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/kubernetes-intro.html">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes/namespaces.html">Kubernetes Namespaces</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CheatSheets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheets/misc.html">Miscellaneous HowTos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generative AI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generative-ai/building-systems-with-chatgpt.html">Building Systems with ChatGPT AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generative-ai/prompt-engineering.html">ChatGPT Prompt Engineering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MLOps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mlops/ml-in-production.html">ML in Production</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../journal.html">Work Learnings Journal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Faws/aws-assentials.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/aws/aws-assentials.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>AWS Essentials</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#account">Account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#billing">Billing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloudwatch-logging-and-monitoring-service">CloudWatch (logging and monitoring service)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#birth-of-cloud">Birth of Cloud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-and-availability-zones-az">Regions and Availability Zones (AZ)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iaas-compute">IaaS Compute</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ec2-vm-remote">EC2 VM remote</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iaas-storage">IaaS Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ebs">EBS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efs">EFS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s3">S3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s3-glacier">S3 “Glacier”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloudfront-not-s3">Cloudfront (not S3!)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iaas-networking">IaaS Networking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vpc-virtual-private-cloud">VPC (Virtual Private Cloud)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nat-gateway">NAT Gateway</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#internet-gateway">Internet Gateway</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-ips">Elastic IPs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elb-elastic-load-balancer">ELB (Elastic Load Balancer)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#route-53">Route 53</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbaas">DBaaS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rds">RDS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-aurora">AWS Aurora</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamodb">DynamoDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentdb">DocumentDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elasticache">ElastiCache</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redshift">Redshift</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messaging-services">Messaging Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paas">PaaS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-beanstalk">Elastic Beanstalk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecs-elastic-container-service">ECS (Elastic Container Service)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faas-aws-lambda">FaaS / AWS Lambda</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saas">SaaS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognito">Cognito</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-gateway">API Gateway</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appsync">AppSync</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amplify">Amplify</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sagemaker">AWS SageMaker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lex">Lex</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="aws-essentials">
+<h1>AWS Essentials<a class="headerlink" href="#aws-essentials" title="Permalink to this heading">#</a></h1>
+<section id="account">
+<h2>Account<a class="headerlink" href="#account" title="Permalink to this heading">#</a></h2>
+<p>AWS Account signup with email id ==&gt; Root account (captain of the starship)</p>
+<p><strong>NOTEs:</strong></p>
+<ul class="simple">
+<li><p>Do not use the Root account after the initial setup!</p></li>
+<li><p>Setup and Use MFA (multi factor authentication keys for your root account and IAM users)</p></li>
+</ul>
+<p>First steps:</p>
+<ol class="arabic simple">
+<li><p>Create group using IAM with admin, developer, etc specific permissions/roles.</p></li>
+<li><p>Delete the root user’s secret access key if it is present (should never leak in public).</p></li>
+<li><p>Create an admin user and add it to the admin group. Use this for further admin actions.</p></li>
+<li><p>Create secret access keys for the admin IAM user and store it securely somewhere. If the access key is ever leaked out, delete it immediately and generate a new one!</p></li>
+</ol>
+</section>
+<section id="billing">
+<h2>Billing<a class="headerlink" href="#billing" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Add email alerts from the Billing service</p></li>
+</ul>
+</section>
+<section id="cloudwatch-logging-and-monitoring-service">
+<h2>CloudWatch (logging and monitoring service)<a class="headerlink" href="#cloudwatch-logging-and-monitoring-service" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You can add “alarms” for billing, with SNS.</p></li>
+</ul>
+</section>
+<section id="birth-of-cloud">
+<h2>Birth of Cloud<a class="headerlink" href="#birth-of-cloud" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>initially there used to be physical servers</p>
+<ul>
+<li><p>Self hosted</p></li>
+<li><p>Colocation</p></li>
+<li><p>Leased</p></li>
+</ul>
+</li>
+<li><p>All are example of on-premise</p></li>
+<li><p>Not elastic and not able to scale well and need to be managed.</p></li>
+<li><p>Virtualisation technologies came which were able to split the machine resources and create a virtual machine out of it.</p></li>
+<li><p>Clouds took advantages of it to scale and provide elasticity</p></li>
+<li><p>There is a shared responsibility model for the cloud as they manage hardware and physical servers and users have to maintain the software and updates.</p></li>
+<li><p>Called now “IaaS” - infrastructure as a service. AWS provides an infrastructure as a service to us.</p></li>
+<li><p>EC2 and S3 are the oldest AWS services even before dropbox.</p></li>
+</ul>
+</section>
+<section id="regions-and-availability-zones-az">
+<h2>Regions and Availability Zones (AZ)<a class="headerlink" href="#regions-and-availability-zones-az" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>AZ is a data centre within a region.</p></li>
+<li><p>Ohio, Oregon and North Virginia (us-east) are the largest regions and AZs. First updates comes here.</p></li>
+</ul>
+</section>
+<section id="iaas-compute">
+<h2>IaaS Compute<a class="headerlink" href="#iaas-compute" title="Permalink to this heading">#</a></h2>
+<section id="ec2-vm-remote">
+<h3>EC2 VM remote<a class="headerlink" href="#ec2-vm-remote" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>You are asked to generate key-pair for the instance</p></li>
+<li><p>You can download the .pem file ==&gt; it is the only private key there is, just don’t lose it!</p></li>
+<li><p>Public key is already present in the was instance.</p></li>
+<li><p>Save the .pem file securely somewhere on your machine.</p></li>
+<li><p>No you can SSH into the instance using the .pem file and the URL/endpoint provided.</p></li>
+</ul>
+<p>Instance Types:</p>
+<ul class="simple">
+<li><p>Size ==&gt; T-shirt sizes like model for size of machine.</p></li>
+<li><p>T instances use compute credits for later burst usage</p></li>
+<li><p>Reserved instances are great way to save money when you know what you workload is.</p></li>
+</ul>
+<p>Connecting to internet:</p>
+<ul class="simple">
+<li><p>“Security groups” act as firewall/filter from the public internet.</p></li>
+<li><p>Outgoing traffic allows all ==&gt; can connect to internet and install softwares etc.</p></li>
+</ul>
+<p>EC2 actions:</p>
+<ul class="simple">
+<li><p>“Stop” and “start” ==&gt; this might move the VM instance into a different AZ! Do this if you are facing trouble connecting to the machine (there might be a failure at that AZ).</p></li>
+<li><p>“Reboot” will do a software reboot of the VM on the same physical machine.</p></li>
+<li><p>Stopped instance won’t be changed with the compute cost but there will be data cost for hard drive (which will be minimal).</p></li>
+<li><p>You can create and AMI image from an existing EC2 instance to clone this VM (all the hard drive and software intact) ==&gt; you can use the image in case the VM crash or corrupt to rest it to the default fresh configuration.</p></li>
+</ul>
+</section>
+</section>
+<section id="iaas-storage">
+<h2>IaaS Storage<a class="headerlink" href="#iaas-storage" title="Permalink to this heading">#</a></h2>
+<section id="ebs">
+<h3>EBS<a class="headerlink" href="#ebs" title="Permalink to this heading">#</a></h3>
+<p>Elastic Block storage (grow and shrink in size)</p>
+<ul class="simple">
+<li><p>Once a EBS volume os plugged into the EC2 instance it cannot be shared across with another EC2 instance.</p></li>
+<li><p>Automatically attached to the EC2 and given OOTB</p></li>
+</ul>
+</section>
+<section id="efs">
+<h3>EFS<a class="headerlink" href="#efs" title="Permalink to this heading">#</a></h3>
+<p>Elastic File System</p>
+<ul class="simple">
+<li><p>AWS version of the NAS (Network attached storage)</p></li>
+<li><p>Allows you to mount and share drive across multiple EC2 instances.</p></li>
+<li><p>Isn’t as fast as EBS as it is not that closely attached to the raw hardware.</p></li>
+<li><p>You can create the EFS from the AWS services console</p>
+<ul>
+<li><p>Install “nfs-common” (if using ubuntu) on each connected machine where EFS need to be accessed.</p></li>
+<li><p>Create a mount point ==&gt; instruction are given in the AWS Console.</p></li>
+</ul>
+</li>
+<li><p>Security groups work exactly like EC2</p></li>
+</ul>
+</section>
+<section id="s3">
+<h3>S3<a class="headerlink" href="#s3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>One of the first AWS services.</p></li>
+<li><p>Slower than both EBS and EFS.</p></li>
+<li><p>Can share all kinds of files directly with the users without having to configure any security polity and mounting etc.</p></li>
+<li><p>You don’t need a server to host your files (which is required in case of an EFS)</p></li>
+<li><p>Keep separate buckets for different kind of security sensitive files to keep different settings for each bucket.</p></li>
+</ul>
+<p><strong>NOTEs:</strong></p>
+<ul class="simple">
+<li><p>You can use the AWS CLI and SDK to access and manage your AWS services.</p></li>
+<li><p>While working with SDK, avoid using and leaking the access key and secret into the server</p></li>
+<li><p>For this you can create a role with specific permission to a particular EC2 instance, then you won’t need a key to work with SDK.</p></li>
+</ul>
+</section>
+<section id="s3-glacier">
+<h3>S3 “Glacier”<a class="headerlink" href="#s3-glacier" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For “colder” files (files not being used much), you can opt for a cheaper file storage than S3.</p></li>
+<li><p>Costs a fraction that S3.</p></li>
+<li><p>Ideal for backups.</p></li>
+<li><p>If you want to access some data from “Glacier” it is freezing cold and need to become hot ==&gt; this can take several hours ==&gt; only keep data not frequently used into “S3 Glacier”</p></li>
+</ul>
+</section>
+<section id="cloudfront-not-s3">
+<h3>Cloudfront (not S3!)<a class="headerlink" href="#cloudfront-not-s3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CDN</p></li>
+<li><p>We can “distribute” a bucket across multiple regions (or across the hold world)</p></li>
+</ul>
+</section>
+</section>
+<section id="iaas-networking">
+<h2>IaaS Networking<a class="headerlink" href="#iaas-networking" title="Permalink to this heading">#</a></h2>
+<section id="vpc-virtual-private-cloud">
+<h3>VPC (Virtual Private Cloud)<a class="headerlink" href="#vpc-virtual-private-cloud" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Local network between in the AWS services isolated from the public internet</p></li>
+<li><p>e.g., n computers connected to each other using a network switch without the internet.</p></li>
+</ul>
+<p>NOTE : We can create multiple subnets to groups different networking privileges for different AWS services.</p>
+<ul class="simple">
+<li><p>Private subnet for db servers</p></li>
+<li><p>Public subnet for external facing services</p></li>
+</ul>
+</section>
+<section id="nat-gateway">
+<h3>NAT Gateway<a class="headerlink" href="#nat-gateway" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>door-knob only on the inside, outside traffic can’t get in (router without port-forwarding enabled).</p>
+</div></blockquote>
+</section>
+<section id="internet-gateway">
+<h3>Internet Gateway<a class="headerlink" href="#internet-gateway" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>door-knob on the both sides</p>
+</div></blockquote>
+</section>
+<section id="elastic-ips">
+<h3>Elastic IPs<a class="headerlink" href="#elastic-ips" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>static IP</p></li>
+<li><p>Ipv4 addresses are precious resources, hence, Amazon will charge a small fee to let you keep an Elastic IP without it being bound to some addresses/instance/EC2/server</p></li>
+<li><p>Make sure you release the Elastic IP when you shutdown a service.</p></li>
+</ul>
+<p>2 main use cases of VPC:</p>
+<ol class="arabic simple">
+<li><p>Developer connecting to DB servers without it being open to public internet.</p></li>
+<li><p>Site to Site VPC ==&gt; ???</p></li>
+</ol>
+</section>
+<section id="elb-elastic-load-balancer">
+<h3>ELB (Elastic Load Balancer)<a class="headerlink" href="#elb-elastic-load-balancer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Checks health of the target</p></li>
+</ul>
+</section>
+<section id="route-53">
+<h3>Route 53<a class="headerlink" href="#route-53" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>AWS DNS</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Use this to point to your ALB (ELB)</p></li>
+<li><p>If we want to transfer domain to route 53, we can point the domain’s DNS server to route 53 servers.</p></li>
+</ul>
+</section>
+</section>
+<section id="dbaas">
+<h2>DBaaS<a class="headerlink" href="#dbaas" title="Permalink to this heading">#</a></h2>
+<p>NOTE : You can still use database server inside a EC2 instance just like your on-premise environment.</p>
+<section id="rds">
+<h3>RDS<a class="headerlink" href="#rds" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Relational Database service</p></li>
+<li><p>Multiple vendor options</p></li>
+</ul>
+</section>
+<section id="aws-aurora">
+<h3>AWS Aurora<a class="headerlink" href="#aws-aurora" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Mysql and Postgres compatible RBBMS managed service</p></li>
+<li><p>Serverless model</p></li>
+<li><p>A lot more managed by AWS</p></li>
+</ul>
+</section>
+<section id="dynamodb">
+<h3>DynamoDB<a class="headerlink" href="#dynamodb" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>AWS’s NoSQL offering</p></li>
+<li><p>Easier to scale up if you have partitioned your keys correctly</p></li>
+<li><p>They even provide global tables</p>
+<ul>
+<li><p>Replicated tables for speed and redundancy</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="documentdb">
+<h3>DocumentDB<a class="headerlink" href="#documentdb" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Mongo like database</p></li>
+</ul>
+</section>
+<section id="elasticache">
+<h3>ElastiCache<a class="headerlink" href="#elasticache" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Redis</p></li>
+<li><p>Memcache</p></li>
+</ul>
+</section>
+<section id="redshift">
+<h3>Redshift<a class="headerlink" href="#redshift" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Big data store</p></li>
+</ul>
+<p>NOTE : Datalake vs Data warehouse</p>
+<ul class="simple">
+<li><p>Datalake - box of books (unorganized)</p></li>
+<li><p>Data warehouse - labelled, organised data ==&gt; optimized Postgres</p></li>
+</ul>
+</section>
+</section>
+<section id="messaging-services">
+<h2>Messaging Services<a class="headerlink" href="#messaging-services" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Kinesis ==&gt; realtime large data queue</p></li>
+<li><p>SQS ==&gt; Simple Queue service, can get really expensive on sending lots and lots of data.</p></li>
+<li><p>SNS ==&gt; Simple Notification service</p></li>
+</ul>
+</section>
+<section id="paas">
+<h2>PaaS<a class="headerlink" href="#paas" title="Permalink to this heading">#</a></h2>
+<p>When things just works ==&gt; giving the codebase, clicking a button and everything is performed under the hood, software updates etc.</p>
+<section id="elastic-beanstalk">
+<h3>Elastic Beanstalk<a class="headerlink" href="#elastic-beanstalk" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="ecs-elastic-container-service">
+<h3>ECS (Elastic Container Service)<a class="headerlink" href="#ecs-elastic-container-service" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="faas-aws-lambda">
+<h3>FaaS / AWS Lambda<a class="headerlink" href="#faas-aws-lambda" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Serverless Architecture</p></li>
+</ul>
+</section>
+</section>
+<section id="saas">
+<h2>SaaS<a class="headerlink" href="#saas" title="Permalink to this heading">#</a></h2>
+<section id="cognito">
+<h3>Cognito<a class="headerlink" href="#cognito" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>User Authentication service</p></li>
+</ul>
+</section>
+<section id="api-gateway">
+<h3>API Gateway<a class="headerlink" href="#api-gateway" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Similar to LB but very heavy on REST APIs</p></li>
+</ul>
+</section>
+<section id="appsync">
+<h3>AppSync<a class="headerlink" href="#appsync" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>GraphQL</p></li>
+</ul>
+</section>
+<section id="amplify">
+<h3>Amplify<a class="headerlink" href="#amplify" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Apps boiletplate</p></li>
+</ul>
+</section>
+<section id="aws-sagemaker">
+<h3>AWS SageMaker<a class="headerlink" href="#aws-sagemaker" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Machine Learning</p></li>
+</ul>
+</section>
+<section id="lex">
+<h3>Lex<a class="headerlink" href="#lex" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Chatbots</p></li>
+</ul>
+<p>….many more!!</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./aws"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../gradle/gradle.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gradle</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../apache-spark/apache-spark.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Apache Spark</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#account">Account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#billing">Billing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloudwatch-logging-and-monitoring-service">CloudWatch (logging and monitoring service)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#birth-of-cloud">Birth of Cloud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-and-availability-zones-az">Regions and Availability Zones (AZ)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iaas-compute">IaaS Compute</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ec2-vm-remote">EC2 VM remote</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iaas-storage">IaaS Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ebs">EBS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efs">EFS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s3">S3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s3-glacier">S3 “Glacier”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloudfront-not-s3">Cloudfront (not S3!)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iaas-networking">IaaS Networking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vpc-virtual-private-cloud">VPC (Virtual Private Cloud)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nat-gateway">NAT Gateway</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#internet-gateway">Internet Gateway</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-ips">Elastic IPs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elb-elastic-load-balancer">ELB (Elastic Load Balancer)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#route-53">Route 53</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbaas">DBaaS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rds">RDS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-aurora">AWS Aurora</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamodb">DynamoDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentdb">DocumentDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elasticache">ElastiCache</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redshift">Redshift</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messaging-services">Messaging Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paas">PaaS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-beanstalk">Elastic Beanstalk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecs-elastic-container-service">ECS (Elastic Container Service)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faas-aws-lambda">FaaS / AWS Lambda</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saas">SaaS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognito">Cognito</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-gateway">API Gateway</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appsync">AppSync</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amplify">Amplify</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sagemaker">AWS SageMaker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lex">Lex</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lalit Prakash Vatsal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
