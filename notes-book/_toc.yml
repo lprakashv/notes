@@ -4,6 +4,9 @@
 format: jb-book
 root: BOOK
 parts:
+  - caption: Concepts
+    chapters:
+      - glob: concepts/*
   - caption: Java
     chapters:
       - glob: java/java-*
@@ -13,27 +16,28 @@ parts:
       - file: spring/spring-cloud-0
         sections:
           - glob: spring/spring-cloud-*
-  - caption: Apache Spark
-    chapters:
-      - glob: apache-spark/*
+      - file: spring/spring-misc
   - caption: Gradle
     chapters:
       - glob: gradle/*
+  - caption: AWS
+    chapters:
+      - glob: aws/*
+  - caption: Apache Spark
+    chapters:
+      - glob: apache-spark/*
   - caption: Golang
     chapters:
       - glob: go/*
   - caption: Rust
     chapters:
       - file: rust/rust-snippets
-  - caption: Concepts
-    chapters:
-      - glob: concepts/*
   - caption: Kubernetes
     chapters:
       - glob: kubernetes/*
-  - caption: Commands and CheatSheets
+  - caption: CheatSheets
     chapters:
-      - glob: command-cheatsheets/*
+      - glob: cheatsheets/*
   - caption: Generative AI
     chapters:
       - glob: generative-ai/*

@@ -1,4 +1,4 @@
-# Miscellaneous Helpful Commands
+# Miscellaneous HowTos
 
 Commands used in personal/professional Experience
 
@@ -61,7 +61,9 @@ TODO
 
 TODO
 
-## MS SQL Server
+## Databases / SQL
+
+### MS SQL Server
 
 Running procedure
 
@@ -87,6 +89,14 @@ req.cpu_time,
 req.total_elapsed_time
 FROM sys.dm_exec_requests req
 CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sqltext;
+```
+
+### PostgreSQL
+
+random number b/w a and b (inclusive):
+
+```sql
+select floor(random()*(b-a+1)) + a;
 ```
 
 ## Git - WIP
@@ -249,3 +259,41 @@ kafka-run-class kafka.tools.GetOffsetShell \
 --topic ukgr-recipe-hearst-etl-prod \
 --time 1583298000000
 ```
+
+## Scala
+
+Scala reading from a file:
+
+```scala
+val source: String = Source.fromFile("/Users/lpv/Desktop/categoryHierarchy.json")(Codec.UTF8).getLines.mkString
+```
+
+## Sonatype
+
+### Create sonatype account
+
+1. Same passwords for `issues.sonatype.org` (JIRA), `oss.sonatype.org`, `central.sonatype.org`
+2. Raise a jira request to open a repository.
+3. They will ask you to verify a domain/groupid.
+
+### Signing
+
+1. Create key using “gpg” and save passphrase.
+    1. `gpg --list-secret-keys`
+2. Set short code (last 8 chars of key), passphrase, secret ring file path in gradle’s global properties (set in maven is using maven)
+3. Distribute it to “central keystores” (ubuntu, etc.)
+    1. `gpg --keyserver hkp://pool.sks-keyservers.net --send-keys <key last 8 chars are fine>`
+    2. `gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys <key>`
+4. Generate a secret key
+    1. `gpg --export-secret-keys >~/.gnupg/secring.gpg`
+
+### Publish
+
+1. Use gradle’s `maven-publish` or some other plugin for maven if using maven.
+2. Don’t forget to add credentials to `buildscript` (`publishscript`)
+
+### Sonatype release
+
+1. “close” published sonatype `"staging"` repo, you can check the content.
+2. Release it.
+3. If first release (promote), comment on the jira ticket.

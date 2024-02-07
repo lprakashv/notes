@@ -1,4 +1,4 @@
-# Work Learnings Journal (Appended to each topic section)
+# Work Learnings Journal
 
 ## Kubernetes
   
