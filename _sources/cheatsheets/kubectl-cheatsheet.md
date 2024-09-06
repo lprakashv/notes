@@ -51,6 +51,42 @@ kubectl create namespace test-123 --dry-run -o yaml
 kubectl get pods -o wide
 ```
 
+## AWS EKS Cluster
+
+### Adding cluster to `kubectl`
+
+```bash
+aws eks update-kubeconfig --region <region> --name <cluster-name>
+```
+
+### Switching clusters
+
+```bash
+kubectx <cluster-arn>
+```
+
+> NOTE: `kubectx` needs to be installed first!
+
+## Resource Labels
+
+### Adding label
+
+```bash
+kubectl label <resource-type> <resource-name> <label-name>=<label-value>
+```
+
+### Removing label / Unlabelling
+
+```bash
+kubectl label <resource-type> <resource-name> <label-name>-
+```
+
+## Port Forward
+
+```bash
+kubectl port-forward mongo-75f59d57f4-4nd6q <external/local-port>:<pod-port>
+```
+
 ## Imperative Commands (Single command to create resources)
 
 | Task | Command |

@@ -445,6 +445,17 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-resource">Describing resource</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-resource">Deleting resource</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-output">Formatting output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-eks-cluster">AWS EKS Cluster</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-cluster-to-kubectl">Adding cluster to <code class="docutils literal notranslate"><span class="pre">kubectl</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-clusters">Switching clusters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resource-labels">Resource Labels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-label">Adding label</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-label-unlabelling">Removing label / Unlabelling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#port-forward">Port Forward</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-commands-single-command-to-create-resources">Imperative Commands (Single command to create resources)</a></li>
 </ul>
             </nav>
@@ -515,6 +526,45 @@ kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span clas
 
 <span class="c1"># Wide</span>
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide
+</pre></div>
+</div>
+</section>
+<section id="aws-eks-cluster">
+<h2>AWS EKS Cluster<a class="headerlink" href="#aws-eks-cluster" title="Permalink to this heading">#</a></h2>
+<section id="adding-cluster-to-kubectl">
+<h3>Adding cluster to <code class="docutils literal notranslate"><span class="pre">kubectl</span></code><a class="headerlink" href="#adding-cluster-to-kubectl" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>eks<span class="w"> </span>update-kubeconfig<span class="w"> </span>--region<span class="w"> </span>&lt;region&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;cluster-name&gt;
+</pre></div>
+</div>
+</section>
+<section id="switching-clusters">
+<h3>Switching clusters<a class="headerlink" href="#switching-clusters" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectx<span class="w"> </span>&lt;cluster-arn&gt;
+</pre></div>
+</div>
+<blockquote>
+<div><p>NOTE: <code class="docutils literal notranslate"><span class="pre">kubectx</span></code> needs to be installed first!</p>
+</div></blockquote>
+</section>
+</section>
+<section id="resource-labels">
+<h2>Resource Labels<a class="headerlink" href="#resource-labels" title="Permalink to this heading">#</a></h2>
+<section id="adding-label">
+<h3>Adding label<a class="headerlink" href="#adding-label" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>label<span class="w"> </span>&lt;resource-type&gt;<span class="w"> </span>&lt;resource-name&gt;<span class="w"> </span>&lt;label-name&gt;<span class="o">=</span>&lt;label-value&gt;
+</pre></div>
+</div>
+</section>
+<section id="removing-label-unlabelling">
+<h3>Removing label / Unlabelling<a class="headerlink" href="#removing-label-unlabelling" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>label<span class="w"> </span>&lt;resource-type&gt;<span class="w"> </span>&lt;resource-name&gt;<span class="w"> </span>&lt;label-name&gt;-
+</pre></div>
+</div>
+</section>
+</section>
+<section id="port-forward">
+<h2>Port Forward<a class="headerlink" href="#port-forward" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>port-forward<span class="w"> </span>mongo-75f59d57f4-4nd6q<span class="w"> </span>&lt;external/local-port&gt;:&lt;pod-port&gt;
 </pre></div>
 </div>
 </section>
@@ -628,6 +678,17 @@ kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> <
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-resource">Describing resource</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-resource">Deleting resource</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-output">Formatting output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-eks-cluster">AWS EKS Cluster</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-cluster-to-kubectl">Adding cluster to <code class="docutils literal notranslate"><span class="pre">kubectl</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-clusters">Switching clusters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resource-labels">Resource Labels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-label">Adding label</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-label-unlabelling">Removing label / Unlabelling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#port-forward">Port Forward</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-commands-single-command-to-create-resources">Imperative Commands (Single command to create resources)</a></li>
 </ul>
   </nav></div>
