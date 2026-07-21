@@ -1,0 +1,15 @@
+[book]
+title = "Lalit's Tech Notebook"
+authors = ["Lalit Prakash Vatsal"]
+description = "A collection of technical notes and learnings."
+language = "en"
+src = "notes-book"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+git-repository-url = "https://github.com/lprakashv/notes"
+edit-url-template = "https://github.com/lprakashv/notes/edit/master/{path}"
+site-url = "/notes/"
