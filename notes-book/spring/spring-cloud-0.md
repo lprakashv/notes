@@ -4,10 +4,10 @@ Netflix OSS + Spring + Spring Boot = Spring Cloud!
 
 ## Spring cloud stack
 
-1. [Service Discovery](./spring-cloud-service-discovery.md)
-2. [Distributed Configuration](./spring-cloud-distributed-config.md)
+1. [Service Discovery](./spring-cloud-2-service-discovery.md)
+2. [Distributed Configuration](./spring-cloud-1-distributed-config.md)
 3. Client-side Load balancing (CSLB)
-4. [Intelligent routing](./spring-cloud-intelligent-routing.md)
+4. [Intelligent routing](./spring-cloud-3-intelligent-routing.md)
 5. Fault tolerance
 
 Spring Cloud projects:

@@ -3,5 +3,5 @@ logs/
 .vscode/
 .metals/
 .DS_Store
+/book/
 _build/
-.venv*/

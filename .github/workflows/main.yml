@@ -1,40 +1,43 @@
-name: deploy-notes-book
+name: Deploy mdBook to GitHub Pages
 
-# Only run this when the master branch changes
 on:
   push:
     branches:
-    - master
-    # If your git repository has the Jupyter Book within some-subfolder next to
-    # unrelated files, you can make this run only if a file within that specific
-    # folder has been modified.
-    #
-    # paths:
-    # - some-subfolder/**
+      - master
+    paths:
+      - .github/workflows/main.yml
+      - book.toml
+      - notes-book/**
+  workflow_dispatch:
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: true
+
 jobs:
-  deploy-book:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    # Install dependencies
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.11
+      - name: Install mdBook
+        env:
+          MDBOOK_VERSION: 0.5.4
+        run: |
+          mkdir --parents "$RUNNER_TEMP/mdbook"
+          curl --fail --location --silent --show-error \
+            "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar --extract --gzip --directory "$RUNNER_TEMP/mdbook"
+          echo "$RUNNER_TEMP/mdbook" >> "$GITHUB_PATH"
 
-    - name: Install dependencies
-      run: |
-        python3 -m pip install pipenv && python3 -m pipenv install
-    # Build the book
-    - name: Build the book
-      run: |
-        python3 -m pipenv run jupyter-book build ./notes-book/
-    # Push the book's static files to github-pages
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.6.1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./notes-book/_build/html
+      - name: Build the book
+        run: mdbook build
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
