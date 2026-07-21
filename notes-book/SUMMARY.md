@@ -39,6 +39,11 @@
 - [Apache Spark](data-engineering/apache-spark.md)
 - [Big Data](data-engineering/big-data.md)
 
+# Databases
+
+- [Databases](databases/databases.md)
+- [SQLite](databases/sqlite.md)
+
 # Golang
 
 - [Basic Syntax](go/basic-syntax.md)
@@ -74,6 +79,13 @@
 - [LangSmith](generative-ai/langsmith.md)
 - [LlamaIndex](generative-ai/llamaindex.md)
 - [Prompt Engineering](generative-ai/prompt-engineering.md)
+
+# OpenTelemetry
+
+- [Collector](opentelemetry/collector.md)
+- [Go SDK](opentelemetry/go-sdk.md)
+- [Logs](opentelemetry/logs.md)
+- [Metrics](opentelemetry/metrics.md)
 
 # MLOps
 
