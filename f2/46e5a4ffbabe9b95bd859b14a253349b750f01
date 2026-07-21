@@ -1,0 +1,25 @@
+notes-book/BOOK.md
+  s_e351dc749c9965::t_19fddf00c9d0d2 3
+.gitignore
+  s_e351dc749c9965::t_19fddf00c9d0d2 6
+.github/workflows/main.yml
+  s_e351dc749c9965::t_19fddf00c9d0d2 1,6-18,21,24-34,36-37,39-43
+notes-book/spring/spring-cloud-0.md
+  s_e351dc749c9965::t_19fddf00c9d0d2 7-8,10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "f246e5a4ffbabe9b95bd859b14a253349b750f01",
+  "prompts": {},
+  "sessions": {
+    "s_e351dc749c9965": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8346-94a0-7cc1-b516-68d38c6dcbd7",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "lprakashv <lprakashv@gmail.com>"
+    }
+  }
+}
