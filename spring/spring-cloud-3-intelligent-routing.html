@@ -1,870 +1,454 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Intelligent Routing - Lalit&#x27;s Tech Notebook</title>
 
 
-<!DOCTYPE html>
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A collection of technical notes and learnings.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
 
 
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Intelligent Routing &#8212; Lalit&#39;s Tech Notebook</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'spring/spring-cloud-3-intelligent-routing';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CSLB" href="spring-cloud-4-cslb.html" />
-    <link rel="prev" title="Service Discovery" href="spring-cloud-2-service-discovery.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
-<a class="navbar-brand logo" href="../BOOK.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/Lalit-new-logo-3.png" class="logo__image only-light" alt="Lalit's Tech Notebook - Home"/>
-    <script>document.write(`<img src="../_static/Lalit-new-logo-3.png" class="logo__image only-dark" alt="Lalit's Tech Notebook - Home"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../BOOK.html">
-                    Lalit’s Tech Notes
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../concepts/concurrency.html">Concurrency</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Java</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../java/java-gc.html">Java Garbage Collection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../java/java-misc.html">Java - Misc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../java/java-multithreading.html">Java Multi-threading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../java/java-snippets.html">Java Snippets</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Spring</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="spring-data-transactions.html">Data Transactions with Spring</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="spring-cloud-0.html">Spring Cloud Fundamentals</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-1-distributed-config.html">Distributed Config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-2-service-discovery.html">Service Discovery</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Intelligent Routing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-4-cslb.html">CSLB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-5-self-healing-services.html">Self Healing Services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spring-cloud-6-wrap.html">Wrap - Big Picture</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spring-misc.html">Spring Miscellaneous</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gradle</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gradle/gradle.html">Gradle</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">AWS</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../aws/aws-assentials.html">AWS Essentials</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apache Spark</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../apache-spark/apache-spark.html">Apache Spark</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Golang</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../go/basic-syntax.html">Basic Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/code-generation.html">Code Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/concurrency.html">Concurrency in Go</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/context.html">Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/database.html">Database Programming in Go</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/grpc-app.html">gRPC in Go</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/http-services.html">HTTP in Go</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../go/testing.html">Testing in Go</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rust</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../rust/rust-snippets.html">Rust Snippets</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Kubernetes</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../kubernetes/kubernetes-intro.html">Kubernetes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../kubernetes/namespaces.html">Kubernetes Namespaces</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">CheatSheets</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../cheatsheets/docker-cheatsheet.html">Docker cheatsheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cheatsheets/kubectl-cheatsheet.html">Kubectl Cheat Sheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cheatsheets/misc.html">Miscellaneous HowTos</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generative AI</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../generative-ai/building-systems-with-chatgpt.html">Building Systems with ChatGPT AI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../generative-ai/prompt-engineering.html">ChatGPT Prompt Engineering</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">MLOps</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../mlops/ml-in-production.html">ML in Production</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Work Learnings Journal</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../journal.html">Work Learnings Journal</a></li>
-</ul>
-
-    </div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
-<div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/lprakashv/notes" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/lprakashv/notes/issues/new?title=Issue%20on%20page%20%2Fspring/spring-cloud-3-intelligent-routing.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/spring/spring-cloud-3-intelligent-routing.md" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Intelligent Routing</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-67146efd.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-7e1bdbd6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
             <div>
-                <h2> Contents </h2>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
             </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-with-individual-services">Challenges with Individual Services</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#routing-service">Routing Service</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gateway-service">Gateway Service</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netflix-zuul">Netflix Zuul</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-zuul-reverse-proxy">Using Spring Cloud + Netflix Zuul Reverse Proxy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-zuul">Using Spring Cloud + Netflix Zuul</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-service-discovery">With Service Discovery</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-service-discovery">Without Service Discovery</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-service-discovery-precise-routing">With Service Discovery: Precise Routing</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-service-discovery-precise-routing">Without Service Discovery: Precise Routing</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zuul-filters">Zuul Filters</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-zuul-filter">Creating a Zuul Filter</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-between-filters-requestcontext">Sharing between Filters: <code class="docutils literal notranslate"><span class="pre">RequestContext</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
-</div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="intelligent-routing">
-<h1>Intelligent Routing<a class="headerlink" href="#intelligent-routing" title="Permalink to this heading">#</a></h1>
-<section id="challenges-with-individual-services">
-<h2>Challenges with Individual Services<a class="headerlink" href="#challenges-with-individual-services" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Different ports</p></li>
-<li><p>Different addresses</p></li>
-<li><p>Different APIs and paths</p></li>
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Lalit&#x27;s Tech Notebook</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/lprakashv/notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/lprakashv/notes/edit/master/notes-book/spring/spring-cloud-3-intelligent-routing.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="intelligent-routing"><a class="header" href="#intelligent-routing">Intelligent Routing</a></h1>
+<h2 id="challenges-with-individual-services"><a class="header" href="#challenges-with-individual-services">Challenges with Individual Services</a></h2>
+<ul>
+<li>Different ports</li>
+<li>Different addresses</li>
+<li>Different APIs and paths</li>
 </ul>
 <p>Solution: <strong>“Intelligent Routing”</strong></p>
-</section>
-<section id="routing-service">
-<h2>Routing Service<a class="headerlink" href="#routing-service" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Via Gateway service (or API Gateway)</p></li>
-<li><p>Single point of entry for all clients</p></li>
+<h2 id="routing-service"><a class="header" href="#routing-service">Routing Service</a></h2>
+<ul>
+<li>Via Gateway service (or API Gateway)</li>
+<li>Single point of entry for all clients</li>
 </ul>
-</section>
-<section id="gateway-service">
-<h2>Gateway Service<a class="headerlink" href="#gateway-service" title="Permalink to this heading">#</a></h2>
+<h2 id="gateway-service"><a class="header" href="#gateway-service">Gateway Service</a></h2>
 <p>Provides:</p>
-<ul class="simple">
-<li><p>Dynamic routing and delivery</p></li>
-<li><p>Security and Filtering</p></li>
-<li><p>Auditing and Logging</p></li>
-<li><p>Request Enhancement</p></li>
-<li><p>Load balancing</p></li>
-<li><p>Different APIs for different clients</p></li>
+<ul>
+<li>Dynamic routing and delivery</li>
+<li>Security and Filtering</li>
+<li>Auditing and Logging</li>
+<li>Request Enhancement</li>
+<li>Load balancing</li>
+<li>Different APIs for different clients</li>
 </ul>
-</section>
-<section id="netflix-zuul">
-<h2>Netflix Zuul<a class="headerlink" href="#netflix-zuul" title="Permalink to this heading">#</a></h2>
+<h2 id="netflix-zuul"><a class="header" href="#netflix-zuul">Netflix Zuul</a></h2>
 <p>Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security and more.</p>
-<ul class="simple">
-<li><p>Proxy server</p></li>
-<li><p>Setting up routes</p></li>
-<li><p>Setting up filters</p></li>
+<ul>
+<li>Proxy server</li>
+<li>Setting up routes</li>
+<li>Setting up filters</li>
 </ul>
-<section id="using-spring-cloud-netflix-zuul-reverse-proxy">
-<h3>Using Spring Cloud + Netflix Zuul Reverse Proxy<a class="headerlink" href="#using-spring-cloud-netflix-zuul-reverse-proxy" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Application.java</span></code></p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
-<span class="nd">@EnableZuulProxy</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span>
+<h3 id="using-spring-cloud--netflix-zuul-reverse-proxy"><a class="header" href="#using-spring-cloud--netflix-zuul-reverse-proxy">Using Spring Cloud + Netflix Zuul Reverse Proxy</a></h3>
+<p><code>Application.java</code></p>
+<pre><code class="language-java">@SpringBootApplication
+@EnableZuulProxy
+public class Application {
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">SpringBootApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="using-spring-cloud-netflix-zuul">
-<h3>Using Spring Cloud + Netflix Zuul<a class="headerlink" href="#using-spring-cloud-netflix-zuul" title="Permalink to this heading">#</a></h3>
-<section id="with-service-discovery">
-<h4>With Service Discovery<a class="headerlink" href="#with-service-discovery" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">gateway-service</span>
-<span class="na">eureka.client.service-url.defaultZone</span><span class="o">=</span><span class="s">http://localhost:8761/eureka</span>
-</pre></div>
-</div>
-<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
-<span class="nt">eureka</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">client</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">service-url</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">defaultZone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:8761/eureka</span>
-</pre></div>
-</div>
-</section>
-<section id="without-service-discovery">
-<h4>Without Service Discovery<a class="headerlink" href="#without-service-discovery" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">gateway-service</span>
-<span class="na">ribbon.eureka.enabled</span><span class="o">=</span><span class="s">false</span>
-</pre></div>
-</div>
-<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
-<span class="nt">ribbon</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">eureka</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</pre></div>
-</div>
+  public static void main(String[] args) {
+    SpringBootApplication.run(Application.class, args);
+  }
+}
+</code></pre>
+<h3 id="using-spring-cloud--netflix-zuul"><a class="header" href="#using-spring-cloud--netflix-zuul">Using Spring Cloud + Netflix Zuul</a></h3>
+<h4 id="with-service-discovery"><a class="header" href="#with-service-discovery">With Service Discovery</a></h4>
+<p><code>application.properties</code></p>
+<pre><code class="language-properties">spring.application.name=gateway-service
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+</code></pre>
+<p>OR <code>application.yml</code></p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: gateway-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+</code></pre>
+<h4 id="without-service-discovery"><a class="header" href="#without-service-discovery">Without Service Discovery</a></h4>
+<p><code>application.properties</code></p>
+<pre><code class="language-properties">spring.application.name=gateway-service
+ribbon.eureka.enabled=false
+</code></pre>
+<p>OR <code>application.yml</code></p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: gateway-service
+ribbon:
+  eureka:
+    enabled: false
+</code></pre>
 <p>Default Route to Service Resolution with Service Discovery</p>
-<table class="table">
+<div class="table-wrapper">
+<table>
 <thead>
-<tr class="row-odd"><th class="head"><p>Request</p></th>
-<th class="head"><p>maps to Service</p></th>
-</tr>
+<tr><th>Request</th><th>maps to Service</th></tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/foo</span></code></p></td>
-<td><p>spring.application.name=foo</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/categories/1</span></code></p></td>
-<td><p>spring.application.name=categories</p></td>
-</tr>
+<tr><td><code>/foo</code></td><td>spring.application.name=foo</td></tr>
+<tr><td><code>/categories/1</code></td><td>spring.application.name=categories</td></tr>
 </tbody>
 </table>
+</div>
 <p><strong>NOTEs:</strong></p>
-<ul class="simple">
-<li><p><em>Prefix is stripped by default. Use <code class="docutils literal notranslate"><span class="pre">zuul.stripPrefixes=false</span></code> to disable.</em></p></li>
-<li><p><em>All services are added by default. Use <code class="docutils literal notranslate"><span class="pre">zuul.ignoredServices=&lt;pattern&gt;</span></code> to ignore services.</em></p></li>
+<ul>
+<li><em>Prefix is stripped by default. Use <code>zuul.stripPrefixes=false</code> to disable.</em></li>
+<li><em>All services are added by default. Use <code>zuul.ignoredServices=&lt;pattern&gt;</code> to ignore services.</em></li>
 </ul>
-</section>
-<section id="with-service-discovery-precise-routing">
-<h4>With Service Discovery: Precise Routing<a class="headerlink" href="#with-service-discovery-precise-routing" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">gateway-service</span>
-<span class="na">zuul.routes.&lt;route_name&gt;.path</span><span class="o">=</span><span class="s">/somepath/**</span>
-<span class="na">zuul.routes.&lt;route_name&gt;.serviceld</span><span class="o">=</span><span class="s">some_service_id</span>
-<span class="na">zuul.ignored-services</span><span class="o">=</span><span class="s">some_service_id</span>
-</pre></div>
-</div>
-<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
-<span class="w">  </span><span class="nt">zuul</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">routes</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">‹route_name&gt;</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/ somepath/**</span>
-<span class="w">        </span><span class="nt">serviceld</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_service_id</span>
-<span class="w">    </span><span class="nt">ignored-services</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_service_id</span>
-</pre></div>
-</div>
-</section>
-<section id="without-service-discovery-precise-routing">
-<h4>Without Service Discovery: Precise Routing<a class="headerlink" href="#without-service-discovery-precise-routing" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">application.properties</span></code></p>
-<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">spring.application.name</span><span class="o">=</span><span class="s">gateway-service</span>
-<span class="na">zuul.routes.&lt;route_name&gt;.path</span><span class="o">=</span><span class="s">/somepath/**</span>
-<span class="na">zuul.routes.&lt;route_name&gt;.url</span><span class="o">=</span><span class="s">http://some_url_address/</span>
-</pre></div>
-</div>
-<p>OR <code class="docutils literal notranslate"><span class="pre">application.yml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spring</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway-service</span>
-<span class="w">  </span><span class="nt">zuul</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">routes</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">‹route_name&gt;</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/ somepath/**</span>
-<span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://some_path_url/</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="zuul-filters">
-<h3>Zuul Filters<a class="headerlink" href="#zuul-filters" title="Permalink to this heading">#</a></h3>
+<h4 id="with-service-discovery-precise-routing"><a class="header" href="#with-service-discovery-precise-routing">With Service Discovery: Precise Routing</a></h4>
+<p><code>application.properties</code></p>
+<pre><code class="language-properties">spring.application.name=gateway-service
+zuul.routes.&lt;route_name&gt;.path=/somepath/**
+zuul.routes.&lt;route_name&gt;.serviceld=some_service_id
+zuul.ignored-services=some_service_id
+</code></pre>
+<p>OR <code>application.yml</code></p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: gateway-service
+  zuul:
+    routes:
+      ‹route_name&gt;:
+        path: / somepath/**
+        serviceld: some_service_id
+    ignored-services: some_service_id
+</code></pre>
+<h4 id="without-service-discovery-precise-routing"><a class="header" href="#without-service-discovery-precise-routing">Without Service Discovery: Precise Routing</a></h4>
+<p><code>application.properties</code></p>
+<pre><code class="language-properties">spring.application.name=gateway-service
+zuul.routes.&lt;route_name&gt;.path=/somepath/**
+zuul.routes.&lt;route_name&gt;.url=http://some_url_address/
+</code></pre>
+<p>OR <code>application.yml</code></p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: gateway-service
+  zuul:
+    routes:
+      ‹route_name&gt;:
+        path: / somepath/**
+        url: http://some_path_url/
+</code></pre>
+<h3 id="zuul-filters"><a class="header" href="#zuul-filters">Zuul Filters</a></h3>
 <p>Filter types:</p>
-<ol class="arabic simple">
-<li><p>Pre -&gt; before request</p></li>
-<li><p>Route -&gt; any kind of routing</p>
-<ol class="arabic simple">
-<li><p>In fact &#64;EnableZuulProxy sets up some default ‘route’ filters.</p></li>
+<ol>
+<li>Pre -&gt; before request</li>
+<li>Route -&gt; any kind of routing
+<ol>
+<li>In fact @EnableZuulProxy sets up some default ‘route’ filters.</li>
 </ol>
 </li>
-<li><p>Post -&gt; After request is executed.</p></li>
-<li><p>Error -&gt; Any of pre/route/post filter failed.</p></li>
+<li>Post -&gt; After request is executed.</li>
+<li>Error -&gt; Any of pre/route/post filter failed.</li>
 </ol>
-<section id="creating-a-zuul-filter">
-<h4>Creating a Zuul Filter<a class="headerlink" href="#creating-a-zuul-filter" title="Permalink to this heading">#</a></h4>
+<h4 id="creating-a-zuul-filter"><a class="header" href="#creating-a-zuul-filter">Creating a Zuul Filter</a></h4>
 <p>Extend &amp; Implement ZuulFilter</p>
-<p><code class="docutils literal notranslate"><span class="pre">MyFilter.java</span></code></p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ZuulFilter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// implement methods</span>
+<p><code>MyFilter.java</code></p>
+<pre><code class="language-java">public class MyFilter extends ZuulFilter {
+    // implement methods
 
-<span class="w">    </span><span class="c1">// Filter logic goes here</span>
-<span class="w">    </span><span class="c1">// **Current implementation ignores return value**</span>
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// Whether or not the `run()` method should execute</span>
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldFilter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// The type of filter: `pre`, `route`, `post`, `error`</span>
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">filterType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// The order of execution with respect to the other filters of the same type</span>
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">filterOrder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Define a <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> which returns the Filter</p>
-<p><code class="docutils literal notranslate"><span class="pre">MyConfig.java</span></code></p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyConfig</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nd">@Bean</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ZuulFilter</span><span class="w"> </span><span class="nf">myFilter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyFilter</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="sharing-between-filters-requestcontext">
-<h4>Sharing between Filters: <code class="docutils literal notranslate"><span class="pre">RequestContext</span></code><a class="headerlink" href="#sharing-between-filters-requestcontext" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p>Holds request, response, state and data information</p></li>
-<li><p>Only available for the duration of the request</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">RequestContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RequestContext</span><span class="p">.</span><span class="na">getCurrentContext</span><span class="p">();</span>
-
-<span class="c1">// Get the servlet request</span>
-<span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getRequest</span><span class="p">();</span>
-
-<span class="c1">// Get the servlet response</span>
-<span class="n">HttpServletResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
-
-<span class="c1">// Set a variable</span>
-<span class="n">ctx</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;foobar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PRE_FILTER_EXECUTED&quot;</span><span class="p">);</span>
-
-<span class="c1">// Get a variable</span>
-<span class="n">String</span><span class="w"> </span><span class="n">foobar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;foobar&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Example of setting the header using Filter:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractRequestHeaderFilter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ZuulFilter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldFilter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">filterType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;pre&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">RequestContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RequestContext</span><span class="p">.</span><span class="na">getCurrentContext</span><span class="p">();</span>
-<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">addZuulRequestHeader</span><span class="p">(</span><span class="s">&quot;x-location&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;INDIA&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-</section>
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./spring"
-        },
-        predefinedOutput: true
+    // Filter logic goes here
+    // **Current implementation ignores return value**
+    @Override
+    public Object run() {
+        // ...
     }
-    </script>
-    <script>kernelName = 'python3'</script>
 
-                </article>
-              
+    // Whether or not the `run()` method should execute
+    @Override
+    public boolean shouldFilter() {
+        // ...
+    }
 
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="spring-cloud-2-service-discovery.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Service Discovery</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="spring-cloud-4-cslb.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">CSLB</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div>
-                </footer>
-              
+    // The type of filter: `pre`, `route`, `post`, `error`
+    @Override
+    public String filterType() {
+        // ...
+    }
+
+    // The order of execution with respect to the other filters of the same type
+    @Override
+    public int filterOrder() {
+        // ...
+    }
+}
+</code></pre>
+<p>Define a <code>@Bean</code> which returns the Filter</p>
+<p><code>MyConfig.java</code></p>
+<pre><code class="language-java">@Configuration
+public class MyConfig {
+
+    @Bean
+    public ZuulFilter myFilter() {
+        return new MyFilter();
+    }
+}
+</code></pre>
+<h4 id="sharing-between-filters-requestcontext"><a class="header" href="#sharing-between-filters-requestcontext">Sharing between Filters: <code>RequestContext</code></a></h4>
+<ul>
+<li>Holds request, response, state and data information</li>
+<li>Only available for the duration of the request</li>
+</ul>
+<pre><code class="language-java">RequestContext ctx = RequestContext.getCurrentContext();
+
+// Get the servlet request
+HttpServletRequest req = ctx.getRequest();
+
+// Get the servlet response
+HttpServletResponse = res = ctx.getResponse();
+
+// Set a variable
+ctx.set("foobar", "PRE_FILTER_EXECUTED");
+
+// Get a variable
+String foobar = (String) ctx.get("foobar");
+</code></pre>
+<p>Example of setting the header using Filter:</p>
+<pre><code class="language-java">public class AbstractRequestHeaderFilter extends ZuulFilter {
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public String filterType() {
+        return "pre";
+    }
+
+    @Override
+    public Object run() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        ctx.addZuulRequestHeader("x-location", "INDIA");
+        return null;
+    }
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../spring/spring-cloud-2-service-discovery.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../spring/spring-cloud-4-cslb.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../spring/spring-cloud-2-service-discovery.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../spring/spring-cloud-4-cslb.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-with-individual-services">Challenges with Individual Services</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#routing-service">Routing Service</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gateway-service">Gateway Service</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netflix-zuul">Netflix Zuul</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-zuul-reverse-proxy">Using Spring Cloud + Netflix Zuul Reverse Proxy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-spring-cloud-netflix-zuul">Using Spring Cloud + Netflix Zuul</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-service-discovery">With Service Discovery</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-service-discovery">Without Service Discovery</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-service-discovery-precise-routing">With Service Discovery: Precise Routing</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-service-discovery-precise-routing">Without Service Discovery: Precise Routing</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zuul-filters">Zuul Filters</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-zuul-filter">Creating a Zuul Filter</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-between-filters-requestcontext">Sharing between Filters: <code class="docutils literal notranslate"><span class="pre">RequestContext</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-  </nav></div>
 
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Lalit Prakash Vatsal
-</p>
+        <script>
+            window.playground_copyable = true;
+        </script>
 
-  </div>
-  
-  <div class="footer-item">
-    
 
-  <p class="copyright">
-    
-      © Copyright 2022.
-      <br/>
-    
-  </p>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
-      </main>
+        <!-- Custom JS scripts -->
+
+
+
     </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+    </body>
 </html>

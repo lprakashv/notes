@@ -1,1 +1,0 @@
-# Database Programming in Go
