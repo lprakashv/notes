@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>LangChain - Lalit&#x27;s Tech Notebook</title>
+        <title>SQLite - Lalit&#x27;s Tech Notebook</title>
 
 
         <!-- Custom HTML head -->
@@ -146,7 +146,7 @@
                         <a href="https://github.com/lprakashv/notes" title="Git repository" aria-label="Git repository">
                             <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
-                        <a href="https://github.com/lprakashv/notes/edit/master/notes-book/generative-ai/langchain.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/lprakashv/notes/edit/master/notes-book/databases/sqlite.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
                         </a>
 
@@ -180,20 +180,188 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="langchain"><a class="header" href="#langchain">LangChain</a></h1>
-<blockquote>
-<p>Placeholder for notes on LangChain.</p>
-</blockquote>
+                        <h1 id="sqlite"><a class="header" href="#sqlite">SQLite</a></h1>
+<h2 id="in-a-nutshell"><a class="header" href="#in-a-nutshell">In-a-nutshell</a></h2>
+<ul>
+<li>An in-process library -&gt; not a server</li>
+<li>1 file of ANSI-C code</li>
+<li>Database is a single file
+<ul>
+<li>can contains 1000s of tables, indexes and views</li>
+<li>space efficient</li>
+</ul>
+</li>
+<li>Full-featured SQL</li>
+<li>Power-safe serializable transactions</li>
+<li>Fast</li>
+<li>Simple API</li>
+<li>Public domain</li>
+</ul>
+<h2 id="lite-means-low-overhead-but-not-low-capability"><a class="header" href="#lite-means-low-overhead-but-not-low-capability">“Lite” means “low overhead”, but not “low capability”</a></h2>
+<ul>
+<li>1 writer + N concurrent readers</li>
+<li>1 GB strings and BLOBs</li>
+<li>281 TB databases</li>
+<li>64-way joins</li>
+<li>2000 columns per table or index</li>
+<li>No arbitrary limits on numbers of:
+<ul>
+<li>tables</li>
+<li>indexes</li>
+<li>rows in a table</li>
+</ul>
+</li>
+</ul>
+<h2 id="not-for"><a class="header" href="#not-for">Not for</a></h2>
+<ul>
+<li>Remote data</li>
+<li>Big data</li>
+<li>Concurrent writers</li>
+</ul>
+<h2 id="sqlite-is-found-in-many-places-but-not-limited-to"><a class="header" href="#sqlite-is-found-in-many-places-but-not-limited-to">SQLite is Found in many places (but not limited to)</a></h2>
+<p><a href="https://www.youtube.com/watch?v=ZSKLA81tBis">source</a></p>
+<ul>
+<li>every ios and androind phone and device</li>
+<li>every mac and windows 10/11 computer</li>
+<li>every firefox, chrome and safari browsers</li>
+<li>most desktop and phone software applications</li>
+<li>TVs, smart appliances, automotive “infotainment” systems</li>
+<li>countless millions of other applications…</li>
+<li>more and more of websites…</li>
+</ul>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<h3 id="interface"><a class="header" href="#interface">Interface</a></h3>
+<p>https://youtu.be/ZSKLA81tBis?t=1104</p>
+<h3 id="ins-and-outs"><a class="header" href="#ins-and-outs">Ins and Outs</a></h3>
+<ul>
+<li>Compiler -&gt; translates SQKL into bytecode</li>
+<li>Virtual machine -&gt; runs the bytecode</li>
+</ul>
+<pre><code class="language-text">
++-----+      +---------------------------+     +--------------------+     +-----------------+     +--------+
+| SQL | --&gt;  | compiled SQL into program | --&gt; | prepared statement | --&gt; | run the program | --&gt; | result |
++-----+      +---------------------------+     +--------------------|     +-----------------+     +--------+
+
+             \___________  ______________/                                \_______  _______/
+                         \/                                                       \/
+                 `sqlite3_prepare()`                                       `sqlite3_step()`
+</code></pre>
+<p>The SQLite Stack</p>
+<pre><code class="language-text">+--------+          -+
+| Parser |           |
++--------+           |
+     |               |
+     v               |------ `sqlite3_prepare()`
++----------------+   |
+| Code generator |   |
++----------------+   |
+     |              -+
+     v
++-----------------+
+| Virtual machine |
++-----------------+
+     |
+     v
++--------+         -+
+| B-Tree |          |
++--------+          |
+     |              |
+     v              |
++--------+          |
+| Pager  |          |------- Storage Engine
++--------+          |
+     |              |
+     v              |
++--------------+    |
+| OS Interface |    |
++--------------+    |
+                   -+
+</code></pre>
+<p>Parser</p>
+<ul>
+<li>LALR(1) parser generated by “Lemon”</li>
+<li>Reentrant and threadsafe</li>
+<li>Output: is an AST</li>
+<li>Hand-written tokenizer</li>
+</ul>
+<p>Code generator</p>
+<ul>
+<li>Semantic analysis</li>
+<li>AST transformations</li>
+<li>Query planning</li>
+<li>Output: prepared statement (bytecode)</li>
+</ul>
+<p>Virtual machine</p>
+<ul>
+<li>bytecode interpreter</li>
+<li>3-address, 5-operand register machine</li>
+<li>Bit <code>switch</code> statement on the <code>opcode</code> and inside a loop</li>
+<li>Special opcodes designed to help implement SQL statements</li>
+</ul>
+<p>Storage Engine Summary</p>
+<ul>
+<li>Row store</li>
+<li>Variable length entries</li>
+<li>Forest of B-trees
+<ul>
+<li>1 b-tree for each table and each index</li>
+<li>table key: PRIMARY KEY or ROWID</li>
+<li>index key: indexed columns + table key</li>
+</ul>
+</li>
+<li>Transaction control using “rollback-journal” or “write-ahead-log” (WAL)</li>
+</ul>
+<p>B-Tree</p>
+<ul>
+<li>B Trees and B+ trees</li>
+<li>multiple B trees per disk file</li>
+<li>variable length entries</li>
+<li>free page tracking and reuse</li>
+<li>access via cursor</li>
+<li>concurrent read/write of the same table using separate cursors</li>
+</ul>
+<p>Pager</p>
+<ul>
+<li>atomic commit or rollback
+<ul>
+<li>power safe transactions</li>
+<li>rollback mode or WAL mode</li>
+</ul>
+</li>
+<li>uniform size pages numbed from 1</li>
+<li>512 or 65536 bytes per page</li>
+<li>no interpretation of page content</li>
+<li>cache</li>
+<li>concurrency control</li>
+</ul>
+<p>OS Interface (<code>os_unix.c</code> / <code>os_win.c</code>)</p>
+<ul>
+<li>platform specific interface to the OS</li>
+<li>runtime changeable</li>
+<li>portability layer</li>
+<li><code>read()</code>/<code>write()</code> or <code>mmap()</code></li>
+<li><code>https://sqlite.org/vfs.html</code></li>
+<li>direct i/o to hardware: <code>test_onefile.c</code></li>
+</ul>
+<p>VFS Shims</p>
+<ul>
+<li>inserted in-between pager and os interface</li>
+<li>encryption</li>
+<li>compression</li>
+<li>logging</li>
+<li>testing and fault injection</li>
+<li>…</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../generative-ai/enhance-rag-with-raptor.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../databases/databases.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../generative-ai/langsmith.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../go/basic-syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -203,11 +371,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../generative-ai/enhance-rag-with-raptor.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../databases/databases.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../generative-ai/langsmith.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../go/basic-syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

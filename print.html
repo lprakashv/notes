@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-67146efd.js";
+            window.path_to_searchindex_js = "searchindex-8a37ffac.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7e1bdbd6.js"></script>
+        <script src="toc-2dde9d1e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -2558,6 +2558,9 @@ private void anyMethodCalledAdviseMe() {
 <p>….many more!!</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="data-engineering"><a class="header" href="#data-engineering">Data Engineering</a></h1>
+<blockquote>
+<p>Placeholder for data-engineering notes and learning resources.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="apache-spark"><a class="header" href="#apache-spark">Apache Spark</a></h1>
 <h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
@@ -2714,6 +2717,184 @@ private void anyMethodCalledAdviseMe() {
 <ul>
 <li>more propreitary systems</li>
 <li>some systems and tools they have open-sources and they do contribute back to the community.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="databases"><a class="header" href="#databases">Databases</a></h1>
+<blockquote>
+<p>Placeholder for database concepts and comparisons.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="sqlite"><a class="header" href="#sqlite">SQLite</a></h1>
+<h2 id="in-a-nutshell"><a class="header" href="#in-a-nutshell">In-a-nutshell</a></h2>
+<ul>
+<li>An in-process library -&gt; not a server</li>
+<li>1 file of ANSI-C code</li>
+<li>Database is a single file
+<ul>
+<li>can contains 1000s of tables, indexes and views</li>
+<li>space efficient</li>
+</ul>
+</li>
+<li>Full-featured SQL</li>
+<li>Power-safe serializable transactions</li>
+<li>Fast</li>
+<li>Simple API</li>
+<li>Public domain</li>
+</ul>
+<h2 id="lite-means-low-overhead-but-not-low-capability"><a class="header" href="#lite-means-low-overhead-but-not-low-capability">“Lite” means “low overhead”, but not “low capability”</a></h2>
+<ul>
+<li>1 writer + N concurrent readers</li>
+<li>1 GB strings and BLOBs</li>
+<li>281 TB databases</li>
+<li>64-way joins</li>
+<li>2000 columns per table or index</li>
+<li>No arbitrary limits on numbers of:
+<ul>
+<li>tables</li>
+<li>indexes</li>
+<li>rows in a table</li>
+</ul>
+</li>
+</ul>
+<h2 id="not-for"><a class="header" href="#not-for">Not for</a></h2>
+<ul>
+<li>Remote data</li>
+<li>Big data</li>
+<li>Concurrent writers</li>
+</ul>
+<h2 id="sqlite-is-found-in-many-places-but-not-limited-to"><a class="header" href="#sqlite-is-found-in-many-places-but-not-limited-to">SQLite is Found in many places (but not limited to)</a></h2>
+<p><a href="https://www.youtube.com/watch?v=ZSKLA81tBis">source</a></p>
+<ul>
+<li>every ios and androind phone and device</li>
+<li>every mac and windows 10/11 computer</li>
+<li>every firefox, chrome and safari browsers</li>
+<li>most desktop and phone software applications</li>
+<li>TVs, smart appliances, automotive “infotainment” systems</li>
+<li>countless millions of other applications…</li>
+<li>more and more of websites…</li>
+</ul>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<h3 id="interface"><a class="header" href="#interface">Interface</a></h3>
+<p>https://youtu.be/ZSKLA81tBis?t=1104</p>
+<h3 id="ins-and-outs"><a class="header" href="#ins-and-outs">Ins and Outs</a></h3>
+<ul>
+<li>Compiler -&gt; translates SQKL into bytecode</li>
+<li>Virtual machine -&gt; runs the bytecode</li>
+</ul>
+<pre><code class="language-text">
++-----+      +---------------------------+     +--------------------+     +-----------------+     +--------+
+| SQL | --&gt;  | compiled SQL into program | --&gt; | prepared statement | --&gt; | run the program | --&gt; | result |
++-----+      +---------------------------+     +--------------------|     +-----------------+     +--------+
+
+             \___________  ______________/                                \_______  _______/
+                         \/                                                       \/
+                 `sqlite3_prepare()`                                       `sqlite3_step()`
+</code></pre>
+<p>The SQLite Stack</p>
+<pre><code class="language-text">+--------+          -+
+| Parser |           |
++--------+           |
+     |               |
+     v               |------ `sqlite3_prepare()`
++----------------+   |
+| Code generator |   |
++----------------+   |
+     |              -+
+     v
++-----------------+
+| Virtual machine |
++-----------------+
+     |
+     v
++--------+         -+
+| B-Tree |          |
++--------+          |
+     |              |
+     v              |
++--------+          |
+| Pager  |          |------- Storage Engine
++--------+          |
+     |              |
+     v              |
++--------------+    |
+| OS Interface |    |
++--------------+    |
+                   -+
+</code></pre>
+<p>Parser</p>
+<ul>
+<li>LALR(1) parser generated by “Lemon”</li>
+<li>Reentrant and threadsafe</li>
+<li>Output: is an AST</li>
+<li>Hand-written tokenizer</li>
+</ul>
+<p>Code generator</p>
+<ul>
+<li>Semantic analysis</li>
+<li>AST transformations</li>
+<li>Query planning</li>
+<li>Output: prepared statement (bytecode)</li>
+</ul>
+<p>Virtual machine</p>
+<ul>
+<li>bytecode interpreter</li>
+<li>3-address, 5-operand register machine</li>
+<li>Bit <code>switch</code> statement on the <code>opcode</code> and inside a loop</li>
+<li>Special opcodes designed to help implement SQL statements</li>
+</ul>
+<p>Storage Engine Summary</p>
+<ul>
+<li>Row store</li>
+<li>Variable length entries</li>
+<li>Forest of B-trees
+<ul>
+<li>1 b-tree for each table and each index</li>
+<li>table key: PRIMARY KEY or ROWID</li>
+<li>index key: indexed columns + table key</li>
+</ul>
+</li>
+<li>Transaction control using “rollback-journal” or “write-ahead-log” (WAL)</li>
+</ul>
+<p>B-Tree</p>
+<ul>
+<li>B Trees and B+ trees</li>
+<li>multiple B trees per disk file</li>
+<li>variable length entries</li>
+<li>free page tracking and reuse</li>
+<li>access via cursor</li>
+<li>concurrent read/write of the same table using separate cursors</li>
+</ul>
+<p>Pager</p>
+<ul>
+<li>atomic commit or rollback
+<ul>
+<li>power safe transactions</li>
+<li>rollback mode or WAL mode</li>
+</ul>
+</li>
+<li>uniform size pages numbed from 1</li>
+<li>512 or 65536 bytes per page</li>
+<li>no interpretation of page content</li>
+<li>cache</li>
+<li>concurrency control</li>
+</ul>
+<p>OS Interface (<code>os_unix.c</code> / <code>os_win.c</code>)</p>
+<ul>
+<li>platform specific interface to the OS</li>
+<li>runtime changeable</li>
+<li>portability layer</li>
+<li><code>read()</code>/<code>write()</code> or <code>mmap()</code></li>
+<li><code>https://sqlite.org/vfs.html</code></li>
+<li>direct i/o to hardware: <code>test_onefile.c</code></li>
+</ul>
+<p>VFS Shims</p>
+<ul>
+<li>inserted in-between pager and os interface</li>
+<li>encryption</li>
+<li>compression</li>
+<li>logging</li>
+<li>testing and fault injection</li>
+<li>…</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="basic-syntax"><a class="header" href="#basic-syntax">Basic Syntax</a></h1>
@@ -3044,6 +3225,9 @@ atomicCount.Add(1)
 <h2 id="context---applied"><a class="header" href="#context---applied">Context - Applied</a></h2>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="database-programming-in-go"><a class="header" href="#database-programming-in-go">Database Programming in Go</a></h1>
+<blockquote>
+<p>Placeholder for database-programming notes and examples in Go.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="grpc-in-go"><a class="header" href="#grpc-in-go">gRPC in Go</a></h1>
 <ul>
@@ -3087,10 +3271,19 @@ atomicCount.Add(1)
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="http-in-go"><a class="header" href="#http-in-go">HTTP in Go</a></h1>
+<blockquote>
+<p>Placeholder for HTTP service notes and examples in Go.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="testing-in-go"><a class="header" href="#testing-in-go">Testing in Go</a></h1>
+<blockquote>
+<p>Placeholder for testing notes and examples in Go.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="rust-snippets"><a class="header" href="#rust-snippets">Rust Snippets</a></h1>
+<blockquote>
+<p>Placeholder for Rust snippets and notes.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="kubernetes"><a class="header" href="#kubernetes">Kubernetes</a></h1>
 <p>Introduction to Kubernetes</p>
@@ -3911,21 +4104,62 @@ xargs -n 1 -I ^ -P 10 bash -c \
 <li>If first release (promote), comment on the jira ticket.</li>
 </ol>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="amazon-bedrock"><a href="#amazon-bedrock" class="header">Amazon Bedrock</a></h1>
+<h1 id="amazon-bedrock"><a class="header" href="#amazon-bedrock">Amazon Bedrock</a></h1>
+<blockquote>
+<p>Placeholder for notes on Amazon Bedrock.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="building-systems-with-chatgpt-ai"><a class="header" href="#building-systems-with-chatgpt-ai">Building Systems with ChatGPT AI</a></h1>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="enhancing-rag-with-raptor"><a href="#enhancing-rag-with-raptor" class="header">Enhancing RAG with RAPTOR</a></h1>
+<h1 id="enhancing-rag-with-raptor"><a class="header" href="#enhancing-rag-with-raptor">Enhancing RAG with RAPTOR</a></h1>
+<blockquote>
+<p>Placeholder for notes on RAPTOR-based retrieval-augmented generation.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="langchain"><a href="#langchain" class="header">LangChain</a></h1>
+<h1 id="langchain"><a class="header" href="#langchain">LangChain</a></h1>
+<blockquote>
+<p>Placeholder for notes on LangChain.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="langsmith"><a href="#langsmith" class="header">LangSmith</a></h1>
+<h1 id="langsmith"><a class="header" href="#langsmith">LangSmith</a></h1>
+<blockquote>
+<p>Placeholder for notes on LangSmith.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="llamaindex"><a href="#llamaindex" class="header">LlamaIndex</a></h1>
+<h1 id="llamaindex"><a class="header" href="#llamaindex">LlamaIndex</a></h1>
+<blockquote>
+<p>Placeholder for notes on LlamaIndex.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="chatgpt-prompt-engineering"><a class="header" href="#chatgpt-prompt-engineering">ChatGPT Prompt Engineering</a></h1>
+<blockquote>
+<p>Placeholder for prompt-engineering notes and examples.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="opentelemetry-collector"><a class="header" href="#opentelemetry-collector">OpenTelemetry Collector</a></h1>
+<blockquote>
+<p>Placeholder for notes on the OpenTelemetry Collector.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="opentelemetry-go-sdk"><a class="header" href="#opentelemetry-go-sdk">OpenTelemetry Go SDK</a></h1>
+<blockquote>
+<p>Placeholder for notes on the OpenTelemetry Go SDK.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="opentelemetry-logs"><a class="header" href="#opentelemetry-logs">OpenTelemetry Logs</a></h1>
+<blockquote>
+<p>Placeholder for notes on OpenTelemetry logs.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="opentelemetry-metrics"><a class="header" href="#opentelemetry-metrics">OpenTelemetry Metrics</a></h1>
+<blockquote>
+<p>Placeholder for notes on OpenTelemetry metrics.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="ml-in-production"><a class="header" href="#ml-in-production">ML in Production</a></h1>
+<blockquote>
+<p>Placeholder for production machine-learning notes and examples.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="work-learnings-journal"><a class="header" href="#work-learnings-journal">Work Learnings Journal</a></h1>
 <h2 id="kubernetes-1"><a class="header" href="#kubernetes-1">Kubernetes</a></h2>
