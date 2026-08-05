@@ -4,22 +4,23 @@ This repository publishes technical notes with [MkDocs](https://www.mkdocs.org/)
 
 ## Local development
 
-Install the pinned MkDocs dependency (Python 3.8+ is required):
+Start a local site with live reload (Python 3.8+ is required):
+
+```sh
+./scripts/serve-local.sh
+```
+
+The script creates `.venv/` when needed, installs the pinned dependency from `requirements.txt`, and opens the site in your browser. To build the static site without starting a server:
+
+```sh
+./scripts/serve-local.sh build
+```
+
+The generated site is written to `site/`. To use a pre-existing Python environment instead, install dependencies and run MkDocs directly:
 
 ```sh
 python3 -m pip install --requirement requirements.txt
-```
-
-Build the static site:
-
-```sh
-mkdocs build --strict
-```
-
-The generated site is written to `site/`. To preview it locally with live reload, run:
-
-```sh
-mkdocs serve
+python3 -m mkdocs serve
 ```
 
 To remove generated output:
