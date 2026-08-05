@@ -1,0 +1,22 @@
+overrides/partials/favicon.html
+  s_e351dc749c9965::t_aa96691bc75979 1
+  s_e351dc749c9965::t_f08beed04acab6 2-3
+mkdocs.yml
+  s_e351dc749c9965::t_aa96691bc75979 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "dc6c063d77abf389d0f52c3e7070370d52b7551e",
+  "prompts": {},
+  "sessions": {
+    "s_e351dc749c9965": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8346-94a0-7cc1-b516-68d38c6dcbd7",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "lprakashv <lprakashv@gmail.com>"
+    }
+  }
+}
