@@ -11,7 +11,7 @@ site_dir: site
 strict: true
 
 theme:
-  name: simple-blog
+  name: terminal
 
 nav:
   - Home: index.md

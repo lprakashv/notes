@@ -1,6 +1,6 @@
 # Lalit's Tech Notes
 
-This repository publishes technical notes with [MkDocs](https://www.mkdocs.org/) and the Simple Blog community theme.
+This repository publishes technical notes with [MkDocs](https://www.mkdocs.org/) and the Terminal community theme.
 
 ## Local development
 
