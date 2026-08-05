@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+    
+    <meta name="description" content="A collection of technical notes and learnings."> 
+    
+    <meta name="author" content="Lalit Prakash Vatsal"> 
+    
+    <link rel="canonical" href="https://lprakashv.github.io/notes/java/java-gc/">
+<link rel="icon" type="image/png" href="../../Lalit-new-logo-3.png">
+<link rel="apple-touch-icon" href="../../Lalit-new-logo-3.png">
+
+
+    
+ 
+<title>Java Garbage Collection - Lalit's Tech Notebook</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- default color palette -->
+<link href="../../css/palettes/default.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+     
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://lprakashv.github.io/notes/" class="no-style">Lalit's Tech Notebook</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Home</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../gradle/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Gradle</span>
+                    </a>
+                    <meta property="position" content="1">
+                </li>
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../aws/aws-assentials/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">AWS</span>
+                    </a>
+                    <meta property="position" content="2">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../rust/rust-snippets/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Rust</span>
+                    </a>
+                    <meta property="position" content="3">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../mlops/ml-in-production/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">MLOps</span>
+                    </a>
+                    <meta property="position" content="4">
+                </li>
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../journal/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Work Learnings Journal</span>
+                    </a>
+                    <meta property="position" content="5">
+                </li>
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="6">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">Home</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Concepts</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../concepts/concurrency/">Concurrency</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Java</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="terminal-mkdocs-side-nav-item--active">Java Garbage Collection</span>
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../java-misc/">Java Miscellaneous</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../java-multithreading/">Java Multithreading</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../java-snippets/">Java Snippets</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Spring</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../spring/spring-data-transactions/">Data Transactions with Spring</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Spring Cloud</span>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../spring/spring-misc/">Spring Miscellaneous</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../gradle/">Gradle</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../aws/aws-assentials/">AWS</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Data Engineering</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/data-engineering/">Overview</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/apache-spark/">Apache Spark</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/big-data/">Big Data</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Databases</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../databases/databases/">Overview</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../databases/sqlite/">SQLite</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Golang</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/basic-syntax/">Basic Syntax</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/code-generation/">Code Generation</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/concurrency/">Concurrency</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/context/">Context</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/database/">Database Programming</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/grpc-app/">gRPC Application</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/http-services/">HTTP Services</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/testing/">Testing</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../rust/rust-snippets/">Rust</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Kubernetes</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/kubernetes-intro/">Overview</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/namespaces/">Namespaces</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Cheat Sheets</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/docker-cheatsheet/">Docker</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/kubectl-cheatsheet/">kubectl</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/misc/">Miscellaneous HowTos</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Generative AI</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/amazon-bedrock/">Amazon Bedrock</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/building-systems-with-chatgpt/">Building Systems with ChatGPT</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/enhance-rag-with-raptor/">Enhancing RAG with RAPTOR</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/langchain/">LangChain</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/langsmith/">LangSmith</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/llamaindex/">LlamaIndex</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/prompt-engineering/">Prompt Engineering</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">OpenTelemetry</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/collector/">Collector</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/go-sdk/">Go SDK</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/logs/">Logs</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/metrics/">Metrics</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../mlops/ml-in-production/">MLOps</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../journal/">Work Learnings Journal</a>
+        
+    
+    
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#java-garbage-collection">Java Garbage Collection</a></li>
+        <li><a href="#heap">Heap</a></li><li><a href="#garbage-collector">Garbage Collector</a></li><li><a href="#garbage-collectors-in-java">Garbage Collectors in Java</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="java-garbage-collection">Java Garbage Collection</h1>
+<h2 id="heap">Heap</h2>
+<p>The Heap is divided into several parts called generations:</p>
+<ul>
+<li>Young generation is a field, where recently created objects are stored;</li>
+<li>Old (tenured) generation is a field, where long-life objects are stored;</li>
+</ul>
+<p>Before Java 8, there was one more memory space — Permanent generation. it contained meta-information about classes, methods, statistical variables. After Java 8 was invented, all this information then became stored separately in the Metaspace.</p>
+<blockquote>
+<p>Stack object access is thread-safe while heap access is not!</p>
+</blockquote>
+<p><img alt="GC" src="../images/gc1.png" /></p>
+<blockquote>
+<p>Why was the decision taken to get rid of Permanent generation?</p>
+</blockquote>
+<p>First of all, it was because of the error connected with memory overflow. Since the Perm had a constant size and could not expand dynamically, sooner or later the memory ran out, an error was thrown and application crashed.</p>
+<p>In contrast, Metaspace has a dynamic size, and during its execution, it can expand up to the memory size of the JVM.</p>
+<p>Key Heap features:</p>
+<ul>
+<li>If Heap space is full, Java throws java.lang.OutOfMemoryError</li>
+<li>Access to the Heap is relatively slower in comparison to the Stack</li>
+<li>To remove unused objects from the memory in the Heap, a Garbage collector is used</li>
+<li>Unlike stack, a heap isn't thread-safe and needs to be guarded by properly synchronizing the code</li>
+</ul>
+<p>--</p>
+<h3 id="notes">Notes</h3>
+<p>Heap is divided into memory areas:</p>
+<ol>
+<li><strong>Permgen</strong>/<strong>metaspace</strong></li>
+<li><strong>NewGen</strong>
+    a. Eden space
+    b. Surviving space 1
+    c. Surviving space 2</li>
+<li><strong>Old Gen</strong></li>
+</ol>
+<blockquote>
+<p>Only (2) and (3) are considered for GC.</p>
+</blockquote>
+<p>Operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mark</td>
+<td>Starts from root of application, walks through "object graph", and marks all the reachable as live.</td>
+</tr>
+<tr>
+<td>Sweep (delete)</td>
+<td>Deletes all unreachable objects</td>
+</tr>
+<tr>
+<td>Compacting</td>
+<td>Compacts the memory/defragment it/increase contiguous space.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="garbage-collector">Garbage Collector</h2>
+<p>Garbage collector is a programme that works in JVM and is intended to delete objects that are no longer used or needed.</p>
+<blockquote>
+<p>Different JVMs can have different algorithms of garbage collection, so there are a variety of different garbage collectors in Java.</p>
+</blockquote>
+<p>Heap memory is divided into 2 sections called Generations: New generation and Old generation.</p>
+<p><img alt="GC" src="../images/gc.png" /></p>
+<p>New generation includes 3 regions: Eden, Survivor 0, and Survivor 1.</p>
+<p>Old generation includes the Tenured region.</p>
+<blockquote>
+<p>So what happens when we create a new object in Java?</p>
+</blockquote>
+<h3 id="gc-cycles-triggering">GC Cycles - Triggering</h3>
+<p>In 2 types of ways of GC triggered:</p>
+<table>
+<thead>
+<tr>
+<th>Type/Cycle</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minor</td>
+<td>Works on small amount of memory - mostly the newgen space, old is untouched</td>
+</tr>
+<tr>
+<td>Major</td>
+<td>Works on the entire heap</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Both the operations are "stop the world"</li>
+<li>Every new object creation happens in Eden space.</li>
+<li>On Eden space exhaustion, minor gc kicks in.</li>
+<li>Marks all the objects in New/young gen.</li>
+<li>Puts surviving from eden in either SS1 or SS2</li>
+<li>Also transfers surviving in other SS also (avoids compacting overhead)</li>
+<li>Sweeps</li>
+<li>If an object survives <code>-XX:MaxTenuringThreshold</code> number of gc cycles, it's promoted to older/tenured space.</li>
+</ul>
+<h3 id="types-of-gc">Types of GC</h3>
+<ol>
+<li>Serial GC - basic.</li>
+<li>Single threaded.</li>
+<li>Completely pauses every other thread (complete stop the world).</li>
+<li>Concurrent Mark Sweep (CMS).</li>
+<li>When: <strong>more memory, more CPU, short pauses.</strong></li>
+<li>Performs GC along with application execution.</li>
+<li>Does not wait for the Old Gen to be full.</li>
+<li>Stops the world only during marking/re-marking.</li>
+<li>Parallel GC.</li>
+<li>When: <strong>less memory, less CPU, high throughput needed, can withstand long pauses.</strong></li>
+<li>Utilizes multiple CPUs and threads.</li>
+<li>Does not kick in until heap is full/near-full.</li>
+<li>"Stop the world".</li>
+<li>G1 GC (Java 7+) - Garbage First.</li>
+<li>Divides entire memory into smaller regions (those can be Eden/Survivor/Tenured).</li>
+<li>Runs on smaller regions whichever has more garbage.</li>
+<li>Concurrent as well as parallel.</li>
+<li>Pauses for defragmentation.</li>
+<li>Better heap utilization.</li>
+</ol>
+<hr />
+<h2 id="garbage-collectors-in-java">Garbage Collectors in Java</h2>
+<h3 id="g1-garbage-collector">G1 Garbage Collector</h3>
+<p>G1 is introduced in <strong>Java7</strong>. Oracle 9 Hotspot JVM comes with default G1 Garbage collection.</p>
+<p>You can configure this for maximum pause time using flag <code>-XX:MaxGCPauseMillis=n</code>.</p>
+<blockquote>
+<p>Lots of real-world studies say most of the objects (90%) garbage collected in a young generation or in first garbage collection or minor GC (also it depends upon applications). Who survived a couple of GCs(major GC), present in old memory (old objects) they will remain survive more than 95% times.</p>
+</blockquote>
+<h4 id="g1-working">G1 Working</h4>
+<ul>
+<li>It does most of the work concurrently.</li>
+<li>It uses non-continuous which enables G1 to deal with the very large heap efficiently.</li>
+<li>Instead of dividing heaps into 3 spaces (old) like other Garbage Collectors like CMS (concurrent mark and sweep), Parallel etc, <strong>it divides heap memory in small chunks. These regions are fix-sized (about 2Mb by default)</strong></li>
+</ul>
+<p>Earlier
+<img alt="GC" src="../images/gc3spaces.png" /></p>
+<p>G1
+<img alt="G1GC" src="../images/g1gc.png" /></p>
+<ul>
+<li>Splitting into small regions helps G1 concurrently run and finish it off very quickly.</li>
+<li>While running GC on Eden space all the survived objects get copied to unassigned space. <em>The unassigned space becomes survivor space</em>.</li>
+<li><em>If all the objects in Eden space are garbage then it can be declared as Unassigned</em>.</li>
+<li><strong>G1 is not run on whole heap memory at once</strong> like others Garbage Collectors, instead of this <strong>it always selects the regions which are full or almost full</strong> to minimizes the amount of work to free heap space.</li>
+<li><strong>G1 only stops the application at the beginning of the GC for boot strapping</strong> , this phase is called as <strong>Initial Mark</strong>.</li>
+<li>While Application is executing it follow all the references and mark live objects, this phase called as <strong>Concurrent Mark</strong>.</li>
+<li>When above phase(Concurrent Mark) is done then application again stops. for final cleanup is made, this phase called as <strong>Final Mark</strong>.</li>
+<li>To move objects and reclaim heap memory, this phase called as Evacuation phase this phase is fast, called as <strong>Evacuation Phase</strong>.</li>
+<li><strong>"This is not good for small heaps"</strong> then it that case might be full GC is performed and might slow down overall executions. In that case <em>increase the heap size or other Garbage collectors can be used</em>.</li>
+</ul>
+<h4 id="g1-extras">G1 Extras</h4>
+<h5 id="string-deduplication">String deduplication</h5>
+<blockquote>
+<p>Many large-scale Java applications are currently bottlenecked on memory. Measurements have shown that <strong>roughly 25% of the Java heap live data set in these types of applications is consumed by String objects</strong>. Further, <strong>roughly half of those String objects are duplicates</strong>, where duplicates means string1.equals(string2)is true. Having duplicate String objects on the heap is, essentially, just a waste of memory.</p>
+</blockquote>
+<p>Java provides two ways to handle duplicate strings and eliminate memory usage</p>
+<p><strong>1. By using <code>String.intern()</code> method:</strong></p>
+<pre><code class="language-java">String str = &quot;abc&quot;;
+String str = new String(&quot;abc&quot;).intern();
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>Intern method is expensive and slow.</li>
+<li><code>String.intern()</code> is a native method, and calling a native method incurs massive overhead.</li>
+<li>The implementation used a fixed size (<strong>default 1009, can be set using <code>-XX:StringTableSize=N</code></strong>) hashtable so as the number entries grew, the performance became O(n).</li>
+</ul>
+<p><strong>2. By enabling string deduplication (only available with G1 garbage collector):</strong></p>
+<pre><code class="language-bash">XX:+UseG1GC -XX:+UseStringDeduplication
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>This option is only available from <strong>Java 8 Update 20 JDK release</strong>.</li>
+<li>This feature will only work along with the <strong>G1 garbage collector</strong>.</li>
+<li>You need to provide both <code>-XX:+UseG1GC</code> and <code>-XX:+StringDeduplication</code> JVM options to enable this feature.</li>
+<li>To check if it happens in your system you can use <code>-XX:+PrintStringDeduplicationStatistics</code> parameter.</li>
+<li>You can control this by using <code>-XX:StringDeduplicationAgeThreshold=3</code> option to change when Strings become eligible for deduplication.</li>
+</ul>
+<h3 id="zgc">ZGC</h3>
+<p>It is a scalable low latency garbage collector designed to meet the following goals:</p>
+<ul>
+<li>Z Garbage Collector (ZGC) is introduced in JAVA-11 as an experimental GC.</li>
+<li>Pause times <strong>do not</strong> exceed <strong>10ms</strong>.</li>
+<li>Pause times <strong>do not</strong> increase with the heap or live-set size.</li>
+<li>Handle heaps ranging from a few hundred megabytes to multi terabytes in size.</li>
+</ul>
+<p>Properties:</p>
+<ul>
+<li>Concurrent</li>
+<li>Region-based</li>
+<li>Compacting=</li>
+<li>NUMA-aware</li>
+<li>Using colored pointers</li>
+<li>Using load barriers</li>
+</ul>
+<h4 id="working-of-zgc">Working of ZGC</h4>
+<p>ZGC divides memory into regions, also called <strong>ZPages</strong>. ZPages are dynamically sized (unlike the G1 GC), which are multiples of 2 MB can be dynamically created and destroyed.</p>
+<p>Here are the size groups of heap regions:</p>
+<ul>
+<li>Small(2MB),</li>
+<li>Medium(32MB)</li>
+<li>Large(N * 2 MB)</li>
+</ul>
+<p><img alt="ZGC" src="../images/zgc.png" /></p>
+<p>Notes:</p>
+<ul>
+<li>ZGC heap can have multiple occurrences of these heap regions.</li>
+<li>After ZGC compaction, ZPages are freed up and inserted into a page cache called as <strong>ZPageCache</strong>.</li>
+<li>ZPages in the page cache are ready to be reused to satisfy new heap allocations.</li>
+<li>The page cache is critical for performance, as committing and uncommitting memory are expensive operations.</li>
+<li>ZPages in the page cache represents the unused parts of the heap that could be uncommitted and returned to the operating system.</li>
+</ul>
+<h4 id="phases-of-z-garbage-collection">Phases of Z Garbage Collection</h4>
+<p><img alt="ZGC" src="../images/zgcphases.jpeg" /></p>
+<p><strong>1. Pause Mark Start:</strong></p>
+<ul>
+<li>In this phase objects that have been pointed to roots. This includes walking through the live set of objects and then finding and marking them.</li>
+<li>It starts with a scanning thread stack which gives the reference objects in heap.</li>
+<li>After getting reference it will walk through all the graphs of objects(which are reachable).</li>
+<li>It also remaps the live data after the end of the last phase(Pause Relocate Phase).</li>
+</ul>
+<p><strong>2. Pause Mark End:</strong></p>
+<ul>
+<li>This phase with a short pause of 1ms.</li>
+<li>The pause time involved here depends only on the number of roots and the ratio of the sizes of the relocation set and total live set of objects.</li>
+<li>This starts after completion of the first phase.</li>
+<li>This starts with preparing concurrent relocation of objects and marks the regions it wants to compact.</li>
+<li>Now we have all the information which objects are live so it starts with reference processing and moves to week-root cleaning.</li>
+</ul>
+<p><strong>Pause Relocate Start:</strong></p>
+<ul>
+<li>It triggers the actual region compaction.</li>
+<li>It begins with root scanning pointing into the location set, followed by the concurrent reallocation of objects in the relocation set.</li>
+</ul>
+<h4 id="colored-pointers">Colored Pointers</h4>
+<ul>
+<li>Colored pointers are one of the core concepts of ZGC.</li>
+<li>It enables ZGC to find, mark, locate, and remap the objects.</li>
+<li>It doesn't support x32 or 32 bits operating systems.</li>
+<li><strong>Load Barrier</strong> uses this to detect whether the object is bad color then do the corresponding action (like remap means object is remapped to a different address). <strong>It is injected by the JIT compiler when the object is fetched from the heap</strong>.</li>
+</ul>
+<p><img alt="ZGC" src="../images/zgccoloredpointers.png" /></p>
+<p>the 64-bit object reference is divided as follows:</p>
+<ul>
+<li>18 bits: <strong>Unused bits</strong></li>
+<li>1-bit: <strong>Finalizable</strong></li>
+<li>1-bit: <strong>Remapped</strong></li>
+<li>1-bit: <strong>Marked1</strong></li>
+<li>1-bit: <strong>Marked0</strong></li>
+<li>42 bits: <strong>Object Address</strong></li>
+</ul>
+<p>Explanations:</p>
+<ul>
+<li>The first 18 bits are reserved for future use.</li>
+<li>42 bits can address up to 4 TB of address space.</li>
+<li>The <strong>Marked1</strong> and <strong>Marked0</strong> bits are used to mark objects for garbage collection. By setting the single bit for <strong>Remapped</strong>, an object can be marked not pointing to the relocation set.</li>
+<li>The last 1-bit for finalizing relates to concurrent reference processing.</li>
+</ul>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>

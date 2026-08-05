@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+    
+    <meta name="description" content="A collection of technical notes and learnings."> 
+    
+    <meta name="author" content="Lalit Prakash Vatsal"> 
+    
+    <link rel="canonical" href="https://lprakashv.github.io/notes/spring/spring-cloud-1-distributed-config/">
+<link rel="icon" type="image/png" href="../../Lalit-new-logo-3.png">
+<link rel="apple-touch-icon" href="../../Lalit-new-logo-3.png">
+
+
+    
+ 
+<title>Distributed Configuration - Lalit's Tech Notebook</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- default color palette -->
+<link href="../../css/palettes/default.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+     
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://lprakashv.github.io/notes/" class="no-style">Lalit's Tech Notebook</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Home</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../java/gradle/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Gradle</span>
+                    </a>
+                    <meta property="position" content="1">
+                </li>
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../aws/aws-assentials/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">AWS</span>
+                    </a>
+                    <meta property="position" content="2">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../rust/rust-snippets/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Rust</span>
+                    </a>
+                    <meta property="position" content="3">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../mlops/ml-in-production/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">MLOps</span>
+                    </a>
+                    <meta property="position" content="4">
+                </li>
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../journal/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Work Learnings Journal</span>
+                    </a>
+                    <meta property="position" content="5">
+                </li>
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="6">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">Home</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Concepts</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../concepts/concurrency/">Concurrency</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Java</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-gc/">Java Garbage Collection</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-misc/">Java Miscellaneous</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-multithreading/">Java Multithreading</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-snippets/">Java Snippets</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Spring</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../spring-data-transactions/">Data Transactions with Spring</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Spring Cloud</span>
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../spring-misc/">Spring Miscellaneous</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/gradle/">Gradle</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../aws/aws-assentials/">AWS</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Data Engineering</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/data-engineering/">Overview</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/apache-spark/">Apache Spark</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/big-data/">Big Data</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Databases</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../databases/databases/">Overview</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../databases/sqlite/">SQLite</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Golang</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/basic-syntax/">Basic Syntax</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/code-generation/">Code Generation</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/concurrency/">Concurrency</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/context/">Context</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/database/">Database Programming</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/grpc-app/">gRPC Application</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/http-services/">HTTP Services</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/testing/">Testing</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../rust/rust-snippets/">Rust</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Kubernetes</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/kubernetes-intro/">Overview</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/namespaces/">Namespaces</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Cheat Sheets</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/docker-cheatsheet/">Docker</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/kubectl-cheatsheet/">kubectl</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/misc/">Miscellaneous HowTos</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Generative AI</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/amazon-bedrock/">Amazon Bedrock</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/building-systems-with-chatgpt/">Building Systems with ChatGPT</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/enhance-rag-with-raptor/">Enhancing RAG with RAPTOR</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/langchain/">LangChain</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/langsmith/">LangSmith</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/llamaindex/">LlamaIndex</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/prompt-engineering/">Prompt Engineering</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">OpenTelemetry</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/collector/">Collector</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/go-sdk/">Go SDK</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/logs/">Logs</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/metrics/">Metrics</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../mlops/ml-in-production/">MLOps</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../journal/">Work Learnings Journal</a>
+        
+    
+    
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#distributed-config">Distributed Config</a></li>
+        <li><a href="#application-configuration-server">Application Configuration Server</a></li><li><a href="#integration-with-spring-applications">Integration with Spring Applications</a></li><li><a href="#spring-cloud-config-config-server">Spring Cloud Config: Config Server</a></li><li><a href="#spring-cloud-config-config-client">Spring Cloud Config: Config Client</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="distributed-config">Distributed Config</h1>
+<p>Configuration in a non-distributed to distributed explodes really rapidly, from a handlful of configuration files to many-many ones.</p>
+<p>We can still live with configuration management tools like Puppet, Chef etc. But there are issues with typical configuration management:</p>
+<ul>
+<li><strong>Deployment oriented:</strong> Need to kick-off deployments even for small or temporary changes.</li>
+<li><strong>Push-based is usally not dynamic enough:</strong> Won't work in cloud environment, as we need to keep track of all the newly spun up instances and push to those as well.</li>
+<li><strong>Pull-based adds latency with temporal polling:</strong> Usually works on polling mechanism, which adds time-interval latency.</li>
+</ul>
+<p><strong>Configuration Server</strong> can solve our problems!</p>
+<h2 id="application-configuration-server">Application Configuration Server</h2>
+<ul>
+<li>Dedicated, dynamic and centralized key/value store (maybe distributed).</li>
+<li>Authoritative source.</li>
+<li>Auditing.</li>
+<li>Versioning.</li>
+<li>Cryptography support.</li>
+</ul>
+<p>Options available for configuration management backend:</p>
+<ol>
+<li>Spring Cloud Consul</li>
+<li>Spring Cloud Zookeeper</li>
+<li><strong>Spring Cloud Config</strong></li>
+</ol>
+<h2 id="integration-with-spring-applications">Integration with Spring Applications</h2>
+<p><strong>Config Client:</strong></p>
+<ul>
+<li>Embedded in application</li>
+<li>Spring <strong><code>Environment</code></strong> abstraction:</li>
+</ul>
+<pre><code class="language-java">@Inject
+Environment environment;
+</code></pre>
+<p><strong>Config Server:</strong></p>
+<ul>
+<li>Standalone (can be embedded)</li>
+<li>Spring <strong><code>PropertySource</code></strong> abstraction</li>
+</ul>
+<pre><code class="language-properties">classpath:file.properties
+</code></pre>
+<h2 id="spring-cloud-config-config-server">Spring Cloud Config: Config Server</h2>
+<ul>
+<li>HTTP REST Access</li>
+<li>Output formats</li>
+<li>JSON (default)</li>
+<li>Properties</li>
+<li>YAML</li>
+<li>Backend Stores</li>
+<li>Git (default)</li>
+<li>SVN</li>
+<li>File system</li>
+<li>Configuration scopes</li>
+</ul>
+<h3 id="using-spring-cloud-config-server">Using Spring Cloud Config Server</h3>
+<p><code>pom.xml</code></p>
+<pre><code class="language-xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+      &lt;version&gt;Camden-SR2&lt;/version&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre>
+<p><code>pom.xml</code></p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p><code>application.properties</code></p>
+<pre><code class="language-properties">server.port=8888
+spring.cloud.config.server.git.uri=&lt;uri_to_git_repo&gt;
+</code></pre>
+<p>OR <code>application.yml</code></p>
+<pre><code class="language-yaml">server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: &lt;uri_to_git_repo&gt;
+</code></pre>
+<p>Application.java</p>
+<pre><code class="language-java">@SpringBootApplication
+@EnableConfigServer
+public class Application {
+
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
+}
+</code></pre>
+<p><strong>TIP:</strong> Add Eureka client dependencies, service-url configuration and <code>@EnableDiscoveryClient</code> to make the config server discoverable.</p>
+<p><strong>Configuring backend store:</strong></p>
+<ol>
+<li>Create a folder to store configuration.</li>
+<li>(optional) Add a <code>properties</code> or <code>yml</code> file with name <strong><code>application</code></strong>.</li>
+<li>Add <code>properties</code> or <code>yml</code> file with name <strong><code>{application}-{profile}</code></strong>.</li>
+<li><code>git init</code>.</li>
+<li><code>git add</code> and <code>git commit</code>.</li>
+<li>(optional) Setup remote git repository and <code>git push</code>.</li>
+</ol>
+<p><strong>Additional Notes:</strong></p>
+<ul>
+<li>Git is the default mechanism/backend.</li>
+<li>Global configs goes into <code>application.yml</code>/<code>application.properties</code> and application specific config go into the named files as above.</li>
+</ul>
+<p><strong>NOTE:</strong> Don't forget to secure your Config Server!</p>
+<ul>
+<li>Easy to configure Spring Security.</li>
+</ul>
+<h3 id="rest-endpoint-parameters">REST Endpoint Parameters</h3>
+<ul>
+<li><strong>{application}</strong> - maps to <strong><code>spring.application.name</code></strong> on <strong>client</strong>.</li>
+<li><strong>{profile}</strong> - maps to <strong><code>spring.profiles.active</code></strong> on <strong>client</strong>.</li>
+<li><strong>{label}</strong> - server side feature to refer to set of config files by name.</li>
+</ul>
+<h4 id="get-applicationprofilelabel">GET /{application}/{profile}[/{label}]</h4>
+<ul>
+<li><code>/myapp/dev/master</code></li>
+<li><code>/myapp/prod/v2</code></li>
+<li><code>/myapp/default</code></li>
+</ul>
+<h4 id="get-application-profileyml-properties">GET /{application}-{profile}.(yml | properties)</h4>
+<ul>
+<li><code>/myapp-dev.yml</code></li>
+<li><code>/myapp-prod.properties</code></li>
+<li><code>/myapp-default.properties</code></li>
+</ul>
+<h4 id="get-labelapplication-profileyml-properties">GET /{label}/{application}-{profile}.{yml | properties}</h4>
+<ul>
+<li><code>/master/myapp-dev.yml</code></li>
+<li><code>/v2/myapp-prod.properties</code></li>
+<li><code>/master/myapp-default.properties</code></li>
+</ul>
+<h2 id="spring-cloud-config-config-client">Spring Cloud Config: Config Client</h2>
+<h3 id="spring-config-client">Spring Config Client</h3>
+<p>pom.xml</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-cloud-config-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h4 id="config-first">Config First</h4>
+<p>Specify the location of the config server.</p>
+<p><code>bootstrap.properties</code></p>
+<pre><code class="language-properties">spring.application.name=&lt;your_application_name&gt;
+spring.cloud.config.discovery.enabled=true
+</code></pre>
+<p>OR <code>bootstrap.yml</code></p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: &lt;your_application_name&gt;
+  cloud:
+    config:
+      discovery:
+        enabled: true
+</code></pre>
+<h4 id="discovery-first">Discovery First</h4>
+<p>Discover the location of the config server.</p>
+<p><code>bootstrap.properties</code></p>
+<pre><code class="language-properties">spring.application.name=&lt;your_application_name&gt;
+spring.cloud.config.uri=http://localhost:8888/
+</code></pre>
+<p>OR <code>bootstrap.yml</code></p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: &lt;your_application_name&gt;
+  cloud:
+    config:
+      uri: http://localhost:8888/
+</code></pre>
+<p><strong>NOTE:</strong> Don't forget to add eureka client dependencies, service-url configuration and <code>@EnableDiscoveryClient</code></p>
+<h3 id="refreshing-configuration-properties">Refreshing configuration properties</h3>
+<h4 id="1-configuration-changes">#1: Configuration changes</h4>
+<ul>
+<li>Edit and save configuration file(s).</li>
+<li>Commit and/or push changes to a VCS.</li>
+</ul>
+<h4 id="2-notify-applications-to-refresh-configuration">#2: Notify Application(s) to refresh configuration</h4>
+<ul>
+<li><strong><code>/refresh</code></strong> with <strong><code>spring-boot-actuator</code></strong>.</li>
+<li>Explicit refresh.</li>
+<li><strong><code>/bus/refresh</code></strong> with <strong><code>spring-cloud-bus</code></strong>.</li>
+<li>Dynamic push refresh.</li>
+<li>Automatic via Spring Cloud Bus broadcasting.</li>
+<li>From RabbitMQ or Kafka?</li>
+<li>VCS + <code>/monitor</code> with <strong><code>spring-cloud-config-monitor</code></strong> and <strong><code>spring-cloud-bus</code></strong>.</li>
+<li>Automatic and Smart refresh.</li>
+<li>Via post commit hooks, Spring Cloud Config Monitor and Spring Cloud Config Bus broadcasting.</li>
+</ul>
+<h3 id="refreshing-config-whats-covered-and-whats-not">Refreshing Config: What's covered and what's not</h3>
+<ul>
+<li>[x] <strong><code>@ConfigurationProperties</code></strong></li>
+<li>[x] All logging levels defined by <strong><code>logging.level.*</code></strong> are updated.</li>
+<li>[ ] Any <strong><code>@Bean</code></strong> or <strong><code>@Value</code></strong> that only gets its configuration upon initialization.</li>
+</ul>
+<h4 id="refreshscope"><code>@RefreshScope</code></h4>
+<p>To refresh a <code>@Bean</code> or a <code>@Value</code> that only gets its configuration upon initialization.</p>
+<pre><code class="language-java">@Configuration
+public class SomeConfiguration {
+  @Bean
+  @RefreshScope
+  public FooService fooService(FooProperties properties) {
+    return new FooService(properties.getConfigValue());
+  }
+}
+</code></pre>
+<h3 id="additional-features-supported">Additional Features Supported</h3>
+<ul>
+<li>Encrypted configuration at rest and/or in-flight.</li>
+<li>An <code>/encrypt</code> endpoint to encrypt configuration.</li>
+<li>A <code>/decrypt</code> endpoint to decrypt configuration.</li>
+<li>Encrypting and decrypting with symmetric or asymmetric keys.</li>
+</ul>
+<h4 id="what-does-encrypted-configuration-look-like">What does encrypted configuration look like?</h4>
+<p><code>application.properties</code></p>
+<pre><code class="language-properties">my.datasource.username=foobar
+my.datasource.password={cypher}AASFDSFJSRFAFESECCSE
+</code></pre>
+<p>OR <code>application.yml</code></p>
+<pre><code class="language-yaml">my:
+  datasource:
+    usernmae: foobar
+    password: '{cipher}AASFDSFJSRFAFESECCSE'
+</code></pre>
+<h4 id="at-what-point-the-configuration-is-decrypted">At what point the configuration is decrypted?</h4>
+<ul>
+<li>Upon request at the server (default).</li>
+<li>Locally at the client on response.</li>
+</ul>
+<p>Configure the Config Server with: <code>spring.cloud.config.server.encrypt.enabled=false</code></p>
+<p>TODO: encryption and decryption setup with examples.</p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>

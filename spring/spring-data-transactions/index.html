@@ -11,21 +11,25 @@
     
     <meta name="author" content="Lalit Prakash Vatsal"> 
     
-<link rel="icon" type="image/png" href="/notes/Lalit-new-logo-3.png">
-<link rel="apple-touch-icon" href="/notes/Lalit-new-logo-3.png">
-<title>404 - Lalit's Tech Notebook</title>
+    <link rel="canonical" href="https://lprakashv.github.io/notes/spring/spring-data-transactions/">
+<link rel="icon" type="image/png" href="../../Lalit-new-logo-3.png">
+<link rel="apple-touch-icon" href="../../Lalit-new-logo-3.png">
 
 
+    
+ 
+<title>Data Transactions with Spring - Lalit's Tech Notebook</title>
 
-<link href="/notes/css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-<link href="/notes/css/fontawesome/css/solid.min.css" rel="stylesheet">
-<link href="/notes/css/normalize.css" rel="stylesheet">
-<link href="/notes/css/terminal.css" rel="stylesheet">
-<link href="/notes/css/theme.css" rel="stylesheet">
-<link href="/notes/css/theme.tile_grid.css" rel="stylesheet">
-<link href="/notes/css/theme.footer.css" rel="stylesheet">
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
 <!-- default color palette -->
-<link href="/notes/css/palettes/default.css" rel="stylesheet">
+<link href="../../css/palettes/default.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -56,20 +60,20 @@
 
     
     <!-- search css support -->
-<link href="/notes/css/search/bootstrap-modal.css" rel="stylesheet">
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
 <!-- search scripts -->
 <script>
-    var base_url = "/notes/",
+    var base_url = "../..",
     shortcuts = "{}";
 </script>
-<script src="/notes/js/jquery/jquery-1.10.1.min.js" defer></script>
-<script src="/notes/js/bootstrap/bootstrap.min.js" defer></script>
-<script src="/notes/js/mkdocs/base.js" defer></script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
     
     
     
     
-    <script src="/notes/search/main.js"></script>
+    <script src="../../search/main.js"></script>
     
 
     
@@ -87,7 +91,7 @@
                 
                 
                 <li property="itemListElement" typeof="ListItem">
-                    <a href="/notes/." class="menu-item " property="item" typeof="WebPage">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
                         <span property="name">Home</span>
                     </a>
                     <meta property="position" content="0">
@@ -101,7 +105,7 @@
                 
                 
                 <li property="itemListElement" typeof="ListItem">
-                    <a href="/notes/java/gradle/" class="menu-item " property="item" typeof="WebPage">
+                    <a href="../../java/gradle/" class="menu-item " property="item" typeof="WebPage">
                         <span property="name">Gradle</span>
                     </a>
                     <meta property="position" content="1">
@@ -109,7 +113,7 @@
                 
                 
                 <li property="itemListElement" typeof="ListItem">
-                    <a href="/notes/aws/aws-assentials/" class="menu-item " property="item" typeof="WebPage">
+                    <a href="../../aws/aws-assentials/" class="menu-item " property="item" typeof="WebPage">
                         <span property="name">AWS</span>
                     </a>
                     <meta property="position" content="2">
@@ -123,7 +127,7 @@
                 
                 
                 <li property="itemListElement" typeof="ListItem">
-                    <a href="/notes/rust/rust-snippets/" class="menu-item " property="item" typeof="WebPage">
+                    <a href="../../rust/rust-snippets/" class="menu-item " property="item" typeof="WebPage">
                         <span property="name">Rust</span>
                     </a>
                     <meta property="position" content="3">
@@ -139,7 +143,7 @@
                 
                 
                 <li property="itemListElement" typeof="ListItem">
-                    <a href="/notes/mlops/ml-in-production/" class="menu-item " property="item" typeof="WebPage">
+                    <a href="../../mlops/ml-in-production/" class="menu-item " property="item" typeof="WebPage">
                         <span property="name">MLOps</span>
                     </a>
                     <meta property="position" content="4">
@@ -147,7 +151,7 @@
                 
                 
                 <li property="itemListElement" typeof="ListItem">
-                    <a href="/notes/journal/" class="menu-item " property="item" typeof="WebPage">
+                    <a href="../../journal/" class="menu-item " property="item" typeof="WebPage">
                         <span property="name">Work Learnings Journal</span>
                     </a>
                     <meta property="position" content="5">
@@ -180,7 +184,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/.">Home</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../..">Home</a>
         
     
     
@@ -215,7 +219,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/concepts/concurrency/">Concurrency</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../concepts/concurrency/">Concurrency</a>
         
     
     </li>
@@ -254,7 +258,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/java/java-gc/">Java Garbage Collection</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-gc/">Java Garbage Collection</a>
         
     
     </li>
@@ -267,7 +271,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/java/java-misc/">Java Miscellaneous</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-misc/">Java Miscellaneous</a>
         
     
     </li>
@@ -280,7 +284,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/java/java-multithreading/">Java Multithreading</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-multithreading/">Java Multithreading</a>
         
     
     </li>
@@ -293,7 +297,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/java/java-snippets/">Java Snippets</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-snippets/">Java Snippets</a>
         
     
     </li>
@@ -312,13 +316,9 @@
             
     
         
+        <span class="
         
-            
-            
-            <span class="
-        
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Spring</span>
-        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Spring</span>
     
     
         
@@ -331,9 +331,7 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/spring/spring-data-transactions/">Data Transactions with Spring</a>
-        
+        <span class="terminal-mkdocs-side-nav-item--active">Data Transactions with Spring</span>
     
     </li>
             
@@ -362,7 +360,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/spring/spring-misc/">Spring Miscellaneous</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../spring-misc/">Spring Miscellaneous</a>
         
     
     </li>
@@ -379,7 +377,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/java/gradle/">Gradle</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../java/gradle/">Gradle</a>
         
     
     
@@ -392,7 +390,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/aws/aws-assentials/">AWS</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../aws/aws-assentials/">AWS</a>
         
     
     
@@ -427,7 +425,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/data-engineering/data-engineering/">Overview</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/data-engineering/">Overview</a>
         
     
     </li>
@@ -440,7 +438,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/data-engineering/apache-spark/">Apache Spark</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/apache-spark/">Apache Spark</a>
         
     
     </li>
@@ -453,7 +451,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/data-engineering/big-data/">Big Data</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/big-data/">Big Data</a>
         
     
     </li>
@@ -492,7 +490,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/databases/databases/">Overview</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../databases/databases/">Overview</a>
         
     
     </li>
@@ -505,7 +503,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/databases/sqlite/">SQLite</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../databases/sqlite/">SQLite</a>
         
     
     </li>
@@ -544,7 +542,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/basic-syntax/">Basic Syntax</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/basic-syntax/">Basic Syntax</a>
         
     
     </li>
@@ -557,7 +555,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/code-generation/">Code Generation</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/code-generation/">Code Generation</a>
         
     
     </li>
@@ -570,7 +568,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/concurrency/">Concurrency</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/concurrency/">Concurrency</a>
         
     
     </li>
@@ -583,7 +581,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/context/">Context</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/context/">Context</a>
         
     
     </li>
@@ -596,7 +594,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/database/">Database Programming</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/database/">Database Programming</a>
         
     
     </li>
@@ -609,7 +607,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/grpc-app/">gRPC Application</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/grpc-app/">gRPC Application</a>
         
     
     </li>
@@ -622,7 +620,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/http-services/">HTTP Services</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/http-services/">HTTP Services</a>
         
     
     </li>
@@ -635,7 +633,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/go/testing/">Testing</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../go/testing/">Testing</a>
         
     
     </li>
@@ -652,7 +650,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/rust/rust-snippets/">Rust</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../rust/rust-snippets/">Rust</a>
         
     
     
@@ -687,7 +685,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/kubernetes/kubernetes-intro/">Overview</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/kubernetes-intro/">Overview</a>
         
     
     </li>
@@ -700,7 +698,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/kubernetes/namespaces/">Namespaces</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/namespaces/">Namespaces</a>
         
     
     </li>
@@ -739,7 +737,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/cheatsheets/docker-cheatsheet/">Docker</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/docker-cheatsheet/">Docker</a>
         
     
     </li>
@@ -752,7 +750,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/cheatsheets/kubectl-cheatsheet/">kubectl</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/kubectl-cheatsheet/">kubectl</a>
         
     
     </li>
@@ -765,7 +763,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/cheatsheets/misc/">Miscellaneous HowTos</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/misc/">Miscellaneous HowTos</a>
         
     
     </li>
@@ -804,7 +802,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/amazon-bedrock/">Amazon Bedrock</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/amazon-bedrock/">Amazon Bedrock</a>
         
     
     </li>
@@ -817,7 +815,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/building-systems-with-chatgpt/">Building Systems with ChatGPT</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/building-systems-with-chatgpt/">Building Systems with ChatGPT</a>
         
     
     </li>
@@ -830,7 +828,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/enhance-rag-with-raptor/">Enhancing RAG with RAPTOR</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/enhance-rag-with-raptor/">Enhancing RAG with RAPTOR</a>
         
     
     </li>
@@ -843,7 +841,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/langchain/">LangChain</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/langchain/">LangChain</a>
         
     
     </li>
@@ -856,7 +854,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/langsmith/">LangSmith</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/langsmith/">LangSmith</a>
         
     
     </li>
@@ -869,7 +867,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/llamaindex/">LlamaIndex</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/llamaindex/">LlamaIndex</a>
         
     
     </li>
@@ -882,7 +880,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/generative-ai/prompt-engineering/">Prompt Engineering</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../generative-ai/prompt-engineering/">Prompt Engineering</a>
         
     
     </li>
@@ -921,7 +919,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/opentelemetry/collector/">Collector</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/collector/">Collector</a>
         
     
     </li>
@@ -934,7 +932,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/opentelemetry/go-sdk/">Go SDK</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/go-sdk/">Go SDK</a>
         
     
     </li>
@@ -947,7 +945,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/opentelemetry/logs/">Logs</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/logs/">Logs</a>
         
     
     </li>
@@ -960,7 +958,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/opentelemetry/metrics/">Metrics</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/metrics/">Metrics</a>
         
     
     </li>
@@ -977,7 +975,7 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/mlops/ml-in-production/">MLOps</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../mlops/ml-in-production/">MLOps</a>
         
     
     
@@ -990,20 +988,191 @@
     
         
         
-            <a class="terminal-mkdocs-side-nav-item" href="/notes/journal/">Work Learnings Journal</a>
+            <a class="terminal-mkdocs-side-nav-item" href="../../journal/">Work Learnings Journal</a>
         
     
     
     
        </li>
         
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#data-transactions-with-spring">Data Transactions with Spring</a></li>
+        <li><a href="#transaction">Transaction</a></li><li><a href="#spring-framework">Spring Framework</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
-<br>
-<div class="terminal-alert terminal-alert-error">The page you requested could not be found.</div>
-<a href="https://lprakashv.github.io/notes/"><button class="btn btn-default">Return Home</button></a>
+<section id="mkdocs-terminal-content">
+    <h1 id="data-transactions-with-spring">Data Transactions with Spring</h1>
+<h2 id="transaction">Transaction</h2>
+<p>Multiple actions performed as a single group</p>
+<h3 id="acid-transactions">ACID Transactions</h3>
+<ul>
+<li><strong>A (Atomicity):</strong> All or nothing (no partial).</li>
+<li><strong>C (Consistency):</strong> Committed (written) when all actions (in a transaction) are completed.</li>
+<li><strong>I (Isolation):</strong> Each transaction is isolated from other transactions, meaning uncorrupted data.</li>
+<li><strong>D (Durability):</strong> Cannot be deleted/undone by a system failure.</li>
+</ul>
+<h3 id="transaction-types">Transaction Types</h3>
+<ul>
+<li><strong>Global:</strong> Multiple resources manage the transaction. Usually managed by the web server.</li>
+<li><strong>Local:</strong> One resource manages the transaction. e.g., JDBC connection.</li>
+</ul>
+<h2 id="spring-framework">Spring Framework</h2>
+<p>Consistent programming model across global and local transactions.</p>
+<h3 id="spring-transaction-management-types">Spring Transaction management types</h3>
+<h4 id="programmatic">Programmatic</h4>
+<ul>
+<li>Custom code for transaction management.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-java">public void saveTicket(Ticket ticket) {
+  Session session = SessionFactory.getCurrentSession();
+  session.getTransaction().begin();   //--
+  session.save(ticket);               //  | &lt;=== transaction
+  session.getTransaction().end();     //--
+}
+</code></pre>
+<h4 id="declarative">Declarative</h4>
+<ul>
+<li>Manages transaction using Spring-specific annotations.</li>
+<li>Separates transaction management from business code.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-java">@Transactional
+public void scheduleRelease(Ticket ticket, Release release) {
+  ticketDao.saveTicket(ticket);
+  assignToRelease(ticket, release);
+  doOtherStuff(ticket);
+}
+</code></pre>
+<p>Manages everything:</p>
+<ol>
+<li>Begin</li>
+<li>Suspend</li>
+<li>Commit</li>
+<li>Rollback</li>
+<li>Transactional parameters</li>
+</ol>
+<h3 id="transaction-managers">Transaction Managers</h3>
+<p><strong>Programmatic Transaction Management:</strong></p>
+<ol>
+<li><strong>Transaction template:</strong> Similar to Spring templates like <code>JdbcTemplate</code> and other available templates.</li>
+<li><strong>Platform transaction manager:</strong> Handles transactions across Hibernate, JDBC, JPA, JMS, etc.</li>
+</ol>
+<p><strong>Spring Transaction Managers:</strong></p>
+<ol>
+<li>Platform transaction manager</li>
+<li>JTA</li>
+<li>Hibernate</li>
+<li>DataSource</li>
+<li><strong>JPA</strong></li>
+</ol>
+<h3 id="transactional-annotation"><code>@Transactional</code> annotation</h3>
+<ul>
+<li>Proxy is created to hold transaction management code.</li>
+<li>Annotation used at the class, interface or method level.</li>
+<li>Transaction propagation is handled automatically.</li>
+</ul>
+<p><strong>NOTE:</strong> In Spring boot, it works without configuration.</p>
+<h3 id="spring-configuration">Spring Configuration</h3>
+<ul>
+<li>JPA Transaction Manager: Registers a transaction manager for us.</li>
+<li>Additional configuration: Datasource, entity manager, repositories.</li>
+<li>Spring Data Repositories.</li>
+</ul>
+<h3 id="lifecycle-and-scope">Lifecycle and Scope</h3>
+<h4 id="database-transaction">Database Transaction</h4>
+<p><strong><code>@Transactional</code></strong> defines a single transaction, in the scope of a <strong>persistence context</strong>.</p>
+<h4 id="persistence-context">Persistence Context</h4>
+<ul>
+<li>Defined in <strong>JPA</strong></li>
+<li>Handles a set of entities that contain data to be persisted.</li>
+</ul>
+<h3 id="how-transactional-works">How <code>@Transactional</code> works?</h3>
+<p>Via proxies!</p>
+<p><strong>Without proxy implementation:</strong></p>
+<p><img alt="spring-proxy" src="../images/without-proxy.png" /></p>
+<p><strong>With Proxy implementation:</strong></p>
+<p><img alt="spring-proxy" src="../images/with-proxy.png" /></p>
+<h4 id="proxy">Proxy</h4>
+<ul>
+<li><strong>Transaction Interceptor:</strong> Intercepts method calls.</li>
+<li><strong>Platform transaction manager:</strong> Handles transactions.</li>
+</ul>
+<p>Difference proxies in Spring (JPA?) transaction handling:</p>
+<ol>
+<li><strong>Persistence context proxy</strong></li>
+<li><strong>Entity manager proxy</strong></li>
+<li><strong>Transaction aspect</strong></li>
+<li><strong>Transaction manager</strong></li>
+</ol>
+<h3 id="rollbacks">Rollbacks</h3>
+<p>Rollbacks will occur for <code>RuntimeException</code> or unchecked-exception only.</p>
+<ul>
+<li>Use <strong><code>@Transactional(rollbackFor=Exception.class)</code></strong> to state otherwise.</li>
+<li>Use <strong><code>@Transactional(noRollbackFor=SpecificException.class)</code></strong> to avoid rollback on a specific exception.</li>
+</ul>
+<p>Rollback will happen in case of:</p>
+<ol>
+<li>Throw an exception from code.</li>
+<li>Spring catches an unhandled exception.</li>
+<li>Spring determines to mark the transaction for "rollback".</li>
+</ol>
+<p><strong>NOTE:</strong></p>
+<p>To enable the transaction logging from Spring, set: <code>logging.level.org.springframework.transaction.interceptor=TRACE</code></p>
+<h3 id="transaction-management-code">Transaction management code</h3>
+<p>Configuration:</p>
+<pre><code class="language-java">private final TransactionTemplate transactionTemplate;
+
+// constructor
+public ReleaseService(PlatformTransactionManager transactionManager) {
+  this.transactionTemplate = new TransactionTemplate(transactionManager);
+  this.transactionTemplate.setPropagationBehaviorName(&quot;PROPAGATION_REQUIRES_NEW&quot;);
+  this.transactionTemplate.setReadOnly(true);
+}
+</code></pre>
+<p>A simple 2 step transaction with the above configuration:</p>
+<pre><code class="language-java">transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+  public void doInTransactionWithoutResult(TransactionStatus status) {
+    try {
+
+    } catch (NoSuchElementException exception) {
+      exception.printStackTrace();
+      status.setRollbackOnly();
+    }
+  }
+});
+</code></pre>
+<p>Fine-grained control in programmatic transaction management, using platform transaction manager directly.</p>
+<pre><code class="language-java">public Release scheduleRelease(Release release) {
+  TransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+  TransactionStatus transactionStatus = transactionManager.getTransaction(transactionDefinition);
+
+  try {
+    createTickets(release);
+    assignTicketsToRelease(release.getId(), release.getTickets());
+
+    transactionManager.commit(transactionStatus);
+  } catch (RuntimeException e) {
+    transactionManager.rollback(transactionStatus);
+    throw e;
+  }
+
+  return release;
+}
+</code></pre>
+<h4 id="declarative-transaction-management-vs-programmatic">Declarative transaction management (vs Programmatic)</h4>
+<ul>
+<li>Manage transaction via configuration.</li>
+<li>Separate transaction logic from business logic.</li>
+<li>Easy to maintain.</li>
+<li>Preferred when a lot of transaction logic.</li>
+</ul>
+</section>
 
             </main>
         </div>
