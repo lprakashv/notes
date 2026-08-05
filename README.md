@@ -1,33 +1,33 @@
 # Lalit's Tech Notes
 
-This repository publishes technical notes with [mdBook](https://rust-lang.github.io/mdBook/).
+This repository publishes technical notes with [MkDocs](https://www.mkdocs.org/).
 
 ## Local development
 
-Install the CI version of mdBook (Rust and Cargo are required):
+Install the pinned MkDocs dependency (Python 3.8+ is required):
 
 ```sh
-cargo install mdbook --version 0.5.4 --locked
+python3 -m pip install --requirement requirements.txt
 ```
 
 Build the static site:
 
 ```sh
-mdbook build
+mkdocs build --strict
 ```
 
-The generated site is written to `book/`. To preview it locally with live reload, run:
+The generated site is written to `site/`. To preview it locally with live reload, run:
 
 ```sh
-mdbook serve --open
+mkdocs serve
 ```
 
-Validate Rust code examples with:
+To remove generated output:
 
 ```sh
-mdbook test
+rm -rf site/
 ```
 
 ## Deployment
 
-Pushing to `master` runs `.github/workflows/main.yml`. The workflow downloads mdBook 0.5.4, builds the site, and publishes `book/` to the `gh-pages` branch. GitHub Pages must be configured to publish from that branch.
+Pushing to `master` runs `.github/workflows/main.yml`. The workflow installs MkDocs 1.6.1, builds the site, and publishes `site/` to the `gh-pages` branch. GitHub Pages must be configured to publish from that branch.

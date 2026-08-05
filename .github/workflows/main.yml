@@ -1,4 +1,4 @@
-name: Deploy mdBook to GitHub Pages
+name: Deploy MkDocs to GitHub Pages
 
 on:
   push:
@@ -6,7 +6,8 @@ on:
       - master
     paths:
       - .github/workflows/main.yml
-      - book.toml
+      - mkdocs.yml
+      - requirements.txt
       - notes-book/**
   workflow_dispatch:
 
@@ -23,21 +24,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install mdBook
-        env:
-          MDBOOK_VERSION: 0.5.4
-        run: |
-          mkdir --parents "$RUNNER_TEMP/mdbook"
-          curl --fail --location --silent --show-error \
-            "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
-            | tar --extract --gzip --directory "$RUNNER_TEMP/mdbook"
-          echo "$RUNNER_TEMP/mdbook" >> "$GITHUB_PATH"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install --requirement requirements.txt
 
       - name: Build the book
-        run: mdbook build
+        run: mkdocs build --strict
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book
+          publish_dir: ./site
