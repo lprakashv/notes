@@ -11,10 +11,7 @@ site_dir: site
 strict: true
 
 theme:
-  name: readthedocs
-  logo: Lalit-new-logo-3.png
-  include_homepage_in_sidebar: true
-  navigation_depth: 4
+  name: simple-blog
 
 nav:
   - Home: index.md
