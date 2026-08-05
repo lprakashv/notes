@@ -12,6 +12,7 @@ strict: true
 
 theme:
   name: terminal
+  custom_dir: overrides
 
 nav:
   - Home: index.md
