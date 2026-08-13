@@ -1,1052 +1,1689 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
-    
-    <meta name="description" content="A collection of technical notes and learnings."> 
-    
-    <meta name="author" content="Lalit Prakash Vatsal"> 
-    
-    <link rel="canonical" href="https://lprakashv.github.io/notes/generative-ai/prompt-engineering/">
-<link rel="icon" type="image/png" href="../../Lalit-new-logo-3.png">
-<link rel="apple-touch-icon" href="../../Lalit-new-logo-3.png">
+    <script>
+        // for search plugin notably
+        const base_url = "https://lprakashv.github.io/notes/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
 
-
-    
- 
-<title>Prompt Engineering - Lalit's Tech Notebook</title>
-
-
-<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
-<link href="../../css/normalize.css" rel="stylesheet">
-<link href="../../css/terminal.css" rel="stylesheet">
-<link href="../../css/theme.css" rel="stylesheet">
-<link href="../../css/theme.tile_grid.css" rel="stylesheet">
-<link href="../../css/theme.footer.css" rel="stylesheet">
-<!-- default color palette -->
-<link href="../../css/palettes/default.css" rel="stylesheet">
-
-<!-- page layout -->
-<style>
-/* initially set page layout to a one column grid */
-.terminal-mkdocs-main-grid {
-    display: grid;
-    grid-column-gap: 1.4em;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
-}
-
-/*  
-*   when side navigation is not hidden, use a two column grid.  
-*   if the screen is too narrow, fall back to the initial one column grid layout.
-*   in this case the main content will be placed under the navigation panel. 
-*/
-@media only screen and (min-width: 70em) {
-    .terminal-mkdocs-main-grid {
-        grid-template-columns: 4fr 9fr;
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
     }
-}</style>
 
-
-
-     
-    
-    
-
-    
-    <!-- search css support -->
-<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
-<!-- search scripts -->
-<script>
-    var base_url = "../..",
-    shortcuts = "{}";
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
 </script>
-<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
-<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
-<script src="../../js/mkdocs/base.js" defer></script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prompt Engineering - Lalit's Tech Notebook</title>
     
-    
-    
-    
-    <script src="../../search/main.js"></script>
+
+
+<title>Prompt Engineering</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://lprakashv.github.io/notes/generative-ai/prompt-engineering/">
+
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+
+<meta property="og:title" content="Prompt Engineering">
+
+
+
+
+
+<meta property="og:url" content="https://lprakashv.github.io/notes/generative-ai/prompt-engineering/">
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+<meta name="twitter:title" content="Prompt Engineering">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="../../img/favicon.ico">
+
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/geist.css" rel="stylesheet">
+
     
 
     
+
+    <script src="../../js/callbacks.js"></script>
+
+    
+
+    
+
+    
+
 </head>
 
-<body class="terminal"><div class="container">
-    <div class="terminal-nav">
-        <header class="terminal-logo">
-            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://lprakashv.github.io/notes/" class="no-style">Lalit's Tech Notebook</a></div>
-        </header>
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://lprakashv.github.io/notes/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+    class="size-5">
+    <rect width="256" height="256" fill="none"></rect>
+    <line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+    <line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+</svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Lalit's Tech Notebook</h1>
+                
+            </a>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+    <button onclick="onSearchBarClick(event)" data-slot="dialog-trigger" data-variant="outline" data-size="default" class="inline-flex shrink-0 items-center gap-2 text-sm whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 border bg-background hover:text-accent-foreground dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[&gt;svg]:px-3 relative h-8 w-full justify-start rounded-lg pl-3 font-normal text-foreground shadow-none hover:bg-muted/50 sm:pr-12 md:w-48 lg:w-56 xl:w-64 dark:bg-card" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-_r_1_" data-state="closed">
+        <span class="hidden lg:inline-flex">Search documentation...</span>
+        <span class="inline-flex lg:hidden">Search...</span>
+    </button>
+</div>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="https://github.com/lprakashv/notes">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width:calc(var(--spacing) * 72);--sidebar-width-icon:3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="w-(--sidebar-width) flex-col text-sidebar-foreground sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] overscroll-none bg-transparent [--sidebar-menu-width:--spacing(56)] lg:flex">
+                        <div class="h-9"></div>
+                        <div class="absolute top-8 z-10 h-8 w-(--sidebar-menu-width) shrink-0 bg-gradient-to-b from-background via-background/80 to-background/50 blur-xs"></div>
+                        <div class="absolute top-12 right-2 bottom-0 hidden h-full w-px bg-gradient-to-b from-transparent via-border to-transparent lg:flex"></div>
+                        <div data-slot="sidebar-content" data-sidebar="content" view-transition-name="sidebar"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden mx-auto no-scrollbar w-(--sidebar-menu-width) overflow-x-hidden px-2">
+                            
+
+
+
+
+
+
+
+
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2 pt-6">
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-        <nav class="terminal-menu">
-            
-            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
-                
-                
-                <li property="itemListElement" typeof="ListItem">
-                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
-                        <span property="name">Home</span>
-                    </a>
-                    <meta property="position" content="0">
-                </li>
-                
-                
-                
-                
-                
-                
-                
-                
-                <li property="itemListElement" typeof="ListItem">
-                    <a href="../../java/gradle/" class="menu-item " property="item" typeof="WebPage">
-                        <span property="name">Gradle</span>
-                    </a>
-                    <meta property="position" content="1">
-                </li>
-                
-                
-                <li property="itemListElement" typeof="ListItem">
-                    <a href="../../aws/aws-assentials/" class="menu-item " property="item" typeof="WebPage">
-                        <span property="name">AWS</span>
-                    </a>
-                    <meta property="position" content="2">
-                </li>
-                
-                
-                
-                
-                
-                
-                
-                
-                <li property="itemListElement" typeof="ListItem">
-                    <a href="../../rust/rust-snippets/" class="menu-item " property="item" typeof="WebPage">
-                        <span property="name">Rust</span>
-                    </a>
-                    <meta property="position" content="3">
-                </li>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li property="itemListElement" typeof="ListItem">
-                    <a href="../../mlops/ml-in-production/" class="menu-item " property="item" typeof="WebPage">
-                        <span property="name">MLOps</span>
-                    </a>
-                    <meta property="position" content="4">
-                </li>
-                
-                
-                <li property="itemListElement" typeof="ListItem">
-                    <a href="../../journal/" class="menu-item " property="item" typeof="WebPage">
-                        <span property="name">Work Learnings Journal</span>
-                    </a>
-                    <meta property="position" content="5">
-                </li>
-                
-                    
-                    
+        Home
+        
 
+        
 
-<li property="itemListElement" typeof="ListItem">
-    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
-        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+        
+
+        
     </a>
-    <meta property="position" content="6">
 </li>
-                    
-            </ul>
             
-        </nav>
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/java/gradle/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        Gradle
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/aws/aws-assentials/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        AWS
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/rust/rust-snippets/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        Rust
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/mlops/ml-in-production/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        MLOps
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/journal/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        Work Learnings Journal
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+        </ul>
     </div>
 </div>
-        
-    <div class="container">
-        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
-    <ul class="terminal-mkdocs-side-nav-items">
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-    
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../..">Home</a>
-        
-    
-    
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-        
-        
-        
-            
-    
-        
-        
-            
-            
-            <span class="
-        
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Concepts</span>
-        
-    
-    
-        
-        
-            <ul class="terminal-mkdocs-side-nav-li-ul">
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../concepts/concurrency/">Concurrency</a>
-        
-    
-    </li>
-            
+
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Concepts</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-    </ul>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/concepts/concurrency/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-       </li>
+        Concurrency
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
+
         
+
         
+
         
+    </a>
+</li>
             
-    
-        
-        
-            
-            
-            <span class="
-        
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Java</span>
-        
-    
-    
-        
-        
-            <ul class="terminal-mkdocs-side-nav-li-ul">
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-gc/">Java Garbage Collection</a>
-        
-    
-    </li>
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Java</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/java/java-gc/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        Java Garbage Collection
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-misc/">Java Miscellaneous</a>
+
         
-    
-    </li>
-            
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/java/java-misc/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-multithreading/">Java Multithreading</a>
+        Java Miscellaneous
         
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../java/java-snippets/">Java Snippets</a>
+
         
-    
-    </li>
-            
+    </a>
+</li>
             
-    </ul>
-        
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/java/java-multithreading/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Java Multithreading
         
+
         
-            
-    
+
         
+
         
+    </a>
+</li>
             
-            
-            <span class="
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/java/java-snippets/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Spring</span>
+        Java Snippets
         
-    
-    
+
         
+
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
+
         
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Spring</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/spring/spring-data-transactions/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../spring/spring-data-transactions/">Data Transactions with Spring</a>
+        Data Transactions with Spring
         
-    
-    </li>
-            
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
+    </a>
+</li>
             
-            
-            <span class="
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/spring/spring-misc/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Spring Cloud</span>
-        
-    
-    </li>
-            
+        Spring Miscellaneous
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../spring/spring-misc/">Spring Miscellaneous</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Data Engineering</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-    </ul>
-        
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-    
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/data-engineering/data-engineering/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Overview
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../java/gradle/">Gradle</a>
+
         
-    
-    
-    
-       </li>
+
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
-    
-    
+
         
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../aws/aws-assentials/">AWS</a>
-        
-    
-    
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-        
-        
-        
+    </a>
+</li>
             
-    
-        
-        
-            
-            
-            <span class="
-        
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Data Engineering</span>
-        
-    
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/data-engineering/apache-spark/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
+        Apache Spark
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/data-engineering/">Overview</a>
+
         
-    
-    </li>
-            
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/data-engineering/big-data/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/apache-spark/">Apache Spark</a>
+        Big Data
         
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../data-engineering/big-data/">Big Data</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Databases</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-    </ul>
-        
-    
-       </li>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/databases/databases/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
+        Overview
         
+
         
-        
-            
-    
+
         
+
         
+    </a>
+</li>
             
-            
-            <span class="
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/databases/sqlite/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Databases</span>
+        SQLite
         
-    
-    
+
         
+
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
+
         
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Golang</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../databases/databases/">Overview</a>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/basic-syntax/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-    </li>
-            
+        Basic Syntax
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../databases/sqlite/">SQLite</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
-            
-    </ul>
-        
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/code-generation/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Code Generation
         
+
         
-            
-    
+
         
+
         
-            
+    </a>
+</li>
             
-            <span class="
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/concurrency/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Golang</span>
+        Concurrency
         
-    
-    
+
         
+
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/context/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/basic-syntax/">Basic Syntax</a>
+        Context
         
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/code-generation/">Code Generation</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/database/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        Database Programming
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/concurrency/">Concurrency</a>
+
         
-    
-    </li>
-            
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/grpc-app/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/context/">Context</a>
+        gRPC Application
         
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/database/">Database Programming</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/http-services/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        HTTP Services
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/grpc-app/">gRPC Application</a>
+
         
-    
-    </li>
-            
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/http-services/">HTTP Services</a>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/go/testing/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-    </li>
-            
+        Testing
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../go/testing/">Testing</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Kubernetes</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-    </ul>
-        
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-    
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../rust/rust-snippets/">Rust</a>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/kubernetes/kubernetes-intro/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-    
-    
-       </li>
+        Overview
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
+
         
+
         
+
         
+    </a>
+</li>
             
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/kubernetes/namespaces/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Namespaces
         
-            
-            
-            <span class="
-        
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Kubernetes</span>
+
         
-    
-    
+
         
+
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
-        
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Cheat Sheets</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/kubernetes-intro/">Overview</a>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/cheatsheets/docker-cheatsheet/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-    </li>
-            
+        Docker
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../kubernetes/namespaces/">Namespaces</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
-            
-    </ul>
-        
-    
-       </li>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/cheatsheets/kubectl-cheatsheet/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
+        kubectl
         
+
         
-        
-            
-    
+
         
+
         
+    </a>
+</li>
             
-            
-            <span class="
-        
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Cheat Sheets</span>
-        
-    
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/cheatsheets/misc/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-        
-            <ul class="terminal-mkdocs-side-nav-li-ul">
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        Miscellaneous HowTos
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/docker-cheatsheet/">Docker</a>
+
         
-    
-    </li>
-            
+
         
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        Generative AI</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/amazon-bedrock/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/kubectl-cheatsheet/">kubectl</a>
+        Amazon Bedrock
         
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../cheatsheets/misc/">Miscellaneous HowTos</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
-            
-    </ul>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/building-systems-with-chatgpt/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-       </li>
+        Building Systems with ChatGPT
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
+
         
+
         
+
         
+    </a>
+</li>
             
-    
-        
-        <span class="
-        
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Generative AI</span>
-    
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/enhance-rag-with-raptor/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Enhancing RAG with RAPTOR
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../amazon-bedrock/">Amazon Bedrock</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/langchain/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        LangChain
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../building-systems-with-chatgpt/">Building Systems with ChatGPT</a>
+
         
-    
-    </li>
-            
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/langsmith/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../enhance-rag-with-raptor/">Enhancing RAG with RAPTOR</a>
-        
-    
-    </li>
-            
+        LangSmith
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../langchain/">LangChain</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/llamaindex/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        LlamaIndex
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../langsmith/">LangSmith</a>
+
         
-    
-    </li>
-            
+
         
-            
+    </a>
+</li>
             
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="true" data-sidebar="menu-button"
+        data-size="default" href="/notes/generative-ai/prompt-engineering/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Prompt Engineering
         
-            <a class="terminal-mkdocs-side-nav-item" href="../llamaindex/">LlamaIndex</a>
+
         
-    
-    </li>
-            
+
         
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
-        <span class="terminal-mkdocs-side-nav-item--active">Prompt Engineering</span>
-    
-    </li>
+    </a>
+</li>
             
+        </ul>
+    </div>
+</div>
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+    <div data-slot="sidebar-group-label" data-sidebar="group-label"
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 font-medium text-muted-foreground">
+        OpenTelemetry</div>
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
             
-    </ul>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/opentelemetry/collector/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-       </li>
+        Collector
         
-          <li class="terminal-mkdocs-side-nav-li">
-    
+
         
+
         
+
         
-            
-    
-        
-        
-            
+    </a>
+</li>
             
-            <span class="
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/opentelemetry/go-sdk/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">OpenTelemetry</span>
+        Go SDK
         
-    
-    
+
         
+
         
-            <ul class="terminal-mkdocs-side-nav-li-ul">
+
         
+    </a>
+</li>
             
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/collector/">Collector</a>
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/opentelemetry/logs/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+        Logs
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/go-sdk/">Go SDK</a>
+
         
-    
-    </li>
-            
+
         
-            
+    </a>
+</li>
             
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/notes/opentelemetry/metrics/"
+        class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
         
+        Metrics
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/logs/">Logs</a>
-        
-    
-    </li>
-            
-        
-            
-            
-             
-                <li class="terminal-mkdocs-side-nav-li-ul-li">
-    
+
         
+
         
-            <a class="terminal-mkdocs-side-nav-item" href="../../opentelemetry/metrics/">Metrics</a>
+
         
-    
-    </li>
+    </a>
+</li>
             
-            
-    </ul>
-        
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-    
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../mlops/ml-in-production/">MLOps</a>
-        
-    
-    
-    
-       </li>
-        
-          <li class="terminal-mkdocs-side-nav-li">
-    
-    
-    
-        
-        
-            <a class="terminal-mkdocs-side-nav-item" href="../../journal/">Work Learnings Journal</a>
-        
-    
-    
-    
-       </li>
-        
-    </ul>
-</nav><hr>
-<nav>
-    <ul>
-        <li><a href="#chatgpt-prompt-engineering">ChatGPT Prompt Engineering</a></li>
-        
-    </ul>
-</nav>
-</aside>
-            <main id="terminal-mkdocs-main-content">
-<section id="mkdocs-terminal-content">
-    <h1 id="chatgpt-prompt-engineering">ChatGPT Prompt Engineering</h1>
-<blockquote>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+<div class="sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t from-background via-background/80 to-background/50 blur-xs"></div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1
+          class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+        >
+          Prompt Engineering
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          
+<button onclick="fetch(`https://lprakashv.github.io/notes/generative-ai/prompt-engineering.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+        data-slot="button" 
+        class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+    <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+</svg>
+<span class="max-md:hidden">Copy Page</span>
+</button> 
+          
+          <a
+            data-slot="button"
+            id="previous-button"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+            href="/notes/generative-ai/llamaindex/"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="tabler-icon tabler-icon-arrow-left"
+            >
+              <path d="M5 12l14 0"></path>
+              <path d="M5 12l6 6"></path>
+              <path d="M5 12l6 -6"></path>
+            </svg>
+            <span class="sr-only">Previous</span>
+          </a>
+           
+          
+          <a
+            data-slot="button"
+            id="next-button"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+            href="/notes/opentelemetry/collector/"
+          >
+            <span class="sr-only">Next</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="tabler-icon tabler-icon-arrow-right"
+            >
+              <path d="M5 12l14 0"></path>
+              <path d="M13 18l6 -6"></path>
+              <path d="M13 6l6 6"></path>
+            </svg>
+          </a>
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <blockquote>
 <p>Placeholder for prompt-engineering notes and examples.</p>
 </blockquote>
-</section>
+  </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 shadow-none"
+        href="/notes/generative-ai/llamaindex/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-left ">
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l6 6"></path>
+            <path d="M5 12l6 -6"></path>
+        </svg>
+        <span class="max-[500px]:hidden">LlamaIndex</span>
+    </a>
+    
+    
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 ml-auto shadow-none"
+        href="/notes/opentelemetry/collector/">
+        <span class="max-[500px]:hidden">Collector</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-right ">
+            <path d="M5 12l14 0"></path>
+            <path d="M13 18l6 -6"></path>
+            <path d="M13 6l6 6"></path>
+        </svg>
+    </a>
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
 
-            </main>
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="../..">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../../java/gradle/">
+                        
+                        Gradle
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../../aws/aws-assentials/">
+                        
+                        AWS
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../../rust/rust-snippets/">
+                        
+                        Rust
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../../mlops/ml-in-production/">
+                        
+                        MLOps
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../../journal/">
+                        
+                        Work Learnings Journal
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            <div class="flex flex-col gap-8">
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Concepts</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../concepts/concurrency/">
+                            
+                            Concurrency
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Java</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../java/java-gc/">
+                            
+                            Java Garbage Collection
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../java/java-misc/">
+                            
+                            Java Miscellaneous
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../java/java-multithreading/">
+                            
+                            Java Multithreading
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../java/java-snippets/">
+                            
+                            Java Snippets
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Spring</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../spring/spring-data-transactions/">
+                            
+                            Data Transactions with Spring
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../spring/spring-misc/">
+                            
+                            Spring Miscellaneous
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Data Engineering</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../data-engineering/data-engineering/">
+                            
+                            Overview
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../data-engineering/apache-spark/">
+                            
+                            Apache Spark
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../data-engineering/big-data/">
+                            
+                            Big Data
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Databases</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../databases/databases/">
+                            
+                            Overview
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../databases/sqlite/">
+                            
+                            SQLite
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Golang</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../go/basic-syntax/">
+                            
+                            Basic Syntax
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/code-generation/">
+                            
+                            Code Generation
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/concurrency/">
+                            
+                            Concurrency
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/context/">
+                            
+                            Context
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/database/">
+                            
+                            Database Programming
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/grpc-app/">
+                            
+                            gRPC Application
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/http-services/">
+                            
+                            HTTP Services
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../go/testing/">
+                            
+                            Testing
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Kubernetes</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../kubernetes/kubernetes-intro/">
+                            
+                            Overview
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../kubernetes/namespaces/">
+                            
+                            Namespaces
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Cheat Sheets</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../cheatsheets/docker-cheatsheet/">
+                            
+                            Docker
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../cheatsheets/kubectl-cheatsheet/">
+                            
+                            kubectl
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../cheatsheets/misc/">
+                            
+                            Miscellaneous HowTos
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">Generative AI</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../amazon-bedrock/">
+                            
+                            Amazon Bedrock
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../building-systems-with-chatgpt/">
+                            
+                            Building Systems with ChatGPT
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../enhance-rag-with-raptor/">
+                            
+                            Enhancing RAG with RAPTOR
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../langchain/">
+                            
+                            LangChain
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../langsmith/">
+                            
+                            LangSmith
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../llamaindex/">
+                            
+                            LlamaIndex
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="./">
+                            
+                            Prompt Engineering
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">OpenTelemetry</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <a class="text-2xl font-medium" href="../../opentelemetry/collector/">
+                            
+                            Collector
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../opentelemetry/go-sdk/">
+                            
+                            Go SDK
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../opentelemetry/logs/">
+                            
+                            Logs
+                            
+                        </a>
+                        
+                        <a class="text-2xl font-medium" href="../../opentelemetry/metrics/">
+                            
+                            Metrics
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            
+
         </div>
-        <hr><footer>
-    <div class="terminal-mkdocs-footer-grid">
-        <div id="terminal-mkdocs-footer-copyright-info">
-             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                Built by<!-- --> <span>Lalit Prakash Vatsal</span> &mdash;
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
         </div>
     </div>
 </footer>
     </div>
+     
+
+<script src="../../search/main.js"></script>
+
 
     
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
-    <div class="modal-dialog modal-lg" role="search">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="searchModalLabel">Search</h5>
-                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
-            </div>
-            <div class="modal-body">
-                <p id="searchInputLabel">Type to start searching</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+
+    <script src="../../js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("https://github.com/lprakashv/notes");</script>
     
     
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
 </body>
 
 </html>

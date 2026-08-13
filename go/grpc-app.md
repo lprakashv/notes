@@ -1,0 +1,27 @@
+# gRPC in Go
+
+- Alternative to HTTP based RESTful services
+- Communication patterns:
+  - request and response
+  - server streaming (one request and a stream of responses)
+  - client streaming (stream of requests and one response)
+  - bidirectional streaming (stream of requests & stream of responses)
+- HTTP2 (initially "SPDY" protocol was developer by Google! around 2002-04?, they used it in Chrome and later open-sourced it)
+  - SSE
+  - Sticky session/connection
+  - bidirectional
+  - streaming
+  - etc. (?? LOOK UP! ??)
+- Uses Protocol Buffers for serializing payloads
+  - Share the schema among the cunsumers and producers in advance
+- Multi-language Support
+  - JVM (Java, Kotlin)
+  - Node
+  - Python
+  - C# / .NET
+  - Dart
+  - C++
+  - Go
+  - Ruby
+  - PHP
+  - Obj-C
