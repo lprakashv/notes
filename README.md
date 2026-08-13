@@ -1,6 +1,6 @@
 # Lalit's Tech Notes
 
-This repository publishes technical notes with [MkDocs](https://www.mkdocs.org/) and the Terminal community theme.
+This repository publishes technical notes with [MkDocs](https://www.mkdocs.org/) and the [mkdocs-shadcn](https://github.com/asiffer/mkdocs-shadcn) theme.
 
 ## Local development
 

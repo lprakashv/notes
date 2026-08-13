@@ -11,7 +11,7 @@ site_dir: site
 strict: true
 
 theme:
-  name: terminal
+  name: shadcn
   custom_dir: overrides
 
 nav:
