@@ -1,0 +1,25 @@
+requirements.txt
+  s_639159f99b2f4c::t_ef7e6e363d65b2 2
+README.md
+  s_639159f99b2f4c::t_ef7e6e363d65b2 3
+mkdocs.yml
+  s_639159f99b2f4c::t_ef7e6e363d65b2 14
+overrides/partials/favicon.html
+  s_639159f99b2f4c::t_ef7e6e363d65b2 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5459ecc6bfe32d380db2e609b00ead16662c7c41",
+  "prompts": {},
+  "sessions": {
+    "s_639159f99b2f4c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ffc6e-af68-7950-b39f-51f85b0d7e3e",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "lprakashv <lprakashv@gmail.com>"
+    }
+  }
+}
