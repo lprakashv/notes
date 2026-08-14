@@ -23,8 +23,8 @@ jobs:
           python-version: "3.13"
           cache: pip
 
-      - name: Build the book
-        run: bash ./build-local.sh build
+      - name: Test and build the book
+        run: bash ./build-local.sh test
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4

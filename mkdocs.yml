@@ -15,6 +15,9 @@ markdown_extensions:
   - codehilite:
       guess_lang: false
   - fenced_code
+  - shadcn.extensions.excalidraw:
+      base_dir: book/excalidraw
+      svg_only: true
 
 theme:
   name: shadcn

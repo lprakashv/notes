@@ -31,6 +31,6 @@ TODO
 
 ### Initialization
 
-### Configuration
+### Configuration phase
 
 ### Execution
