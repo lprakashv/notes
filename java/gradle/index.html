@@ -1486,26 +1486,180 @@
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
     <h2 id="incremental-builds">Incremental Builds</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Gradle skips a task as <code>UP-TO-DATE</code> when its declared inputs and outputs match the
+previous local execution. Custom tasks must declare every input and output;
+otherwise Gradle cannot decide safely whether the work can be skipped.</p>
+<pre class="codehilite"><code class="language-bash">./gradlew build --console=verbose
+</code></pre>
+
+<p>Incremental execution is local to the current workspace and previous task state.</p>
 <h2 id="build-cache">Build Cache</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The build cache reuses task outputs produced by an earlier build when the task
+implementation and inputs have the same cache key. Unlike an up-to-date check,
+the output may come from another workspace or a shared remote cache.</p>
+<pre class="codehilite"><code class="language-bash">./gradlew build --build-cache
+</code></pre>
+
+<p>Enable it persistently with <code>org.gradle.caching=true</code> in <code>gradle.properties</code>.
+Only cache deterministic tasks whose outputs depend completely on declared inputs.</p>
 <h2 id="daemon">Daemon</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The Gradle Daemon is a long-lived JVM that runs builds, retains in-memory caches,
+and benefits from JVM warm-up. It is enabled by default. Useful commands are:</p>
+<pre class="codehilite"><code class="language-bash">./gradlew --status
+./gradlew --stop
+./gradlew build --no-daemon
+</code></pre>
+
 <h2 id="scopes">Scopes</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Dependency configurations describe where a dependency is needed:</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>implementation</code></td>
+<td>Compile and runtime dependency hidden from consumers</td>
+</tr>
+<tr>
+<td><code>api</code></td>
+<td>Dependency exposed in a Java library's public API</td>
+</tr>
+<tr>
+<td><code>compileOnly</code></td>
+<td>Needed to compile but not placed on the runtime classpath</td>
+</tr>
+<tr>
+<td><code>runtimeOnly</code></td>
+<td>Needed only at runtime</td>
+</tr>
+<tr>
+<td><code>testImplementation</code></td>
+<td>Needed to compile and run tests</td>
+</tr>
+<tr>
+<td><code>testRuntimeOnly</code></td>
+<td>Needed only while running tests</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prefer the narrowest configuration; it reduces accidental coupling and improves
+compile avoidance.</p>
 <h2 id="configuration">Configuration</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Build logic is normally written in <code>build.gradle.kts</code> or <code>build.gradle</code>, while
+project structure and plugin/dependency resolution policy live in
+<code>settings.gradle.kts</code> or <code>settings.gradle</code>. Prefer the Gradle Wrapper (<code>./gradlew</code>)
+so local and CI builds use the declared Gradle version.</p>
 <h3 id="plugins">Plugins</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-kotlin">plugins {
+    java
+    application
+}
+</code></pre>
+
+<p>Plugins add tasks, conventions, and domain-specific configuration. Pin external
+plugin versions in the <code>plugins</code> block or central plugin management.</p>
 <h3 id="repositories">Repositories</h3>
-<p>TODO</p>
-<ul>
-<li>Maven central</li>
-<li>Maven local</li>
-<li>JCenter</li>
-<li>File system</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-kotlin">repositories {
+    mavenCentral()
+    maven { url = uri(&quot;https://repo.example.com/releases&quot;) }
+}
+</code></pre>
+
+<p>Repository order matters. Prefer authenticated HTTPS repositories with known
+provenance. Avoid <code>mavenLocal()</code> in repeatable builds unless local publication is
+the explicit workflow. The <code>jcenter()</code> API was deprecated in Gradle 7 and removed
+in Gradle 9; use <code>mavenCentral()</code> or the repository that actually owns the
+artifact.</p>
 <h3 id="dependencies">Dependencies</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-kotlin">dependencies {
+    implementation(&quot;com.google.guava:guava:33.5.0-jre&quot;)
+    testImplementation(platform(&quot;org.junit:junit-bom:6.0.3&quot;))
+    testImplementation(&quot;org.junit.jupiter:junit-jupiter&quot;)
+}
+</code></pre>
+
+<p>Use dependency constraints or platforms to keep related versions aligned. Avoid
+dynamic versions such as <code>1.+</code> in reproducible builds.</p>
 <h3 id="sub-projects">Sub Projects</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-kotlin">// settings.gradle.kts
+rootProject.name = &quot;shop&quot;
+include(&quot;app&quot;, &quot;catalog&quot;, &quot;payments&quot;)
+</code></pre>
+
+<p>Each subproject has its own tasks and dependencies. Share real build conventions
+through a convention plugin; avoid a large root <code>allprojects</code> block that silently
+couples unrelated modules.</p>
 <h2 id="tasks">Tasks</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-kotlin">tasks.register&lt;Copy&gt;(&quot;copyDocs&quot;) {
+    from(layout.projectDirectory.dir(&quot;docs&quot;))
+    into(layout.buildDirectory.dir(&quot;docs&quot;))
+}
+</code></pre>
+
+<p>Register tasks lazily with <code>tasks.register</code>. A task should declare inputs and
+outputs and should not perform work during configuration.</p>
 <h2 id="phases">Phases</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Every build moves through initialization, configuration, and execution. Knowing
+the boundary explains why printing or doing I/O at the top level of a build script
+happens even when its tasks are not selected.</p>
 <h3 id="initialization">Initialization</h3>
-<h3 id="configuration_1">Configuration</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Gradle evaluates settings, discovers included builds and projects, and creates
+the project structure.</p>
+<h3 id="configuration-phase">Configuration phase</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Gradle evaluates build scripts, configures projects and tasks, and constructs the
+task graph. The configuration cache can reuse this work when the build logic is
+compatible.</p>
 <h3 id="execution">Execution</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Gradle runs the selected task graph, honoring dependencies, ordering rules,
+up-to-date checks, and cache hits.</p>
+<p>Further reading: <a href="https://docs.gradle.org/current/userguide/build_lifecycle.html">Gradle build lifecycle</a>
+and <a href="https://docs.gradle.org/current/userguide/gradle_optimizations.html">performance optimizations</a>.</p>
   </div>
   
   <script>
@@ -1773,10 +1927,10 @@
             Initialization
         </a>
         
-        <a href="#configuration_1"
+        <a href="#configuration-phase"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#configuration_1');">
-            Configuration
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#configuration-phase');">
+            Configuration phase
         </a>
         
         <a href="#execution"

@@ -1485,7 +1485,49 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    
+    <h2 id="go-generate"><code>go generate</code></h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>go generate</code> runs commands declared by <code>//go:generate</code> directives. It is an
+explicit developer tool: it is not run automatically by <code>go build</code>, <code>go test</code>,
+or module download.</p>
+<pre class="codehilite"><code class="language-go">package status
+
+//go:generate stringer -type=State
+
+type State int
+
+const (
+    Pending State = iota
+    Running
+    Done
+)
+</code></pre>
+
+<p>Run every directive in the current package:</p>
+<pre class="codehilite"><code class="language-bash">go generate
+</code></pre>
+
+<p>Run directives recursively for packages in the module:</p>
+<pre class="codehilite"><code class="language-bash">go generate ./...
+</code></pre>
+
+<p>The generator executable must already be installed and available on <code>PATH</code>.</p>
+<h2 id="reproducible-generation">Reproducible generation</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Pin generator versions in normal module tooling or a documented tool setup.</li>
+<li>Commit generated files when consumers should not need the generator.</li>
+<li>Put a “generated; do not edit” comment in generated output.</li>
+<li>Make generation deterministic; avoid timestamps and machine-specific paths.</li>
+<li>In CI, regenerate and fail if <code>git diff --exit-code</code> reports a change.</li>
+<li>Review generated code like dependency output: generators execute with the
+  developer's permissions.</li>
+</ul>
+<p>Further reading: <a href="https://go.dev/blog/generate">Generating code</a>.</p>
   </div>
   
   <script>
@@ -1662,6 +1704,28 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#go-generate"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#go-generate');">
+            go generate
+        </a>
+        
+
+        
+        <a href="#reproducible-generation"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#reproducible-generation');">
+            Reproducible generation
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

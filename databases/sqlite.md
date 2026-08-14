@@ -3,7 +3,7 @@
 ## In-a-nutshell
 
 - An in-process library -> not a server
-- 1 file of ANSI-C code
+- A small C library commonly distributed as a single amalgamation source file
 - Database is a single file
   - can contains 1000s of tables, indexes and views
   - space efficient
@@ -15,7 +15,8 @@
 
 ## "Lite" means "low overhead", but not "low capability"
 
-- 1 writer + N concurrent readers
+- One writer at a time; readers can run concurrently, with WAL mode improving
+  read/write overlap
 - 1 GB strings and BLOBs
 - 281 TB databases
 - 64-way joins
@@ -51,7 +52,7 @@ https://youtu.be/ZSKLA81tBis?t=1104
 
 ### Ins and Outs
 
-- Compiler -> translates SQKL into bytecode
+- Compiler -> translates SQL into bytecode
 - Virtual machine -> runs the bytecode
 
 ```text
@@ -167,4 +168,3 @@ VFS Shims
 - logging
 - testing and fault injection
 - ...
-

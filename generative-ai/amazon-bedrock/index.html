@@ -1485,9 +1485,46 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on Amazon Bedrock.</p>
-</blockquote>
+    <h2 id="what-it-provides">What it provides</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Amazon Bedrock is a managed AWS service for invoking foundation models with AWS
+controls such as IAM, encryption, and logging.</p>
+<p>The managed building blocks include:</p>
+<ul>
+<li>model inference and evaluation;</li>
+<li>Knowledge Bases for retrieval-augmented generation (RAG);</li>
+<li>Guardrails for input and output controls;</li>
+<li>Agents for coordinating models, knowledge bases, and action APIs.</li>
+</ul>
+<p>Model availability, features, quotas, and pricing vary by AWS Region, so verify
+them before choosing an architecture.</p>
+<h2 id="request-path">Request path</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>Authenticate with an IAM role and call a selected model.</li>
+<li>Optionally apply Guardrails and retrieve context from a Knowledge Base.</li>
+<li>Generate a response.</li>
+<li>Validate it before display or action.</li>
+</ol>
+<p>Keep model calls behind an application boundary. That is the right place for
+timeouts, retries, cost limits, input validation, authorization, and audit logs.</p>
+<h2 id="security-checklist">Security checklist</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Grant only the model and API actions the workload needs.</li>
+<li>Treat prompts, retrieved documents, and tool output as sensitive or untrusted.</li>
+<li>Enforce authorization in application code, not only in prompts.</li>
+<li>Test guardrails and audit decisions without logging secrets.</li>
+</ul>
+<p>Further reading: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Amazon Bedrock User Guide</a>,
+<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html">Knowledge Bases</a>, and
+<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1701,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#what-it-provides"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#what-it-provides');">
+            What it provides
+        </a>
+        
+
+        
+        <a href="#request-path"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#request-path');">
+            Request path
+        </a>
+        
+
+        
+        <a href="#security-checklist"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#security-checklist');">
+            Security checklist
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

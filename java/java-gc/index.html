@@ -1486,42 +1486,78 @@
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
     <h2 id="heap">Heap</h2>
-<p>The Heap is divided into several parts called generations:</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The Java heap stores ordinary objects and arrays managed by the garbage collector.
+Most HotSpot collectors are generational:</p>
 <ul>
-<li>Young generation is a field, where recently created objects are stored;</li>
-<li>Old (tenured) generation is a field, where long-life objects are stored;</li>
+<li>the <strong>young generation</strong> receives most new objects and is collected frequently;</li>
+<li>objects that survive enough collections may be promoted to the <strong>old generation</strong>.</li>
 </ul>
-<p>Before Java 8, there was one more memory space — Permanent generation. it contained meta-information about classes, methods, statistical variables. After Java 8 was invented, all this information then became stored separately in the Metaspace.</p>
-<blockquote>
-<p>Stack object access is thread-safe while heap access is not!</p>
-</blockquote>
-<p><img alt="GC" src="../images/gc1.png" /></p>
-<blockquote>
-<p>Why was the decision taken to get rid of Permanent generation?</p>
-</blockquote>
-<p>First of all, it was because of the error connected with memory overflow. Since the Perm had a constant size and could not expand dynamically, sooner or later the memory ran out, an error was thrown and application crashed.</p>
-<p>In contrast, Metaspace has a dynamic size, and during its execution, it can expand up to the memory size of the JVM.</p>
+<p>Metaspace stores class metadata in native memory and is not a heap generation.
+PermGen was removed in Java 8. Metaspace grows by default but can be capped with
+<code>-XX:MaxMetaspaceSize</code>.</p>
+<p>Thread stacks are private to their threads, but objects referenced from a stack
+can still be shared. Thread safety depends on sharing and synchronization, not on
+whether a reference happens to be held on a stack or in the heap.</p>
+<p><svg role="img" viewBox="0 0 1100 680" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>HotSpot memory layout before and after Java 8</title><desc>PermGen was inside the pre-Java-8 heap; Metaspace uses native memory outside the heap.</desc><title>HotSpot memory layout before and after Java 8</title>
+  <desc>Before Java 8, PermGen was inside the heap; Java 8 replaced it with native-memory Metaspace outside the heap.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/java/images/gc1.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="550.0" y="35.0">PermGen was replaced by native-memory Metaspace</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="500" text-anchor="middle"><tspan x="300" y="105.0">Before Java 8</tspan></text>
+  <rect fill="#f8f9fa" height="465" rx="12" stroke="#495057" stroke-width="2" width="420" x="90" y="145"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="300" y="632.0">JVM process</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="500" text-anchor="middle"><tspan x="800" y="105.0">Java 8+</tspan></text>
+  <rect fill="#f8f9fa" height="465" rx="12" stroke="#495057" stroke-width="2" width="420" x="590" y="145"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="800" y="632.0">JVM process</tspan></text>
+  <rect fill="#e7f5ff" height="290" rx="12" stroke="#1971c2" stroke-dasharray="9 7" stroke-width="2" width="330" x="135" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="start"><tspan x="160" y="205.0">Heap (-Xmx)</tspan></text>
+  <rect fill="#b2f2bb" height="85" rx="12" stroke="#2f9e44" stroke-width="2" width="260" x="170" y="240"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="300.0" y="271.875">New generation</tspan><tspan x="300.0" y="293.125">(Eden + Survivors)</tspan></text>
+  <rect fill="#ffec99" height="65" rx="12" stroke="#e67700" stroke-width="2" width="260" x="170" y="335"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="300.0" y="367.5">Old generation</tspan></text>
+  <rect fill="#ffd8a8" height="45" rx="12" stroke="#e8590c" stroke-width="2" width="260" x="170" y="410"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="400" text-anchor="middle"><tspan x="300.0" y="432.5">PermGen (-XX:MaxPermSize)</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="300" y="545.0">Native memory</tspan></text>
+  <rect fill="#e7f5ff" height="215" rx="12" stroke="#1971c2" stroke-dasharray="9 7" stroke-width="2" width="330" x="635" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="start"><tspan x="660" y="205.0">Heap (-Xmx)</tspan></text>
+  <rect fill="#b2f2bb" height="75" rx="12" stroke="#2f9e44" stroke-width="2" width="260" x="670" y="240"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="800.0" y="266.875">New generation</tspan><tspan x="800.0" y="288.125">(Eden + Survivors)</tspan></text>
+  <rect fill="#ffec99" height="55" rx="12" stroke="#e67700" stroke-width="2" width="260" x="670" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="800.0" y="352.5">Old generation</tspan></text>
+  <rect fill="#ffd8a8" height="65" rx="12" stroke="#e8590c" stroke-width="2" width="260" x="670" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="800.0" y="477.5">Metaspace</tspan><tspan x="800.0" y="497.5">(-XX:MaxMetaspaceSize)</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="800" y="555.0">Native memory</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="465,432 670,487" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="567.5" y="437.5">replaced</tspan></text>
+</svg></p>
 <p>Key Heap features:</p>
 <ul>
-<li>If Heap space is full, Java throws java.lang.OutOfMemoryError</li>
+<li>If the JVM cannot allocate after collection, it may throw <code>OutOfMemoryError</code>.</li>
 <li>Access to the Heap is relatively slower in comparison to the Stack</li>
-<li>To remove unused objects from the memory in the Heap, a Garbage collector is used</li>
-<li>Unlike stack, a heap isn't thread-safe and needs to be guarded by properly synchronizing the code</li>
+<li>The collector reclaims objects that are no longer strongly reachable.</li>
+<li>Shared mutable objects need a concurrency strategy; immutable or thread-confined
+  objects often do not need locking.</li>
 </ul>
 <p>--</p>
 <h3 id="notes">Notes</h3>
 <p>Heap is divided into memory areas:</p>
 <ol>
-<li><strong>Permgen</strong>/<strong>metaspace</strong></li>
 <li><strong>NewGen</strong>
     a. Eden space
     b. Surviving space 1
     c. Surviving space 2</li>
 <li><strong>Old Gen</strong></li>
 </ol>
-<blockquote>
-<p>Only (2) and (3) are considered for GC.</p>
-</blockquote>
+<p>This is a conceptual generational layout. Region-based collectors such as G1 use
+non-contiguous regions rather than fixed contiguous young and old spaces.</p>
 <p>Operations:</p>
 <div class="table-wrapper"><table>
 <thead>
@@ -1546,12 +1582,44 @@
 </tbody>
 </table></div>
 <h2 id="garbage-collector">Garbage Collector</h2>
-<p>Garbage collector is a programme that works in JVM and is intended to delete objects that are no longer used or needed.</p>
+<p>A garbage collector is a JVM component that reclaims objects that are no longer
+reachable.</p>
 <blockquote>
 <p>Different JVMs can have different algorithms of garbage collection, so there are a variety of different garbage collectors in Java.</p>
 </blockquote>
 <p>Heap memory is divided into 2 sections called Generations: New generation and Old generation.</p>
-<p><img alt="GC" src="../images/gc.png" /></p>
+<h3 id="conceptual-generational-layout">Conceptual generational layout</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1100 450" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Conceptual generational heap</title><desc>New objects enter Eden, survivors alternate between survivor spaces, and long-lived objects are promoted.</desc><title>Conceptual generational heap</title>
+  <desc>New objects enter Eden, survivors alternate between survivor spaces, and sufficiently long-lived objects are promoted to the old generation.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/java/images/gc.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="550.0" y="35.0">Conceptual generational heap</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="500" text-anchor="middle"><tspan x="370" y="105.0">Young generation</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="500" text-anchor="middle"><tspan x="865" y="105.0">Old generation</tspan></text>
+  <rect fill="#b2f2bb" height="110" rx="12" stroke="#2f9e44" stroke-width="2" width="380" x="180" y="150"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="400" text-anchor="middle"><tspan x="370.0" y="205.0">Eden</tspan></text>
+  <rect fill="#a5d8ff" height="110" rx="12" stroke="#1971c2" stroke-width="2" width="115" x="570" y="150"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="400" text-anchor="middle"><tspan x="627.5" y="205.0">S0</tspan></text>
+  <rect fill="#a5d8ff" height="110" rx="12" stroke="#1971c2" stroke-width="2" width="115" x="695" y="150"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="400" text-anchor="middle"><tspan x="752.5" y="205.0">S1</tspan></text>
+  <rect fill="#ffec99" height="110" rx="12" stroke="#e67700" stroke-width="2" width="220" x="820" y="150"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="400" text-anchor="middle"><tspan x="930.0" y="205.0">Tenured</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="50,205 180,205" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="115.0" y="185.0">new objects</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)" points="560,285 570,330 752,330 752,260" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="672.9511388567678" y="352.0">survivors alternate S0 ↔ S1</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="810,205 820,205" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="815.0" y="185.0">promotion</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="550" y="405.0">This is a teaching model; region-based collectors do not require contiguous generations.</tspan></text>
+</svg></p>
 <p>New generation includes 3 regions: Eden, Survivor 0, and Survivor 1.</p>
 <p>Old generation includes the Tenured region.</p>
 <blockquote>
@@ -1588,165 +1656,151 @@
 <li>If an object survives <code>-XX:MaxTenuringThreshold</code> number of gc cycles, it's promoted to older/tenured space.</li>
 </ul>
 <h3 id="types-of-gc">Types of GC</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Current HotSpot provides these main collectors:</p>
 <ol>
-<li>Serial GC - basic.</li>
-<li>Single threaded.</li>
-<li>Completely pauses every other thread (complete stop the world).</li>
-<li>Concurrent Mark Sweep (CMS).</li>
-<li>When: <strong>more memory, more CPU, short pauses.</strong></li>
-<li>Performs GC along with application execution.</li>
-<li>Does not wait for the Old Gen to be full.</li>
-<li>Stops the world only during marking/re-marking.</li>
-<li>Parallel GC.</li>
-<li>When: <strong>less memory, less CPU, high throughput needed, can withstand long pauses.</strong></li>
-<li>Utilizes multiple CPUs and threads.</li>
-<li>Does not kick in until heap is full/near-full.</li>
-<li>"Stop the world".</li>
-<li>G1 GC (Java 7+) - Garbage First.</li>
-<li>Divides entire memory into smaller regions (those can be Eden/Survivor/Tenured).</li>
-<li>Runs on smaller regions whichever has more garbage.</li>
-<li>Concurrent as well as parallel.</li>
-<li>Pauses for defragmentation.</li>
-<li>Better heap utilization.</li>
+<li><strong>Serial GC:</strong> one GC thread; suitable for small heaps or constrained machines.</li>
+<li><strong>Parallel GC:</strong> stop-the-world collection using multiple threads, optimized
+   primarily for throughput.</li>
+<li><strong>G1:</strong> generational, region-based, parallel, and mostly concurrent; the
+   default on most supported hardware.</li>
+<li><strong>ZGC:</strong> generational and highly concurrent, designed for very short pauses at
+   some throughput cost.</li>
 </ol>
+<p>CMS was deprecated in JDK 9 and removed in JDK 14. Collector choice is a starting
+point, not a guarantee: measure allocation rate, live-set size, throughput, and
+pause distributions on the real workload.</p>
 <hr />
 <h2 id="garbage-collectors-in-java">Garbage Collectors in Java</h2>
 <h3 id="g1-garbage-collector">G1 Garbage Collector</h3>
-<p>G1 is introduced in <strong>Java7</strong>. Oracle 9 Hotspot JVM comes with default G1 Garbage collection.</p>
+<p>G1 was introduced in Java 7 and became the HotSpot default in Java 9 on most
+supported configurations.</p>
 <p>You can configure this for maximum pause time using flag <code>-XX:MaxGCPauseMillis=n</code>.</p>
 <blockquote>
 <p>Lots of real-world studies say most of the objects (90%) garbage collected in a young generation or in first garbage collection or minor GC (also it depends upon applications). Who survived a couple of GCs(major GC), present in old memory (old objects) they will remain survive more than 95% times.</p>
 </blockquote>
 <h4 id="g1-working">G1 Working</h4>
-<ul>
-<li>It does most of the work concurrently.</li>
-<li>It uses non-continuous which enables G1 to deal with the very large heap efficiently.</li>
-<li>Instead of dividing heaps into 3 spaces (old) like other Garbage Collectors like CMS (concurrent mark and sweep), Parallel etc, <strong>it divides heap memory in small chunks. These regions are fix-sized (about 2Mb by default)</strong></li>
-</ul>
-<p>Earlier
-<img alt="GC" src="../images/gc3spaces.png" /></p>
-<p>G1
-<img alt="G1GC" src="../images/g1gc.png" /></p>
-<ul>
-<li>Splitting into small regions helps G1 concurrently run and finish it off very quickly.</li>
-<li>While running GC on Eden space all the survived objects get copied to unassigned space. <em>The unassigned space becomes survivor space</em>.</li>
-<li><em>If all the objects in Eden space are garbage then it can be declared as Unassigned</em>.</li>
-<li><strong>G1 is not run on whole heap memory at once</strong> like others Garbage Collectors, instead of this <strong>it always selects the regions which are full or almost full</strong> to minimizes the amount of work to free heap space.</li>
-<li><strong>G1 only stops the application at the beginning of the GC for boot strapping</strong> , this phase is called as <strong>Initial Mark</strong>.</li>
-<li>While Application is executing it follow all the references and mark live objects, this phase called as <strong>Concurrent Mark</strong>.</li>
-<li>When above phase(Concurrent Mark) is done then application again stops. for final cleanup is made, this phase called as <strong>Final Mark</strong>.</li>
-<li>To move objects and reclaim heap memory, this phase called as Evacuation phase this phase is fast, called as <strong>Evacuation Phase</strong>.</li>
-<li><strong>"This is not good for small heaps"</strong> then it that case might be full GC is performed and might slow down overall executions. In that case <em>increase the heap size or other Garbage collectors can be used</em>.</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>G1 divides the heap into equal-sized regions. At any moment a region may be free,
+young, survivor, old, or humongous. Young collections evacuate live objects from
+selected young regions. Concurrent marking estimates liveness in old regions;
+later mixed collections evacuate selected young and old regions with useful
+reclaim potential.</p>
+<p><svg role="img" viewBox="0 0 1180 580" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Contiguous spaces versus G1 regions</title><desc>A traditional contiguous layout is contrasted with dynamically assigned equal-sized G1 regions.</desc><title>Fixed contiguous heap spaces compared with G1 regions</title>
+  <desc>A traditional teaching layout uses contiguous Eden, survivor, and old spaces; G1 assigns equal-sized regions dynamically as unused, survivor, Eden, or old.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/java/images/gc3spaces.png", "archive/original-images/book/java/images/g1gc.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="590.0" y="35.0">Contiguous spaces versus G1 regions</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" text-anchor="start"><tspan x="90" y="105.0">Earlier teaching model</tspan></text>
+  <rect fill="#ffd8a8" height="80" rx="12" stroke="#e8590c" stroke-width="2" width="420" x="90" y="135"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="300.0" y="175.0">Old</tspan></text>
+  <rect fill="#ffec99" height="80" rx="12" stroke="#e67700" stroke-width="2" width="250" x="510" y="135"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="635.0" y="175.0">Survivor</tspan></text>
+  <rect fill="#b2f2bb" height="80" rx="12" stroke="#2f9e44" stroke-width="2" width="330" x="760" y="135"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="925.0" y="175.0">Eden</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" text-anchor="start"><tspan x="90" y="285.0">G1 equal-sized regions</tspan></text>
+  <rect fill="#e9ecef" height="72" rx="12" stroke="#495057" stroke-width="2" width="50" x="90" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="115.0" y="361.0">U</tspan></text>
+  <rect fill="#b2f2bb" height="72" rx="12" stroke="#2f9e44" stroke-width="2" width="50" x="140" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="165.0" y="361.0">S</tspan></text>
+  <rect fill="#e9ecef" height="72" rx="12" stroke="#495057" stroke-width="2" width="50" x="190" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="215.0" y="361.0">U</tspan></text>
+  <rect fill="#b2f2bb" height="72" rx="12" stroke="#2f9e44" stroke-width="2" width="50" x="240" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="265.0" y="361.0">S</tspan></text>
+  <rect fill="#ffec99" height="72" rx="12" stroke="#e67700" stroke-width="2" width="50" x="290" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="315.0" y="361.0">E</tspan></text>
+  <rect fill="#ffd8a8" height="72" rx="12" stroke="#e8590c" stroke-width="2" width="50" x="340" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="365.0" y="361.0">O</tspan></text>
+  <rect fill="#e9ecef" height="72" rx="12" stroke="#495057" stroke-width="2" width="50" x="390" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="415.0" y="361.0">U</tspan></text>
+  <rect fill="#e9ecef" height="72" rx="12" stroke="#495057" stroke-width="2" width="50" x="440" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="465.0" y="361.0">U</tspan></text>
+  <rect fill="#e9ecef" height="72" rx="12" stroke="#495057" stroke-width="2" width="50" x="490" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="515.0" y="361.0">U</tspan></text>
+  <rect fill="#ffec99" height="72" rx="12" stroke="#e67700" stroke-width="2" width="50" x="540" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="565.0" y="361.0">E</tspan></text>
+  <rect fill="#ffec99" height="72" rx="12" stroke="#e67700" stroke-width="2" width="50" x="590" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="615.0" y="361.0">E</tspan></text>
+  <rect fill="#ffd8a8" height="72" rx="12" stroke="#e8590c" stroke-width="2" width="50" x="640" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="665.0" y="361.0">O</tspan></text>
+  <rect fill="#b2f2bb" height="72" rx="12" stroke="#2f9e44" stroke-width="2" width="50" x="690" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="715.0" y="361.0">S</tspan></text>
+  <rect fill="#b2f2bb" height="72" rx="12" stroke="#2f9e44" stroke-width="2" width="50" x="740" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="765.0" y="361.0">S</tspan></text>
+  <rect fill="#b2f2bb" height="72" rx="12" stroke="#2f9e44" stroke-width="2" width="50" x="790" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="815.0" y="361.0">S</tspan></text>
+  <rect fill="#e9ecef" height="72" rx="12" stroke="#495057" stroke-width="2" width="50" x="840" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="865.0" y="361.0">U</tspan></text>
+  <rect fill="#ffd8a8" height="72" rx="12" stroke="#e8590c" stroke-width="2" width="50" x="890" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="915.0" y="361.0">O</tspan></text>
+  <rect fill="#ffec99" height="72" rx="12" stroke="#e67700" stroke-width="2" width="50" x="940" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="965.0" y="361.0">E</tspan></text>
+  <rect fill="#ffd8a8" height="72" rx="12" stroke="#e8590c" stroke-width="2" width="50" x="990" y="325"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="1015.0" y="361.0">O</tspan></text>
+  <rect fill="#e9ecef" height="45" rx="12" stroke="#495057" stroke-width="2" width="45" x="140" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="162.5" y="477.5">U</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="start"><tspan x="200" y="478.0">unused</tspan></text>
+  <rect fill="#b2f2bb" height="45" rx="12" stroke="#2f9e44" stroke-width="2" width="45" x="390" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="412.5" y="477.5">S</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="start"><tspan x="450" y="478.0">survivor</tspan></text>
+  <rect fill="#ffec99" height="45" rx="12" stroke="#e67700" stroke-width="2" width="45" x="640" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="662.5" y="477.5">E</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="start"><tspan x="700" y="478.0">Eden</tspan></text>
+  <rect fill="#ffd8a8" height="45" rx="12" stroke="#e8590c" stroke-width="2" width="45" x="890" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="912.5" y="477.5">O</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="start"><tspan x="950" y="478.0">old</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="590" y="545.0">Region roles change as G1 selects regions for allocation and evacuation.</tspan></text>
+</svg></p>
+<p>G1 still has stop-the-world phases, including evacuation. It performs expensive
+global marking mostly concurrently and reclaims space incrementally to pursue a
+pause-time goal. A pause-time goal is a target, not a hard real-time guarantee.</p>
 <h4 id="g1-extras">G1 Extras</h4>
 <h5 id="string-deduplication">String deduplication</h5>
-<blockquote>
-<p>Many large-scale Java applications are currently bottlenecked on memory. Measurements have shown that <strong>roughly 25% of the Java heap live data set in these types of applications is consumed by String objects</strong>. Further, <strong>roughly half of those String objects are duplicates</strong>, where duplicates means string1.equals(string2)is true. Having duplicate String objects on the heap is, essentially, just a waste of memory.</p>
-</blockquote>
-<p>Java provides two ways to handle duplicate strings and eliminate memory usage</p>
-<p><strong>1. By using <code>String.intern()</code> method:</strong></p>
-<pre class="codehilite"><code class="language-java">String str = &quot;abc&quot;;
-String str = new String(&quot;abc&quot;).intern();
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>String.intern()</code> returns a canonical pooled instance for equal strings. It changes
+identity and lifetime behavior, so use it only when canonicalization is part of
+the design—not as a blanket memory optimization.</p>
+<p>G1 can instead deduplicate equal backing arrays for selected strings while keeping
+the distinct <code>String</code> objects:</p>
+<pre class="codehilite"><code class="language-bash">-XX:+UseG1GC -XX:+UseStringDeduplication
 </code></pre>
 
-<p>Notes:</p>
-<ul>
-<li>Intern method is expensive and slow.</li>
-<li><code>String.intern()</code> is a native method, and calling a native method incurs massive overhead.</li>
-<li>The implementation used a fixed size (<strong>default 1009, can be set using <code>-XX:StringTableSize=N</code></strong>) hashtable so as the number entries grew, the performance became O(n).</li>
-</ul>
-<p><strong>2. By enabling string deduplication (only available with G1 garbage collector):</strong></p>
-<pre class="codehilite"><code class="language-bash">XX:+UseG1GC -XX:+UseStringDeduplication
-</code></pre>
-
-<p>Notes:</p>
-<ul>
-<li>This option is only available from <strong>Java 8 Update 20 JDK release</strong>.</li>
-<li>This feature will only work along with the <strong>G1 garbage collector</strong>.</li>
-<li>You need to provide both <code>-XX:+UseG1GC</code> and <code>-XX:+StringDeduplication</code> JVM options to enable this feature.</li>
-<li>To check if it happens in your system you can use <code>-XX:+PrintStringDeduplicationStatistics</code> parameter.</li>
-<li>You can control this by using <code>-XX:StringDeduplicationAgeThreshold=3</code> option to change when Strings become eligible for deduplication.</li>
-</ul>
+<p>Inspect activity with <code>-Xlog:stringdedup*=debug</code>. The
+<code>-XX:StringDeduplicationAgeThreshold</code> option controls when young strings become
+eligible. Deduplication consumes CPU and bookkeeping memory, so measure retained
+heap and throughput before enabling it in production.</p>
 <h3 id="zgc">ZGC</h3>
-<p>It is a scalable low latency garbage collector designed to meet the following goals:</p>
-<ul>
-<li>Z Garbage Collector (ZGC) is introduced in JAVA-11 as an experimental GC.</li>
-<li>Pause times <strong>do not</strong> exceed <strong>10ms</strong>.</li>
-<li>Pause times <strong>do not</strong> increase with the heap or live-set size.</li>
-<li>Handle heaps ranging from a few hundred megabytes to multi terabytes in size.</li>
-</ul>
-<p>Properties:</p>
-<ul>
-<li>Concurrent</li>
-<li>Region-based</li>
-<li>Compacting=</li>
-<li>NUMA-aware</li>
-<li>Using colored pointers</li>
-<li>Using load barriers</li>
-</ul>
-<h4 id="working-of-zgc">Working of ZGC</h4>
-<p>ZGC divides memory into regions, also called <strong>ZPages</strong>. ZPages are dynamically sized (unlike the G1 GC), which are multiples of 2 MB can be dynamically created and destroyed.</p>
-<p>Here are the size groups of heap regions:</p>
-<ul>
-<li>Small(2MB),</li>
-<li>Medium(32MB)</li>
-<li>Large(N * 2 MB)</li>
-</ul>
-<p><img alt="ZGC" src="../images/zgc.png" /></p>
-<p>Notes:</p>
-<ul>
-<li>ZGC heap can have multiple occurrences of these heap regions.</li>
-<li>After ZGC compaction, ZPages are freed up and inserted into a page cache called as <strong>ZPageCache</strong>.</li>
-<li>ZPages in the page cache are ready to be reused to satisfy new heap allocations.</li>
-<li>The page cache is critical for performance, as committing and uncommitting memory are expensive operations.</li>
-<li>ZPages in the page cache represents the unused parts of the heap that could be uncommitted and returned to the operating system.</li>
-</ul>
-<h4 id="phases-of-z-garbage-collection">Phases of Z Garbage Collection</h4>
-<p><img alt="ZGC" src="../images/zgcphases.jpeg" /></p>
-<p><strong>1. Pause Mark Start:</strong></p>
-<ul>
-<li>In this phase objects that have been pointed to roots. This includes walking through the live set of objects and then finding and marking them.</li>
-<li>It starts with a scanning thread stack which gives the reference objects in heap.</li>
-<li>After getting reference it will walk through all the graphs of objects(which are reachable).</li>
-<li>It also remaps the live data after the end of the last phase(Pause Relocate Phase).</li>
-</ul>
-<p><strong>2. Pause Mark End:</strong></p>
-<ul>
-<li>This phase with a short pause of 1ms.</li>
-<li>The pause time involved here depends only on the number of roots and the ratio of the sizes of the relocation set and total live set of objects.</li>
-<li>This starts after completion of the first phase.</li>
-<li>This starts with preparing concurrent relocation of objects and marks the regions it wants to compact.</li>
-<li>Now we have all the information which objects are live so it starts with reference processing and moves to week-root cleaning.</li>
-</ul>
-<p><strong>Pause Relocate Start:</strong></p>
-<ul>
-<li>It triggers the actual region compaction.</li>
-<li>It begins with root scanning pointing into the location set, followed by the concurrent reallocation of objects in the relocation set.</li>
-</ul>
-<h4 id="colored-pointers">Colored Pointers</h4>
-<ul>
-<li>Colored pointers are one of the core concepts of ZGC.</li>
-<li>It enables ZGC to find, mark, locate, and remap the objects.</li>
-<li>It doesn't support x32 or 32 bits operating systems.</li>
-<li><strong>Load Barrier</strong> uses this to detect whether the object is bad color then do the corresponding action (like remap means object is remapped to a different address). <strong>It is injected by the JIT compiler when the object is fetched from the heap</strong>.</li>
-</ul>
-<p><img alt="ZGC" src="../images/zgccoloredpointers.png" /></p>
-<p>the 64-bit object reference is divided as follows:</p>
-<ul>
-<li>18 bits: <strong>Unused bits</strong></li>
-<li>1-bit: <strong>Finalizable</strong></li>
-<li>1-bit: <strong>Remapped</strong></li>
-<li>1-bit: <strong>Marked1</strong></li>
-<li>1-bit: <strong>Marked0</strong></li>
-<li>42 bits: <strong>Object Address</strong></li>
-</ul>
-<p>Explanations:</p>
-<ul>
-<li>The first 18 bits are reserved for future use.</li>
-<li>42 bits can address up to 4 TB of address space.</li>
-<li>The <strong>Marked1</strong> and <strong>Marked0</strong> bits are used to mark objects for garbage collection. By setting the single bit for <strong>Remapped</strong>, an object can be marked not pointing to the relocation set.</li>
-<li>The last 1-bit for finalizing relates to concurrent reference processing.</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>ZGC is a scalable, highly concurrent collector for workloads where short pauses
+matter more than maximum throughput. It was introduced as experimental in Java 11
+and became a production feature in Java 15. Since JDK 24, only generational ZGC
+remains.</p>
+<pre class="codehilite"><code class="language-bash">java -XX:+UseZGC -Xms4g -Xmx4g -jar app.jar
+</code></pre>
+
+<p>ZGC performs marking, relocation, and reference processing mostly while
+application threads continue to run. Load barriers and metadata associated with
+object references let the collector relocate objects concurrently. The exact
+reference layout and internal phases are implementation details that can change
+between JDK releases; do not size or tune an application from a fixed bit diagram.</p>
+<p>The current HotSpot guide describes sub-millisecond maximum pauses as the design
+target and support from a few hundred megabytes to multi-terabyte heaps. Treat
+those as collector goals, then validate latency and throughput with GC logs and a
+representative load test.</p>
+<p>Further reading: <a href="https://docs.oracle.com/en/java/javase/25/gctuning/available-collectors.html">HotSpot available collectors</a>.</p>
   </div>
   
   <script>
@@ -1949,6 +2003,12 @@ String str = new String(&quot;abc&quot;).intern();
             Garbage Collector
         </a>
         
+        
+        <a href="#conceptual-generational-layout"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#conceptual-generational-layout');">
+            Conceptual generational layout
+        </a>
         
         <a href="#gc-cycles-triggering"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"

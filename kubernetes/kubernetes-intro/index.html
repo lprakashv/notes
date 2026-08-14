@@ -1503,7 +1503,7 @@ spec:
 <li><code>kind</code> defines the type of the resource</li>
 </ul>
 <p><strong>Creating resource with YAML:</strong></p>
-<pre class="codehilite"><code class="language-bash">kubectl create -f resource-definition.yaml
+<pre class="codehilite"><code class="language-bash">kubectl apply -f resource-definition.yaml
 </code></pre>
 
 <h2 id="pod">Pod</h2>
@@ -1513,9 +1513,13 @@ spec:
 pod/nginx created
 </code></pre>
 
-<ul>
-<li>image name is the docker image name (if kubernetes cluster container backend is docker).</li>
-</ul>
+<h3 id="container-runtime-note">Container runtime note</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The image reference identifies an OCI-compatible container image. Kubernetes
+uses a CRI-compatible runtime; it does not require Docker Engine on the node.</p>
+<h3 id="pod-operations">Pod operations</h3>
 <p><strong>Getting Pods:</strong></p>
 <pre class="codehilite"><code class="language-bash">➜  notes git:(master) ✗ kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
@@ -1611,7 +1615,7 @@ spec:
     - name: postgres
       image: postgres
       env:
-        - name: POSTGRES_PASSWD
+        - name: POSTGRES_PASSWORD
           value: mysecretpassword
 </code></pre>
 
@@ -1632,9 +1636,10 @@ spec:
 <h2 id="replicationcontrollers-and-replicasets">ReplicationControllers and ReplicaSets</h2>
 <ul>
 <li>Maintains HA with required number of pods (within a node or cluster)</li>
-<li>Provides Load balancing and scalability</li>
+<li>Provides horizontal scaling by maintaining a requested replica count. A Service
+  or another routing layer provides load balancing.</li>
 </ul>
-<h3 id="replicationcontroller-deprecated-definition">ReplicationController (<code>deprecated</code>) Definition</h3>
+<h3 id="replicationcontroller-legacy-definition">ReplicationController (legacy) Definition</h3>
 <pre class="codehilite"><code class="language-yaml">apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -1650,7 +1655,8 @@ spec:
 
 <ul>
 <li>3 Pods will be created (and maintained) with <code>myapp-rc-</code> prefix</li>
-<li><code>RepliationController</code> api is deprecated</li>
+<li><code>ReplicationController</code> is a legacy workload controller. Prefer a Deployment,
+  which manages ReplicaSets and supports declarative rollouts and rollback.</li>
 </ul>
 <h3 id="replicaset-definition-similar-to-rc">ReplicaSet Definition (similar to RC)</h3>
 <pre class="codehilite"><code class="language-yaml">apiVersion: apps/v1   # Difference
@@ -1693,20 +1699,152 @@ kubectl replace -f replicaset-definition.yaml
 <li>Also deletes all underlying pods</li>
 </ul>
 <h2 id="service">Service</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>A Service gives a changing set of Pods a stable virtual endpoint. Its selector
+usually identifies the Pods, and the control plane maintains EndpointSlices for
+the matching backends.</p>
+<p>Common Service types:</p>
 <ul>
-<li>External Access to the App</li>
-<li>Load balancing</li>
-<li>2 Types</li>
-<li><strong>NodePort</strong></li>
-<li><strong>ClusterIP</strong></li>
+<li><strong>ClusterIP:</strong> cluster-internal virtual IP; the default.</li>
+<li><strong>NodePort:</strong> also exposes a port on each node.</li>
+<li><strong>LoadBalancer:</strong> asks a supported cloud or load-balancer integration for an
+  external load balancer, normally building on NodePort or direct pod routing.</li>
+<li><strong>ExternalName:</strong> returns a DNS CNAME and does not proxy traffic.</li>
 </ul>
 <h3 id="nodeport">NodePort</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <p>NodePort Service in single Node</p>
-<p><img alt="NodePort Single Node" src="../../images/nodeport.png" /></p>
+<p><svg role="img" viewBox="0 0 960 680" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>NodePort Service on one node</title><desc>A request to a node IP and NodePort is routed through a Service to one of the Pods.</desc><title>NodePort Service on one node</title>
+  <desc>A request to node IP 192.168.1.2 on NodePort 30008 is routed by a Service to one of three Pods.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/images/nodeport.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="480.0" y="35.0">NodePort on one node</tspan></text>
+  <ellipse cx="480" cy="105" fill="#e9ecef" rx="75" ry="32" stroke="#495057" stroke-width="2"></ellipse>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="480" y="105.0">Client</tspan></text>
+  <rect fill="#f8f9fa" height="455" rx="12" stroke="#495057" stroke-dasharray="9 7" stroke-width="2" width="720" x="120" y="165"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" text-anchor="start"><tspan x="185" y="195.0">Node 192.168.1.2</tspan></text>
+  <rect fill="#ffd8a8" height="58" rx="12" stroke="#e8590c" stroke-width="2" width="200" x="380" y="220"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="480.0" y="249.0">NodePort 30008</tspan></text>
+  <rect fill="#c5f6fa" height="68" rx="12" stroke="#0b7285" stroke-width="2" width="280" x="340" y="335"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="480.0" y="369.0">Service :80</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="480,137 480,220" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="625.0" y="148.5">192.168.1.2:30008</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="480,278 480,335" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="480,403 280,485" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#a5d8ff" height="90" rx="12" stroke="#1971c2" stroke-width="2" width="180" x="190" y="485"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="280.0" y="518.75">Pod</tspan><tspan x="280.0" y="541.25">10.244.0.3</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="480,403 480,485" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#a5d8ff" height="90" rx="12" stroke="#1971c2" stroke-width="2" width="180" x="390" y="485"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="480.0" y="518.75">Pod</tspan><tspan x="480.0" y="541.25">10.244.0.2</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="480,403 680,485" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#a5d8ff" height="90" rx="12" stroke="#1971c2" stroke-width="2" width="180" x="590" y="485"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="680.0" y="518.75">Pod</tspan><tspan x="680.0" y="541.25">10.244.0.4</tspan></text>
+</svg></p>
 <p>NodePort Service in multi-node Cluster</p>
-<p><img alt="NodePort Cluster" src="../../images/nodeport1.png" /></p>
+<p><svg role="img" viewBox="0 0 1180 720" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>NodePort Service across a cluster</title><desc>The same NodePort is reachable on every node and may select a Pod running on any node.</desc><title>NodePort Service across a cluster</title>
+  <desc>The same NodePort 30008 is reachable on every node and routes through one Service to Pods on any node.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/images/nodeport1.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="590.0" y="35.0">The same NodePort is exposed on every node</tspan></text>
+  <ellipse cx="590" cy="102" fill="#e9ecef" rx="75" ry="32" stroke="#495057" stroke-width="2"></ellipse>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="590" y="102.0">Client</tspan></text>
+  <rect fill="#f8f9fa" height="420" rx="12" stroke="#495057" stroke-dasharray="9 7" stroke-width="2" width="300" x="80" y="230"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="230" y="258.0">Node 192.168.1.2</tspan></text>
+  <rect fill="#ffd8a8" height="55" rx="12" stroke="#e8590c" stroke-width="2" width="170" x="145" y="295"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="230.0" y="322.5">NodePort 30008</tspan></text>
+  <rect fill="#a5d8ff" height="82" rx="12" stroke="#1971c2" stroke-width="2" width="170" x="145" y="515"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="230.0" y="545.375">Pod</tspan><tspan x="230.0" y="566.625">10.244.0.3</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="590,134 230,295" stroke="#495057" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#f8f9fa" height="420" rx="12" stroke="#495057" stroke-dasharray="9 7" stroke-width="2" width="300" x="425" y="230"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="575" y="258.0">Node 192.168.1.3</tspan></text>
+  <rect fill="#ffd8a8" height="55" rx="12" stroke="#e8590c" stroke-width="2" width="170" x="490" y="295"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="575.0" y="322.5">NodePort 30008</tspan></text>
+  <rect fill="#a5d8ff" height="82" rx="12" stroke="#1971c2" stroke-width="2" width="170" x="490" y="515"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="575.0" y="545.375">Pod</tspan><tspan x="575.0" y="566.625">10.244.0.2</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="590,134 575,295" stroke="#495057" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#f8f9fa" height="420" rx="12" stroke="#495057" stroke-dasharray="9 7" stroke-width="2" width="300" x="770" y="230"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="920" y="258.0">Node 192.168.1.4</tspan></text>
+  <rect fill="#ffd8a8" height="55" rx="12" stroke="#e8590c" stroke-width="2" width="170" x="835" y="295"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="920.0" y="322.5">NodePort 30008</tspan></text>
+  <rect fill="#a5d8ff" height="82" rx="12" stroke="#1971c2" stroke-width="2" width="170" x="835" y="515"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="920.0" y="545.375">Pod</tspan><tspan x="920.0" y="566.625">10.244.0.4</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="590,134 920,295" stroke="#495057" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#c5f6fa" height="70" rx="12" stroke="#0b7285" stroke-width="2" width="480" x="350" y="395"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="590.0" y="430.0">One virtual Service routes across the cluster</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="230,350 230,395" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="590,465 230,515" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="575,350 575,395" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="590,465 575,515" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="920,350 920,395" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="590,465 920,515" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="590" y="685.0">Client may use :30008 on any node IP; the selected backend Pod may run elsewhere.</tspan></text>
+</svg></p>
 <h3 id="clusterip">ClusterIP</h3>
-<p><img alt="ClusterIP" src="../../images/clusterip.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1120 780" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>ClusterIP Services between application tiers</title><desc>Stable ClusterIP Services connect changing front-end, back-end, and Redis Pods.</desc><title>ClusterIP Services connecting three application tiers</title>
+  <desc>Front-end Pods reach back-end Pods through a back-end Service, and back-end Pods reach Redis Pods through a Redis Service.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/images/clusterip.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="560.0" y="35.0">Stable ClusterIP Services connect changing Pods</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" text-anchor="start"><tspan x="55" y="155.0">front-end</tspan></text>
+  <rect fill="#a5d8ff" height="100" rx="12" stroke="#1971c2" stroke-width="2" width="180" x="245" y="105"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="335.0" y="144.375">Pod</tspan><tspan x="335.0" y="165.625">10.244.0.3</tspan></text>
+  <rect fill="#a5d8ff" height="100" rx="12" stroke="#1971c2" stroke-width="2" width="180" x="485" y="105"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="575.0" y="144.375">Pod</tspan><tspan x="575.0" y="165.625">10.244.0.2</tspan></text>
+  <rect fill="#a5d8ff" height="100" rx="12" stroke="#1971c2" stroke-width="2" width="180" x="725" y="105"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="815.0" y="144.375">Pod</tspan><tspan x="815.0" y="165.625">10.244.0.4</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" text-anchor="start"><tspan x="55" y="410.0">back-end</tspan></text>
+  <rect fill="#b2f2bb" height="100" rx="12" stroke="#2f9e44" stroke-width="2" width="180" x="245" y="360"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="335.0" y="399.375">Pod</tspan><tspan x="335.0" y="420.625">10.244.0.5</tspan></text>
+  <rect fill="#b2f2bb" height="100" rx="12" stroke="#2f9e44" stroke-width="2" width="180" x="485" y="360"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="575.0" y="399.375">Pod</tspan><tspan x="575.0" y="420.625">10.244.0.6</tspan></text>
+  <rect fill="#b2f2bb" height="100" rx="12" stroke="#2f9e44" stroke-width="2" width="180" x="725" y="360"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="815.0" y="399.375">Pod</tspan><tspan x="815.0" y="420.625">10.244.0.7</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" text-anchor="start"><tspan x="55" y="665.0">redis</tspan></text>
+  <rect fill="#ffc9c9" height="100" rx="12" stroke="#c92a2a" stroke-width="2" width="180" x="245" y="615"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="335.0" y="654.375">Pod</tspan><tspan x="335.0" y="675.625">10.244.0.8</tspan></text>
+  <rect fill="#ffc9c9" height="100" rx="12" stroke="#c92a2a" stroke-width="2" width="180" x="485" y="615"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="575.0" y="654.375">Pod</tspan><tspan x="575.0" y="675.625">10.244.0.9</tspan></text>
+  <rect fill="#ffc9c9" height="100" rx="12" stroke="#c92a2a" stroke-width="2" width="180" x="725" y="615"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="815.0" y="654.375">Pod</tspan><tspan x="815.0" y="675.625">10.244.0.10</tspan></text>
+  <rect fill="#c5f6fa" height="65" rx="12" stroke="#0b7285" stroke-width="2" width="610" x="270" y="250"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="575.0" y="282.5">back-end Service (stable ClusterIP)</tspan></text>
+  <rect fill="#ffd8a8" height="65" rx="12" stroke="#e8590c" stroke-width="2" width="610" x="270" y="505"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="575.0" y="537.5">redis Service (stable ClusterIP)</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="335,205 335,250" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,315 335,360" stroke="#0b7285" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="335,460 335,505" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,570 335,615" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="575,205 575,250" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,315 575,360" stroke="#0b7285" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="575,460 575,505" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,570 575,615" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="815,205 815,250" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,315 815,360" stroke="#0b7285" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="815,460 815,505" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,570 815,615" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+</svg></p>
 <p>service-definition.yaml</p>
 <pre class="codehilite"><code class="language-yaml">apiVersion: v1
 kind: Service
@@ -1917,6 +2055,20 @@ spec:
             Pod
         </a>
         
+        
+        <a href="#container-runtime-note"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#container-runtime-note');">
+            Container runtime note
+        </a>
+        
+        <a href="#pod-operations"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#pod-operations');">
+            Pod operations
+        </a>
+        
+        
 
         
         <a href="#replicationcontrollers-and-replicasets"
@@ -1926,10 +2078,10 @@ spec:
         </a>
         
         
-        <a href="#replicationcontroller-deprecated-definition"
+        <a href="#replicationcontroller-legacy-definition"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#replicationcontroller-deprecated-definition');">
-            ReplicationController (deprecated) Definition
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#replicationcontroller-legacy-definition');">
+            ReplicationController (legacy) Definition
         </a>
         
         <a href="#replicaset-definition-similar-to-rc"

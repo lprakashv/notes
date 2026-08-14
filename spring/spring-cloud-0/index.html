@@ -1511,6 +1511,53 @@
 <li>Spring Cloud Netflix Eureka Client</li>
 <li>Other Spring Cloud Netflix projects...</li>
 </ul>
+<h2 id="version-scope-and-current-equivalents">Version scope and current equivalents</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Manual review</p>
+<p>This Spring Cloud series uses the Camden-era stack. Its Config, Eureka,
+Ribbon, Zuul, Hystrix, and Turbine examples should not be copied into a new
+project without checking the selected Spring Boot/Spring Cloud release train.
+Ribbon, Zuul 1, Hystrix, and Turbine moved to maintenance mode and are absent
+from current Spring Cloud Netflix documentation.</p>
+</div>
+<p>For a new system, start with the current release-train documentation and consider:</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Legacy topic in these notes</th>
+<th>Current starting point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ribbon</td>
+<td>Spring Cloud LoadBalancer</td>
+</tr>
+<tr>
+<td>Zuul 1</td>
+<td>Spring Cloud Gateway</td>
+</tr>
+<tr>
+<td>Hystrix</td>
+<td>Spring Cloud CircuitBreaker with a supported implementation</td>
+</tr>
+<tr>
+<td>Hystrix Dashboard/Turbine</td>
+<td>Micrometer metrics, traces, and an observability backend</td>
+</tr>
+<tr>
+<td><code>bootstrap.yml</code> Config client</td>
+<td><code>spring.config.import=configserver:</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Eureka client and server remain available in Spring Cloud Netflix. The warning
+is about version scope, not about every concept in the series being obsolete.</p>
+<p>Further reading: <a href="https://spring.io/projects/spring-cloud">Spring Cloud projects</a>
+and <a href="https://docs.spring.io/spring-cloud-netflix/reference/">Spring Cloud Netflix</a>.</p>
   </div>
   
   <script>
@@ -1691,10 +1738,26 @@
         
         
         
+        <a href="#spring-cloud-stack"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#spring-cloud-stack');">
+            Spring cloud stack
+        </a>
+        
+        
         <a href="#spring-cloud-netflix"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#spring-cloud-netflix');">
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#spring-cloud-netflix');">
             Spring Cloud Netflix
+        </a>
+        
+        
+
+        
+        <a href="#version-scope-and-current-equivalents"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#version-scope-and-current-equivalents');">
+            Version scope and current equivalents
         </a>
         
 

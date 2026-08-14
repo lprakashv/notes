@@ -1486,12 +1486,20 @@
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
     <h2 id="strings">Strings</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
-<li>String pool was used to be in Permgen, but <strong>since java 8 it has been moved to main heap area</strong>.</li>
-<li>Since java 1.7 <code>+</code> operators are implemented using <code>StringBuilder</code>'s <code>.append()</code> method.</li>
-<li><code>.concat()</code> can only concat 2 strings (unlike <code>.append()</code> and <code>+</code> which can concat different data types)</li>
-<li><strong>There was a memory leak in java 1.6 <code>String()</code> constructor.</strong></li>
-<li>Regex - match introduced in java 8.</li>
+<li>The interned string pool moved from PermGen to the regular heap in Java 7.</li>
+<li>String concatenation with <code>+</code> is compiled to an implementation chosen by the
+  compiler/runtime. Modern JDKs may use <code>invokedynamic</code>; do not rely on a specific
+  <code>StringBuilder</code> translation.</li>
+<li><code>String.concat</code> accepts one <code>String</code>; <code>+</code> converts operands using string
+  conversion rules.</li>
+<li>Since Java 7u6, <code>substring</code> copies the requested range instead of retaining the
+  original backing array.</li>
+<li><code>String</code> is immutable. Use <code>StringBuilder</code> for repeated single-threaded mutation
+  when profiling shows concatenation is a hot path.</li>
 </ul>
 <h2 id="stream">Stream</h2>
 <ul>
@@ -1536,62 +1544,66 @@ for (Seller s : sorted)
 <li>No distraction of garbage variable (sellers, sorted in the above example)</li>
 <li>Don't have to keep track of context which leads to code understanding on one glance, less error prone.</li>
 </ol>
-<h2 id="classloader">ClassLoader</h2>
-<p><strong>javac</strong> : <code>*.java</code> files to <code>*.class</code> files</p>
-<p><strong>Class-loader</strong> : loads the <code>*.class</code> files!</p>
-<p>Kinds of class loaders and load from locations:</p>
+<h2 id="class-loaders">Class Loaders</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>javac</code> compiles source into class files. At runtime, class loaders locate class
+definitions and define <code>Class&lt;?&gt;</code> objects. Current JDKs have three built-in loader
+roles:</p>
 <ol>
-<li><strong>Bootstrap</strong> (or "Primordial ClassLoader")<ol>
-<li><code>JRE/lib/rt.jar</code></li>
+<li><strong>Bootstrap loader:</strong> built into the VM; loads foundational runtime classes and
+   is commonly represented by <code>null</code> from <code>Class.getClassLoader()</code>.</li>
+<li><strong>Platform loader:</strong> loads Java SE platform and JDK runtime classes.</li>
+<li><strong>System/application loader:</strong> normally loads application classes from the
+   class path or module path.</li>
 </ol>
-</li>
-<li><strong>Extension</strong><ol>
-<li><code>JRE/lib/ext</code></li>
-<li>Or any directory denoted by : <code>"java.ext.dirs"</code></li>
-</ol>
-</li>
-<li>System or Application<ol>
-<li><code>"CLASSPATH"</code> environment variable.</li>
-<li><code>"-classmate"</code> or "-cp" option.</li>
-<li>Classpath attribute of manifest inside JAR file.</li>
-</ol>
-</li>
-</ol>
-<h3 id="bootstrap-classloader">Bootstrap ClassLoader</h3>
-<ul>
-<li>Loads standard JDK class files from "rt.jar"</li>
-<li>Parent of all class loaders</li>
-<li>Doesn't have any parent</li>
-<li><code>String.class.getClassLoader() == null</code></li>
-<li>Only class loader which is <strong>implemented in native language</strong>, mostly in "C" !</li>
-<li><strong>All others are implemented using <code>java.lang.ClassLoader</code></strong></li>
-</ul>
-<h3 id="extension-classloader">Extension ClassLoader</h3>
-<ul>
-<li>Delegates class loading request to its parent (Bootstrap)</li>
-<li>If unsuccessful from parent (Bootstrap), it loads class from <code>"jre/lib/ext"</code> or any directory pointed by <code>"java.ext.dirs"</code></li>
-<li>Implemented by : <code>sun.misc.Launcher$ExtClassLoader</code></li>
-<li>Child or Extension class loader</li>
-</ul>
-<p><img alt="ClassLoader" src="../images/jvm-classloader.png" /></p>
-<p>Principles:</p>
-<ol>
-<li>Delegation principle: A class in loaded in Java when it is needed.</li>
-<li>Visibility principle: Child ClassLoader can see class loaded by parent ClassLoader, but the vice-versa is not true.</li>
-</ol>
-<p>Simple test to prove visibility principle</p>
-<ul>
-<li>Get Current class's ClassLoader by calling, <code>Abc.class.getClassLoader()</code> ====&gt; Abc is an Application ClassLoader class</li>
-<li>If we try to load this class using the Extension class loader like:</li>
-<li><code>Class.forName("somepack.Abc", true, ClassLoaderTest.class.getClassLoader().getParent())</code></li>
-<li>This will fail! =====&gt; meaning extension class loader cannot see the classes loaded by application class loader</li>
-</ul>
-<p>Extras:</p>
-<ul>
-<li>Class is loaded by calling <code>loadClass()</code> method of <code>java.lang.ClassLoader</code> class which calls <code>findClass()</code> method to locate bytecodes for the corresponding class</li>
-<li>Extension ClassLoader uses <code>java.net.URLClassLoader</code> which searches for class files and resources in JAR and directories. any search path which is ended using "/" is considered a directory</li>
-<li>If <code>findClass()</code> does not found the class than it throws <code>java.lang.ClassNotFoundException</code> and if it finds it calls defineClass() to convert bytecodes into a <code>.class</code> instance which is returned to the caller</li>
-</ul>
+<p>The pre-Java-9 extension mechanism, <code>rt.jar</code>, <code>lib/ext</code>, and <code>java.ext.dirs</code> no
+longer describe the current runtime image.</p>
+<h3 id="parent-delegation">Parent delegation</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The usual <code>ClassLoader.loadClass</code> implementation asks its parent first and calls
+<code>findClass</code> only if the parent cannot load the class. This prevents an application
+loader from casually replacing platform classes. Custom plugin and container
+loaders may use different delegation rules.</p>
+<p><svg role="img" viewBox="0 0 1120 660" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Java class-loader parent delegation</title><desc>Application and platform loaders delegate upward before a not-found request falls back toward findClass.</desc><title>Java class-loader parent delegation</title>
+  <desc>The application loader delegates to the platform loader, which delegates to bootstrap; if a parent cannot load a class, the request falls back toward the child loader's findClass implementation.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/java/images/jvm-classloader.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="560.0" y="35.0">Parent-first class loading</tspan></text>
+  <rect fill="#a5d8ff" height="100" rx="12" stroke="#1971c2" stroke-width="2" width="250" x="90" y="250"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="215.0" y="286.875">Application</tspan><tspan x="215.0" y="313.125">class loader</tspan></text>
+  <rect fill="#b2f2bb" height="100" rx="12" stroke="#2f9e44" stroke-width="2" width="250" x="435" y="250"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="560.0" y="286.875">Platform</tspan><tspan x="560.0" y="313.125">class loader</tspan></text>
+  <rect fill="#ffd8a8" height="100" rx="12" stroke="#e8590c" stroke-width="2" width="250" x="780" y="250"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="905.0" y="286.875">Bootstrap</tspan><tspan x="905.0" y="313.125">class loader</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="340,275 435,275" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="387.5" y="253.0">delegate</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="685,275 780,275" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="732.5" y="253.0">delegate</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="780,330 685,330" stroke="#495057" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="732.5" y="352.0">not found</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="435,330 340,330" stroke="#495057" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="387.5" y="352.0">not found</tspan></text>
+  <rect fill="#d0bfff" height="75" rx="12" stroke="#6741d9" stroke-width="2" width="210" x="110" y="470"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="215.0" y="507.5">findClass</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="215,350 215,470" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="310.0" y="410.0">define class</tspan></text>
+  <ellipse cx="215" cy="125" fill="#e9ecef" rx="125" ry="38" stroke="#495057" stroke-width="2"></ellipse>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="215" y="125.0">loadClass(name)</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="215,163 215,250" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="500" text-anchor="middle"><tspan x="560" y="600.0">Class identity = binary name + defining class loader</tspan></text>
+</svg></p>
+<p>Class identity includes both the binary name and the defining loader. Two loaders
+can define classes with the same name that are not assignment-compatible.</p>
+<p>Further reading: <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ClassLoader.html"><code>ClassLoader</code></a>.</p>
   </div>
   
   <script>
@@ -1788,23 +1800,17 @@ for (Seller s : sorted)
         
 
         
-        <a href="#classloader"
+        <a href="#class-loaders"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#classloader');">
-            ClassLoader
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#class-loaders');">
+            Class Loaders
         </a>
         
         
-        <a href="#bootstrap-classloader"
+        <a href="#parent-delegation"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#bootstrap-classloader');">
-            Bootstrap ClassLoader
-        </a>
-        
-        <a href="#extension-classloader"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#extension-classloader');">
-            Extension ClassLoader
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#parent-delegation');">
+            Parent delegation
         </a>
         
         

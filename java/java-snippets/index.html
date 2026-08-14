@@ -1486,94 +1486,125 @@
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
     <h2 id="array">Array</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <pre class="codehilite"><code class="language-java">Arrays.fill(array, value);
 
-/** Copy array: */
 System.arraycopy(
- int[]    source_array,
- int      start,
- int[]    dest_array,
- int      start2,
- int      end
+    sourceArray,
+    sourceStart,
+    destinationArray,
+    destinationStart,
+    length
 );
 </code></pre>
 
 <h2 id="map">Map</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <pre class="codehilite"><code class="language-java">map.getOrDefault(key, defaultVal);
 
 map.putIfAbsent(key, value);
 
 //smallest
 treeMap.firstEntry();
-// greatest key less than 'k'
-treeMap.floorKey(int k);
-// greatest entry with key less than 'k'
-treeMap.floorEntry(int k);
+// greatest key less than or equal to k
+treeMap.floorKey(k);
+// greatest entry with key less than or equal to k
+treeMap.floorEntry(k);
+// greatest key strictly less than k
+treeMap.lowerKey(k);
 </code></pre>
 
 <h2 id="set">Set</h2>
-<pre class="codehilite"><code class="language-java">/** Similar to tree map =&gt; tree set: */
-// smallest
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-java">// smallest
 treeSet.first();
-// greatest element less than 'k'
-treeSet.floor(int k);
-// smallest element with key greater than 'k'
-treeSet.ceiling(int k);
+// greatest element less than or equal to k
+treeSet.floor(k);
+// smallest element greater than or equal to k
+treeSet.ceiling(k);
+// strictly less / strictly greater
+treeSet.lower(k);
+treeSet.higher(k);
 </code></pre>
 
 <h2 id="queue">Queue</h2>
-<pre class="codehilite"><code class="language-java">PriorityQueue minHeap = new PriorityQueue&lt;&gt;();
-PriorityQueue maxHeap = new PriorityQueue&lt;&gt;(Comparator.reverseOrder());
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-java">PriorityQueue&lt;Integer&gt; minHeap = new PriorityQueue&lt;&gt;();
+PriorityQueue&lt;Integer&gt; maxHeap = new PriorityQueue&lt;&gt;(Comparator.reverseOrder());
 </code></pre>
 
 <h2 id="bitwise-tricks">Bitwise Tricks</h2>
-<p>Test kth bit:</p>
-<pre class="codehilite"><code class="language-java">s &amp; (1 &lt;&lt; k)
-</code></pre>
-
-<p>Set kth bit:</p>
-<pre class="codehilite"><code class="language-java">s |= (1 &lt;&lt; k)
-</code></pre>
-
-<p>Turn off kth bit:</p>
-<pre class="codehilite"><code class="language-java">s &amp;= ~(1 &lt;&lt; k)
-</code></pre>
-
-<p>Toggle kth bit:</p>
-<pre class="codehilite"><code class="language-java">s ^= (1 &lt;&lt; k)
-</code></pre>
-
-<p>Multiple by 2n:</p>
-<pre class="codehilite"><code class="language-java">s &lt;&lt; n
-</code></pre>
-
-<p>Divide by 2n:</p>
-<pre class="codehilite"><code class="language-java">s &gt;&gt; n
-</code></pre>
-
-<p>Intersection:</p>
-<pre class="codehilite"><code class="language-java">s &amp; t
-</code></pre>
-
-<p>Union:</p>
-<pre class="codehilite"><code class="language-java">s | t
-</code></pre>
-
-<p>Set Subtraction:</p>
-<pre class="codehilite"><code class="language-java">s &amp; ~t
-</code></pre>
-
-<p>Extract lowest set bit:</p>
-<pre class="codehilite"><code class="language-java">s &amp; (-s)
-</code></pre>
-
-<p>Extract lowest unset bit:</p>
-<pre class="codehilite"><code class="language-java">~s &amp; (s + 1)
-</code></pre>
-
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test zero-based bit <code>k</code></td>
+<td><code>(s &amp; (1 &lt;&lt; k)) != 0</code></td>
+</tr>
+<tr>
+<td>Set bit <code>k</code></td>
+<td><code>s |= 1 &lt;&lt; k</code></td>
+</tr>
+<tr>
+<td>Clear bit <code>k</code></td>
+<td><code>s &amp;= ~(1 &lt;&lt; k)</code></td>
+</tr>
+<tr>
+<td>Toggle bit <code>k</code></td>
+<td><code>s ^= 1 &lt;&lt; k</code></td>
+</tr>
+<tr>
+<td>Intersection / union</td>
+<td><code>s &amp; t</code> / <code>s \| t</code></td>
+</tr>
+<tr>
+<td>Set subtraction</td>
+<td><code>s &amp; ~t</code></td>
+</tr>
+<tr>
+<td>Lowest set bit</td>
+<td><code>s &amp; -s</code></td>
+</tr>
+<tr>
+<td>Lowest unset bit</td>
+<td><code>~s &amp; (s + 1)</code></td>
+</tr>
+<tr>
+<td>Multiply by 2^n</td>
+<td><code>s &lt;&lt; n</code> (subject to overflow)</td>
+</tr>
+<tr>
+<td>Arithmetic right shift</td>
+<td><code>s &gt;&gt; n</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>For negative odd values, <code>&gt;&gt; n</code> rounds differently from integer division by 2^n.</p>
 <p>Swap Values:</p>
-<pre class="codehilite"><code class="language-java">x ^= y; y ^= x; x ^= y
+<pre class="codehilite"><code class="language-java">int temporary = x;
+x = y;
+y = temporary;
 </code></pre>
+
+<p>The temporary-variable form is clearer and also works when both expressions refer
+to the same storage location.</p>
+<p>Reference: <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html#jls-15.22">Java Language Specification: bitwise and shift operators</a>.</p>
   </div>
   
   <script>

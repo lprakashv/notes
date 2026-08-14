@@ -1485,9 +1485,72 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for Rust snippets and notes.</p>
-</blockquote>
+    <h2 id="ownership-and-borrowing">Ownership and borrowing</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-rust">fn length(value: &amp;str) -&gt; usize {
+    value.len()
+}
+
+fn main() {
+    let name = String::from(&quot;Ferris&quot;);
+    println!(&quot;{} has {} bytes&quot;, name, length(&amp;name));
+}
+</code></pre>
+
+<p>Passing <code>&amp;name</code> borrows the value, so <code>main</code> keeps ownership. Use <code>&amp;mut T</code> for
+an exclusive mutable borrow; Rust permits either many immutable references or one
+mutable reference at a time.</p>
+<h2 id="option-and-result"><code>Option</code> and <code>Result</code></h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-rust">fn first(items: &amp;[String]) -&gt; Option&lt;&amp;str&gt; {
+    items.first().map(String::as_str)
+}
+
+fn parse_port(raw: &amp;str) -&gt; Result&lt;u16, std::num::ParseIntError&gt; {
+    raw.parse()
+}
+</code></pre>
+
+<p><code>Option&lt;T&gt;</code> represents a value that may be absent. <code>Result&lt;T, E&gt;</code> represents an
+operation that may fail. Prefer matching or the <code>?</code> operator over <code>unwrap()</code> in
+code that must handle bad input gracefully.</p>
+<h2 id="iterators">Iterators</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-rust">let even_squares: Vec&lt;i32&gt; = (1..=8)
+    .filter(|n| n % 2 == 0)
+    .map(|n| n * n)
+    .collect();
+</code></pre>
+
+<p>Iterator adapters are lazy; <code>collect</code>, <code>sum</code>, and <code>for_each</code> are examples of
+consumers that drive the iterator.</p>
+<h2 id="testing">Testing</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-rust">fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn adds_two_numbers() {
+        assert_eq!(add(2, 3), 5);
+    }
+}
+</code></pre>
+
+<p>Run unit and integration tests with <code>cargo test</code>; use <code>cargo clippy</code> for common
+correctness and style lints and <code>cargo fmt --check</code> in CI.</p>
   </div>
   
   <script>
@@ -1664,6 +1727,44 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#ownership-and-borrowing"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#ownership-and-borrowing');">
+            Ownership and borrowing
+        </a>
+        
+
+        
+        <a href="#option-and-result"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#option-and-result');">
+            Option and Result
+        </a>
+        
+
+        
+        <a href="#iterators"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#iterators');">
+            Iterators
+        </a>
+        
+
+        
+        <a href="#testing"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#testing');">
+            Testing
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

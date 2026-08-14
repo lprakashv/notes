@@ -1485,9 +1485,72 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on OpenTelemetry metrics.</p>
-</blockquote>
+    <h2 id="instruments">Instruments</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Choose an instrument from what the value means:</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Instrument</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Counter</td>
+<td>Monotonic totals such as completed requests</td>
+</tr>
+<tr>
+<td>UpDownCounter</td>
+<td>Values that may rise and fall, such as active jobs</td>
+</tr>
+<tr>
+<td>Histogram</td>
+<td>Distributions such as request duration or payload size</td>
+</tr>
+<tr>
+<td>Observable Counter</td>
+<td>A monotonic value read from another system</td>
+</tr>
+<tr>
+<td>Observable UpDownCounter</td>
+<td>A sampled value that may rise and fall</td>
+</tr>
+<tr>
+<td>Observable Gauge</td>
+<td>A current sampled measurement</td>
+</tr>
+</tbody>
+</table></div>
+<p>Record durations in a consistent unit and use semantic conventions when one
+exists.</p>
+<h2 id="attributes-and-cardinality">Attributes and cardinality</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Attributes split a metric into time series. A small bounded set such as HTTP
+method or coarse status code is usually useful. User IDs, raw URLs, request IDs,
+and timestamps can create an unbounded number of series and overwhelm the
+pipeline.</p>
+<p>Estimate cardinality before launch:</p>
+<pre class="codehilite"><code class="language-text">series = instrument count × product of distinct attribute values
+</code></pre>
+
+<h2 id="aggregation-and-temporality">Aggregation and temporality</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The SDK aggregates measurements before export. A histogram keeps a count, sum,
+and bucket counts rather than every observation. Exporters may use cumulative
+temporality, where values cover the process lifetime, or delta temporality, where
+values cover the interval since the previous export.</p>
+<p>Metric readers and views control collection and aggregation. Keep views in
+application-level telemetry configuration so libraries do not impose backend
+policy.</p>
+<p>Further reading: <a href="https://opentelemetry.io/docs/concepts/signals/metrics/">OpenTelemetry metrics</a>
+and <a href="https://opentelemetry.io/docs/reference/specification/metrics/data-model/">metrics data model</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1727,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#instruments"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#instruments');">
+            Instruments
+        </a>
+        
+
+        
+        <a href="#attributes-and-cardinality"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#attributes-and-cardinality');">
+            Attributes and cardinality
+        </a>
+        
+
+        
+        <a href="#aggregation-and-temporality"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#aggregation-and-temporality');">
+            Aggregation and temporality
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

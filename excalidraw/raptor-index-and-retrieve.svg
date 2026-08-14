@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="100%" role="img">
+  <title>RAPTOR indexing and retrieval tree</title>
+  <desc>Document chunks are embedded, clustered, and summarized recursively; retrieval may search detailed leaves and higher-level summaries while citations resolve to source chunks.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="35.0">RAPTOR builds and searches a hierarchy</tspan></text>
+  <rect x="80" y="545" width="140" height="65" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="150.0" y="577.5">Chunk 1</tspan></text>
+  <rect x="250" y="545" width="140" height="65" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="320.0" y="577.5">Chunk 2</tspan></text>
+  <rect x="420" y="545" width="140" height="65" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="490.0" y="577.5">Chunk 3</tspan></text>
+  <rect x="590" y="545" width="140" height="65" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="660.0" y="577.5">Chunk 4</tspan></text>
+  <rect x="760" y="545" width="140" height="65" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="830.0" y="577.5">Chunk 5</tspan></text>
+  <rect x="930" y="545" width="140" height="65" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1000.0" y="577.5">Chunk 6</tspan></text>
+  <rect x="165" y="345" width="190" height="85" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="260.0" y="376.25">Cluster A</tspan><tspan x="260.0" y="398.75">summary</tspan></text>
+  <rect x="505" y="345" width="190" height="85" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="600.0" y="376.25">Cluster B</tspan><tspan x="600.0" y="398.75">summary</tspan></text>
+  <rect x="845" y="345" width="190" height="85" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="940.0" y="376.25">Cluster C</tspan><tspan x="940.0" y="398.75">summary</tspan></text>
+  <rect x="420" y="145" width="340" height="90" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="190.0">Higher-level summary</tspan></text>
+  <polyline points="150,545 260,430" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="320,545 260,430" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="490,545 600,430" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="660,545 600,430" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="830,545 940,430" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="1000,545 940,430" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="260,345 590,235" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="600,345 590,235" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="940,345 590,235" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <ellipse cx="1040" cy="155" rx="95" ry="38" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="20" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1040" y="155.0">query</tspan></text>
+  <polyline points="945,155 760,190" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="852.5" y="152.5">search summaries</tspan></text>
+  <polyline points="1040,193 1040,545" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1110.0" y="369.0">search leaves</tspan></text>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590" y="675.0">Answer evidence retains lineage back to the original chunks.</tspan></text>
+</svg>

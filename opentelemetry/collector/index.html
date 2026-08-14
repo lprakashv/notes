@@ -1485,9 +1485,95 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on the OpenTelemetry Collector.</p>
-</blockquote>
+    <h2 id="role">Role</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The OpenTelemetry Collector is a vendor-neutral service for receiving,
+processing, and exporting telemetry. Applications can send one protocol and the
+Collector can batch, filter, enrich, sample, and forward the data to one or more
+backends.</p>
+<p>A Collector does not store telemetry as its primary job. It is a pipeline
+component, so design for backpressure, retries, queue limits, and what happens
+when the destination is unavailable.</p>
+<h2 id="pipeline-model">Pipeline model</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Each signal pipeline is assembled from three component types:</p>
+<ul>
+<li><strong>receivers</strong> accept telemetry, for example OTLP;</li>
+<li><strong>processors</strong> transform or buffer it, for example <code>batch</code> or <code>memory_limiter</code>;</li>
+<li><strong>exporters</strong> send it to another Collector or backend.</li>
+</ul>
+<p><svg role="img" viewBox="0 0 1180 590" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>OpenTelemetry Collector pipeline</title><desc>Applications send telemetry through receivers and ordered processors to exporters and observability backends.</desc><title>OpenTelemetry Collector pipeline</title>
+  <desc>Applications send telemetry to receivers, which pass it through ordered processors and then exporters to one or more observability backends.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="590.0" y="35.0">A signal pipeline wires receivers → processors → exporters</tspan></text>
+  <rect fill="#e9ecef" height="120" rx="12" stroke="#495057" stroke-width="2" width="185" x="55" y="215"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="147.5" y="263.125">Applications</tspan><tspan x="147.5" y="286.875">OTLP gRPC / HTTP</tspan></text>
+  <rect fill="#a5d8ff" height="120" rx="12" stroke="#1971c2" stroke-width="2" width="190" x="310" y="215"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="405.0" y="262.5">Receiver</tspan><tspan x="405.0" y="287.5">otlp</tspan></text>
+  <rect fill="#ffec99" height="90" rx="12" stroke="#e67700" stroke-width="2" width="210" x="570" y="155"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="675.0" y="188.75">Processor</tspan><tspan x="675.0" y="211.25">memory_limiter</tspan></text>
+  <rect fill="#ffec99" height="90" rx="12" stroke="#e67700" stroke-width="2" width="210" x="570" y="305"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="675.0" y="338.125">Processor</tspan><tspan x="675.0" y="361.875">batch</tspan></text>
+  <rect fill="#b2f2bb" height="120" rx="12" stroke="#2f9e44" stroke-width="2" width="190" x="850" y="215"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="945.0" y="263.125">Exporter</tspan><tspan x="945.0" y="286.875">OTLP / debug</tspan></text>
+  <rect fill="#d0bfff" height="80" rx="12" stroke="#6741d9" stroke-width="2" width="260" x="850" y="445"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="980.0" y="485.0">Observability backend</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="240,275 310,275" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="500,275 535,275 535,200 570,200" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="675,245 675,305" stroke="#e67700" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="780,350 815,350 815,275 850,275" stroke="#e67700" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="945,335 945,445" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="590" y="555.0">Components do nothing until referenced under service.pipelines.<signal>.</tspan></text>
+</svg></p>
+<pre class="codehilite"><code class="language-yaml">receivers:
+  otlp:
+    protocols:
+      grpc: {}
+      http: {}
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+  batch: {}
+
+exporters:
+  debug: {}
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [debug]
+</code></pre>
+
+<p>Defining a component is not enough; it must also be referenced from a pipeline
+under <code>service</code>.</p>
+<h2 id="deployment-patterns">Deployment patterns</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li><strong>Agent:</strong> one Collector near each workload or node; useful for host-local data.</li>
+<li><strong>Gateway:</strong> a shared tier for central policy, sampling, and export.</li>
+<li><strong>Agent plus gateway:</strong> local collection with centralized processing.</li>
+</ul>
+<p>Start with the fewest moving parts that meet the reliability requirement. A
+gateway needs horizontal scaling and load balancing for the protocol and any
+stateful processors it uses.</p>
+<p>Further reading: <a href="https://opentelemetry.io/docs/collector/">Collector documentation</a>
+and <a href="https://opentelemetry.io/docs/collector/configuration/">configuration</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1750,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#role"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#role');">
+            Role
+        </a>
+        
+
+        
+        <a href="#pipeline-model"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#pipeline-model');">
+            Pipeline model
+        </a>
+        
+
+        
+        <a href="#deployment-patterns"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#deployment-patterns');">
+            Deployment patterns
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

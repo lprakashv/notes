@@ -1485,9 +1485,44 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for prompt-engineering notes and examples.</p>
-</blockquote>
+    <h2 id="a-useful-prompt-contract">A useful prompt contract</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>A strong prompt usually states:</p>
+<ol>
+<li>outcome and audience;</li>
+<li>necessary context;</li>
+<li>constraints and approval boundaries;</li>
+<li>required evidence and output format.</li>
+</ol>
+<p>State each instruction once. Keep examples when they encode a real product rule
+or repair a measured failure; remove decorative prose and repeated reminders.</p>
+<pre class="codehilite"><code class="language-text">Summarize the incident for an engineering manager.
+
+Use only the attached timeline. Lead with impact and current status, then list
+the three most important contributing factors and the next owner/action/date.
+If a fact is missing, say &quot;unknown&quot;. Use at most 180 words.
+</code></pre>
+
+<h2 id="grounding-and-uncertainty">Grounding and uncertainty</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Separate instructions from untrusted documents or user-supplied content.</li>
+<li>Require evidence and define what to do when sources disagree or are incomplete.</li>
+<li>Keep authorization, secrets, calculations, and strict validation in code.</li>
+</ul>
+<h2 id="improve-with-evaluations">Improve with evaluations</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Keep reviewed examples, change one prompt element at a time, and rerun the same
+evaluation. Version production prompts; validate machine-readable output against
+a schema.</p>
+<p>Further reading: <a href="https://developers.openai.com/api/docs/guides/prompt-engineering">OpenAI prompt engineering</a>
+and <a href="https://developers.openai.com/api/docs/guides/evaluation-best-practices">evaluation best practices</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1699,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#a-useful-prompt-contract"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#a-useful-prompt-contract');">
+            A useful prompt contract
+        </a>
+        
+
+        
+        <a href="#grounding-and-uncertainty"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#grounding-and-uncertainty');">
+            Grounding and uncertainty
+        </a>
+        
+
+        
+        <a href="#improve-with-evaluations"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#improve-with-evaluations');">
+            Improve with evaluations
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

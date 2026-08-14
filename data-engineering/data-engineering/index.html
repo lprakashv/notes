@@ -1485,9 +1485,95 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for data-engineering notes and learning resources.</p>
-</blockquote>
+    <h2 id="what-a-data-engineer-builds">What a data engineer builds</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Data engineering turns raw data into dependable datasets while preserving meaning
+from ingestion to the final report.</p>
+<p>A typical data platform has these stages:</p>
+<ol>
+<li><strong>Ingest</strong> from databases, APIs, files, queues, or event streams.</li>
+<li><strong>Store</strong> raw data with enough history to replay or audit it.</li>
+<li><strong>Transform</strong> data into validated, documented models.</li>
+<li><strong>Serve</strong> those models to analytics, machine learning, and applications.</li>
+<li><strong>Observe</strong> freshness, volume, schema, lineage, cost, and failures.</li>
+</ol>
+<p><svg role="img" viewBox="0 0 1200 560" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Data engineering platform stages</title><desc>Sources flow through ingestion, durable raw storage, transformation, and serving while observability spans every stage.</desc><title>Data engineering platform stages</title>
+  <desc>Sources flow through ingestion, durable raw storage, transformation, and serving; observability spans every stage and enables replay, lineage, and freshness checks.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="600.0" y="35.0">A dependable data path preserves replay and lineage</tspan></text>
+  <rect fill="#e9ecef" height="110" rx="12" stroke="#495057" stroke-width="2" width="170" x="45" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="130.0" y="228.75">Sources</tspan><tspan x="130.0" y="251.25">DB · API · files · events</tspan></text>
+  <rect fill="#a5d8ff" height="110" rx="12" stroke="#1971c2" stroke-width="2" width="170" x="285" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="370.0" y="228.75">Ingest</tspan><tspan x="370.0" y="251.25">batch + streaming</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="215,240 285,240" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#c5f6fa" height="110" rx="12" stroke="#0b7285" stroke-width="2" width="170" x="525" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="610.0" y="228.75">Store raw</tspan><tspan x="610.0" y="251.25">history for replay</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="455,240 525,240" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#b2f2bb" height="110" rx="12" stroke="#2f9e44" stroke-width="2" width="170" x="765" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="850.0" y="228.75">Transform</tspan><tspan x="850.0" y="251.25">validated models</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="695,240 765,240" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#d0bfff" height="110" rx="12" stroke="#6741d9" stroke-width="2" width="170" x="1005" y="185"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="1090.0" y="228.75">Serve</tspan><tspan x="1090.0" y="251.25">BI · ML · apps</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="935,240 1005,240" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#ffd8a8" height="90" rx="12" stroke="#e8590c" stroke-dasharray="9 7" stroke-width="2" width="790" x="225" y="375"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" text-anchor="middle"><tspan x="620" y="405.0">Observe every stage</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="620" y="440.0">freshness · volume · schema · quality · lineage · cost · failures</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="370,295 370,375" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="610,295 610,375" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="850,295 850,375" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="1090,295 1090,375" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="850,465 610,520 370,465" stroke="#c92a2a" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="610.0" y="540.0">replay / backfill</tspan></text>
+</svg></p>
+<h2 id="batch-and-streaming">Batch and streaming</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Batch</th>
+<th>Streaming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Processes a bounded collection</td>
+<td>Processes an unbounded sequence of events</td>
+</tr>
+<tr>
+<td>Usually simpler to replay and reason about</td>
+<td>Usually offers lower latency</td>
+</tr>
+<tr>
+<td>Fits periodic reports and backfills</td>
+<td>Fits alerts, live features, and event-driven systems</td>
+</tr>
+</tbody>
+</table></div>
+<p>Many systems use both. A useful first question is not “Which technology is
+newer?” but “How stale may this result be?” If hourly data is acceptable, a
+batch job is often the calmer and cheaper design.</p>
+<h2 id="reliability-checklist">Reliability checklist</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Make writes idempotent and plan replay/backfill paths.</li>
+<li>Define event time, time zone, and late-data behavior.</li>
+<li>Version schemas and data contracts.</li>
+<li>Test integrity and freshness; retain source lineage.</li>
+<li>Alert on user-visible loss or delay.</li>
+</ul>
+<p>Further reading: <a href="../apache-spark/">Apache Spark</a> and <a href="../big-data/">Big Data</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1750,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#what-a-data-engineer-builds"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#what-a-data-engineer-builds');">
+            What a data engineer builds
+        </a>
+        
+
+        
+        <a href="#batch-and-streaming"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#batch-and-streaming');">
+            Batch and streaming
+        </a>
+        
+
+        
+        <a href="#reliability-checklist"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#reliability-checklist');">
+            Reliability checklist
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

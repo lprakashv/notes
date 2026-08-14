@@ -1486,32 +1486,27 @@
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
     <h2 id="variables">Variables</h2>
-<pre class="codehilite"><code class="language-go">// Define and assign
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">// Declare, then assign.
 var someInt int
 someInt = 42
 
-// combines define and assign =&gt; type inference
+// Short declaration with type inference. This form is valid inside functions.
 someOtherInt := 42
 
-// Multiple variables declaration
-var a, b, c, d int
-var e, f, g, h string
-
-// Multiple variables with assignment
+// Grouped declarations are valid at package or function scope.
 var (
-  x = 42
-  y = 54
-  z = &quot;some string&quot;
-  caps = map[string]string{
-    &quot;a&quot; : &quot;A&quot;,
-    &quot;b&quot; : &quot;B&quot;,
-    &quot;c&quot; : &quot;C&quot;,
-  }
+    SomeIntPublic = 42 // Exported because the name starts with an uppercase letter.
+    privateText   = &quot;visible only inside this package&quot;
 )
 
-
-// Capital case to make it visible outside current package
-SomeIntPublic := 42
+caps := map[string]string{
+    &quot;a&quot;: &quot;A&quot;,
+    &quot;b&quot;: &quot;B&quot;,
+    &quot;c&quot;: &quot;C&quot;,
+}
 </code></pre>
 
 <h2 id="if-else">If-Else</h2>
@@ -1542,7 +1537,7 @@ for i &lt; 10 {
 // Looping over lists/arrays/slices
 someList := []string{ &quot;Apple&quot;, &quot;Banana&quot;, &quot;Carrot&quot; }
 for index, element := range someList {
-  fmt.Print(&quot;At %v -&gt; %v\n&quot;, index, element)
+  fmt.Printf(&quot;At %v -&gt; %v\n&quot;, index, element)
 }
 
 // Looping over maps
@@ -1552,7 +1547,7 @@ someMap := map[string]string{
   &quot;c&quot; : &quot;C&quot;,
 }
 for key, val := range someMap {
-  fmt.Print(&quot;For key: %v, value is: %v\n&quot;, key, val)
+  fmt.Printf(&quot;For key: %v, value is: %v\n&quot;, key, val)
 }
 </code></pre>
 
@@ -1627,26 +1622,62 @@ func main() {
 </code></pre>
 
 <h2 id="interfaces">Interfaces</h2>
-<p>Interface as a "God" type:</p>
-<pre class="codehilite"><code class="language-go">
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Interfaces describe behavior. A concrete type implements an interface implicitly
+by providing its methods; there is no <code>implements</code> declaration.</p>
+<p>Keep interfaces small and define them near the code that consumes them. The empty
+interface <code>any</code> accepts a value of any type, but using it gives up compile-time
+knowledge and should not be a default abstraction.</p>
+<h3 id="type-assertions">Type assertions</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">value, ok := input.(string)
+if !ok {
+    return fmt.Errorf(&quot;expected string, got %T&quot;, input)
+}
 </code></pre>
 
-<p>Type assertions:</p>
-<pre class="codehilite"><code class="language-go">
+<p>Use the two-result form when a different dynamic type is expected; a failed
+single-result assertion panics.</p>
+<h3 id="type-switches">Type switches</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">switch value := input.(type) {
+case string:
+    fmt.Println(&quot;string:&quot;, value)
+case int:
+    fmt.Println(&quot;int:&quot;, value)
+default:
+    fmt.Printf(&quot;unsupported: %T\n&quot;, value)
+}
 </code></pre>
 
-<p>Type assertions with type-switch (runtime):</p>
-<pre class="codehilite"><code class="language-go">
+<h3 id="compile-time-contract-check">Compile-time contract check</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">var _ Animal = Dog{}
 </code></pre>
 
-<p>Compile time type contract:</p>
-<pre class="codehilite"><code class="language-go">
+<p>The blank identifier turns an accidental missing method into a compile-time error.</p>
+<h3 id="composing-interfaces">Composing interfaces</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">type ReaderWriter interface {
+    io.Reader
+    io.Writer
+}
 </code></pre>
 
-<p>Composing types using <code>interface{ interface{ SomeFunc any } }</code> or with named one <code>interface{ Contract1, Contract2 }</code>:</p>
-<pre class="codehilite"><code class="language-go">
-</code></pre>
-
+<h3 id="implicit-implementation">Implicit implementation</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <pre class="codehilite"><code class="language-go">type Animal interface {
   Speak() string
   Legs() int
@@ -1654,12 +1685,12 @@ func main() {
 
 // Any struct implementing/having an interface's all the methods
 // it automatically implements that interface
-type Dog struct {
+type Dog struct{}
 
-}
 func (d Dog) Speak() string {
   return &quot;Bark&quot;
 }
+
 func (d Dog) Legs() int {
   return 4
 }
@@ -1909,6 +1940,38 @@ fmt.Print(animal.Speak())
             data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#interfaces');">
             Interfaces
         </a>
+        
+        
+        <a href="#type-assertions"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#type-assertions');">
+            Type assertions
+        </a>
+        
+        <a href="#type-switches"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#type-switches');">
+            Type switches
+        </a>
+        
+        <a href="#compile-time-contract-check"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#compile-time-contract-check');">
+            Compile-time contract check
+        </a>
+        
+        <a href="#composing-interfaces"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#composing-interfaces');">
+            Composing interfaces
+        </a>
+        
+        <a href="#implicit-implementation"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#implicit-implementation');">
+            Implicit implementation
+        </a>
+        
         
 
         

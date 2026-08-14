@@ -1485,9 +1485,63 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for HTTP service notes and examples in Go.</p>
-</blockquote>
+    <h2 id="minimal-server">Minimal server</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">mux := http.NewServeMux()
+mux.HandleFunc(&quot;GET /healthz&quot;, func(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
+    json.NewEncoder(w).Encode(map[string]string{&quot;status&quot;: &quot;ok&quot;})
+})
+
+server := &amp;http.Server{
+    Addr:              &quot;:8080&quot;,
+    Handler:           mux,
+    ReadHeaderTimeout: 5 * time.Second,
+    IdleTimeout:       60 * time.Second,
+}
+
+if err := server.ListenAndServe(); err != nil &amp;&amp; !errors.Is(err, http.ErrServerClosed) {
+    log.Fatal(err)
+}
+</code></pre>
+
+<p>Prefer an explicit <code>ServeMux</code> over global registration in reusable code. Configure
+timeouts; an unbounded server can hold resources for slow or broken clients.</p>
+<h2 id="handler-habits">Handler habits</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Read request-scoped cancellation from <code>r.Context()</code>.</li>
+<li>Set headers before calling <code>WriteHeader</code> or writing the body.</li>
+<li>Limit request bodies before decoding them.</li>
+<li>Reject unknown JSON fields when the API contract requires strict input.</li>
+<li>Return stable error shapes and do not expose internal error details.</li>
+<li>Put authentication, request IDs, logging, and recovery in middleware.</li>
+</ul>
+<h2 id="graceful-shutdown">Graceful shutdown</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">ctx, stop := signal.NotifyContext(
+    context.Background(), os.Interrupt, syscall.SIGTERM,
+)
+defer stop()
+
+go func() {
+    &lt;-ctx.Done()
+    shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    defer cancel()
+    _ = server.Shutdown(shutdownCtx)
+}()
+</code></pre>
+
+<p><code>Shutdown</code> stops accepting new connections and waits for active handlers until
+the deadline. The process still needs to handle the expected <code>http.ErrServerClosed</code>
+result from <code>ListenAndServe</code>.</p>
+<p>Further reading: <a href="https://pkg.go.dev/net/http"><code>net/http</code></a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1718,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#minimal-server"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#minimal-server');">
+            Minimal server
+        </a>
+        
+
+        
+        <a href="#handler-habits"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#handler-habits');">
+            Handler habits
+        </a>
+        
+
+        
+        <a href="#graceful-shutdown"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#graceful-shutdown');">
+            Graceful shutdown
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

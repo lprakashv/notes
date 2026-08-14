@@ -1600,7 +1600,46 @@ public class Application {
 </code></pre>
 
 <h3 id="reading-hystrix-dashboard">Reading Hystrix Dashboard</h3>
-<p><img alt="Reading Dashboard" src="../images/reading-hystrix-dashboard.png" /></p>
+<h4 id="dashboard-signals">Dashboard signals</h4>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1200 720" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Reading a legacy Hystrix Dashboard command tile</title><desc>Request volume, health, errors, throughput, circuit state, and latency percentiles in a command tile.</desc><title>How to read a legacy Hystrix Dashboard command tile</title>
+  <desc>Annotated command tile showing request volume, health, error rate, throughput, circuit state, hosts, and latency percentiles.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/spring/images/reading-hystrix-dashboard.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="600.0" y="35.0">Reading a legacy Hystrix Dashboard command tile</tspan></text>
+  <ellipse cx="535" cy="300" fill="#b2f2bb" rx="205" ry="165" stroke="#2f9e44" stroke-width="2"></ellipse>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500" text-anchor="middle"><tspan x="535" y="180.0">getCurrentWeather</tspan></text>
+  <text fill="#2f9e44" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="470" y="235.0">1,135</tspan></text>
+  <text fill="#1971c2" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="400" text-anchor="middle"><tspan x="560" y="235.0">0</tspan></text>
+  <text fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="400" text-anchor="middle"><tspan x="615" y="235.0">0</tspan></text>
+  <polyline fill="none" points="390,340 430,340 450,285 480,385 525,382 550,315 580,350 620,350 650,325 680,325" stroke="#1971c2" stroke-linejoin="round" stroke-width="3"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="535" y="410.0">Hosts 1   Median 1 ms   Mean 1 ms</tspan><tspan x="535" y="430.0">p90 2 ms   p99 8 ms   p99.5 8 ms</tspan></text>
+  <rect fill="#ffc9c9" height="62" rx="12" stroke="#c92a2a" stroke-width="2" width="250" x="810" y="210"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="935.0" y="241.0">Error rate 0.0%</tspan></text>
+  <rect fill="#a5d8ff" height="62" rx="12" stroke="#1971c2" stroke-width="2" width="250" x="810" y="295"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="935.0" y="326.0">Throughput 49.7 req/s</tspan></text>
+  <rect fill="#b2f2bb" height="62" rx="12" stroke="#2f9e44" stroke-width="2" width="250" x="810" y="380"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="935.0" y="411.0">Circuit CLOSED</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="330,235 420,235" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="245.0" y="215.0">circle size = request volume</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="330,300 335,300" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="212.5" y="300.0">fill = command health</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="810,242 740,242" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="775.0" y="222.0">failed / rejected / timeout</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="810,326 700,326" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="755.0" y="348.0">requests per second</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="535,465 535,570" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="705.0" y="517.5">latency percentiles (rolling window)</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="535" y="645.0">The exact UI is legacy; the useful reading order is volume → errors → state → latency.</tspan></text>
+</svg></p>
+<h4 id="opening-the-legacy-dashboard">Opening the legacy dashboard</h4>
 <p><img alt="Dashboard" src="../images/hystrix-dashboard.png" /></p>
 <ul>
 <li>Start a standalone hystrix server (just like standalone discovery server)</li>

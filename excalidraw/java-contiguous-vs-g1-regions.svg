@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 580" width="100%" role="img">
+  <title>Fixed contiguous heap spaces compared with G1 regions</title>
+  <desc>A traditional teaching layout uses contiguous Eden, survivor, and old spaces; G1 assigns equal-sized regions dynamically as unused, survivor, Eden, or old.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/java/images/gc3spaces.png&quot;, &quot;archive/original-images/book/java/images/g1gc.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="35.0">Contiguous spaces versus G1 regions</tspan></text>
+  <text text-anchor="start" font-size="20" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="90" y="105.0">Earlier teaching model</tspan></text>
+  <rect x="90" y="135" width="420" height="80" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300.0" y="175.0">Old</tspan></text>
+  <rect x="510" y="135" width="250" height="80" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="635.0" y="175.0">Survivor</tspan></text>
+  <rect x="760" y="135" width="330" height="80" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="925.0" y="175.0">Eden</tspan></text>
+  <text text-anchor="start" font-size="20" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="90" y="285.0">G1 equal-sized regions</tspan></text>
+  <rect x="90" y="325" width="50" height="72" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="115.0" y="361.0">U</tspan></text>
+  <rect x="140" y="325" width="50" height="72" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="165.0" y="361.0">S</tspan></text>
+  <rect x="190" y="325" width="50" height="72" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="215.0" y="361.0">U</tspan></text>
+  <rect x="240" y="325" width="50" height="72" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="265.0" y="361.0">S</tspan></text>
+  <rect x="290" y="325" width="50" height="72" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="315.0" y="361.0">E</tspan></text>
+  <rect x="340" y="325" width="50" height="72" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="365.0" y="361.0">O</tspan></text>
+  <rect x="390" y="325" width="50" height="72" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="415.0" y="361.0">U</tspan></text>
+  <rect x="440" y="325" width="50" height="72" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="465.0" y="361.0">U</tspan></text>
+  <rect x="490" y="325" width="50" height="72" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="515.0" y="361.0">U</tspan></text>
+  <rect x="540" y="325" width="50" height="72" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="565.0" y="361.0">E</tspan></text>
+  <rect x="590" y="325" width="50" height="72" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="615.0" y="361.0">E</tspan></text>
+  <rect x="640" y="325" width="50" height="72" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="665.0" y="361.0">O</tspan></text>
+  <rect x="690" y="325" width="50" height="72" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="715.0" y="361.0">S</tspan></text>
+  <rect x="740" y="325" width="50" height="72" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="765.0" y="361.0">S</tspan></text>
+  <rect x="790" y="325" width="50" height="72" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="815.0" y="361.0">S</tspan></text>
+  <rect x="840" y="325" width="50" height="72" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="865.0" y="361.0">U</tspan></text>
+  <rect x="890" y="325" width="50" height="72" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="915.0" y="361.0">O</tspan></text>
+  <rect x="940" y="325" width="50" height="72" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="965.0" y="361.0">E</tspan></text>
+  <rect x="990" y="325" width="50" height="72" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1015.0" y="361.0">O</tspan></text>
+  <rect x="140" y="455" width="45" height="45" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="162.5" y="477.5">U</tspan></text>
+  <text text-anchor="start" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="200" y="478.0">unused</tspan></text>
+  <rect x="390" y="455" width="45" height="45" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="412.5" y="477.5">S</tspan></text>
+  <text text-anchor="start" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="450" y="478.0">survivor</tspan></text>
+  <rect x="640" y="455" width="45" height="45" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="662.5" y="477.5">E</tspan></text>
+  <text text-anchor="start" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="700" y="478.0">Eden</tspan></text>
+  <rect x="890" y="455" width="45" height="45" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="912.5" y="477.5">O</tspan></text>
+  <text text-anchor="start" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="950" y="478.0">old</tspan></text>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590" y="545.0">Region roles change as G1 selects regions for allocation and evacuation.</tspan></text>
+</svg>

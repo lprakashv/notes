@@ -1485,33 +1485,64 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <ul>
-<li>Alternative to HTTP based RESTful services</li>
-<li>Communication patterns:</li>
-<li>request and response</li>
-<li>server streaming (one request and a stream of responses)</li>
-<li>client streaming (stream of requests and one response)</li>
-<li>bidirectional streaming (stream of requests &amp; stream of responses)</li>
-<li>HTTP2 (initially "SPDY" protocol was developer by Google! around 2002-04?, they used it in Chrome and later open-sourced it)</li>
-<li>SSE</li>
-<li>Sticky session/connection</li>
-<li>bidirectional</li>
-<li>streaming</li>
-<li>etc. (?? LOOK UP! ??)</li>
-<li>Uses Protocol Buffers for serializing payloads</li>
-<li>Share the schema among the cunsumers and producers in advance</li>
-<li>Multi-language Support</li>
-<li>JVM (Java, Kotlin)</li>
-<li>Node</li>
-<li>Python</li>
-<li>C# / .NET</li>
-<li>Dart</li>
-<li>C++</li>
-<li>Go</li>
-<li>Ruby</li>
-<li>PHP</li>
-<li>Obj-C</li>
+    <h2 id="overview">Overview</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>gRPC is a remote-procedure-call framework commonly used for typed service-to-
+service APIs. A Protocol Buffers schema defines messages and service methods;
+code generators create client and server bindings for supported languages.</p>
+<p>gRPC typically uses HTTP/2 as its transport. HTTP/2 provides multiplexed streams,
+header compression, and flow control. Server-Sent Events and sticky sessions are
+not gRPC or HTTP/2 features.</p>
+<p>Communication patterns:</p>
+<ul>
+<li>unary: one request and one response;</li>
+<li>server streaming: one request and a stream of responses;</li>
+<li>client streaming: a stream of requests and one response;</li>
+<li>bidirectional streaming: independent request and response streams.</li>
 </ul>
+<h2 id="minimal-contract">Minimal contract</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-proto">syntax = &quot;proto3&quot;;
+
+package catalog.v1;
+
+option go_package = &quot;example.com/catalog/gen/catalog/v1;catalogv1&quot;;
+
+service CatalogService {
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse);
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductResponse {
+  string id = 1;
+  string name = 2;
+}
+</code></pre>
+
+<p>Field numbers are part of the wire contract. Do not reuse a removed field number;
+reserve it and its old name. Prefer additive changes, propagate deadlines through
+<code>context.Context</code>, and map expected failures to appropriate gRPC status codes.</p>
+<h2 id="operational-checklist">Operational checklist</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Enable TLS and authenticate callers.</li>
+<li>Set client deadlines; a server cannot infer a useful business timeout.</li>
+<li>Retry only idempotent calls and use bounded backoff.</li>
+<li>Configure message-size limits intentionally.</li>
+<li>Export latency, status-code, and saturation metrics.</li>
+<li>Use health checking and graceful shutdown for rolling deployments.</li>
+</ul>
+<p>Further reading: <a href="https://grpc.io/docs/what-is-grpc/core-concepts/">gRPC concepts</a>
+and <a href="https://grpc.io/docs/languages/go/quickstart/">gRPC Go quick start</a>.</p>
   </div>
   
   <script>
@@ -1688,6 +1719,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#overview"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#overview');">
+            Overview
+        </a>
+        
+
+        
+        <a href="#minimal-contract"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#minimal-contract');">
+            Minimal contract
+        </a>
+        
+
+        
+        <a href="#operational-checklist"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#operational-checklist');">
+            Operational checklist
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

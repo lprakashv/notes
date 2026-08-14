@@ -1485,9 +1485,59 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for testing notes and examples in Go.</p>
-</blockquote>
+    <h2 id="table-driven-tests">Table-driven tests</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">func TestAdd(t *testing.T) {
+    tests := []struct {
+        name string
+        a, b int
+        want int
+    }{
+        {name: &quot;positive&quot;, a: 2, b: 3, want: 5},
+        {name: &quot;negative&quot;, a: -2, b: 1, want: -1},
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            if got := Add(tt.a, tt.b); got != tt.want {
+                t.Fatalf(&quot;Add(%d, %d) = %d; want %d&quot;, tt.a, tt.b, got, tt.want)
+            }
+        })
+    }
+}
+</code></pre>
+
+<p>Tests live in files ending with <code>_test.go</code>; test functions start with <code>Test</code> and
+accept <code>*testing.T</code>. Prefer small inputs that explain the behavior over a large
+fixture that hides it.</p>
+<h2 id="commands">Commands</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-bash">go test ./...
+go test -race ./...
+go test -coverprofile=cover.out ./...
+go tool cover -html=cover.out
+go test -run '^TestAdd$/negative$' ./path/to/package
+</code></pre>
+
+<p>Coverage shows which statements ran, not whether the assertions were meaningful.
+Use the race detector in CI where its extra time and memory are acceptable.</p>
+<h2 id="http-and-cleanup-helpers">HTTP and cleanup helpers</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Use <code>httptest.NewRecorder</code> for a handler in isolation and <code>httptest.NewServer</code>
+when client behavior and the full HTTP stack matter. Register cleanup with
+<code>t.Cleanup</code>; use <code>t.TempDir</code> for per-test files and <code>t.Setenv</code> for temporary
+environment variables.</p>
+<p>Call <code>t.Parallel()</code> only after checking that the test does not share mutable
+state, fixed ports, process-wide configuration, or a database fixture with other
+parallel tests.</p>
+<p>Further reading: <a href="https://pkg.go.dev/testing"><code>testing</code></a> and
+<a href="https://pkg.go.dev/net/http/httptest"><code>net/http/httptest</code></a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1714,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#table-driven-tests"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#table-driven-tests');">
+            Table-driven tests
+        </a>
+        
+
+        
+        <a href="#commands"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#commands');">
+            Commands
+        </a>
+        
+
+        
+        <a href="#http-and-cleanup-helpers"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#http-and-cleanup-helpers');">
+            HTTP and cleanup helpers
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

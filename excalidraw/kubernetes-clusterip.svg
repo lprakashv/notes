@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 780" width="100%" role="img">
+  <title>ClusterIP Services connecting three application tiers</title>
+  <desc>Front-end Pods reach back-end Pods through a back-end Service, and back-end Pods reach Redis Pods through a Redis Service.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/images/clusterip.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="560.0" y="35.0">Stable ClusterIP Services connect changing Pods</tspan></text>
+  <text text-anchor="start" font-size="20" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="55" y="155.0">front-end</tspan></text>
+  <rect x="245" y="105" width="180" height="100" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="335.0" y="144.375">Pod</tspan><tspan x="335.0" y="165.625">10.244.0.3</tspan></text>
+  <rect x="485" y="105" width="180" height="100" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="144.375">Pod</tspan><tspan x="575.0" y="165.625">10.244.0.2</tspan></text>
+  <rect x="725" y="105" width="180" height="100" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="815.0" y="144.375">Pod</tspan><tspan x="815.0" y="165.625">10.244.0.4</tspan></text>
+  <text text-anchor="start" font-size="20" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="55" y="410.0">back-end</tspan></text>
+  <rect x="245" y="360" width="180" height="100" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="335.0" y="399.375">Pod</tspan><tspan x="335.0" y="420.625">10.244.0.5</tspan></text>
+  <rect x="485" y="360" width="180" height="100" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="399.375">Pod</tspan><tspan x="575.0" y="420.625">10.244.0.6</tspan></text>
+  <rect x="725" y="360" width="180" height="100" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="815.0" y="399.375">Pod</tspan><tspan x="815.0" y="420.625">10.244.0.7</tspan></text>
+  <text text-anchor="start" font-size="20" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="55" y="665.0">redis</tspan></text>
+  <rect x="245" y="615" width="180" height="100" rx="12" fill="#ffc9c9" stroke="#c92a2a" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="335.0" y="654.375">Pod</tspan><tspan x="335.0" y="675.625">10.244.0.8</tspan></text>
+  <rect x="485" y="615" width="180" height="100" rx="12" fill="#ffc9c9" stroke="#c92a2a" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="654.375">Pod</tspan><tspan x="575.0" y="675.625">10.244.0.9</tspan></text>
+  <rect x="725" y="615" width="180" height="100" rx="12" fill="#ffc9c9" stroke="#c92a2a" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="815.0" y="654.375">Pod</tspan><tspan x="815.0" y="675.625">10.244.0.10</tspan></text>
+  <rect x="270" y="250" width="610" height="65" rx="12" fill="#c5f6fa" stroke="#0b7285" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="282.5">back-end Service (stable ClusterIP)</tspan></text>
+  <rect x="270" y="505" width="610" height="65" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="537.5">redis Service (stable ClusterIP)</tspan></text>
+  <polyline points="335,205 335,250" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="560,315 335,360" fill="none" stroke="#0b7285" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="335,460 335,505" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="560,570 335,615" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="575,205 575,250" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="560,315 575,360" fill="none" stroke="#0b7285" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="575,460 575,505" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="560,570 575,615" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="815,205 815,250" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="560,315 815,360" fill="none" stroke="#0b7285" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="815,460 815,505" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="560,570 815,615" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+</svg>

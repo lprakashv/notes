@@ -1485,9 +1485,57 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on the OpenTelemetry Go SDK.</p>
-</blockquote>
+    <h2 id="instrumentation-layers">Instrumentation layers</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>The <strong>API</strong> is used by application and library instrumentation.</li>
+<li>The <strong>SDK</strong> samples, processes, and exports telemetry.</li>
+<li><strong>Instrumentation libraries</strong> wrap common HTTP, database, and RPC packages.</li>
+<li><strong>Exporters</strong> send telemetry through OTLP or another supported format.</li>
+</ul>
+<p>Libraries should depend on the OpenTelemetry API and should not install a global
+SDK. The application owns SDK configuration because it knows the deployment,
+sampling, and export policy.</p>
+<h2 id="trace-setup-shape">Trace setup shape</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">resource := resource.NewWithAttributes(
+    semconv.SchemaURL,
+    semconv.ServiceName(&quot;checkout&quot;),
+)
+
+provider := sdktrace.NewTracerProvider(
+    sdktrace.WithResource(resource),
+    sdktrace.WithBatcher(exporter),
+)
+otel.SetTracerProvider(provider)
+defer provider.Shutdown(context.Background())
+</code></pre>
+
+<p>Exporter construction and package paths vary by transport, so use the matching
+current OTLP exporter documentation. Always call <code>Shutdown</code> with a bounded
+context so buffered telemetry gets a chance to flush.</p>
+<h2 id="creating-spans">Creating spans</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">func loadOrder(ctx context.Context, id string) error {
+    ctx, span := otel.Tracer(&quot;orders&quot;).Start(ctx, &quot;load-order&quot;)
+    defer span.End()
+
+    span.SetAttributes(attribute.String(&quot;order.id&quot;, id))
+    return queryOrder(ctx, id)
+}
+</code></pre>
+
+<p>Pass <code>context.Context</code> through the call chain; it carries the current span. Avoid
+high-cardinality values such as request IDs in metric attributes. As of the
+official Go status page, traces and metrics are stable while logs remain beta,
+so check status before adopting logs-specific APIs.</p>
+<p>Further reading: <a href="https://opentelemetry.io/docs/languages/go/">OpenTelemetry Go</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1712,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#instrumentation-layers"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#instrumentation-layers');">
+            Instrumentation layers
+        </a>
+        
+
+        
+        <a href="#trace-setup-shape"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#trace-setup-shape');">
+            Trace setup shape
+        </a>
+        
+
+        
+        <a href="#creating-spans"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#creating-spans');">
+            Creating spans
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

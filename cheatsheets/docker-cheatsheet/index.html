@@ -1503,12 +1503,13 @@ docker search nginx --stars=3 --no-trunc busybox
 
 <p>Pulling an Image</p>
 <pre class="codehilite"><code class="language-bash">docker pull nginx
-docker pull eon01/nginx localhost:5000/myadmin/nginx
+docker pull eon01/nginx
+docker pull localhost:5000/myadmin/nginx
 </code></pre>
 
 <p>Pushing an Image</p>
 <pre class="codehilite"><code class="language-bash">docker push eon01/nginx
-docker push eon01/nginx localhost:5000/myadmin/nginx
+docker push localhost:5000/myadmin/nginx
 </code></pre>
 
 <h2 id="running-containers">Running Containers</h2>
@@ -1581,7 +1582,7 @@ docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -q)
 </code></pre>
 
 <p>Containers Events</p>
-<pre class="codehilite"><code class="language-bash">docker events infinite
+<pre class="codehilite"><code class="language-bash">docker events --filter container=infinite
 </code></pre>
 
 <p>Public Ports</p>
@@ -1632,7 +1633,7 @@ docker load --input ubuntu.tar
 <pre class="codehilite"><code class="language-bash">docker history
 </code></pre>
 
-<p>Creating an Image Fron a Container</p>
+<p>Creating an Image From a Container</p>
 <pre class="codehilite"><code class="language-bash">docker commit nginx
 </code></pre>
 
@@ -1685,7 +1686,7 @@ docker network create -d overlay \
 
 <h2 id="cleaning-docker">Cleaning Docker</h2>
 <p>Removing a Running Container</p>
-<pre class="codehilite"><code class="language-bash">docker rm nginx
+<pre class="codehilite"><code class="language-bash">docker rm --force nginx
 </code></pre>
 
 <p>Removing a Container and its Volume</p>
@@ -1721,10 +1722,16 @@ docker network create -d overlay \
 </code></pre>
 
 <h2 id="docker-swarm">Docker Swarm</h2>
-<p>Installing Docker Swarm</p>
-<pre class="codehilite"><code class="language-bash">curl -ssl https://get.docker.com | bash
+<h3 id="availability">Availability</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Swarm mode is included with Docker Engine; it is not installed through a separate
+curl-to-shell script. Verify the engine before initializing a swarm:</p>
+<pre class="codehilite"><code class="language-bash">docker version
 </code></pre>
 
+<h3 id="managing-a-swarm">Managing a swarm</h3>
 <p>Initializing the Swarm</p>
 <pre class="codehilite"><code class="language-bash">docker swarm init --advertise-addr 192.168.10.1
 </code></pre>
@@ -1750,7 +1757,7 @@ docker network create -d overlay \
 </code></pre>
 
 <p>Listing Swarm Tasks</p>
-<pre class="codehilite"><code class="language-bash">docker service ps
+<pre class="codehilite"><code class="language-bash">docker service ps vote
 </code></pre>
 
 <p>Scaling a Service</p>
@@ -1760,7 +1767,7 @@ docker network create -d overlay \
 <p>Updating a Service</p>
 <pre class="codehilite"><code class="language-bash">docker service update --image instavote/vote:movies vote
 docker service update --force --update-parallelism 1 --update-delay 30s nginx
-docker service update --update-parallelism 5--update-delay 2s --image instavote/vote:indent vote
+docker service update --update-parallelism 5 --update-delay 2s --image instavote/vote:indent vote
 docker service update --limit-cpu 2 nginx
 docker service update --replicas=5 nginx
 </code></pre>
@@ -1771,9 +1778,16 @@ docker service update --replicas=5 nginx
 </code></pre>
 
 <p>Running a container from an image and open a shell into it with root privileges</p>
-<pre class="codehilite"><code class="language-bash">docker run --entrypoint=&quot;sh&quot; --user=0 --privileged=true &lt;image&gt;:&lt;tag&gt;
+<h3 id="container-privilege">Container privilege</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>User <code>0</code> and <code>--privileged</code> are different. Start with user <code>0</code>; add
+<code>--privileged</code> only when the container genuinely needs broad host access.</p>
+<pre class="codehilite"><code class="language-bash">docker run --rm -it --entrypoint=&quot;sh&quot; --user=0 &lt;image&gt;:&lt;tag&gt;
 </code></pre>
 
+<h3 id="other-commands">Other commands</h3>
 <p>Loading image from file</p>
 <pre class="codehilite"><code class="language-bash">docker load &lt; Downloads/scratch.tar.gz
 </code></pre>
@@ -1787,7 +1801,7 @@ docker service update --replicas=5 nginx
 </code></pre>
 
 <p>Logging into AWS-ECR to pull docker images</p>
-<pre class="codehilite"><code class="language-bash">aws ecr get-login-password --region &lt;region&gt; | docker login --username AWS --password-stdin &quot;&lt;account&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com&quot;                          
+<pre class="codehilite"><code class="language-bash">aws ecr get-login-password --region &lt;region&gt; | docker login --username AWS --password-stdin &quot;&lt;account&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com&quot;
 </code></pre>
 
 <p>See the contents (file and directories) inside a docker container:</p>
@@ -2035,6 +2049,20 @@ docker service update --replicas=5 nginx
             Docker Swarm
         </a>
         
+        
+        <a href="#availability"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#availability');">
+            Availability
+        </a>
+        
+        <a href="#managing-a-swarm"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#managing-a-swarm');">
+            Managing a swarm
+        </a>
+        
+        
 
         
         <a href="#misc"
@@ -2042,6 +2070,20 @@ docker service update --replicas=5 nginx
             data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#misc');">
             Misc
         </a>
+        
+        
+        <a href="#container-privilege"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#container-privilege');">
+            Container privilege
+        </a>
+        
+        <a href="#other-commands"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#other-commands');">
+            Other commands
+        </a>
+        
         
 
         

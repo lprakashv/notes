@@ -13,9 +13,16 @@ DNS explained for: __"db-service.dev.svc.cluster.local"__
 
 ## Standard namespaces
 
-- __default__
-- kube-system
-- kube-public
+!!! info "AI-generated"
+
+- `default` for namespaced objects created without another namespace;
+- `kube-system` for control-plane and cluster-system objects;
+- `kube-public`, readable by all clients by convention;
+- `kube-node-lease` for per-node Lease objects used as heartbeats.
+
+Namespaces scope names and policy; they are not a security boundary by
+themselves. Combine them with RBAC, NetworkPolicy, admission policy, quotas, and
+appropriate workload isolation.
 
 ## Namespaces Resources
 

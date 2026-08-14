@@ -1485,10 +1485,102 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p><img alt="parts" src="../images/parts-of-system.png" /></p>
-<p><img alt="putting together on startup" src="../images/system-on-startup-1.png" /></p>
-<p><img alt="putting together on startup 2" src="../images/system-on-startup-2.png" /></p>
-<p>On Request (example to service A):</p>
+    <h2 id="system-components">System components</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1200 720" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Cloud-native system components</title><desc>Gateway, discovery, configuration, and application-service components in the legacy Spring Cloud example.</desc><title>Components of the legacy Spring Cloud Netflix example</title>
+  <desc>Gateway, discovery, configuration, and two application services with registration, startup configuration, and request dependencies.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/spring/images/parts-of-system.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="600.0" y="35.0">Cloud-native system components</tspan></text>
+  <rect fill="#d0bfff" height="105" rx="12" stroke="#6741d9" stroke-width="2" width="230" x="70" y="275"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="185.0" y="314.375">Gateway</tspan><tspan x="185.0" y="340.625">(two instances)</tspan></text>
+  <rect fill="#a5d8ff" height="105" rx="12" stroke="#1971c2" stroke-width="2" width="250" x="475" y="105"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="600.0" y="144.375">Discovery</tspan><tspan x="600.0" y="170.625">(two instances)</tspan></text>
+  <rect fill="#ffd8a8" height="105" rx="12" stroke="#e8590c" stroke-width="2" width="230" x="900" y="275"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="1015.0" y="314.375">Config</tspan><tspan x="1015.0" y="340.625">(two instances)</tspan></text>
+  <rect fill="#b2f2bb" height="105" rx="12" stroke="#2f9e44" stroke-width="2" width="230" x="330" y="500"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="445.0" y="539.375">Service A</tspan><tspan x="445.0" y="565.625">(two instances)</tspan></text>
+  <rect fill="#c5f6fa" height="105" rx="12" stroke="#0b7285" stroke-width="2" width="230" x="650" y="500"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="765.0" y="539.375">Service B</tspan><tspan x="765.0" y="565.625">(two instances)</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="300,327 330,552" stroke="#6741d9" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="293.0" y="424.5">request</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="560,552 650,552" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="605.0" y="532.0">dependency</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="185,275 600,210" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="445,500 600,210" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="522.5" y="340.0">register</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="765,500 600,210" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="900,327 185,380" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="900,327 445,500" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="900,327 765,500" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="832.5" y="398.5">startup config</tspan></text>
+</svg></p>
+<h2 id="startup-sequence">Startup sequence</h2>
+<h3 id="fetch-configuration">Fetch configuration</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1120 570" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Startup configuration phase</title><desc>Gateway and application services fetch external configuration from the Config Server.</desc><title>Spring Cloud startup configuration phase</title>
+  <desc>Gateway and application services fetch external configuration from the Config Server during startup.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/spring/images/system-on-startup-1.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="560.0" y="35.0">Startup phase 1: fetch external configuration</tspan></text>
+  <rect fill="#ffd8a8" height="115" rx="12" stroke="#e8590c" stroke-width="2" width="240" x="820" y="210"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="400" text-anchor="middle"><tspan x="940.0" y="267.5">Config server</tspan></text>
+  <rect fill="#d0bfff" height="100" rx="12" stroke="#6741d9" stroke-width="2" width="210" x="70" y="360"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="175.0" y="410.0">Gateway</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="175,360 900,325" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#b2f2bb" height="100" rx="12" stroke="#2f9e44" stroke-width="2" width="210" x="330" y="360"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="435.0" y="410.0">Service A</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="435,360 900,325" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="667.5" y="327.5">GET configuration</tspan></text>
+  <rect fill="#c5f6fa" height="100" rx="12" stroke="#0b7285" stroke-width="2" width="210" x="590" y="360"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="695.0" y="410.0">Service B</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="695,360 900,325" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="560" y="520.0">Each component starts with environment-specific settings before serving traffic.</tspan></text>
+</svg></p>
+<h3 id="register-instances">Register instances</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1120 570" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Startup registration phase</title><desc>Gateway and service instances register their locations and health with the discovery server.</desc><title>Spring Cloud service-registration phase</title>
+  <desc>Gateway and service instances register their network locations and health with the discovery server.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/spring/images/system-on-startup-2.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="560.0" y="35.0">Startup phase 2: register discoverable instances</tspan></text>
+  <rect fill="#a5d8ff" height="115" rx="12" stroke="#1971c2" stroke-width="2" width="240" x="440" y="110"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="400" text-anchor="middle"><tspan x="560.0" y="167.5">Discovery server</tspan></text>
+  <rect fill="#d0bfff" height="100" rx="12" stroke="#6741d9" stroke-width="2" width="210" x="70" y="370"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="175.0" y="420.0">Gateway</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="175,370 560,225" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <rect fill="#b2f2bb" height="100" rx="12" stroke="#2f9e44" stroke-width="2" width="210" x="330" y="370"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="435.0" y="420.0">Service A</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="435,370 560,225" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="497.5" y="282.5">register + heartbeat</tspan></text>
+  <rect fill="#c5f6fa" height="100" rx="12" stroke="#0b7285" stroke-width="2" width="210" x="590" y="370"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="695.0" y="420.0">Service B</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="695,370 560,225" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="560" y="525.0">The registry can return only instances that have registered and remain healthy.</tspan></text>
+</svg></p>
+<h2 id="request-flow">Request flow</h2>
+<p>Example request to service A:</p>
 <ol>
 <li>Request starts with the gateway (Zuul)</li>
 <li>Gateway utilises already cached location of services A &lt;&gt; or asks Discovery server for Service A’s location.</li>
@@ -1676,6 +1768,50 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#system-components"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#system-components');">
+            System components
+        </a>
+        
+
+        
+        <a href="#startup-sequence"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#startup-sequence');">
+            Startup sequence
+        </a>
+        
+        
+        <a href="#fetch-configuration"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#fetch-configuration');">
+            Fetch configuration
+        </a>
+        
+        <a href="#register-instances"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#register-instances');">
+            Register instances
+        </a>
+        
+        
+
+        
+        <a href="#request-flow"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#request-flow');">
+            Request flow
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

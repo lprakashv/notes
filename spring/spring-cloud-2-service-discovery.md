@@ -17,11 +17,11 @@ Multiple ways to discover services in Spring Cloud:
 
 ## Service Discovery Key Components
 
-![Service Discovery components](./images/service-discovery-components.png)
+!!! info "AI-generated"
+
+~{Service registration and discovery}(<spring-service-discovery.json> "Service instances register with a registry; a client looks up locations and calls a selected instance.")
 
 ## Service Discovery Flow
-
-![Service Discovery flow](./images/service0discovery-flow.png)
 
 1. Service Registers
 2. Client looks up service location
@@ -64,7 +64,7 @@ Multiple ways to discover services in Spring Cloud:
 `application.properties`
 
 ```properties
-spring-application.name=my-discovery-server
+spring.application.name=my-discovery-server
 ```
 
 OR `application.yml`
@@ -92,7 +92,7 @@ __Using Spring Cloud Eureka Server:__
 
 - Just add the __`@EnableEurekaServer`__ on the main class. That’s it, the Eureka discover server is ready and we can start the server application.
 - It will try to register itself with the peer-servers (__for high availability we tend to run multiple servers__).
-  - Which will if there is only one server running.
+  - Disable peer registration and registry fetching for a standalone local server.
 
 __Configurations:__
 
@@ -135,7 +135,7 @@ User of the Service discovery client.
 `application.properties`
 
 ```properties
-spring-application.name=my-service
+spring.application.name=my-service
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 ```
 
@@ -144,7 +144,7 @@ OR `application.yml`
 ```yaml
 spring:
   application:
-    name: my-discovery-server
+    name: my-service
 eureka:
   client:
     service-url:

@@ -1485,9 +1485,83 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for database concepts and comparisons.</p>
-</blockquote>
+    <h2 id="choosing-a-data-model">Choosing a data model</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Choose a database from the access patterns and guarantees the application needs,
+not from the amount of data alone.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Good fit</th>
+<th>Main trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Relational</td>
+<td>Transactions, joins, constraints, reporting</td>
+<td>Schema changes need care</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>Aggregate-shaped records with evolving fields</td>
+<td>Cross-document constraints are harder</td>
+</tr>
+<tr>
+<td>Key-value</td>
+<td>Fast lookup by a known key</td>
+<td>Limited ad-hoc querying</td>
+</tr>
+<tr>
+<td>Wide-column</td>
+<td>Large sparse datasets and predictable queries</td>
+<td>Data is modeled around query paths</td>
+</tr>
+<tr>
+<td>Graph</td>
+<td>Relationship-heavy traversals</td>
+<td>Operational and query-model complexity</td>
+</tr>
+<tr>
+<td>Time-series</td>
+<td>Metrics and timestamped observations</td>
+<td>Specialized retention and query patterns</td>
+</tr>
+</tbody>
+</table></div>
+<p>“NoSQL” does not mean “no schema.” It usually means the schema is enforced by
+application code, validation rules, or conventions instead of only by the
+database engine.</p>
+<h2 id="transaction-refresher">Transaction refresher</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li><strong>Atomicity:</strong> a transaction commits completely or has no effect.</li>
+<li><strong>Consistency:</strong> committed data satisfies the rules the database enforces.</li>
+<li><strong>Isolation:</strong> concurrent transactions behave according to an isolation level;
+  it does not imply that every transaction is fully serializable.</li>
+<li><strong>Durability:</strong> acknowledged commits survive the failures covered by the
+  database's durability configuration.</li>
+</ul>
+<p>Isolation and replication are separate concerns. A strongly isolated local
+transaction can still be replicated asynchronously, so a replica may briefly
+return older data.</p>
+<h2 id="practical-selection-questions">Practical selection questions</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>What are the main reads and writes?</li>
+<li>Which invariants must be atomic?</li>
+<li>How stale may reads be?</li>
+<li>What are the recovery objectives?</li>
+<li>Can the team migrate, observe, back up, and restore it safely?</li>
+</ol>
+<p>See <a href="../sqlite/">SQLite</a> for an embedded relational database.</p>
   </div>
   
   <script>
@@ -1664,6 +1738,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#choosing-a-data-model"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#choosing-a-data-model');">
+            Choosing a data model
+        </a>
+        
+
+        
+        <a href="#transaction-refresher"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#transaction-refresher');">
+            Transaction refresher
+        </a>
+        
+
+        
+        <a href="#practical-selection-questions"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#practical-selection-questions');">
+            Practical selection questions
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

@@ -1485,9 +1485,37 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on LlamaIndex.</p>
-</blockquote>
+    <h2 id="what-it-is">What it is</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>LlamaIndex connects model applications to private or domain data through
+ingestion, indexing, retrieval, query workflows, and agents.</p>
+<h2 id="data-path">Data path</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li><strong>Documents and nodes</strong> represent source items and retrievable units.</li>
+<li>An <strong>index</strong> organizes nodes; a vector index is one option.</li>
+<li>A <strong>retriever</strong> selects nodes for a query.</li>
+<li>A <strong>query engine</strong> coordinates retrieval and response synthesis.</li>
+</ul>
+<p>Keep stable document identifiers and source metadata through every stage. Without
+them, citations, deletion, access control, and incremental re-indexing become
+fragile.</p>
+<h2 id="retrieval-checklist">Retrieval checklist</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>Start with a lexical or flat-vector baseline.</li>
+<li>Tune chunking to document structure.</li>
+<li>Filter by tenant and permission before retrieval.</li>
+<li>Evaluate retrieved evidence, not only final-answer fluency.</li>
+<li>Version the index, embeddings, parser, and prompt.</li>
+</ol>
+<p>Further reading: <a href="https://developers.llamaindex.ai/python/framework/getting_started/concepts/">LlamaIndex high-level concepts</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1692,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#what-it-is"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#what-it-is');">
+            What it is
+        </a>
+        
+
+        
+        <a href="#data-path"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#data-path');">
+            Data path
+        </a>
+        
+
+        
+        <a href="#retrieval-checklist"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#retrieval-checklist');">
+            Retrieval checklist
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

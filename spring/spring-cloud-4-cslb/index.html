@@ -1485,7 +1485,7 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p>Outine:</p>
+    <p>Outline:</p>
 <ul>
 <li>Load Balancing</li>
 <li>server side</li>
@@ -1544,7 +1544,7 @@
 <li>Balancing algorithms</li>
 <li>Availability checks</li>
 </ul>
-<p>Two new Annottations:</p>
+<p>Two new annotations:</p>
 <ol>
 <li><code>@LoadBalanced</code> : Marks a <code>RestTemplate</code> to support load balancing</li>
 <li><code>@RibbonClient</code> : Used for custom configurations and when service discovery is absent.</li>
@@ -1572,11 +1572,11 @@ public class MyConfiguration {
 <p><code>my-service</code> is the name of a service running on port <code>9000</code> at <code>mycompany.com</code> and is discoverable via Service Discovery. There are 2 instances running.</p>
 </blockquote>
 <p><strong>Instead of ...</strong></p>
-<pre class="codehilite"><code class="language-java">restTemplate.getForEntity(&quot;http:/mycompany.com:9000/u/1&quot;, ...);
+<pre class="codehilite"><code class="language-java">restTemplate.getForEntity(&quot;http://mycompany.com:9000/u/1&quot;, ...);
 </code></pre>
 
-<p><strong>User <code>RestTemplate</code> like this instead ...</strong></p>
-<pre class="codehilite"><code class="language-java">restTemplate.getForEntity(&quot;http:/my-service/u/1&quot;, ...);
+<p><strong>Use <code>RestTemplate</code> like this instead ...</strong></p>
+<pre class="codehilite"><code class="language-java">restTemplate.getForEntity(&quot;http://my-service/u/1&quot;, ...);
 </code></pre>
 
 <h4 id="without-service-discovery">Without service discovery</h4>

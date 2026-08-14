@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 570" width="100%" role="img">
+  <title>Spring Cloud startup configuration phase</title>
+  <desc>Gateway and application services fetch external configuration from the Config Server during startup.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/spring/images/system-on-startup-1.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="560.0" y="35.0">Startup phase 1: fetch external configuration</tspan></text>
+  <rect x="820" y="210" width="240" height="115" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="23" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="940.0" y="267.5">Config server</tspan></text>
+  <rect x="70" y="360" width="210" height="100" rx="12" fill="#d0bfff" stroke="#6741d9" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="175.0" y="410.0">Gateway</tspan></text>
+  <polyline points="175,360 900,325" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <rect x="330" y="360" width="210" height="100" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="435.0" y="410.0">Service A</tspan></text>
+  <polyline points="435,360 900,325" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="667.5" y="327.5">GET configuration</tspan></text>
+  <rect x="590" y="360" width="210" height="100" rx="12" fill="#c5f6fa" stroke="#0b7285" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="695.0" y="410.0">Service B</tspan></text>
+  <polyline points="695,360 900,325" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="560" y="520.0">Each component starts with environment-specific settings before serving traffic.</tspan></text>
+</svg>

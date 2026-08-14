@@ -1,6 +1,6 @@
 # CSLB
 
-Outine:
+Outline:
 
 - Load Balancing
   - server side
@@ -37,7 +37,7 @@ Ribbon is an inter-process communication (IPC) / remote procedure calls (RPC) li
   - Balancing algorithms
   - Availability checks
 
-Two new Annottations:
+Two new annotations:
 
 1. `@LoadBalanced` : Marks a `RestTemplate` to support load balancing
 2. `@RibbonClient` : Used for custom configurations and when service discovery is absent.
@@ -70,13 +70,13 @@ __Suppose ...__
 __Instead of ...__
 
 ```java
-restTemplate.getForEntity("http:/mycompany.com:9000/u/1", ...);
+restTemplate.getForEntity("http://mycompany.com:9000/u/1", ...);
 ```
 
-__User `RestTemplate` like this instead ...__
+__Use `RestTemplate` like this instead ...__
 
 ```java
-restTemplate.getForEntity("http:/my-service/u/1", ...);
+restTemplate.getForEntity("http://my-service/u/1", ...);
 ```
 
 #### Without service discovery

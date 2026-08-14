@@ -1485,9 +1485,86 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on RAPTOR-based retrieval-augmented generation.</p>
-</blockquote>
+    <h2 id="core-idea">Core idea</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>RAPTOR—Recursive Abstractive Processing for Tree-Organized Retrieval—builds a
+hierarchy over document chunks. Nearby chunks are clustered, summarized, and
+then clustered again. Retrieval can search both detailed leaves and higher-level
+summaries, helping with questions that span several passages.</p>
+<h2 id="indexing-flow">Indexing flow</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>Split documents into leaf chunks with source metadata.</li>
+<li>Embed and cluster related chunks.</li>
+<li>Summarize each cluster into a parent node; repeat as needed.</li>
+<li>Store the tree with source lineage.</li>
+</ol>
+<p><svg role="img" viewBox="0 0 1180 720" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>RAPTOR indexing and retrieval tree</title><desc>Chunks are recursively clustered and summarized; retrieval searches leaves and summaries while retaining source lineage.</desc><title>RAPTOR indexing and retrieval tree</title>
+  <desc>Document chunks are embedded, clustered, and summarized recursively; retrieval may search detailed leaves and higher-level summaries while citations resolve to source chunks.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="590.0" y="35.0">RAPTOR builds and searches a hierarchy</tspan></text>
+  <rect fill="#e9ecef" height="65" rx="12" stroke="#495057" stroke-width="2" width="140" x="80" y="545"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="150.0" y="577.5">Chunk 1</tspan></text>
+  <rect fill="#e9ecef" height="65" rx="12" stroke="#495057" stroke-width="2" width="140" x="250" y="545"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="320.0" y="577.5">Chunk 2</tspan></text>
+  <rect fill="#e9ecef" height="65" rx="12" stroke="#495057" stroke-width="2" width="140" x="420" y="545"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="490.0" y="577.5">Chunk 3</tspan></text>
+  <rect fill="#e9ecef" height="65" rx="12" stroke="#495057" stroke-width="2" width="140" x="590" y="545"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="660.0" y="577.5">Chunk 4</tspan></text>
+  <rect fill="#e9ecef" height="65" rx="12" stroke="#495057" stroke-width="2" width="140" x="760" y="545"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="830.0" y="577.5">Chunk 5</tspan></text>
+  <rect fill="#e9ecef" height="65" rx="12" stroke="#495057" stroke-width="2" width="140" x="930" y="545"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="1000.0" y="577.5">Chunk 6</tspan></text>
+  <rect fill="#b2f2bb" height="85" rx="12" stroke="#2f9e44" stroke-width="2" width="190" x="165" y="345"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="260.0" y="376.25">Cluster A</tspan><tspan x="260.0" y="398.75">summary</tspan></text>
+  <rect fill="#b2f2bb" height="85" rx="12" stroke="#2f9e44" stroke-width="2" width="190" x="505" y="345"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="600.0" y="376.25">Cluster B</tspan><tspan x="600.0" y="398.75">summary</tspan></text>
+  <rect fill="#b2f2bb" height="85" rx="12" stroke="#2f9e44" stroke-width="2" width="190" x="845" y="345"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="940.0" y="376.25">Cluster C</tspan><tspan x="940.0" y="398.75">summary</tspan></text>
+  <rect fill="#a5d8ff" height="90" rx="12" stroke="#1971c2" stroke-width="2" width="340" x="420" y="145"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="590.0" y="190.0">Higher-level summary</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="150,545 260,430" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="320,545 260,430" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="490,545 600,430" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="660,545 600,430" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="830,545 940,430" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="1000,545 940,430" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="260,345 590,235" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="600,345 590,235" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="940,345 590,235" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <ellipse cx="1040" cy="155" fill="#ffd8a8" rx="95" ry="38" stroke="#e8590c" stroke-width="2"></ellipse>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="1040" y="155.0">query</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="945,155 760,190" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="852.5" y="152.5">search summaries</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="1040,193 1040,545" stroke="#e8590c" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="1110.0" y="369.0">search leaves</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="590" y="675.0">Answer evidence retains lineage back to the original chunks.</tspan></text>
+</svg></p>
+<p>At query time, either search all levels together or traverse from broad nodes to
+their most relevant children. The second approach can reduce search space but is
+more sensitive to an early routing mistake.</p>
+<h2 id="trade-offs-and-evaluation">Trade-offs and evaluation</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Summaries cost more to build and may omit details.</li>
+<li>Updates may require regenerating ancestor nodes.</li>
+<li>Keep citations to original chunks and compare with a flat or hybrid baseline.</li>
+</ul>
+<p>Evaluate retrieval recall separately from answer quality. Compare against a flat
+chunk baseline using the same corpus, questions, model, and token budget.</p>
+<p>Source: <a href="https://arxiv.org/abs/2401.18059">RAPTOR paper</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1741,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#core-idea"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#core-idea');">
+            Core idea
+        </a>
+        
+
+        
+        <a href="#indexing-flow"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#indexing-flow');">
+            Indexing flow
+        </a>
+        
+
+        
+        <a href="#trade-offs-and-evaluation"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#trade-offs-and-evaluation');">
+            Trade-offs and evaluation
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

@@ -1485,9 +1485,52 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for production machine-learning notes and examples.</p>
-</blockquote>
+    <h2 id="the-production-loop">The production loop</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>A model is only one part of a production ML system. The surrounding loop is:</p>
+<ol>
+<li>define the decision and success metric;</li>
+<li>validate representative data and train reproducibly;</li>
+<li>evaluate against a baseline and important slices;</li>
+<li>deploy with a rollback path;</li>
+<li>monitor outcomes and retrain only when evidence supports it.</li>
+</ol>
+<h2 id="offline-and-online-evaluation">Offline and online evaluation</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Offline metrics are fast and repeatable, but they are proxies. A higher accuracy,
+F1 score, or ranking metric does not automatically improve the product outcome.
+Before launch, compare with a simple baseline and inspect slices where mistakes
+have unequal cost. After launch, use a controlled experiment or shadow traffic
+when practical.</p>
+<p>Keep three kinds of checks separate:</p>
+<ul>
+<li><strong>model quality:</strong> prediction performance and calibration;</li>
+<li><strong>data quality:</strong> schema, ranges, missing values, and drift;</li>
+<li><strong>service quality:</strong> latency, throughput, availability, and cost.</li>
+</ul>
+<h2 id="safe-deployment">Safe deployment</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Version the model, preprocessing, and feature definitions together.</li>
+<li>Check training-serving parity.</li>
+<li>Start with shadow or canary traffic and keep a rollback ready.</li>
+<li>Record model/feature versions; watch for feedback-loop data.</li>
+</ul>
+<h2 id="monitoring-drift">Monitoring drift</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Input drift means the feature distribution changed. Concept drift means the
+relationship between inputs and the desired outcome changed. Neither proves that
+the model is worse. Use drift as a signal to investigate, then confirm with
+ground-truth outcomes when they arrive.</p>
+<p>Further reading: <a href="https://developers.google.com/machine-learning/guides/rules-of-ml">Google's Rules of ML</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1707,44 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#the-production-loop"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#the-production-loop');">
+            The production loop
+        </a>
+        
+
+        
+        <a href="#offline-and-online-evaluation"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#offline-and-online-evaluation');">
+            Offline and online evaluation
+        </a>
+        
+
+        
+        <a href="#safe-deployment"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#safe-deployment');">
+            Safe deployment
+        </a>
+        
+
+        
+        <a href="#monitoring-drift"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#monitoring-drift');">
+            Monitoring drift
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

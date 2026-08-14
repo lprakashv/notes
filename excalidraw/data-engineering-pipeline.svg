@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="100%" role="img">
+  <title>Data engineering platform stages</title>
+  <desc>Sources flow through ingestion, durable raw storage, transformation, and serving; observability spans every stage and enables replay, lineage, and freshness checks.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="600.0" y="35.0">A dependable data path preserves replay and lineage</tspan></text>
+  <rect x="45" y="185" width="170" height="110" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="130.0" y="228.75">Sources</tspan><tspan x="130.0" y="251.25">DB · API · files · events</tspan></text>
+  <rect x="285" y="185" width="170" height="110" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="370.0" y="228.75">Ingest</tspan><tspan x="370.0" y="251.25">batch + streaming</tspan></text>
+  <polyline points="215,240 285,240" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <rect x="525" y="185" width="170" height="110" rx="12" fill="#c5f6fa" stroke="#0b7285" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="610.0" y="228.75">Store raw</tspan><tspan x="610.0" y="251.25">history for replay</tspan></text>
+  <polyline points="455,240 525,240" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <rect x="765" y="185" width="170" height="110" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="850.0" y="228.75">Transform</tspan><tspan x="850.0" y="251.25">validated models</tspan></text>
+  <polyline points="695,240 765,240" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <rect x="1005" y="185" width="170" height="110" rx="12" fill="#d0bfff" stroke="#6741d9" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1090.0" y="228.75">Serve</tspan><tspan x="1090.0" y="251.25">BI · ML · apps</tspan></text>
+  <polyline points="935,240 1005,240" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <rect x="225" y="375" width="790" height="90" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="21" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="620" y="405.0">Observe every stage</tspan></text>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="620" y="440.0">freshness · volume · schema · quality · lineage · cost · failures</tspan></text>
+  <polyline points="370,295 370,375" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <polyline points="610,295 610,375" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <polyline points="850,295 850,375" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <polyline points="1090,295 1090,375" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <polyline points="850,465 610,520 370,465" fill="none" stroke="#c92a2a" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="610.0" y="540.0">replay / backfill</tspan></text>
+</svg>

@@ -1485,9 +1485,39 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on LangChain.</p>
-</blockquote>
+    <h2 id="what-it-is">What it is</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>LangChain is an open-source framework for combining models with tools, retrieval,
+structured output, and agents. Use it when those integrations remove more
+complexity than they add; otherwise, prefer a direct model call.</p>
+<h2 id="core-pieces">Core pieces</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li><strong>Models and messages</strong> normalize generation, tool calls, and conversation turns.</li>
+<li><strong>Tools</strong> pair a callable operation with a name, description, and input schema.</li>
+<li><strong>Retrievers</strong> return relevant documents for a query.</li>
+<li><strong>Agents</strong> let a model choose and call tools in a bounded loop.</li>
+<li><strong>Middleware</strong> adds guardrails, state, retries, or observability.</li>
+</ul>
+<p>Current LangChain agents use LangGraph as their underlying graph runtime. Reach
+for LangGraph directly when the workflow needs explicit state, branching,
+durability, or human checkpoints.</p>
+<h2 id="production-habits">Production habits</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Pin versions and keep tool schemas small.</li>
+<li>Enforce authentication and authorization inside tools.</li>
+<li>Bound steps, retries, time, and spend.</li>
+<li>Trace and evaluate complete outcomes; keep fixed steps deterministic.</li>
+</ul>
+<p>Further reading: <a href="https://docs.langchain.com/oss/python/langchain/overview">LangChain overview</a>
+and <a href="https://docs.langchain.com/oss/python/langchain/retrieval">retrieval</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1694,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#what-it-is"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#what-it-is');">
+            What it is
+        </a>
+        
+
+        
+        <a href="#core-pieces"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#core-pieces');">
+            Core pieces
+        </a>
+        
+
+        
+        <a href="#production-habits"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#production-habits');">
+            Production habits
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

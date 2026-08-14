@@ -1488,16 +1488,27 @@
     <h2 id="transaction">Transaction</h2>
 <p>Multiple actions performed as a single group</p>
 <h3 id="acid-transactions">ACID Transactions</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
-<li><strong>A (Atomicity):</strong> All or nothing (no partial).</li>
-<li><strong>C (Consistency):</strong> Committed (written) when all actions (in a transaction) are completed.</li>
-<li><strong>I (Isolation):</strong> Each transaction is isolated from other transactions, meaning uncorrupted data.</li>
-<li><strong>D (Durability):</strong> Cannot be deleted/undone by a system failure.</li>
+<li><strong>Atomicity:</strong> a transaction commits as one unit or has no effect.</li>
+<li><strong>Consistency:</strong> a committed transaction preserves declared invariants such as
+  constraints; the application still has to encode the correct business rules.</li>
+<li><strong>Isolation:</strong> concurrent transactions interact according to the configured
+  isolation level. Weaker levels allow specific anomalies.</li>
+<li><strong>Durability:</strong> an acknowledged commit survives the failures covered by the
+  database's persistence and replication configuration.</li>
 </ul>
 <h3 id="transaction-types">Transaction Types</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
-<li><strong>Global:</strong> Multiple resources manage the transaction. Usually managed by the web server.</li>
-<li><strong>Local:</strong> One resource manages the transaction. e.g., JDBC connection.</li>
+<li><strong>Local:</strong> one transactional resource, such as a JDBC connection.</li>
+<li><strong>Global/distributed:</strong> one unit of work coordinates multiple transactional
+  resources, commonly through JTA/XA. This adds failure modes and should not be
+  confused with an ordinary transaction inside one database.</li>
 </ul>
 <h2 id="spring-framework">Spring Framework</h2>
 <p>Consistent programming model across global and local transactions.</p>
@@ -1508,10 +1519,10 @@
 </ul>
 <p>Example:</p>
 <pre class="codehilite"><code class="language-java">public void saveTicket(Ticket ticket) {
-  Session session = SessionFactory.getCurrentSession();
+  Session session = sessionFactory.getCurrentSession();
   session.getTransaction().begin();   //--
   session.save(ticket);               //  | &lt;=== transaction
-  session.getTransaction().end();     //--
+  session.getTransaction().commit();  //--
 }
 </code></pre>
 
@@ -1574,10 +1585,43 @@ public void scheduleRelease(Ticket ticket, Release release) {
 </ul>
 <h3 id="how-transactional-works">How <code>@Transactional</code> works?</h3>
 <p>Via proxies!</p>
-<p><strong>Without proxy implementation:</strong></p>
-<p><img alt="spring-proxy" src="../images/without-proxy.png" /></p>
-<p><strong>With Proxy implementation:</strong></p>
-<p><img alt="spring-proxy" src="../images/with-proxy.png" /></p>
+<h4 id="transactional-call-path">Transactional call path</h4>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1220 650" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Direct call versus transaction proxy</title><desc>A direct invocation bypasses transaction advice; a call through the proxy begins, invokes, and completes the transaction.</desc><title>Direct method call compared with a transaction proxy</title>
+  <desc>Without a proxy the caller invokes the application object directly; with a Spring transaction proxy, an interceptor begins a transaction, invokes the target, then commits or rolls back.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/spring/images/without-proxy.png", "archive/original-images/book/spring/images/with-proxy.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="610.0" y="35.0">@Transactional works when the call crosses the proxy</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="500" text-anchor="middle"><tspan x="295" y="105.0">Without proxy</tspan></text>
+  <rect fill="#e9ecef" height="100" rx="12" stroke="#495057" stroke-width="2" width="190" x="60" y="230"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="155.0" y="280.0">Calling code</tspan></text>
+  <rect fill="#b2f2bb" height="150" rx="12" stroke="#2f9e44" stroke-width="2" width="250" x="360" y="205"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="485.0" y="267.5">Application object</tspan><tspan x="485.0" y="292.5">@Transactional method</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="250,280 360,280" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="305.0" y="265.0">direct call</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="330" y="420.0">No transaction advice surrounds the invocation.</tspan></text>
+  <polyline fill="none" points="650,90 650,590" stroke="#495057" stroke-dasharray="9 7" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="500" text-anchor="middle"><tspan x="935" y="105.0">With proxy</tspan></text>
+  <rect fill="#e9ecef" height="100" rx="12" stroke="#495057" stroke-width="2" width="170" x="700" y="230"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="785.0" y="280.0">Calling code</tspan></text>
+  <rect fill="#d0bfff" height="140" rx="12" stroke="#6741d9" stroke-width="2" width="230" x="915" y="210"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="1030.0" y="267.5">Transaction proxy</tspan><tspan x="1030.0" y="292.5">interceptor</tspan></text>
+  <rect fill="#b2f2bb" height="110" rx="12" stroke="#2f9e44" stroke-width="2" width="230" x="915" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="1030.0" y="497.5">Application object</tspan><tspan x="1030.0" y="522.5">method</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="870,280 915,280" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="892.5" y="262.0">1  call</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="1030,350 1030,455" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="910.0" y="384.5">2  begin + invoke</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="1145,510 1175,510 1175,330 1145,330" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="1075.0" y="448.0">3  commit / rollback</tspan></text>
+</svg></p>
 <h4 id="proxy">Proxy</h4>
 <ul>
 <li><strong>Transaction Interceptor:</strong> Intercepts method calls.</li>
@@ -1591,17 +1635,25 @@ public void scheduleRelease(Ticket ticket, Release release) {
 <li><strong>Transaction manager</strong></li>
 </ol>
 <h3 id="rollbacks">Rollbacks</h3>
-<p>Rollbacks will occur for <code>RuntimeException</code> or unchecked-exception only.</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>By default, Spring marks a transaction for rollback when an unchecked
+<code>RuntimeException</code> or an <code>Error</code> escapes the transactional boundary. Checked
+exceptions do not trigger rollback unless configured.</p>
 <ul>
 <li>Use <strong><code>@Transactional(rollbackFor=Exception.class)</code></strong> to state otherwise.</li>
 <li>Use <strong><code>@Transactional(noRollbackFor=SpecificException.class)</code></strong> to avoid rollback on a specific exception.</li>
 </ul>
-<p>Rollback will happen in case of:</p>
+<p>The usual proxy-based flow is:</p>
 <ol>
-<li>Throw an exception from code.</li>
-<li>Spring catches an unhandled exception.</li>
-<li>Spring determines to mark the transaction for "rollback".</li>
+<li>Application code throws out of the proxied transactional method.</li>
+<li>The transaction interceptor applies rollback rules.</li>
+<li>The transaction manager commits or rolls back the resource transaction.</li>
 </ol>
+<p>Self-invocation normally bypasses the proxy, and catching an exception inside the
+method prevents the interceptor from seeing it unless the transaction is marked
+rollback-only explicitly.</p>
 <p><strong>NOTE:</strong></p>
 <p>To enable the transaction logging from Spring, set: <code>logging.level.org.springframework.transaction.interceptor=TRACE</code></p>
 <h3 id="transaction-management-code">Transaction management code</h3>

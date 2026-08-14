@@ -1527,35 +1527,31 @@
 <li>Latency* -&gt; cannot be masked completely</li>
 </ul>
 <h3 id="important-latency-figures">Important latency figures</h3>
-<ul>
-<li>Reading from RAM/main mem. Is ~100x faster than reading from disk!</li>
-<li>Read 1 MB from memory (main/RAM) -&gt; 250us</li>
-<li>Read 1 MB from disk -&gt; 20ms ( 20000us )</li>
-<li>Main memory reference is ~1000000 ( 1M ) times faster than x-fer over the n/w US-Eu-US</li>
-<li>Main mem. Ref -&gt; 100ns</li>
-<li>Send packet US-Eu-US -&gt; 150ms ( 150000000ns )</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The exact numbers depend on hardware, storage, topology, and workload. The stable
+lesson is the order of magnitude: local memory access is generally cheaper than
+local storage, and both are cheaper and more predictable than a cross-network
+shuffle. Measure the actual platform instead of designing from a fixed latency
+table.</p>
 <h3 id="what-sparks-predecessor-mapreduce-did-to-get-so-popular-in-2000s">What Spark's predecessor, MapReduce did to get so popular in 2000s</h3>
 <ul>
 <li>Simple API -&gt; map and reduce operations</li>
 <li>Fault tolerance  = Ability to recover for node failures -&gt; any machine ( in that time )  was bound to fail, operate on data unthinkably without worrying about the node failures ! HUGE PLUS!</li>
 </ul>
 <h3 id="now-why-spark-if-hadoops-mapreduce-works-so-well">Now, why Spark? If Hadoop's MapReduce works so well.</h3>
-<ul>
-<li>Hadoop/MapReduce</li>
-<li>Fault tolerance in Hadoop/MapReduce comes at a cost!<ul>
-<li>B/w each map and reduce stage it shuffles the data and stores intermediate data in disk ( to recover for potential failures )</li>
-</ul>
-</li>
-<li>=&gt; Lot of n/w and disk!</li>
-<li>Spark</li>
-<li>Retains fault tolerance but…</li>
-<li>Uses FP -&gt; keeps all data “in memory” and “immutable”.</li>
-<li>All operations are functional-transformation (like regular Scala collections)</li>
-<li>To achieve tolerance -&gt; replaying functional-transformation on original dataset over and over again (without worrying about side-effects).</li>
-<li>=&gt; 100x performance improvement over Hadoop!!!</li>
-<li>=&gt; Even more expressive APIs than Hadoop!!!</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Classic MapReduce materializes intermediate results between jobs, which makes a
+multi-stage or iterative workflow expensive. Spark builds a directed acyclic
+graph of transformations and can cache reused datasets in memory.</p>
+<p>Spark does <strong>not</strong> keep all data in memory. It can read from and spill to storage,
+and wide transformations still shuffle data across the network. RDD lineage lets
+Spark recompute lost partitions, while checkpointing can truncate very long or
+expensive lineage. Performance gains depend on the workload, partitioning,
+serialization, storage, and cluster—not on a universal “100×” multiplier.</p>
 <h2 id="rdd">RDD</h2>
 <ul>
 <li>Seem a lot like immutable sequential or parallel Scala collections.</li>

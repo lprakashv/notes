@@ -1485,9 +1485,71 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for database-programming notes and examples in Go.</p>
-</blockquote>
+    <h2 id="databasesql-mental-model"><code>database/sql</code> mental model</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>*sql.DB</code> is a concurrency-safe database handle and connection pool, not one
+open connection. Create it once, configure pool limits, verify it with <code>Ping</code>,
+and share it across handlers.</p>
+<pre class="codehilite"><code class="language-go">db, err := sql.Open(&quot;driver-name&quot;, dsn)
+if err != nil {
+    return err
+}
+db.SetMaxOpenConns(20)
+db.SetMaxIdleConns(10)
+db.SetConnMaxLifetime(30 * time.Minute)
+
+if err := db.PingContext(ctx); err != nil {
+    return err
+}
+</code></pre>
+
+<p>Import a driver separately. The standard library defines the common interface;
+the driver implements the wire protocol.</p>
+<h2 id="querying-safely">Querying safely</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">rows, err := db.QueryContext(ctx,
+    `SELECT id, name FROM users WHERE active = ?`, true)
+if err != nil {
+    return err
+}
+defer rows.Close()
+
+for rows.Next() {
+    var user User
+    if err := rows.Scan(&amp;user.ID, &amp;user.Name); err != nil {
+        return err
+    }
+}
+return rows.Err()
+</code></pre>
+
+<p>Use placeholders and bound arguments rather than formatting user input into SQL.
+Placeholder syntax differs by driver. Check both the query error and <code>rows.Err()</code>;
+iteration can fail after returning some rows.</p>
+<h2 id="transactions">Transactions</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">tx, err := db.BeginTx(ctx, nil)
+if err != nil {
+    return err
+}
+defer tx.Rollback()
+
+if _, err := tx.ExecContext(ctx, updateSQL, amount, accountID); err != nil {
+    return err
+}
+return tx.Commit()
+</code></pre>
+
+<p>Use only the <code>*sql.Tx</code> methods inside the transaction. Calling <code>db</code> directly may
+run on another connection and therefore outside that transaction. A deferred
+rollback is harmless after a successful commit.</p>
+<p>Further reading: <a href="https://go.dev/doc/database/">Accessing relational databases in Go</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1726,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#databasesql-mental-model"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#databasesql-mental-model');">
+            database/sql mental model
+        </a>
+        
+
+        
+        <a href="#querying-safely"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#querying-safely');">
+            Querying safely
+        </a>
+        
+
+        
+        <a href="#transactions"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#transactions');">
+            Transactions
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

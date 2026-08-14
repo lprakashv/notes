@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 590" width="100%" role="img">
+  <title>OpenTelemetry Collector pipeline</title>
+  <desc>Applications send telemetry to receivers, which pass it through ordered processors and then exporters to one or more observability backends.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="35.0">A signal pipeline wires receivers → processors → exporters</tspan></text>
+  <rect x="55" y="215" width="185" height="120" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="147.5" y="263.125">Applications</tspan><tspan x="147.5" y="286.875">OTLP gRPC / HTTP</tspan></text>
+  <rect x="310" y="215" width="190" height="120" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="20" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="405.0" y="262.5">Receiver</tspan><tspan x="405.0" y="287.5">otlp</tspan></text>
+  <rect x="570" y="155" width="210" height="90" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="675.0" y="188.75">Processor</tspan><tspan x="675.0" y="211.25">memory_limiter</tspan></text>
+  <rect x="570" y="305" width="210" height="90" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="675.0" y="338.125">Processor</tspan><tspan x="675.0" y="361.875">batch</tspan></text>
+  <rect x="850" y="215" width="190" height="120" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="945.0" y="263.125">Exporter</tspan><tspan x="945.0" y="286.875">OTLP / debug</tspan></text>
+  <rect x="850" y="445" width="260" height="80" rx="12" fill="#d0bfff" stroke="#6741d9" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="980.0" y="485.0">Observability backend</tspan></text>
+  <polyline points="240,275 310,275" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="500,275 535,275 535,200 570,200" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="675,245 675,305" fill="none" stroke="#e67700" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="780,350 815,350 815,275 850,275" fill="none" stroke="#e67700" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="945,335 945,445" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590" y="555.0">Components do nothing until referenced under service.pipelines.&lt;signal&gt;.</tspan></text>
+</svg>

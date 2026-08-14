@@ -1512,6 +1512,12 @@
 <pre class="codehilite"><code class="language-bash">kubectl get all
 </code></pre>
 
+<h3 id="scope-of-all">Scope of <code>all</code></h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>all</code> is a convenient category, not every resource type in the namespace. Query
+the specific type when completeness matters.</p>
 <h2 id="describing-resource">Describing resource</h2>
 <pre class="codehilite"><code class="language-bash">kubectl describe [TYPE] [NAME]
 </code></pre>
@@ -1529,9 +1535,9 @@
 <li><code>-o yaml</code> output YAML formatted object</li>
 </ul>
 <p>Examples:</p>
-<pre class="codehilite"><code class="language-bash">kubectl create namespace test-123 --dry-run -o json
+<pre class="codehilite"><code class="language-bash">kubectl create namespace test-123 --dry-run=client -o json
 
-kubectl create namespace test-123 --dry-run -o yaml
+kubectl create namespace test-123 --dry-run=client -o yaml
 
 # Wide
 kubectl get pods -o wide
@@ -1559,7 +1565,7 @@ kubectl get pods -o wide
 </code></pre>
 
 <h2 id="port-forward">Port Forward</h2>
-<pre class="codehilite"><code class="language-bash">kubectl port-forward mongo-75f59d57f4-4nd6q &lt;external/local-port&gt;:&lt;pod-port&gt;
+<pre class="codehilite"><code class="language-bash">kubectl port-forward mongo-75f59d57f4-4nd6q &lt;local-port&gt;:&lt;pod-port&gt;
 </code></pre>
 
 <h2 id="imperative-commands-single-command-to-create-resources">Imperative Commands (Single command to create resources)</h2>
@@ -1802,6 +1808,14 @@ kubectl get pods -o wide
             data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#getting-resource');">
             Getting resource
         </a>
+        
+        
+        <a href="#scope-of-all"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#scope-of-all');">
+            Scope of all
+        </a>
+        
         
 
         

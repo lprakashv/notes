@@ -6,15 +6,24 @@ Multiple actions performed as a single group
 
 ### ACID Transactions
 
-- __A (Atomicity):__ All or nothing (no partial).
-- __C (Consistency):__ Committed (written) when all actions (in a transaction) are completed.
-- __I (Isolation):__ Each transaction is isolated from other transactions, meaning uncorrupted data.
-- __D (Durability):__ Cannot be deleted/undone by a system failure.
+!!! info "AI-generated"
+
+- __Atomicity:__ a transaction commits as one unit or has no effect.
+- __Consistency:__ a committed transaction preserves declared invariants such as
+  constraints; the application still has to encode the correct business rules.
+- __Isolation:__ concurrent transactions interact according to the configured
+  isolation level. Weaker levels allow specific anomalies.
+- __Durability:__ an acknowledged commit survives the failures covered by the
+  database's persistence and replication configuration.
 
 ### Transaction Types
 
-- __Global:__ Multiple resources manage the transaction. Usually managed by the web server.
-- __Local:__ One resource manages the transaction. e.g., JDBC connection.
+!!! info "AI-generated"
+
+- __Local:__ one transactional resource, such as a JDBC connection.
+- __Global/distributed:__ one unit of work coordinates multiple transactional
+  resources, commonly through JTA/XA. This adds failure modes and should not be
+  confused with an ordinary transaction inside one database.
 
 ## Spring Framework
 
@@ -30,10 +39,10 @@ Example:
 
 ```java
 public void saveTicket(Ticket ticket) {
-  Session session = SessionFactory.getCurrentSession();
+  Session session = sessionFactory.getCurrentSession();
   session.getTransaction().begin();   //--
   session.save(ticket);               //  | <=== transaction
-  session.getTransaction().end();     //--
+  session.getTransaction().commit();  //--
 }
 ```
 
@@ -105,13 +114,11 @@ __`@Transactional`__ defines a single transaction, in the scope of a __persisten
 
 Via proxies!
 
-__Without proxy implementation:__
+#### Transactional call path
 
-![spring-proxy](./images/without-proxy.png)
+!!! info "AI-generated"
 
-__With Proxy implementation:__
-
-![spring-proxy](./images/with-proxy.png)
+~{Direct call versus transaction proxy}(<spring-transaction-proxy.json> "A direct invocation bypasses transaction advice; a call through the proxy begins, invokes, and completes the transaction.")
 
 #### Proxy
 
@@ -127,16 +134,24 @@ Difference proxies in Spring (JPA?) transaction handling:
 
 ### Rollbacks
 
-Rollbacks will occur for `RuntimeException` or unchecked-exception only.
+!!! info "AI-generated"
+
+By default, Spring marks a transaction for rollback when an unchecked
+`RuntimeException` or an `Error` escapes the transactional boundary. Checked
+exceptions do not trigger rollback unless configured.
 
 - Use __`@Transactional(rollbackFor=Exception.class)`__ to state otherwise.
 - Use __`@Transactional(noRollbackFor=SpecificException.class)`__ to avoid rollback on a specific exception.
 
-Rollback will happen in case of:
+The usual proxy-based flow is:
 
-1. Throw an exception from code.
-2. Spring catches an unhandled exception.
-3. Spring determines to mark the transaction for "rollback".
+1. Application code throws out of the proxied transactional method.
+2. The transaction interceptor applies rollback rules.
+3. The transaction manager commits or rolls back the resource transaction.
+
+Self-invocation normally bypasses the proxy, and catching an exception inside the
+method prevents the interceptor from seeing it unless the transaction is marked
+rollback-only explicitly.
 
 __NOTE:__
 

@@ -1521,7 +1521,7 @@
 public class Application {
 
   public static void main(String[] args) {
-    SpringBootApplication.run(Application.class, args);
+    SpringApplication.run(Application.class, args);
   }
 }
 </code></pre>
@@ -1586,7 +1586,7 @@ ribbon:
 <p><code>application.properties</code></p>
 <pre class="codehilite"><code class="language-properties">spring.application.name=gateway-service
 zuul.routes.&lt;route_name&gt;.path=/somepath/**
-zuul.routes.&lt;route_name&gt;.serviceld=some_service_id
+zuul.routes.&lt;route_name&gt;.serviceId=some_service_id
 zuul.ignored-services=some_service_id
 </code></pre>
 
@@ -1596,9 +1596,9 @@ zuul.ignored-services=some_service_id
     name: gateway-service
   zuul:
     routes:
-      ‹route_name&gt;:
-        path: / somepath/**
-        serviceld: some_service_id
+      &lt;route_name&gt;:
+        path: /somepath/**
+        serviceId: some_service_id
     ignored-services: some_service_id
 </code></pre>
 
@@ -1615,8 +1615,8 @@ zuul.routes.&lt;route_name&gt;.url=http://some_url_address/
     name: gateway-service
   zuul:
     routes:
-      ‹route_name&gt;:
-        path: / somepath/**
+      &lt;route_name&gt;:
+        path: /somepath/**
         url: http://some_path_url/
 </code></pre>
 
@@ -1687,7 +1687,7 @@ public class MyConfig {
 HttpServletRequest req = ctx.getRequest();
 
 // Get the servlet response
-HttpServletResponse = res = ctx.getResponse();
+HttpServletResponse res = ctx.getResponse();
 
 // Set a variable
 ctx.set(&quot;foobar&quot;, &quot;PRE_FILTER_EXECUTED&quot;);

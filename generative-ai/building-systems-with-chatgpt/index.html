@@ -1485,7 +1485,39 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    
+    <h2 id="start-with-a-small-contract">Start with a small contract</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Define the task before tuning the prompt:</p>
+<ul>
+<li>input, context, and expected output schema;</li>
+<li>actions and tools the model may use;</li>
+<li>hard safety, privacy, cost, and latency limits;</li>
+<li>examples of success and important failure cases.</li>
+</ul>
+<p>Treat model output as untrusted: validate it, authorize side effects in code, and
+require human approval for consequential actions.</p>
+<h2 id="a-practical-request-pipeline">A practical request pipeline</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>Validate input and retrieve only relevant context.</li>
+<li>State one objective, its constraints, and the output contract.</li>
+<li>Run allowed tools with timeouts and least privilege.</li>
+<li>Validate the result and record a privacy-safe trace.</li>
+</ol>
+<p>Keep calculations, permissions, and state transitions in deterministic code.</p>
+<h2 id="evaluation-before-optimization">Evaluation before optimization</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Use a small, reviewed evaluation set covering normal requests, ambiguity, missing
+context, prompt injection, tool failures, and abstention. Compare task success
+before latency, token use, and cost.</p>
+<p>Further reading: <a href="https://developers.openai.com/api/docs/guides/prompt-engineering">OpenAI prompt engineering</a>
+and <a href="https://developers.openai.com/api/docs/guides/evaluation-best-practices">evaluation best practices</a>.</p>
   </div>
   
   <script>
@@ -1662,6 +1694,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#start-with-a-small-contract"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#start-with-a-small-contract');">
+            Start with a small contract
+        </a>
+        
+
+        
+        <a href="#a-practical-request-pipeline"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#a-practical-request-pipeline');">
+            A practical request pipeline
+        </a>
+        
+
+        
+        <a href="#evaluation-before-optimization"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#evaluation-before-optimization');">
+            Evaluation before optimization
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

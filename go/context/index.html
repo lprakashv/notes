@@ -1485,10 +1485,85 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p>With Data:</p>
-<p>With Cancellation timeout:</p>
+    <h2 id="what-a-context-carries">What a context carries</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>context.Context</code> carries a cancellation signal, deadline, and request-scoped
+values across API boundaries. It is safe for use by multiple goroutines.</p>
+<p>Use context for work lifetime, not as an optional-parameter bag. Pass it as the
+first parameter, usually named <code>ctx</code>, and do not store it in a struct unless an
+API specifically requires that pattern.</p>
 <h2 id="hierarchy">Hierarchy</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Derived contexts form a tree. Canceling a parent cancels every descendant, while
+a child cannot cancel its parent.</p>
+<p><svg role="img" viewBox="0 0 1080 620" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Go context cancellation tree</title><desc>Parent cancellation propagates to all descendants, while child cancellation stops only that subtree.</desc><title>Go context cancellation tree</title>
+  <desc>Canceling a parent context propagates cancellation to every descendant, while canceling a child does not affect its parent or siblings.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": []}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="540.0" y="35.0">Cancellation flows from parent to descendants</tspan></text>
+  <rect fill="#a5d8ff" height="75" rx="12" stroke="#1971c2" stroke-width="2" width="260" x="410" y="95"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="540.0" y="132.5">request context</tspan></text>
+  <rect fill="#b2f2bb" height="85" rx="12" stroke="#2f9e44" stroke-width="2" width="260" x="165" y="265"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="295.0" y="295.625">database timeout</tspan><tspan x="295.0" y="319.375">2 seconds</tspan></text>
+  <rect fill="#d0bfff" height="85" rx="12" stroke="#6741d9" stroke-width="2" width="260" x="655" y="265"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="400" text-anchor="middle"><tspan x="785.0" y="295.625">downstream timeout</tspan><tspan x="785.0" y="319.375">500 milliseconds</tspan></text>
+  <rect fill="#b2f2bb" height="80" rx="12" stroke="#2f9e44" stroke-width="2" width="220" x="65" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="175.0" y="495.0">query goroutine</tspan></text>
+  <rect fill="#c5f6fa" height="80" rx="12" stroke="#0b7285" stroke-width="2" width="220" x="305" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="415.0" y="495.0">audit goroutine</tspan></text>
+  <rect fill="#d0bfff" height="80" rx="12" stroke="#6741d9" stroke-width="2" width="260" x="655" y="455"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="785.0" y="495.0">HTTP call goroutine</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="475,170 295,265" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="385.0" y="202.5">derive</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="605,170 785,265" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="695.0" y="202.5">derive</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="250,350 175,455" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="340,350 415,455" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="785,350 785,455" stroke="#6741d9" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle"><tspan x="540" y="585.0">Canceling the parent reaches every descendant; child cancellation stops only that subtree.</tspan></text>
+</svg></p>
+<pre class="codehilite"><code class="language-go">ctx, cancel := context.WithTimeout(parent, 2*time.Second)
+defer cancel()
+
+select {
+case result := &lt;-work(ctx):
+    return result, nil
+case &lt;-ctx.Done():
+    return Result{}, ctx.Err()
+}
+</code></pre>
+
+<p>Call the returned cancel function even when the timeout does not fire; it releases
+the associated timer and references promptly.</p>
 <h2 id="context-applied">Context - Applied</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-go">func findUser(ctx context.Context, db *sql.DB, id int64) (User, error) {
+    var user User
+    err := db.QueryRowContext(
+        ctx,
+        `SELECT id, name FROM users WHERE id = ?`,
+        id,
+    ).Scan(&amp;user.ID, &amp;user.Name)
+    return user, err
+}
+</code></pre>
+
+<p>Use <code>WithValue</code> only for request-scoped metadata that crosses API boundaries,
+such as a request ID. Use an unexported key type to avoid collisions. Required
+business inputs should remain ordinary typed parameters.</p>
+<p>Further reading: <a href="https://pkg.go.dev/context">Go context package</a> and
+<a href="https://go.dev/blog/context">Go concurrency patterns: context</a>.</p>
   </div>
   
   <script>
@@ -1668,6 +1743,14 @@
         
         
         
+        
+        <a href="#what-a-context-carries"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#what-a-context-carries');">
+            What a context carries
+        </a>
+        
+
         
         <a href="#hierarchy"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"

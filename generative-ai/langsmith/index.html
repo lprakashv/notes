@@ -1485,9 +1485,37 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <blockquote>
-<p>Placeholder for notes on LangSmith.</p>
-</blockquote>
+    <h2 id="purpose">Purpose</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>LangSmith traces, evaluates, and monitors model applications, with or without
+LangChain. A useful trace captures prompts, models, tools, latency, and errors—
+but not secrets or unnecessary personal data.</p>
+<h2 id="evaluation-workflow">Evaluation workflow</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>Build a reviewed dataset of representative inputs.</li>
+<li>Run a fixed application version against it.</li>
+<li>Score with deterministic checks, humans, or calibrated model evaluators.</li>
+<li>Compare task success, critical slices, latency, errors, and cost.</li>
+</ol>
+<p>Model-based evaluators are useful for fuzzy criteria, but they are measurements,
+not ground truth. Calibrate them against human labels and inspect disagreements.</p>
+<h2 id="operational-use">Operational use</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ul>
+<li>Tag traces with application version, prompt version, model, and environment.</li>
+<li>Sample high-volume traffic while retaining failures and unusual paths.</li>
+<li>Turn repeated production failures into regression examples.</li>
+<li>Define retention and redaction policies before sending trace payloads.</li>
+</ul>
+<p>Further reading: <a href="https://docs.langchain.com/langsmith/evaluation-concepts">LangSmith evaluation concepts</a>
+and <a href="https://docs.langchain.com/langsmith/observability-concepts">observability concepts</a>.</p>
   </div>
   
   <script>
@@ -1664,6 +1692,36 @@
                                 <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#purpose"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#purpose');">
+            Purpose
+        </a>
+        
+
+        
+        <a href="#evaluation-workflow"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#evaluation-workflow');">
+            Evaluation workflow
+        </a>
+        
+
+        
+        <a href="#operational-use"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#operational-use');">
+            Operational use
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

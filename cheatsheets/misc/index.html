@@ -1520,9 +1520,45 @@
 </code></pre>
 
 <h3 id="go-misc">Go - Misc</h3>
-<p>TODO</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<pre class="codehilite"><code class="language-bash"># Format and vet every package in the module.
+go fmt ./...
+go vet ./...
+
+# Explain why a package is in the module graph.
+go mod why example.com/module
+
+# Remove unused requirements and add missing ones.
+go mod tidy
+
+# List available updates without changing go.mod.
+go list -m -u all
+</code></pre>
+
 <h2 id="makefile">Makefile</h2>
-<p>TODO</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Keep targets small, declare non-file targets as phony, and use the same commands
+locally and in CI.</p>
+<pre class="codehilite"><code class="language-make">.PHONY: fmt lint test build
+
+fmt:
+    go fmt ./...
+
+lint:
+    go vet ./...
+
+test:
+    go test -race ./...
+
+build:
+    go build ./...
+</code></pre>
+
+<p>Recipe lines must begin with a tab unless the Makefile changes <code>.RECIPEPREFIX</code>.</p>
 <h2 id="databases-sql">Databases / SQL</h2>
 <h3 id="ms-sql-server">MS SQL Server</h3>
 <p>Running procedure</p>
@@ -1552,7 +1588,7 @@ CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sqltext;
 <pre class="codehilite"><code class="language-sql">select floor(random()*(b-a+1)) + a;
 </code></pre>
 
-<h2 id="git-wip">Git - WIP</h2>
+<h2 id="git">Git</h2>
 <p>Remove files from remote after adding in <code>.gitignore</code>:</p>
 <pre class="codehilite"><code class="language-bash">git rm -r --cached .
 </code></pre>
@@ -1572,12 +1608,13 @@ CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sqltext;
 top -i
 </code></pre>
 
-<p>User taking superuser role - ?</p>
-<pre class="codehilite"><code class="language-bash">sudo -su &lt;username&gt;
+<p>Run a shell as another user:</p>
+<pre class="codehilite"><code class="language-bash">sudo -u &lt;username&gt; -s
 </code></pre>
 
-<p>Disk space</p>
-<pre class="codehilite"><code class="language-bash">df -hk | du
+<p>Filesystem and directory disk usage:</p>
+<pre class="codehilite"><code class="language-bash">df -h
+du -sh &lt;directory&gt;
 </code></pre>
 
 <h3 id="networking">Networking</h3>
@@ -1607,12 +1644,22 @@ less nginx_access.log | sed -E -e &quot;s/(\?|\&amp;)([^=]+)\=([^&amp;]+)//g&quo
 less nginx_access.log | grep status=502 | sed -E -e &quot;s/(\?|\&amp;)([^=]+)\=([^&amp;]+)//g&quot; | awk '{arr[$10]++}END{for(a in arr) print arr[a], &quot;\t&quot; a}' | sort -k1n
 </code></pre>
 
+<h4 id="command-fragments-explained">Command fragments explained</h4>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
-<li><code>sort -k1n</code> - ???</li>
-<li><code>xargs -I '{}'</code> - ???</li>
-<li><code>sed -E -e ""</code> - ???</li>
-<li><code>awk</code> with multi-line expression and for-loop.</li>
+<li><code>sort -k1,1n</code> sorts numerically by only the first field. <code>-k1n</code> starts at the
+  first field but does not explicitly end there.</li>
+<li><code>xargs -I '{}' command '{}'</code> replaces each <code>{}</code> in <code>command</code> with one input
+  line. Quote the placeholder when filenames may contain spaces.</li>
+<li><code>sed -E -e 'expression'</code> enables extended regular expressions and supplies one
+  editing expression.</li>
+<li>In <code>awk</code>, <code>arr[key]++</code> counts occurrences. An <code>END { ... }</code> block runs once
+  after all input has been consumed and is a convenient place to print totals.</li>
 </ul>
+<p>Prefer null-delimited filenames (<code>find ... -print0 | xargs -0 ...</code>) when names can
+contain spaces or newlines.</p>
 <h2 id="nginx">Nginx</h2>
 <pre class="codehilite"><code class="language-bash">nginx -s reload|reopen|quit|stop
 </code></pre>
@@ -1678,6 +1725,29 @@ xargs -n 1 -I ^ -P 10 bash -c \
 </code></pre>
 
 <h2 id="sonatype">Sonatype</h2>
+<h3 id="reliability-note">Reliability note</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Manual review</p>
+<p>The publishing steps below describe the legacy OSSRH/Jira/staging workflow.
+Maven Central ended support for the legacy deployment protocol on June 30,
+2025. Keep this section only as historical context; verify any real release
+against the current Central Publisher Portal documentation.</p>
+</div>
+<h3 id="current-publishing-direction">Current publishing direction</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<ol>
+<li>Create an account at the Central Publisher Portal.</li>
+<li>Verify the namespace used by the artifact coordinates.</li>
+<li>Sign release artifacts and provide the required POM metadata.</li>
+<li>Use a current Maven- or Gradle-compatible Central publishing plugin.</li>
+<li>Upload, validate, and publish a deployment through the portal or its API.</li>
+</ol>
+<p>Source: <a href="https://central.sonatype.org/publish/publish-portal-guide/">Maven Central publishing guide</a>.</p>
 <h3 id="create-sonatype-account">Create sonatype account</h3>
 <ol>
 <li>Same passwords for <code>issues.sonatype.org</code> (JIRA), <code>oss.sonatype.org</code>, <code>central.sonatype.org</code></li>
@@ -1972,10 +2042,10 @@ xargs -n 1 -I ^ -P 10 bash -c \
         
 
         
-        <a href="#git-wip"
+        <a href="#git"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#git-wip');">
-            Git - WIP
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#git');">
+            Git
         </a>
         
 
@@ -2040,6 +2110,18 @@ xargs -n 1 -I ^ -P 10 bash -c \
             Sonatype
         </a>
         
+        
+        <a href="#reliability-note"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#reliability-note');">
+            Reliability note
+        </a>
+        
+        <a href="#current-publishing-direction"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#current-publishing-direction');">
+            Current publishing direction
+        </a>
         
         <a href="#create-sonatype-account"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"

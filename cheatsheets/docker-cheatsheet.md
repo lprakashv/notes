@@ -27,14 +27,15 @@ Pulling an Image
 
 ```bash
 docker pull nginx
-docker pull eon01/nginx localhost:5000/myadmin/nginx
+docker pull eon01/nginx
+docker pull localhost:5000/myadmin/nginx
 ```
 
 Pushing an Image
 
 ```bash
 docker push eon01/nginx
-docker push eon01/nginx localhost:5000/myadmin/nginx
+docker push localhost:5000/myadmin/nginx
 ```
 
 ## Running Containers
@@ -144,7 +145,7 @@ docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -q)
 Containers Events
 
 ```bash
-docker events infinite
+docker events --filter container=infinite
 ```
 
 Public Ports
@@ -216,7 +217,7 @@ Showing the History of an Image
 docker history
 ```
 
-Creating an Image Fron a Container
+Creating an Image From a Container
 
 ```bash
 docker commit nginx
@@ -293,7 +294,7 @@ docker network disconnect MyOverlayNetwork nginx
 Removing a Running Container
 
 ```bash
-docker rm nginx
+docker rm --force nginx
 ```
 
 Removing a Container and its Volume
@@ -346,11 +347,18 @@ docker volume rm $(docker volume ls -f dangling=true -q)
 
 ## Docker Swarm
 
-Installing Docker Swarm
+### Availability
+
+!!! info "AI-generated"
+
+Swarm mode is included with Docker Engine; it is not installed through a separate
+curl-to-shell script. Verify the engine before initializing a swarm:
 
 ```bash
-curl -ssl https://get.docker.com | bash
+docker version
 ```
+
+### Managing a swarm
 
 Initializing the Swarm
 
@@ -391,7 +399,7 @@ docker service create --name vote -p 8080:80 instavote/vote
 Listing Swarm Tasks
 
 ```bash
-docker service ps
+docker service ps vote
 ```
 
 Scaling a Service
@@ -405,7 +413,7 @@ Updating a Service
 ```bash
 docker service update --image instavote/vote:movies vote
 docker service update --force --update-parallelism 1 --update-delay 30s nginx
-docker service update --update-parallelism 5--update-delay 2s --image instavote/vote:indent vote
+docker service update --update-parallelism 5 --update-delay 2s --image instavote/vote:indent vote
 docker service update --limit-cpu 2 nginx
 docker service update --replicas=5 nginx
 ```
@@ -420,9 +428,18 @@ docker run --rm `docker images --filter reference='*/log-generator' --format '{{
 
 Running a container from an image and open a shell into it with root privileges
 
+### Container privilege
+
+!!! info "AI-generated"
+
+User `0` and `--privileged` are different. Start with user `0`; add
+`--privileged` only when the container genuinely needs broad host access.
+
 ```bash
-docker run --entrypoint="sh" --user=0 --privileged=true <image>:<tag>
+docker run --rm -it --entrypoint="sh" --user=0 <image>:<tag>
 ```
+
+### Other commands
 
 Loading image from file
 
@@ -442,7 +459,7 @@ docker run -v /local/file/path/file.txt:/dest/file/path/file.txt -ti --rm some-d
 Logging into AWS-ECR to pull docker images
 
 ```bash
-aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin "<account>.dkr.ecr.<region>.amazonaws.com"                          
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin "<account>.dkr.ecr.<region>.amazonaws.com"
 ```
 
 See the contents (file and directories) inside a docker container:

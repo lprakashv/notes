@@ -1500,9 +1500,38 @@
 <li><strong>Spring Cloud Netflix</strong></li>
 </ul>
 <h2 id="service-discovery-key-components">Service Discovery Key Components</h2>
-<p><img alt="Service Discovery components" src="../images/service-discovery-components.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1160 680" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Service registration and discovery</title><desc>Service instances register with a registry; a client looks up locations and calls a selected instance.</desc><title>Service registration and discovery flow</title>
+  <desc>Service instances register with a discovery server; a client looks up the service, receives an instance location, and then calls that instance.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/spring/images/service-discovery-components.png", "archive/original-images/book/spring/images/service0discovery-flow.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="580.0" y="35.0">Registration and lookup are separate paths</tspan></text>
+  <rect fill="#a5d8ff" height="110" rx="12" stroke="#1971c2" stroke-width="2" width="300" x="430" y="110"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="580.0" y="151.25">Discovery server</tspan><tspan x="580.0" y="178.75">service registry</tspan></text>
+  <rect fill="#ffd8a8" height="110" rx="12" stroke="#e8590c" stroke-width="2" width="260" x="100" y="440"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="230.0" y="495.0">Application client</tspan></text>
+  <rect fill="#b2f2bb" height="95" rx="12" stroke="#2f9e44" stroke-width="2" width="260" x="785" y="385"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="915.0" y="432.5">Service instance A</tspan></text>
+  <rect fill="#b2f2bb" height="95" rx="12" stroke="#2f9e44" stroke-width="2" width="260" x="785" y="520"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="915.0" y="567.5">Service instance B</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="785,420 670,220" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="782.5" y="306.0">1  register + heartbeat</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="785,555 620,220" stroke="#2f9e44" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="230,440 430,195" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="255.0" y="307.5">2  lookup service</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="430,215 310,440" stroke="#1971c2" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="300.0" y="351.5">3  return locations</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="360,495 785,435" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="572.5" y="447.0">4  call selected instance</tspan></text>
+</svg></p>
 <h2 id="service-discovery-flow">Service Discovery Flow</h2>
-<p><img alt="Service Discovery flow" src="../images/service0discovery-flow.png" /></p>
 <ol>
 <li>Service Registers</li>
 <li>Client looks up service location</li>
@@ -1538,7 +1567,7 @@
 </code></pre>
 
 <p><code>application.properties</code></p>
-<pre class="codehilite"><code class="language-properties">spring-application.name=my-discovery-server
+<pre class="codehilite"><code class="language-properties">spring.application.name=my-discovery-server
 </code></pre>
 
 <p>OR <code>application.yml</code></p>
@@ -1562,7 +1591,7 @@ public class Application {
 <ul>
 <li>Just add the <strong><code>@EnableEurekaServer</code></strong> on the main class. That’s it, the Eureka discover server is ready and we can start the server application.</li>
 <li>It will try to register itself with the peer-servers (<strong>for high availability we tend to run multiple servers</strong>).</li>
-<li>Which will if there is only one server running.</li>
+<li>Disable peer registration and registry fetching for a standalone local server.</li>
 </ul>
 <p><strong>Configurations:</strong></p>
 <ul>
@@ -1596,14 +1625,14 @@ public class Application {
 </code></pre>
 
 <p><code>application.properties</code></p>
-<pre class="codehilite"><code class="language-properties">spring-application.name=my-service
+<pre class="codehilite"><code class="language-properties">spring.application.name=my-service
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 </code></pre>
 
 <p>OR <code>application.yml</code></p>
 <pre class="codehilite"><code class="language-yaml">spring:
   application:
-    name: my-discovery-server
+    name: my-service
 eureka:
   client:
     service-url:

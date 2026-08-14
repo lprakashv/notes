@@ -1485,11 +1485,10 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p>Configuration in a non-distributed to distributed explodes really rapidly, from a handlful of configuration files to many-many ones.</p>
-<p>We can still live with configuration management tools like Puppet, Chef etc. But there are issues with typical configuration management:</p>
+    <p>We can still live with configuration management tools like Puppet, Chef etc. But there are issues with typical configuration management:</p>
 <ul>
 <li><strong>Deployment oriented:</strong> Need to kick-off deployments even for small or temporary changes.</li>
-<li><strong>Push-based is usally not dynamic enough:</strong> Won't work in cloud environment, as we need to keep track of all the newly spun up instances and push to those as well.</li>
+<li><strong>Push-based is usually not dynamic enough:</strong> Won't work in cloud environment, as we need to keep track of all the newly spun up instances and push to those as well.</li>
 <li><strong>Pull-based adds latency with temporal polling:</strong> Usually works on polling mechanism, which adds time-interval latency.</li>
 </ul>
 <p><strong>Configuration Server</strong> can solve our problems!</p>
@@ -1640,39 +1639,34 @@ public class Application {
 </code></pre>
 
 <h4 id="config-first">Config First</h4>
-<p>Specify the location of the config server.</p>
-<p><code>bootstrap.properties</code></p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Specify the location of the Config Server directly. With Spring Boot 2.4 and
+later, Config Data import is the default approach and a <code>bootstrap</code> file is not
+required.</p>
+<p><code>application.properties</code></p>
 <pre class="codehilite"><code class="language-properties">spring.application.name=&lt;your_application_name&gt;
-spring.cloud.config.discovery.enabled=true
+spring.config.import=optional:configserver:http://localhost:8888
 </code></pre>
 
-<p>OR <code>bootstrap.yml</code></p>
-<pre class="codehilite"><code class="language-yaml">spring:
-  application:
-    name: &lt;your_application_name&gt;
-  cloud:
-    config:
-      discovery:
-        enabled: true
-</code></pre>
-
+<p>Remove <code>optional:</code> when startup must fail if the Config Server is unavailable.</p>
 <h4 id="discovery-first">Discovery First</h4>
-<p>Discover the location of the config server.</p>
-<p><code>bootstrap.properties</code></p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Discover the Config Server through a configured discovery client instead of
+hard-coding its URL.</p>
+<p><code>application.properties</code></p>
 <pre class="codehilite"><code class="language-properties">spring.application.name=&lt;your_application_name&gt;
-spring.cloud.config.uri=http://localhost:8888/
+spring.config.import=optional:configserver:
+spring.cloud.config.discovery.enabled=true
+spring.cloud.config.discovery.service-id=configserver
 </code></pre>
 
-<p>OR <code>bootstrap.yml</code></p>
-<pre class="codehilite"><code class="language-yaml">spring:
-  application:
-    name: &lt;your_application_name&gt;
-  cloud:
-    config:
-      uri: http://localhost:8888/
-</code></pre>
-
-<p><strong>NOTE:</strong> Don't forget to add eureka client dependencies, service-url configuration and <code>@EnableDiscoveryClient</code></p>
+<p>Add and configure the selected discovery-client implementation. Discovery-first
+adds a registry lookup before configuration can be fetched, so use it only when
+that extra dependency is worthwhile.</p>
 <h3 id="refreshing-configuration-properties">Refreshing configuration properties</h3>
 <h4 id="1-configuration-changes">#1: Configuration changes</h4>
 <ul>
@@ -1719,13 +1713,13 @@ public class SomeConfiguration {
 <h4 id="what-does-encrypted-configuration-look-like">What does encrypted configuration look like?</h4>
 <p><code>application.properties</code></p>
 <pre class="codehilite"><code class="language-properties">my.datasource.username=foobar
-my.datasource.password={cypher}AASFDSFJSRFAFESECCSE
+my.datasource.password={cipher}AASFDSFJSRFAFESECCSE
 </code></pre>
 
 <p>OR <code>application.yml</code></p>
 <pre class="codehilite"><code class="language-yaml">my:
   datasource:
-    usernmae: foobar
+    username: foobar
     password: '{cipher}AASFDSFJSRFAFESECCSE'
 </code></pre>
 
@@ -1735,7 +1729,22 @@ my.datasource.password={cypher}AASFDSFJSRFAFESECCSE
 <li>Locally at the client on response.</li>
 </ul>
 <p>Configure the Config Server with: <code>spring.cloud.config.server.encrypt.enabled=false</code></p>
-<p>TODO: encryption and decryption setup with examples.</p>
+<h4 id="encryption-setup-example">Encryption setup example</h4>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The Config Server can use a symmetric key for a small local setup:</p>
+<pre class="codehilite"><code class="language-bash">export ENCRYPT_KEY='replace-with-a-secret-from-a-secret-manager'
+curl --silent --header 'Content-Type: text/plain' \
+  --data 'database-password' http://localhost:8888/encrypt
+</code></pre>
+
+<p>Store the returned value with the <code>{cipher}</code> prefix. Secure the <code>/encrypt</code> and
+<code>/decrypt</code> endpoints, never commit the encryption key, and use TLS because server-
+side decryption sends plaintext configuration to the client over the connection.
+For asymmetric encryption, configure a keystore so encryption can use a public
+key while decryption remains limited to the server holding the private key.</p>
+<p>Further reading: <a href="https://docs.spring.io/spring-cloud-config/reference/server/encryption-and-decryption.html">Spring Cloud Config encryption and decryption</a>.</p>
   </div>
   
   <script>

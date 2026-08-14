@@ -1485,38 +1485,55 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p>Characterised by 4 V's</p>
+    <h2 id="the-four-vs">The four Vs</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>“Big data” is a relative engineering description, not a fixed byte threshold. It
+is often summarized with four Vs:</p>
 <ol>
-<li>velocity - <strong>big data</strong> is being generated, and arriving at high speeds.</li>
-<li>velocity - <strong>big data</strong> is big, so that a single machine can't handle it.</li>
-<li>variety - <strong>big data</strong> may come from a variety of sources and in a variety of formats.</li>
-<li>veracity - <strong>big data</strong> often needs to be cleaned before using it.</li>
+<li><strong>Volume:</strong> the amount of data exceeds the convenient capacity of one machine
+   or one conventional database design.</li>
+<li><strong>Velocity:</strong> data arrives or must be processed quickly.</li>
+<li><strong>Variety:</strong> sources and formats differ.</li>
+<li><strong>Veracity:</strong> quality, meaning, and trustworthiness vary.</li>
 </ol>
+<p>The useful question is which constraint forces a distributed design. Distribution
+adds network, consistency, recovery, and operational costs, so a single database
+or machine is preferable while it still meets the requirement.</p>
 <h2 id="hadoop">Hadoop</h2>
-<ul>
-<li>Began in 2011.</li>
-<li>Based on Google's infrastructure.</li>
-<li>Distributed storage and processing of massive datasets (like Google's).</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Apache Hadoop emerged in the mid-2000s from the Nutch project, influenced by
+Google's papers on the Google File System and MapReduce. It provides distributed
+storage and batch processing on clusters of commodity machines.</p>
 <p>Consists of:</p>
 <ol>
 <li>HDFS - Distributed File System</li>
 <li>YARN - Yet another resource manager, manages all nodes, assigns tasks to nodes etc.</li>
 <li>Map-Reduce - allows you to write scripts to analyze data that is spread across multiple machines.</li>
 </ol>
-<h2 id="major-big-data-vendors">"Major" Big-Data vendors</h2>
-<h2 id="hortonworks">Hortonworks</h2>
-<p>Does not market itself around Hadoop, but Hadoop still remains at the core of it.</p>
-<p>Product offerings:</p>
-<ul>
-<li>HDP - Hortonworks Data Platform, their core product, bundles multiple OSS tools to provide a easy deployable solution to mamage, query and do ML on data.</li>
-<li>HDF - Hortonworks Data Flow, for streaming data in real-time.</li>
-</ul>
-<h2 id="cloudera">Cloudera</h2>
-<ul>
-<li>more propreitary systems</li>
-<li>some systems and tools they have open-sources and they do contribute back to the community.</li>
-</ul>
+<h2 id="vendor-history">Vendor history</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Hortonworks and Cloudera were prominent commercial Hadoop distributors. They
+completed a merger in 2019, so treating them as two current competing vendors is
+historical rather than a present-day market comparison.</p>
+<h3 id="hortonworks">Hortonworks</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Hortonworks Data Platform (HDP) bundled Hadoop ecosystem projects. Hortonworks
+DataFlow (HDF) focused on data-in-motion tooling, including Apache NiFi.</p>
+<h3 id="cloudera">Cloudera</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Cloudera combined open-source ecosystem projects with commercial management,
+security, governance, and support. Current product names and packaging change;
+check vendor documentation before using these historical names in an architecture.</p>
   </div>
   
   <script>
@@ -1697,6 +1714,14 @@
         
         
         
+        <a href="#the-four-vs"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#the-four-vs');">
+            The four Vs
+        </a>
+        
+
+        
         <a href="#hadoop"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#hadoop');">
@@ -1705,27 +1730,25 @@
         
 
         
-        <a href="#major-big-data-vendors"
+        <a href="#vendor-history"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#major-big-data-vendors');">
-            "Major" Big-Data vendors
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#vendor-history');">
+            Vendor history
         </a>
         
-
         
         <a href="#hortonworks"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#hortonworks');">
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#hortonworks');">
             Hortonworks
         </a>
         
-
-        
         <a href="#cloudera"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#cloudera');">
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#cloudera');">
             Cloudera
         </a>
+        
         
 
         

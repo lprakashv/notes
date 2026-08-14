@@ -1488,13 +1488,24 @@
     <h2 id="java-thread-class-methods">Java <code>Thread</code> class methods</h2>
 <h3 id="threadcurrentthread"><code>Thread.currentThread()</code></h3>
 <p>The return type of this method is Thread, it returns a reference of currently executing thread (who touched this method). It does not raise any exception.</p>
-<h3 id="long-getid"><code>long getId()</code></h3>
-<p>The thread ID is a positive long number generated when this thread was created.</p>
-<p>The thread ID is unique and remains unchanged during its lifetime. When a thread is terminated, this thread ID may be reused.</p>
+<h3 id="long-threadid"><code>long threadId()</code></h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>The thread ID is a positive <code>long</code> generated when the thread is created. It is
+unique and unchanged during that thread's lifetime. <code>getId()</code> is deprecated since
+Java 19; use <code>threadId()</code> in current code.</p>
+<p>An ID is useful for diagnostics, not as a permanent application identity.</p>
 <h3 id="int-getpriority-and-void-setpriority"><code>int getPriority()</code> and <code>void setPriority()</code></h3>
 <p>The priority of thread can either be assigned by the JVM or by the programmer explicitly while creating the thread.</p>
 <p>The thread's priority is in the range of 1 to 10. The <strong>default priority of a thread is 5</strong>.</p>
 <h3 id="threadstate-getstate"><code>Thread.State getState()</code></h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Returns one of <code>NEW</code>, <code>RUNNABLE</code>, <code>BLOCKED</code>, <code>WAITING</code>, <code>TIMED_WAITING</code>, or
+<code>TERMINATED</code>. The value is a snapshot intended for monitoring and diagnostics,
+not for synchronization decisions.</p>
 <h3 id="void-interrupt"><code>void interrupt()</code></h3>
 <p>An interrupt is an indication to a thread that it should stop what it is doing and do something else. It’s up to the programmer to decide exactly how a thread responds to an interrupt, but <strong>it is very common for the thread to terminate</strong>.</p>
 <h3 id="void-join"><code>void join()</code></h3>
@@ -1503,44 +1514,93 @@
 <h3 id="void-run"><code>void run()</code></h3>
 <p>The <code>run()</code> method of a thread encapsulates the logic that should be run by a thread.</p>
 <h3 id="void-setdaemonboolean-on"><code>void setDaemon(boolean on)</code></h3>
-<p>On the other hand, daemon threads are <strong>low-priority threads whose only role is to provide services to user threads</strong>. Since daemon threads are meant to serve user threads and are only needed while user threads are running, they won’t prevent the JVM from exiting once all user threads have finished their execution.</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Daemon status controls JVM shutdown; it does not mean low priority. JVM shutdown
+begins after all started non-daemon threads terminate. Virtual threads are always
+daemon threads.</p>
 <p>The method <code>setDaemon()</code> can only be called after the Thread object has been created and the thread has not been started. An <strong>attempt to call setDaemon() while a thread is running will throw an <code>IllegalThreadStateException</code></strong>.</p>
 <h3 id="threadsleeplong-millis"><code>Thread.sleep(long millis)</code></h3>
 <p><code>Thread.sleep()</code> the method can be used to pause the execution of the current thread for a specified time in milliseconds. The argument value for <strong>milliseconds can't be negative</strong>, else it throws <code>IllegalArgumentException</code>.</p>
 <h3 id="void-start"><code>void start()</code></h3>
 <p>When a program calls the <code>start()</code> method, a new thread is created, and then the <code>run()</code> method is executed.</p>
-<p>We can't call the <code>start()</code> method twice otherwise it will throw an <code>IllegalStateException</code>.</p>
+<p>We can't call the <code>start()</code> method twice; a second call throws
+<code>IllegalThreadStateException</code>.</p>
 <h3 id="threadyield"><code>Thread.yield()</code></h3>
-<p><code>yield()</code> basically means that the thread is not doing anything particularly important and if any other threads or processes need to be run, they should run. Otherwise, the current thread will continue to run.</p>
-<p>Use of yield method:</p>
-<ul>
-<li>Whenever a thread calls <code>java.lang.Thread.yield()</code> method, it gives hint to the thread scheduler that it is ready to pause its execution. The thread scheduler is free to ignore this hint.</li>
-<li>If any thread executes yield method, <strong>thread scheduler checks if there is any thread with same or high priority than this thread</strong>. If the processor finds any thread with higher or same priority then it will move the current thread to Ready/Runnable state and give processor to other thread and if not — current thread will keep executing.</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>yield()</code> is only a hint that the current thread is willing to give up its current
+use of a processor. The scheduler may ignore it, and the Java API does not promise
+that another thread of a particular priority will run. It is rarely appropriate
+outside diagnostics or concurrency-control implementation; verify any use with
+profiling and tests.</p>
 <hr />
 <h2 id="thread-lifecycle">Thread Lifecycle</h2>
-<p>According to Sun microsystems, there are 4 states in the java thread life cycle.</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Java exposes six <code>Thread.State</code> values:</p>
 <ul>
-<li><strong>New</strong> — A thread is in the "New" state, when an object of the <strong>thread class is instantiated but the “start” method is not invoked</strong>.</li>
-<li><strong>Runnable</strong> — When the <strong>"start" method has been invoked on the thread object</strong>. In this state, the thread is either waiting for the scheduler to pick it up for execution or it's already running. Let us call the state <strong>when the thread is already picked for execution, the “running” state</strong>.</li>
-<li><strong>Non-Runnable(Blocked , Timed-Waiting)</strong> — When the thread is alive, i.e., the thread class object exists, but it cannot be picked by the scheduler for execution. <strong>It is temporarily inactive</strong>.</li>
-<li><strong>Terminated</strong> — When the thread completes execution of its “run” method. At this stage, the task of the thread is completed.</li>
+<li><strong>NEW:</strong> created but not started;</li>
+<li><strong>RUNNABLE:</strong> executing in the JVM or eligible to execute;</li>
+<li><strong>BLOCKED:</strong> waiting to acquire a monitor lock;</li>
+<li><strong>WAITING:</strong> waiting indefinitely for another action;</li>
+<li><strong>TIMED_WAITING:</strong> waiting for up to a specified duration;</li>
+<li><strong>TERMINATED:</strong> execution has ended.</li>
 </ul>
-<p><img alt="Thread Lifecycle" src="../images/threadlifecycle.png" /></p>
+<p>These are JVM states, not a one-to-one representation of operating-system thread
+states.</p>
+<p><svg role="img" viewBox="0 0 1220 750" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Java thread lifecycle states</title><desc>The six Thread.State values and representative transitions between RUNNABLE and waiting states.</desc><title>Java thread lifecycle states</title>
+  <desc>Transitions among NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, and TERMINATED with representative causes.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/java/images/threadlifecycle.png"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="610.0" y="35.0">Java exposes six Thread.State values</tspan></text>
+  <rect fill="#b2f2bb" height="80" rx="12" stroke="#2f9e44" stroke-width="2" width="200" x="50" y="145"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="150.0" y="185.0">NEW</tspan></text>
+  <rect fill="#a5d8ff" height="95" rx="12" stroke="#1971c2" stroke-width="2" width="320" x="430" y="135"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="400" text-anchor="middle"><tspan x="590.0" y="169.375">RUNNABLE</tspan><tspan x="590.0" y="195.625">(eligible or running)</tspan></text>
+  <rect fill="#e9ecef" height="80" rx="12" stroke="#495057" stroke-width="2" width="230" x="940" y="145"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="1055.0" y="185.0">TERMINATED</tspan></text>
+  <rect fill="#ffd8a8" height="90" rx="12" stroke="#e8590c" stroke-width="2" width="240" x="80" y="505"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="200.0" y="550.0">BLOCKED</tspan></text>
+  <rect fill="#d0bfff" height="90" rx="12" stroke="#6741d9" stroke-width="2" width="240" x="445" y="505"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="565.0" y="550.0">WAITING</tspan></text>
+  <rect fill="#ffec99" height="90" rx="12" stroke="#e67700" stroke-width="2" width="340" x="800" y="505"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" text-anchor="middle"><tspan x="970.0" y="550.0">TIMED_WAITING</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="250,185 430,185" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="340.0" y="163.0">start()</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="750,185 940,185" stroke="#495057" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="400" text-anchor="middle"><tspan x="845.0" y="163.0">run() returns or throws</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)" points="500,230 200,505" stroke="#e8590c" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)" points="590,230 565,505" stroke="#6741d9" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)" points="680,230 970,505" stroke="#e67700" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="250" y="354.375">enter: monitor unavailable</tspan><tspan x="250" y="375.625">return: lock acquired</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="565" y="354.375">enter: wait / join / park</tspan><tspan x="565" y="375.625">return: notify / completion / unpark</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="900" y="354.375">enter: sleep / timed wait, join, or park</tspan><tspan x="900" y="375.625">return: timeout or signal</tspan></text>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" text-anchor="middle"><tspan x="610" y="675.0">RUNNABLE includes both executing in the JVM and eligible to execute.</tspan></text>
+</svg></p>
 <h3 id="how-does-a-thread-enter-the-non-runnable-state">How does a thread enter the non-runnable state</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
-<li><strong>Forced reason</strong></li>
-<li>It is waiting for an I/O operation.</li>
-<li>It is waiting on an object which is being held by another thread (Java associates "Monitor" to every object to enforce locking/synchronization).</li>
-<li>Moved to sleep by scheduler based on the logic of resource sharing.</li>
-<li><strong>By choice</strong> - we can code inside "run" method or any method inside run which can deliberately give up CPU time.</li>
-<li><strong><code>sleep(long millis)</code></strong> thread gives up CPU time but keeps the lock.</li>
-<li><strong><code>wait()</code></strong> or <strong><code>wait(long timeout)</code></strong> causes thread to give up CPU time as well as release any object lock. If used without timeout, it remains in non-runnable state endlessly unless we call <code>notfy()</code> or <code>notifyAll()</code> on  it.</li>
-<li><strong><code>yield()</code></strong> - This method is like a notification to the scheduler, that the thread is ready to give up execution. The scheduler then decides, based on other live threads and their priorities, if it wants to move the calling thread to runnable and give the CPU time to other threads, or keep running the existing thread.</li>
-<li><strong><code>join()</code></strong> is called to pause the execution of the program until the thread calling the join method is terminated.</li>
+<li>Contending for a <code>synchronized</code> monitor produces <code>BLOCKED</code>.</li>
+<li><code>Object.wait()</code> and an untimed <code>Thread.join()</code> produce <code>WAITING</code>.</li>
+<li><code>Thread.sleep</code>, timed <code>wait</code>, and timed <code>join</code> produce <code>TIMED_WAITING</code>.</li>
+<li><code>Object.wait()</code> releases the monitor on which it waits; <code>Thread.sleep()</code> does
+  not release monitors already held.</li>
+<li><code>thread.join()</code> waits for <code>thread</code> to terminate; it pauses the caller, not the
+  target thread.</li>
 </ul>
 <hr />
-<h2 id="thread-safey">Thread Safey</h2>
+<h2 id="thread-safety">Thread Safety</h2>
 <p>A code that is safe to call by multiple threads simultaneously is called thread-safe.</p>
 <h3 id="critical-area">Critical Area</h3>
 <p>A critical area is a <strong>section of code that is executed by multiple threads and where the sequence of execution for the threads makes a difference in the result</strong> of the concurrent execution of the critical area.</p>
@@ -1549,7 +1609,39 @@
 <p>A race condition is a special condition that may occur inside a critical area.</p>
 <p>When the result of multiple threads executing a critical area may differ depending on the sequence in which the threads execute, the critical area is said to contain a race condition.</p>
 <h3 id="which-resources-are-thread-safe">Which resources are Thread-Safe</h3>
-<p><img alt="Threadsafe" src="../images/threadsafe.jpeg" /></p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><svg role="img" viewBox="0 0 1120 650" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <title>Thread stacks and shared heap objects</title><desc>Each thread has a private stack, while local references may point to the same mutable heap object.</desc><title>Thread stacks and shared heap objects</title>
+  <desc>Each thread has a private stack, but local references can point to the same mutable object in the shared heap.</desc>
+  <metadata>{"provenance": "AI-generated", "sourceAssets": ["archive/original-images/book/java/images/threadsafe.jpeg"]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="8" refY="3"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"></path></marker>
+    <marker id="arrow-start" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto-start-reverse" refX="1" refY="3"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"></path></marker>
+  </defs>
+  <rect fill="#ffffff" height="100%" width="100%"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" text-anchor="middle"><tspan x="560.0" y="35.0">Stack slots are private; referenced objects may be shared</tspan></text>
+  <rect fill="#fff4e6" height="465" rx="12" stroke="#e8590c" stroke-width="2" width="610" x="80" y="110"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="500" text-anchor="middle"><tspan x="385" y="140.0">Heap (shared)</tspan></text>
+  <rect fill="#ffd8a8" height="190" rx="12" stroke="#e8590c" stroke-width="2" width="330" x="220" y="235"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400" text-anchor="middle"><tspan x="385.0" y="305.0">Mutable object</tspan><tspan x="385.0" y="330.0">fields / members</tspan><tspan x="385.0" y="355.0">reachable from static state</tspan></text>
+  <rect fill="#ebfbee" height="210" rx="12" stroke="#2f9e44" stroke-width="2" width="285" x="760" y="110"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" text-anchor="middle"><tspan x="902" y="140.0">Thread A stack</tspan></text>
+  <rect fill="#b2f2bb" height="55" rx="12" stroke="#2f9e44" stroke-width="2" width="195" x="805" y="180"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="902.5" y="207.5">local primitive</tspan></text>
+  <rect fill="#c5f6fa" height="45" rx="12" stroke="#0b7285" stroke-width="2" width="195" x="805" y="250"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="902.5" y="272.5">local reference</tspan></text>
+  <rect fill="#ebfbee" height="210" rx="12" stroke="#2f9e44" stroke-width="2" width="285" x="760" y="365"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" text-anchor="middle"><tspan x="902" y="395.0">Thread B stack</tspan></text>
+  <rect fill="#b2f2bb" height="55" rx="12" stroke="#2f9e44" stroke-width="2" width="195" x="805" y="435"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="902.5" y="462.5">local primitive</tspan></text>
+  <rect fill="#c5f6fa" height="45" rx="12" stroke="#0b7285" stroke-width="2" width="195" x="805" y="505"></rect>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="902.5" y="527.5">local reference</tspan></text>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="805,272 550,300" stroke="#0b7285" stroke-linejoin="round" stroke-width="2"></polyline>
+  <polyline fill="none" marker-end="url(#arrow-end)" points="805,527 650,527 650,380 550,380" stroke="#0b7285" stroke-linejoin="round" stroke-width="2"></polyline>
+  <text fill="#1e1e1e" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="400" text-anchor="middle"><tspan x="385" y="530.0">Thread safety depends on whether mutable state is shared and coordinated.</tspan></text>
+</svg></p>
 <h2 id="multithreading-in-practice">Multithreading in Practice</h2>
 <h3 id="running-computation-into-a-separate-thread-spawning-threads">Running computation into a separate thread - spawning threads</h3>
 <p>Using Thread class:</p>
@@ -1575,7 +1667,8 @@
 <blockquote>
 <p>Use <code>volatile</code> keyword in the data field declaration to avoid this.</p>
 </blockquote>
-<p><code>t1.join()</code> returns to main thread only when <code>t1</code> finishes meaning <code>t1</code> <strong>blocks</strong> the main thread.</p>
+<p><code>t1.join()</code> returns only when <code>t1</code> finishes; it blocks whichever thread called
+<code>join</code>, which is not necessarily the main thread.</p>
 <p>To fixing thread interleaving (on a modifiable data):</p>
 <ul>
 <li>Make the modification operation "atomic" by making methods for each operation <em>synchronized</em> using <code>public synchronized void fn()</code>.</li>
@@ -1612,7 +1705,7 @@ executor.submit(new myCustomThread2());
 executor.shutdown();
 
 //waits only for specified time and then will return
-Executor.awaitTermination(100, TimeOut.MILLIS);
+executor.awaitTermination(100, TimeUnit.MILLISECONDS);
 </code></pre>
 
 <p>Implementing thread-pool from scratch</p>
@@ -1632,10 +1725,14 @@ latch.await();
 </code></pre>
 
 <h3 id="concurrent-thread-safe-data-structures">Concurrent (thread-safe) Data structures</h3>
-<ul>
-<li>All classes in <code>java.util.cocurrent.*</code> package are concurrent and thread-safe.</li>
-<li>No need to worry about thread synchronization at all.</li>
-</ul>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p><code>java.util.concurrent</code> provides concurrent collections, queues, synchronizers,
+executors, and atomic utilities. Their individual operations have documented
+thread-safety guarantees, but a multi-step check-then-act sequence may still need
+an atomic method such as <code>compute</code>, an explicit lock, or another coordination
+mechanism.</p>
 <h3 id="blockingqueue">BlockingQueue</h3>
 <pre class="codehilite"><code class="language-java">BlockingQueue&lt;Integer&gt; queue = new ArrayBlockingQueue&lt;Integer&gt;(size);
 
@@ -1662,7 +1759,8 @@ int val = queue.take();
 </ul>
 <h4 id="notify-all">Notify-All</h4>
 <ul>
-<li>Notifies the waiting thread. (does not release the lock until the block is over).</li>
+<li>Wakes all threads waiting on the same monitor. They still must reacquire that
+  monitor after the notifying thread releases it.</li>
 </ul>
 <h3 id="re-entrant-lock">Re-Entrant Lock</h3>
 <pre class="codehilite"><code class="language-java">//lock interface
@@ -1763,12 +1861,12 @@ future.get();
 </code></pre>
 
 <h4 id="interrupts">Interrupts</h4>
-<pre class="codehilite"><code class="language-java">t1.interrupt()
+<pre class="codehilite"><code class="language-java">t1.interrupt();
 //doesn't stop the thread -&gt; there is a stop() method but it is deprecated.
 //it just sets an interrupted flag and continues with the normal execution.
 
-//we cause Thread.currentThread() instead of explicitly defining a thread
-t1.isInterrupted()
+// Check the current thread without keeping another Thread reference.
+Thread.currentThread().isInterrupted();
 
 //catching InterruptedException will catch it if the flag is set.
 </code></pre>
@@ -1965,10 +2063,10 @@ t1.isInterrupted()
             Thread.currentThread()
         </a>
         
-        <a href="#long-getid"
+        <a href="#long-threadid"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#long-getid');">
-            long getId()
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#long-threadid');">
+            long threadId()
         </a>
         
         <a href="#int-getpriority-and-void-setpriority"
@@ -2044,10 +2142,10 @@ t1.isInterrupted()
         
 
         
-        <a href="#thread-safey"
+        <a href="#thread-safety"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#thread-safey');">
-            Thread Safey
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#thread-safety');">
+            Thread Safety
         </a>
         
         

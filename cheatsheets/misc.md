@@ -55,11 +55,47 @@ go get example.com/mod@none
 
 ### Go - Misc
 
-TODO
+!!! info "AI-generated"
+
+```bash
+# Format and vet every package in the module.
+go fmt ./...
+go vet ./...
+
+# Explain why a package is in the module graph.
+go mod why example.com/module
+
+# Remove unused requirements and add missing ones.
+go mod tidy
+
+# List available updates without changing go.mod.
+go list -m -u all
+```
 
 ## Makefile
 
-TODO
+!!! info "AI-generated"
+
+Keep targets small, declare non-file targets as phony, and use the same commands
+locally and in CI.
+
+```make
+.PHONY: fmt lint test build
+
+fmt:
+	go fmt ./...
+
+lint:
+	go vet ./...
+
+test:
+	go test -race ./...
+
+build:
+	go build ./...
+```
+
+Recipe lines must begin with a tab unless the Makefile changes `.RECIPEPREFIX`.
 
 ## Databases / SQL
 
@@ -99,7 +135,7 @@ random number b/w a and b (inclusive):
 select floor(random()*(b-a+1)) + a;
 ```
 
-## Git - WIP
+## Git
 
 Remove files from remote after adding in `.gitignore`:
 
@@ -130,16 +166,17 @@ top -p <pid>
 top -i
 ```
 
-User taking superuser role - ?
+Run a shell as another user:
 
 ```bash
-sudo -su <username>
+sudo -u <username> -s
 ```
 
-Disk space
+Filesystem and directory disk usage:
 
 ```bash
-df -hk | du
+df -h
+du -sh <directory>
 ```
 
 ### Networking
@@ -178,10 +215,21 @@ less nginx_access.log | sed -E -e "s/(\?|\&)([^=]+)\=([^&]+)//g" | awk '{print $
 less nginx_access.log | grep status=502 | sed -E -e "s/(\?|\&)([^=]+)\=([^&]+)//g" | awk '{arr[$10]++}END{for(a in arr) print arr[a], "\t" a}' | sort -k1n
 ```
 
-- `sort -k1n` - ???
-- `xargs -I '{}'` - ???
-- `sed -E -e ""` - ???
-- `awk` with multi-line expression and for-loop.
+#### Command fragments explained
+
+!!! info "AI-generated"
+
+- `sort -k1,1n` sorts numerically by only the first field. `-k1n` starts at the
+  first field but does not explicitly end there.
+- `xargs -I '{}' command '{}'` replaces each `{}` in `command` with one input
+  line. Quote the placeholder when filenames may contain spaces.
+- `sed -E -e 'expression'` enables extended regular expressions and supplies one
+  editing expression.
+- In `awk`, `arr[key]++` counts occurrences. An `END { ... }` block runs once
+  after all input has been consumed and is a convenient place to print totals.
+
+Prefer null-delimited filenames (`find ... -print0 | xargs -0 ...`) when names can
+contain spaces or newlines.
 
 ## Nginx
 
@@ -269,6 +317,28 @@ val source: String = Source.fromFile("/Users/lpv/Desktop/categoryHierarchy.json"
 ```
 
 ## Sonatype
+
+### Reliability note
+
+!!! info "AI-generated"
+
+!!! warning "Manual review"
+    The publishing steps below describe the legacy OSSRH/Jira/staging workflow.
+    Maven Central ended support for the legacy deployment protocol on June 30,
+    2025. Keep this section only as historical context; verify any real release
+    against the current Central Publisher Portal documentation.
+
+### Current publishing direction
+
+!!! info "AI-generated"
+
+1. Create an account at the Central Publisher Portal.
+2. Verify the namespace used by the artifact coordinates.
+3. Sign release artifacts and provide the required POM metadata.
+4. Use a current Maven- or Gradle-compatible Central publishing plugin.
+5. Upload, validate, and publish a deployment through the portal or its API.
+
+Source: [Maven Central publishing guide](https://central.sonatype.org/publish/publish-portal-guide/).
 
 ### Create sonatype account
 

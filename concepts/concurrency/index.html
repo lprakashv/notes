@@ -1487,7 +1487,13 @@
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
     <h2 id="problems">Problems</h2>
 <h3 id="data-race-race-condition">Data race / race condition</h3>
-<p>2 or more tasks writing a shared variable outside a critical section (without any synch mechanism) then the final output depends upon order of execution.</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>A <strong>data race</strong> occurs when concurrent operations access the same memory, at least
+one operation writes, and the accesses are not ordered by the language's
+synchronization rules. A <strong>race condition</strong> is broader: correctness depends on
+uncontrolled timing or ordering even when every individual access is atomic.</p>
 <h3 id="deadlock">Deadlock</h3>
 <p>2 or more tasks waiting for a shared resource, that must be free from the other, so none of them will get the resource -&gt; indefinite blocking.</p>
 <ul>
@@ -1498,9 +1504,17 @@
 <li>Circular wait. -&gt; (1 —&gt; 2 —&gt; 3 —&gt; … n —&gt; 1)</li>
 </ul>
 <h3 id="live-lock">Live lock</h3>
-<p>2 tasks always changing states due to another actions of the other -&gt; perpetually changing and not continuing their work.</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Two or more tasks keep reacting to one another and changing state, but no task
+makes useful progress. Unlike a deadlock, the tasks remain active.</p>
 <h3 id="resource-starvation">Resource starvation</h3>
-<p>More than one tasks waiting for the same resource, when it gets freed up is is allocated to one of them. One of the tasks might never get the resource</p>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>One task waits indefinitely because other tasks repeatedly receive the resource
+or scheduling opportunity first.</p>
 <ul>
 <li>Solution -&gt; fair allocation algorithm.</li>
 <li>Fairness solutions to this problem takes additional overhead.</li>
@@ -1509,47 +1523,44 @@
 <p>Low priority task holds the resource needed by the high priority task.</p>
 <h2 id="models">Models</h2>
 <h3 id="shared-mutable-state">Shared mutable state</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
 <li>Synchronize/lock access - may lead to deadlocks</li>
 <li>Fix deadlocks by locking objects in a pre-defined order.</li>
-<li>Use atomic wherever necessary (better than custom synchronization).</li>
+<li>Use atomic operations for simple state transitions; use locks or higher-level
+  coordination when several values must change together.</li>
 <li>Accidental Non-determinism in thread execution (coz controlled by OS).</li>
 <li>Not evident from library/classes that they share mutable state.</li>
 </ul>
 <h3 id="functional-way-parallelism">Functional way (parallelism)</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
+<p>Pure functions and immutable values reduce coordination because concurrent tasks
+do not mutate the same state. They do not guarantee parallel speed-up or freedom
+from deadlock; futures can still wait cyclically, block a limited executor, or
+perform nondeterministic I/O.</p>
 <ul>
-<li>Better concurrency support using pure functions.</li>
-<li>Basic primitives</li>
-<li><strong>Futures</strong><ul>
-<li>Block of code running in a different thread.</li>
-<li>Cannot have deadlocks.</li>
-<li>Can make parallel execution with multiple processors.</li>
-<li>Faster execution and deterministic results.</li>
+<li>A <strong>future</strong> represents a result that may become available later.</li>
+<li>A <strong>promise</strong> is a writable handle used to complete a future once.</li>
+<li>Parallel work is useful only when the tasks are independent enough and the
+  scheduling/communication overhead is smaller than the saved computation time.</li>
 </ul>
-</li>
-<li><strong>Promises</strong><ul>
-<li>Container where we can put the value only once.</li>
-<li>Will block the promise read until the promise gets filled.</li>
-<li>Can have "deadlocks"!!</li>
-<li>Predictable/deterministic.</li>
-</ul>
-</li>
-</ul>
-<h3 id="functional-concurrency">Functional concurrency</h3>
+<h3 id="message-passing-and-functional-concurrency">Message passing and functional concurrency</h3>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+</div>
 <ul>
-<li><strong>Atoms</strong> in clojure (atomic references)</li>
-<li>More atomic swaps than the actual changes needed (rollback and discarding the inconsistent atomic change)<ul>
-<li>Solution: put more values in same atom</li>
-<li>Solution: <strong>STM</strong></li>
-</ul>
-</li>
-<li>Agents</li>
-<li>Same as atoms -&gt; just the fn needed to update value runs on a diff thread.</li>
-<li>Await needed at the end to wait for all the update ops on the agent.</li>
-<li><strong>Ref</strong> / <strong>STM</strong></li>
-<li>Unlike atom, can synchronize multiple values</li>
-<li>Each operation should by in transaction (<code>dosync</code>)</li>
-<li><strong>Actor model</strong></li>
+<li><strong>Clojure atoms</strong> apply an atomic function to one reference. The function may
+  be retried, so it must not perform side effects.</li>
+<li><strong>Clojure refs/STM</strong> coordinate changes to multiple references inside <code>dosync</code>.</li>
+<li><strong>Clojure agents</strong> serialize asynchronous actions against one value; <code>await</code>
+  waits for queued actions when a synchronous boundary is needed.</li>
+<li>In the <strong>actor model</strong>, actors isolate state and communicate through messages.
+  An actor handles one message at a time, but the system still needs supervision,
+  mailbox limits, ordering assumptions, and failure handling.</li>
 </ul>
   </div>
   
@@ -1790,10 +1801,10 @@
             Functional way (parallelism)
         </a>
         
-        <a href="#functional-concurrency"
+        <a href="#message-passing-and-functional-concurrency"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#functional-concurrency');">
-            Functional concurrency
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#message-passing-and-functional-concurrency');">
+            Message passing and functional concurrency
         </a>
         
         

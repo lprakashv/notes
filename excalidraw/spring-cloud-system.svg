@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="100%" role="img">
+  <title>Components of the legacy Spring Cloud Netflix example</title>
+  <desc>Gateway, discovery, configuration, and two application services with registration, startup configuration, and request dependencies.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/spring/images/parts-of-system.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="600.0" y="35.0">Cloud-native system components</tspan></text>
+  <rect x="70" y="275" width="230" height="105" rx="12" fill="#d0bfff" stroke="#6741d9" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="185.0" y="314.375">Gateway</tspan><tspan x="185.0" y="340.625">(two instances)</tspan></text>
+  <rect x="475" y="105" width="250" height="105" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="600.0" y="144.375">Discovery</tspan><tspan x="600.0" y="170.625">(two instances)</tspan></text>
+  <rect x="900" y="275" width="230" height="105" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1015.0" y="314.375">Config</tspan><tspan x="1015.0" y="340.625">(two instances)</tspan></text>
+  <rect x="330" y="500" width="230" height="105" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="445.0" y="539.375">Service A</tspan><tspan x="445.0" y="565.625">(two instances)</tspan></text>
+  <rect x="650" y="500" width="230" height="105" rx="12" fill="#c5f6fa" stroke="#0b7285" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="765.0" y="539.375">Service B</tspan><tspan x="765.0" y="565.625">(two instances)</tspan></text>
+  <polyline points="300,327 330,552" fill="none" stroke="#6741d9" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="293.0" y="424.5">request</tspan></text>
+  <polyline points="560,552 650,552" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="605.0" y="532.0">dependency</tspan></text>
+  <polyline points="185,275 600,210" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="445,500 600,210" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="522.5" y="340.0">register</tspan></text>
+  <polyline points="765,500 600,210" fill="none" stroke="#1971c2" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="900,327 185,380" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <polyline points="900,327 445,500" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <polyline points="900,327 765,500" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="832.5" y="398.5">startup config</tspan></text>
+</svg>

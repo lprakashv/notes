@@ -6,11 +6,15 @@
 
 The return type of this method is Thread, it returns a reference of currently executing thread (who touched this method). It does not raise any exception.
 
-### `long getId()`
+### `long threadId()`
 
-The thread ID is a positive long number generated when this thread was created.
+!!! info "AI-generated"
 
-The thread ID is unique and remains unchanged during its lifetime. When a thread is terminated, this thread ID may be reused.
+The thread ID is a positive `long` generated when the thread is created. It is
+unique and unchanged during that thread's lifetime. `getId()` is deprecated since
+Java 19; use `threadId()` in current code.
+
+An ID is useful for diagnostics, not as a permanent application identity.
 
 ### `int getPriority()` and `void setPriority()`
 
@@ -19,6 +23,12 @@ The priority of thread can either be assigned by the JVM or by the programmer ex
 The thread's priority is in the range of 1 to 10. The __default priority of a thread is 5__.
 
 ### `Thread.State getState()`
+
+!!! info "AI-generated"
+
+Returns one of `NEW`, `RUNNABLE`, `BLOCKED`, `WAITING`, `TIMED_WAITING`, or
+`TERMINATED`. The value is a snapshot intended for monitoring and diagnostics,
+not for synchronization decisions.
 
 ### `void interrupt()`
 
@@ -36,7 +46,11 @@ The `run()` method of a thread encapsulates the logic that should be run by a th
 
 ### `void setDaemon(boolean on)`
 
-On the other hand, daemon threads are __low-priority threads whose only role is to provide services to user threads__. Since daemon threads are meant to serve user threads and are only needed while user threads are running, they won’t prevent the JVM from exiting once all user threads have finished their execution.
+!!! info "AI-generated"
+
+Daemon status controls JVM shutdown; it does not mean low priority. JVM shutdown
+begins after all started non-daemon threads terminate. Virtual threads are always
+daemon threads.
 
 The method `setDaemon()` can only be called after the Thread object has been created and the thread has not been started. An __attempt to call setDaemon() while a thread is running will throw an `IllegalThreadStateException`__.
 
@@ -48,45 +62,54 @@ The method `setDaemon()` can only be called after the Thread object has been cre
 
 When a program calls the `start()` method, a new thread is created, and then the `run()` method is executed.
 
-We can't call the `start()` method twice otherwise it will throw an `IllegalStateException`.
+We can't call the `start()` method twice; a second call throws
+`IllegalThreadStateException`.
 
 ### `Thread.yield()`
 
-`yield()` basically means that the thread is not doing anything particularly important and if any other threads or processes need to be run, they should run. Otherwise, the current thread will continue to run.
+!!! info "AI-generated"
 
-Use of yield method:
-
-- Whenever a thread calls `java.lang.Thread.yield()` method, it gives hint to the thread scheduler that it is ready to pause its execution. The thread scheduler is free to ignore this hint.
-- If any thread executes yield method, __thread scheduler checks if there is any thread with same or high priority than this thread__. If the processor finds any thread with higher or same priority then it will move the current thread to Ready/Runnable state and give processor to other thread and if not — current thread will keep executing.
+`yield()` is only a hint that the current thread is willing to give up its current
+use of a processor. The scheduler may ignore it, and the Java API does not promise
+that another thread of a particular priority will run. It is rarely appropriate
+outside diagnostics or concurrency-control implementation; verify any use with
+profiling and tests.
 
 ---
 
 ## Thread Lifecycle
 
-According to Sun microsystems, there are 4 states in the java thread life cycle.
+!!! info "AI-generated"
 
-- __New__ — A thread is in the "New" state, when an object of the __thread class is instantiated but the “start” method is not invoked__.
-- __Runnable__ — When the __"start" method has been invoked on the thread object__. In this state, the thread is either waiting for the scheduler to pick it up for execution or it's already running. Let us call the state __when the thread is already picked for execution, the “running” state__.
-- __Non-Runnable(Blocked , Timed-Waiting)__ — When the thread is alive, i.e., the thread class object exists, but it cannot be picked by the scheduler for execution. __It is temporarily inactive__.
-- __Terminated__ — When the thread completes execution of its “run” method. At this stage, the task of the thread is completed.
+Java exposes six `Thread.State` values:
 
-![Thread Lifecycle](./images/threadlifecycle.png)
+- **NEW:** created but not started;
+- **RUNNABLE:** executing in the JVM or eligible to execute;
+- **BLOCKED:** waiting to acquire a monitor lock;
+- **WAITING:** waiting indefinitely for another action;
+- **TIMED_WAITING:** waiting for up to a specified duration;
+- **TERMINATED:** execution has ended.
+
+These are JVM states, not a one-to-one representation of operating-system thread
+states.
+
+~{Java thread lifecycle states}(<java-thread-states.json> "The six Thread.State values and representative transitions between RUNNABLE and waiting states.")
 
 ### How does a thread enter the non-runnable state
 
-- __Forced reason__
-  - It is waiting for an I/O operation.
-  - It is waiting on an object which is being held by another thread (Java associates "Monitor" to every object to enforce locking/synchronization).
-  - Moved to sleep by scheduler based on the logic of resource sharing.
-- __By choice__ - we can code inside "run" method or any method inside run which can deliberately give up CPU time.
-  - __`sleep(long millis)`__ thread gives up CPU time but keeps the lock.
-  - __`wait()`__ or __`wait(long timeout)`__ causes thread to give up CPU time as well as release any object lock. If used without timeout, it remains in non-runnable state endlessly unless we call `notfy()` or `notifyAll()` on  it.
-  - __`yield()`__ - This method is like a notification to the scheduler, that the thread is ready to give up execution. The scheduler then decides, based on other live threads and their priorities, if it wants to move the calling thread to runnable and give the CPU time to other threads, or keep running the existing thread.
-  - __`join()`__ is called to pause the execution of the program until the thread calling the join method is terminated.
+!!! info "AI-generated"
+
+- Contending for a `synchronized` monitor produces `BLOCKED`.
+- `Object.wait()` and an untimed `Thread.join()` produce `WAITING`.
+- `Thread.sleep`, timed `wait`, and timed `join` produce `TIMED_WAITING`.
+- `Object.wait()` releases the monitor on which it waits; `Thread.sleep()` does
+  not release monitors already held.
+- `thread.join()` waits for `thread` to terminate; it pauses the caller, not the
+  target thread.
 
 ---
 
-## Thread Safey
+## Thread Safety
 
 A code that is safe to call by multiple threads simultaneously is called thread-safe.
 
@@ -104,7 +127,9 @@ When the result of multiple threads executing a critical area may differ dependi
 
 ### Which resources are Thread-Safe
 
-![Threadsafe](./images/threadsafe.jpeg)
+!!! info "AI-generated"
+
+~{Thread stacks and shared heap objects}(<java-memory-sharing.json> "Each thread has a private stack, while local references may point to the same mutable heap object.")
 
 ## Multithreading in Practice
 
@@ -137,7 +162,8 @@ new Thread(new Runnable() {
 Thread might "cache" some shared data and prevent scanning it when other threads modify it.
 > Use `volatile` keyword in the data field declaration to avoid this.
 
-`t1.join()` returns to main thread only when `t1` finishes meaning `t1` __blocks__ the main thread.
+`t1.join()` returns only when `t1` finishes; it blocks whichever thread called
+`join`, which is not necessarily the main thread.
 
 To fixing thread interleaving (on a modifiable data):
 
@@ -176,7 +202,7 @@ executor.submit(new myCustomThread2());
 executor.shutdown();
 
 //waits only for specified time and then will return
-Executor.awaitTermination(100, TimeOut.MILLIS);
+executor.awaitTermination(100, TimeUnit.MILLISECONDS);
 ```
 
 Implementing thread-pool from scratch
@@ -200,8 +226,13 @@ latch.await();
 
 ### Concurrent (thread-safe) Data structures
 
-- All classes in `java.util.cocurrent.*` package are concurrent and thread-safe.
-- No need to worry about thread synchronization at all.
+!!! info "AI-generated"
+
+`java.util.concurrent` provides concurrent collections, queues, synchronizers,
+executors, and atomic utilities. Their individual operations have documented
+thread-safety guarantees, but a multi-step check-then-act sequence may still need
+an atomic method such as `compute`, an explicit lock, or another coordination
+mechanism.
 
 ### BlockingQueue
 
@@ -231,7 +262,8 @@ int val = queue.take();
 
 #### Notify-All
 
-- Notifies the waiting thread. (does not release the lock until the block is over).
+- Wakes all threads waiting on the same monitor. They still must reacquire that
+  monitor after the notifying thread releases it.
 
 ### Re-Entrant Lock
 
@@ -350,12 +382,12 @@ future.get();
 #### Interrupts
 
 ```java
-t1.interrupt()
+t1.interrupt();
 //doesn't stop the thread -> there is a stop() method but it is deprecated.
 //it just sets an interrupted flag and continues with the normal execution.
 
-//we cause Thread.currentThread() instead of explicitly defining a thread
-t1.isInterrupted()
+// Check the current thread without keeping another Thread reference.
+Thread.currentThread().isInterrupted();
 
 //catching InterruptedException will catch it if the flag is set.
 ```

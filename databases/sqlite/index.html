@@ -1488,7 +1488,7 @@
     <h2 id="in-a-nutshell">In-a-nutshell</h2>
 <ul>
 <li>An in-process library -&gt; not a server</li>
-<li>1 file of ANSI-C code</li>
+<li>A small C library commonly distributed as a single amalgamation source file</li>
 <li>Database is a single file</li>
 <li>can contains 1000s of tables, indexes and views</li>
 <li>space efficient</li>
@@ -1500,7 +1500,8 @@
 </ul>
 <h2 id="lite-means-low-overhead-but-not-low-capability">"Lite" means "low overhead", but not "low capability"</h2>
 <ul>
-<li>1 writer + N concurrent readers</li>
+<li>One writer at a time; readers can run concurrently, with WAL mode improving
+  read/write overlap</li>
 <li>1 GB strings and BLOBs</li>
 <li>281 TB databases</li>
 <li>64-way joins</li>
@@ -1532,7 +1533,7 @@
 <p>https://youtu.be/ZSKLA81tBis?t=1104</p>
 <h3 id="ins-and-outs">Ins and Outs</h3>
 <ul>
-<li>Compiler -&gt; translates SQKL into bytecode</li>
+<li>Compiler -&gt; translates SQL into bytecode</li>
 <li>Virtual machine -&gt; runs the bytecode</li>
 </ul>
 <pre class="codehilite"><code class="language-text">+-----+      +---------------------------+     +--------------------+     +-----------------+     +--------+

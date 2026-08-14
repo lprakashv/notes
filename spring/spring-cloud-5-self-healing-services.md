@@ -125,7 +125,13 @@ public class Application {
 
 ### Reading Hystrix Dashboard
 
-![Reading Dashboard](./images/reading-hystrix-dashboard.png)
+#### Dashboard signals
+
+!!! info "AI-generated"
+
+~{Reading a legacy Hystrix Dashboard command tile}(<hystrix-dashboard-reading.json> "Request volume, health, errors, throughput, circuit state, and latency percentiles in a command tile.")
+
+#### Opening the legacy dashboard
 
 ![Dashboard](./images/hystrix-dashboard.png)
 
