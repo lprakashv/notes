@@ -1,2 +1,2 @@
 mkdocs==1.6.1
-mkdocs-shadcn==0.10.0
+mkdocs-shadcn==0.10.7

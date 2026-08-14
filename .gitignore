@@ -1,3 +1,8 @@
+.idea/
+logs/
+.vscode/
+.metals/
 .DS_Store
-/\.venv/
-/site/
+.venv/
+site/
+.obsidian/
