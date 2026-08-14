@@ -1,0 +1,73 @@
+skills/cultivate-notes/scripts/test_notes.py
+  s_7ed7849ef41914::t_1c8c170c011add 1-4,6-81,109-125,151-153
+  s_7ed7849ef41914::t_c7a46ad283be23 82-108
+  s_7ed7849ef41914::t_9a63e0d3b79920 5,134-143
+  s_7ed7849ef41914::t_d3084514f2de06 126-133,144-150
+skills/cultivate-notes/SKILL.md
+  s_7ed7849ef41914::t_a00780ea887c8a 3,8-30,32-34,36-73
+  s_7ed7849ef41914::t_c98566b6134c91 1-2,4-7
+  s_7ed7849ef41914::t_691fc680b4b3ca 31
+  s_7ed7849ef41914::t_e6b700131bc3f4 35
+.cultivate-notes.toml
+  s_7ed7849ef41914::t_ce627652108385 1-15,17-34
+  s_7ed7849ef41914::t_70b980cc56136e 16
+build-local.sh
+  s_7ed7849ef41914::t_70b980cc56136e 10,16,44,49-53,56-57
+rough-notes/.gitkeep
+  s_7ed7849ef41914::t_70b980cc56136e 1
+book/index.md
+  s_7ed7849ef41914::t_10cb5b0576f065 93-96
+  s_7ed7849ef41914::t_e6b700131bc3f4 97-102
+  s_7ed7849ef41914::t_70b980cc56136e 116-128
+.cultivate-notes/ledger.json
+  s_7ed7849ef41914::t_ce627652108385 1-4
+note-reviews/.gitkeep
+  s_7ed7849ef41914::t_70b980cc56136e 1
+AGENTS.md
+  s_7ed7849ef41914::t_70b980cc56136e 6-7,13-18
+  s_7ed7849ef41914::t_e6b700131bc3f4 10
+skills/cultivate-notes/scripts/notes.py
+  s_7ed7849ef41914::t_d3084514f2de06 50-52,652-686,764-767
+  s_7ed7849ef41914::t_3f6bff2e0026bf 164,773
+  s_7ed7849ef41914::t_c7a46ad283be23 127-141,228-242,453-455,458,463-472,849-850
+  s_7ed7849ef41914::t_c7f1d90a1b9923 220-227
+  s_7ed7849ef41914::t_1b0565392e467d 1-49,53-126,142-163,165-219,243-452,456-457,459-462,473-651,687-763,768-772,774-848,851-890
+skills/cultivate-notes/references/automation.md
+  s_7ed7849ef41914::t_a00780ea887c8a 1-21
+README.md
+  s_7ed7849ef41914::t_70b980cc56136e 9-44,93
+skills/cultivate-notes/references/contract.md
+  s_7ed7849ef41914::t_691fc680b4b3ca 89
+  s_7ed7849ef41914::t_a00780ea887c8a 1-88,90-91
+skills/cultivate-notes/references/provenance.md
+  s_7ed7849ef41914::t_a00780ea887c8a 1-69
+.cultivate-notes/style.md
+  s_7ed7849ef41914::t_ce627652108385 1-9
+archive/rough-notes/.gitkeep
+  s_7ed7849ef41914::t_70b980cc56136e 1
+skills/cultivate-notes/agents/openai.yaml
+  s_7ed7849ef41914::t_c98566b6134c91 1-4
+scripts/validate_notes.py
+  s_7ed7849ef41914::t_70b980cc56136e 23,26-31,62,73
+  s_7ed7849ef41914::t_10cb5b0576f065 44,49,63-70
+.gitignore
+  s_7ed7849ef41914::t_70b980cc56136e 9-11
+Makefile
+  s_7ed7849ef41914::t_70b980cc56136e 2-3,5,21-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "879dce99b93fce2e440d02523f2a865c0afef1bb",
+  "prompts": {},
+  "sessions": {
+    "s_7ed7849ef41914": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fffd1-bc65-7e32-b688-0abcc2d71645",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "lprakashv <lprakashv@gmail.com>"
+    }
+  }
+}
