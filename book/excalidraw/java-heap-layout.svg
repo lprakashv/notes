@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="100%" role="img">
+  <title>HotSpot memory layout before and after Java 8</title>
+  <desc>Before Java 8, PermGen was inside the heap; Java 8 replaced it with native-memory Metaspace outside the heap.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/java/images/gc1.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="550.0" y="35.0">PermGen was replaced by native-memory Metaspace</tspan></text>
+  <text text-anchor="middle" font-size="24" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300" y="105.0">Before Java 8</tspan></text>
+  <rect x="90" y="145" width="420" height="465" rx="12" fill="#f8f9fa" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300" y="632.0">JVM process</tspan></text>
+  <text text-anchor="middle" font-size="24" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="800" y="105.0">Java 8+</tspan></text>
+  <rect x="590" y="145" width="420" height="465" rx="12" fill="#f8f9fa" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="800" y="632.0">JVM process</tspan></text>
+  <rect x="135" y="185" width="330" height="290" rx="12" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" stroke-dasharray="9 7"/>
+  <text text-anchor="start" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="160" y="205.0">Heap (-Xmx)</tspan></text>
+  <rect x="170" y="240" width="260" height="85" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300.0" y="271.875">New generation</tspan><tspan x="300.0" y="293.125">(Eden + Survivors)</tspan></text>
+  <rect x="170" y="335" width="260" height="65" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300.0" y="367.5">Old generation</tspan></text>
+  <rect x="170" y="410" width="260" height="45" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="15" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300.0" y="432.5">PermGen (-XX:MaxPermSize)</tspan></text>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="300" y="545.0">Native memory</tspan></text>
+  <rect x="635" y="185" width="330" height="215" rx="12" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" stroke-dasharray="9 7"/>
+  <text text-anchor="start" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="660" y="205.0">Heap (-Xmx)</tspan></text>
+  <rect x="670" y="240" width="260" height="75" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="800.0" y="266.875">New generation</tspan><tspan x="800.0" y="288.125">(Eden + Survivors)</tspan></text>
+  <rect x="670" y="325" width="260" height="55" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="800.0" y="352.5">Old generation</tspan></text>
+  <rect x="670" y="455" width="260" height="65" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="800.0" y="477.5">Metaspace</tspan><tspan x="800.0" y="497.5">(-XX:MaxMetaspaceSize)</tspan></text>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="800" y="555.0">Native memory</tspan></text>
+  <polyline points="465,432 670,487" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="567.5" y="437.5">replaced</tspan></text>
+</svg>

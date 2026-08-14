@@ -2,27 +2,39 @@
 
 ## Account
 
-AWS Account signup with email id ==> Root account (captain of the starship)
+!!! info "AI-generated"
 
-__NOTEs:__
+The email address used to create an AWS account controls its root user. Treat the
+root user as break-glass access:
 
-- Do not use the Root account after the initial setup!
-- Setup and Use MFA (multi factor authentication keys for your root account and IAM users)
+1. register a hardware-backed or other phishing-resistant MFA method where
+   available;
+2. do not create root access keys;
+3. configure alternate security and billing contacts;
+4. use AWS Organizations and IAM Identity Center for workforce access when the
+   environment has more than one person or account;
+5. grant roles with short-lived credentials and least privilege;
+6. monitor root-user activity and keep a tested recovery procedure.
 
-First steps:
-
-1. Create group using IAM with admin, developer, etc specific permissions/roles.
-2. Delete the root user’s secret access key if it is present (should never leak in public).
-3. Create an admin user and add it to the admin group. Use this for further admin actions.
-4. Create secret access keys for the admin IAM user and store it securely somewhere. If the access key is ever leaked out, delete it immediately and generate a new one!
+Avoid long-lived access keys for routine administration. When a workload runs on
+AWS, give the compute service an IAM role instead of storing a key in code or on
+disk.
 
 ## Billing
 
-- Add email alerts from the Billing service
+!!! info "AI-generated"
 
-## CloudWatch (logging and monitoring service)
+Use AWS Budgets for cost or usage thresholds and Cost Anomaly Detection for
+unexpected patterns. Send notifications through configured contacts or SNS, and
+tag resources so a cost can be traced to an owner and environment.
 
-- You can add “alarms” for billing, with SNS.
+## CloudWatch
+
+!!! info "AI-generated"
+
+CloudWatch provides metrics, logs, alarms, dashboards, and related observability
+features. Billing alarms use estimated-charge metrics; Budgets is usually the
+clearer starting point for budget notifications.
 
 ## Birth of Cloud
 
@@ -40,118 +52,148 @@ First steps:
 
 ## Regions and Availability Zones (AZ)
 
-- AZ is a data centre within a region.
-- Ohio, Oregon and North Virginia (us-east) are the largest regions and AZs. First updates comes here.
+!!! info "AI-generated"
+
+A Region is a separate geographic area. An Availability Zone is one or more
+discrete data centers with independent power, networking, and connectivity inside
+a Region. Design across multiple AZs when the service must tolerate an AZ failure.
+Service availability, price, and feature rollout vary by Region; do not assume a
+particular Region always receives features first.
 
 ## IaaS Compute
 
 ### EC2 VM remote
 
-- You are asked to generate key-pair for the instance
-- You can download the .pem file ==> it is the only private key there is, just don’t lose it!
-- Public key is already present in the was instance.
-- Save the .pem file securely somewhere on your machine.
-- No you can SSH into the instance using the .pem file and the URL/endpoint provided.
+!!! info "AI-generated"
 
-Instance Types:
-
-- Size ==> T-shirt sizes like model for size of machine.
-- T instances use compute credits for later burst usage
-- Reserved instances are great way to save money when you know what you workload is.
-
-Connecting to internet:
-
-- “Security groups” act as firewall/filter from the public internet.
-- Outgoing traffic allows all ==> can connect to internet and install softwares etc.
-
-EC2 actions:
-
-- “Stop” and “start” ==> this might move the VM instance into a different AZ! Do this if you are facing trouble connecting to the machine (there might be a failure at that AZ).
-- “Reboot” will do a software reboot of the VM on the same physical machine.
-- Stopped instance won’t be changed with the compute cost but there will be data cost for hard drive (which will be minimal).
-- You can create and AMI image from an existing EC2 instance to clone this VM (all the hard drive and software intact) ==> you can use the image in case the VM crash or corrupt to rest it to the default fresh configuration.
+- Prefer AWS Systems Manager Session Manager when it meets the access requirement;
+  it avoids exposing SSH and managing shared private keys.
+- For SSH, put the public key on the instance and protect the downloaded private
+  key. A lost private key cannot be downloaded again.
+- Security groups are stateful virtual firewalls. Allow only the required sources,
+  protocols, and ports.
+- T-family instances earn and spend CPU credits for burstable performance.
+- Savings Plans and Reserved Instances can reduce eligible compute cost for
+  predictable usage; they do not make an instance more reliable.
+- Stopping an EBS-backed instance stops most instance compute charges, but EBS,
+  Elastic IP, and other attached resources can still incur cost.
+- A stop/start may move the instance to different physical hardware but keeps it
+  in the same Availability Zone. A reboot normally stays on the same host.
+- An AMI captures launch metadata and block-device snapshots; test restoration
+  instead of treating image creation alone as a backup plan.
 
 ## IaaS Storage
 
 ### EBS
 
-Elastic Block storage (grow and shrink in size)
+!!! info "AI-generated"
 
-- Once a EBS volume os plugged into the EC2 instance it cannot be shared across with another EC2 instance.
-- Automatically attached to the EC2 and given OOTB
+Elastic Block Store provides block volumes for EC2. Volumes can generally be
+expanded, but shrinking requires creating and copying to a smaller filesystem and
+volume. Most volumes attach to one instance at a time; Multi-Attach is limited to
+specific volume types, instance types, and same-AZ use cases and still requires a
+cluster-aware filesystem or application.
 
 ### EFS
 
-Elastic File System
+!!! info "AI-generated"
 
-- AWS version of the NAS (Network attached storage)
-- Allows you to mount and share drive across multiple EC2 instances.
-- Isn’t as fast as EBS as it is not that closely attached to the raw hardware.
-- You can create the EFS from the AWS services console
-  - Install “nfs-common” (if using ubuntu) on each connected machine where EFS need to be accessed.
-  - Create a mount point ==> instruction are given in the AWS Console.
-- Security groups work exactly like EC2
+Elastic File System is a managed NFS file service that can be mounted by multiple
+clients. Mount targets live in VPC subnets and use security groups to control NFS
+traffic. Choose its performance and throughput modes from the workload; its
+shared filesystem semantics solve a different problem from EBS block storage.
 
 ### S3
 
-- One of the first AWS services.
-- Slower than both EBS and EFS.
-- Can share all kinds of files directly with the users without having to configure any security polity and mounting etc.
-- You don’t need a server to host your files (which is required in case of an EFS)
-- Keep separate buckets for different kind of security sensitive files to keep different settings for each bucket.
+!!! info "AI-generated"
 
-__NOTEs:__
+S3 is regional object storage, not a mounted block or network filesystem. Clients
+read and write objects by key through APIs. Design around object semantics rather
+than comparing its latency directly with EBS or EFS.
 
-- You can use the AWS CLI and SDK to access and manage your AWS services.
-- While working with SDK, avoid using and leaking the access key and secret into the server
-- For this you can create a role with specific permission to a particular EC2 instance, then you won’t need a key to work with SDK.
+- Block Public Access by default and grant access through IAM, bucket policies, or
+  access points.
+- Enable versioning when recovery from overwrite or deletion matters.
+- Use lifecycle rules to transition or expire objects intentionally.
+- Choose encryption and key policy from the data classification.
+- Give workloads IAM roles; do not embed long-lived access keys in applications.
+- Use separate buckets or access points when ownership, retention, policy, or
+  blast-radius boundaries differ.
 
 ### S3 “Glacier”
 
-- For “colder” files (files not being used much), you can opt for a cheaper file storage than S3.
-- Costs a fraction that S3.
-- Ideal for backups.
-- If you want to access some data from “Glacier” it is freezing cold and need to become hot ==> this can take several hours ==> only keep data not frequently used into “S3 Glacier”
+!!! info "AI-generated"
+
+S3 Glacier storage classes are S3 tiers for infrequently accessed archives, not
+a separate service outside S3. Retrieval time and minimum-storage charges differ
+by class: Instant Retrieval supports immediate access, while Flexible Retrieval
+and Deep Archive use restore workflows that can take minutes to hours. Match the
+class and lifecycle rule to the recovery objective.
 
 ### Cloudfront (not S3!)
 
-- CDN
-- We can “distribute” a bucket across multiple regions (or across the hold world)
+!!! info "AI-generated"
+
+CloudFront is a content-delivery network. It caches content at edge locations and
+fetches misses from an origin such as S3, an Application Load Balancer, or an HTTP
+server. It does not replicate the source S3 bucket across Regions.
 
 ## IaaS Networking
 
 ### VPC (Virtual Private Cloud)
 
-- Local network between in the AWS services isolated from the public internet
-- e.g., n computers connected to each other using a network switch without the internet.
+!!! info "AI-generated"
 
-NOTE : We can create multiple subnets to groups different networking privileges for different AWS services.
+A VPC is a logically isolated regional network. Subnets belong to one Availability
+Zone and are classified by their routes, not by a “public/private” flag:
 
-- Private subnet for db servers
-- Public subnet for external facing services
+- a public subnet has a route to an internet gateway and workloads still need a
+  public address and security policy to communicate through it;
+- a private subnet has no direct internet-gateway route and may use NAT for
+  outbound IPv4 access;
+- isolated subnets have no internet route.
+
+Security groups filter traffic at network interfaces; network ACLs filter at the
+subnet boundary. Routes provide reachability but do not grant application access.
 
 ### NAT Gateway
 
-> door-knob only on the inside, outside traffic can’t get in (router without port-forwarding enabled).
+!!! info "AI-generated"
+
+A public NAT gateway lets resources in private subnets initiate outbound IPv4
+connections through an Elastic IP. Return traffic is allowed, but unsolicited
+inbound connections are not. It is an Availability-Zone resource; resilient
+designs avoid routing several AZs through one NAT gateway.
 
 ### Internet Gateway
 
-> door-knob on the both sides
+!!! info "AI-generated"
+
+An internet gateway is a VPC attachment used by routes to and from the public
+internet. A route alone does not make a workload reachable: it also needs a public
+address and security-group/network-ACL rules that allow the traffic.
 
 ### Elastic IPs
 
-- static IP
-- Ipv4 addresses are precious resources, hence, Amazon will charge a small fee to let you keep an Elastic IP without it being bound to some addresses/instance/EC2/server
-- Make sure you release the Elastic IP when you shutdown a service.
+!!! info "AI-generated"
 
-2 main use cases of VPC:
+An Elastic IP is a static public IPv4 address that can be remapped between
+resources. AWS charges for public IPv4 addresses, including addresses in use, so
+release unused addresses and prefer IPv6 or shared front doors where practical.
 
-1. Developer connecting to DB servers without it being open to public internet.
-2. Site to Site VPC ==> ???
+Connectivity examples include Client VPN for individual clients, Site-to-Site VPN
+for encrypted IPsec tunnels from a customer network, Direct Connect for dedicated
+connectivity, VPC peering for selected VPC pairs, and Transit Gateway for hub-and-
+spoke routing.
 
 ### ELB (Elastic Load Balancer)
 
-- Checks health of the target
+!!! info "AI-generated"
+
+Elastic Load Balancing distributes traffic across healthy registered targets.
+Application Load Balancers operate at HTTP/HTTPS, Network Load Balancers at
+transport level, and Gateway Load Balancers integrate virtual network appliances.
+Health checks control routing; they do not replace application monitoring.
 
 ### Route 53
 
@@ -171,8 +213,12 @@ NOTE : You can still use database server inside a EC2 instance just like your on
 
 ### AWS Aurora
 
-- Mysql and Postgres compatible RBBMS managed service
-- Serverless model
+!!! info "AI-generated"
+
+Aurora is an RDS database engine compatible with MySQL or PostgreSQL. It separates
+compute instances from a distributed cluster storage layer. Choose provisioned or
+supported Serverless configurations from workload shape, connection behavior,
+scaling limits, availability, and cost—not from the word “serverless” alone.
 - A lot more managed by AWS
 
 ### DynamoDB
@@ -202,9 +248,16 @@ NOTE : Datalake vs Data warehouse
 
 ## Messaging Services
 
-- Kinesis ==> realtime large data queue
-- SQS ==> Simple Queue service, can get really expensive on sending lots and lots of data.
-- SNS ==> Simple Notification service
+!!! info "AI-generated"
+
+- **Kinesis Data Streams:** partitioned event streaming with ordered records per
+  shard and configurable retention; it is not simply a queue.
+- **SQS:** managed standard or FIFO message queues with polling-based consumers.
+- **SNS:** publish/subscribe fan-out to endpoints such as SQS, Lambda, HTTP, or
+  mobile notifications.
+
+Compare ordering, replay, retention, fan-out, throughput, and total request/data
+cost for the actual traffic pattern.
 
 ## PaaS
 
@@ -212,13 +265,29 @@ When things just works ==> giving the codebase, clicking a button and everything
 
 ### Elastic Beanstalk
 
+!!! info "AI-generated"
+
+Deploys supported application platforms onto managed AWS resources. It provisions
+and coordinates components such as EC2, load balancing, health reporting, and
+deployment policies while still exposing the underlying resources for inspection.
+
 ### ECS (Elastic Container Service)
+
+!!! info "AI-generated"
+
+Runs containerized tasks and services on EC2 capacity or AWS Fargate. A task
+definition is the versioned runtime contract; a service maintains the desired
+task count and can integrate with load balancing and deployment controls.
 
 ### FaaS / AWS Lambda
 
-- Serverless Architecture
+!!! info "AI-generated"
 
-## SaaS
+Lambda runs event-driven functions without managing servers. Configure memory,
+timeout, concurrency, retries, dead-letter or failure destinations, and
+idempotency from the event source's delivery semantics.
+
+## Managed Application Services
 
 ### Cognito
 
@@ -226,7 +295,11 @@ When things just works ==> giving the codebase, clicking a button and everything
 
 ### API Gateway
 
-- Similar to LB but very heavy on REST APIs
+!!! info "AI-generated"
+
+API Gateway publishes HTTP, REST, and WebSocket APIs with features such as routing,
+authorization integration, throttling, validation, and usage controls. It is an
+API front door, not a general replacement for every load balancer.
 
 ### AppSync
 
@@ -234,7 +307,9 @@ When things just works ==> giving the codebase, clicking a button and everything
 
 ### Amplify
 
-- Apps boiletplate
+!!! info "AI-generated"
+
+- Tools and managed services for building and hosting web and mobile applications
 
 ### AWS SageMaker
 

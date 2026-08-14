@@ -25,7 +25,7 @@ spec:
 __Creating resource with YAML:__
 
 ```bash
-kubectl create -f resource-definition.yaml
+kubectl apply -f resource-definition.yaml
 ```
 
 ## Pod
@@ -39,7 +39,14 @@ __Running a Container:__
 pod/nginx created
 ```
 
-- image name is the docker image name (if kubernetes cluster container backend is docker).
+### Container runtime note
+
+!!! info "AI-generated"
+
+The image reference identifies an OCI-compatible container image. Kubernetes
+uses a CRI-compatible runtime; it does not require Docker Engine on the node.
+
+### Pod operations
 
 __Getting Pods:__
 
@@ -145,7 +152,7 @@ spec:
     - name: postgres
       image: postgres
       env:
-        - name: POSTGRES_PASSWD
+        - name: POSTGRES_PASSWORD
           value: mysecretpassword
 ```
 
@@ -168,9 +175,10 @@ kubectl edit pod redis
 ## ReplicationControllers and ReplicaSets
 
 - Maintains HA with required number of pods (within a node or cluster)
-- Provides Load balancing and scalability
+- Provides horizontal scaling by maintaining a requested replica count. A Service
+  or another routing layer provides load balancing.
 
-### ReplicationController (`deprecated`) Definition
+### ReplicationController (legacy) Definition
 
 ```yaml
 apiVersion: v1
@@ -187,7 +195,8 @@ spec:
 ```
 
 - 3 Pods will be created (and maintained) with `myapp-rc-` prefix
-- `RepliationController` api is deprecated
+- `ReplicationController` is a legacy workload controller. Prefer a Deployment,
+  which manages ReplicaSets and supports declarative rollouts and rollback.
 
 ### ReplicaSet Definition (similar to RC)
 
@@ -237,25 +246,37 @@ kubectl delete replicaset myapp-replicaset
 
 ## Service
 
-- External Access to the App
-- Load balancing
-- 2 Types
-  - __NodePort__
-  - __ClusterIP__
+!!! info "AI-generated"
+
+A Service gives a changing set of Pods a stable virtual endpoint. Its selector
+usually identifies the Pods, and the control plane maintains EndpointSlices for
+the matching backends.
+
+Common Service types:
+
+- **ClusterIP:** cluster-internal virtual IP; the default.
+- **NodePort:** also exposes a port on each node.
+- **LoadBalancer:** asks a supported cloud or load-balancer integration for an
+  external load balancer, normally building on NodePort or direct pod routing.
+- **ExternalName:** returns a DNS CNAME and does not proxy traffic.
 
 ### NodePort
 
+!!! info "AI-generated"
+
 NodePort Service in single Node
 
-![NodePort Single Node](../images/nodeport.png)
+~{NodePort Service on one node}(<kubernetes-nodeport-single.json> "A request to a node IP and NodePort is routed through a Service to one of the Pods.")
 
 NodePort Service in multi-node Cluster
 
-![NodePort Cluster](../images/nodeport1.png)
+~{NodePort Service across a cluster}(<kubernetes-nodeport-cluster.json> "The same NodePort is reachable on every node and may select a Pod running on any node.")
 
 ### ClusterIP
 
-![ClusterIP](../images/clusterip.png)
+!!! info "AI-generated"
+
+~{ClusterIP Services between application tiers}(<kubernetes-clusterip.json> "Stable ClusterIP Services connect changing front-end, back-end, and Redis Pods.")
 
 service-definition.yaml
 

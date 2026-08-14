@@ -2,55 +2,60 @@
 
 ## Intro
 
-- Golang binary includes machine code + "GC" + "Scheduler".
-- There is no runtime like JVM.
-- In Go application, Built-in "Scheduler" is the entry-point instead of main() function, scheduler in-turn executes the main() function.
-- Scheduler takes care of borrowing Threads from OS.
-- Instruction which are handed to the scheduler to execute are called "go-routines" ( "Managed Concurrency" ).
-  - bare minimum OS thread (in Linux) takes ~ 2 MB memory
-  - bare minimum go-routine takes ~ 2 KB memory  (it was 8 earlier, then became 4 and now it is 2 KB)
-- Concurrency is built into the language instead of SDK / Library / API like Java etc.
-  - "go" keyword
-  - channel data type
-  - channel operator ( <- )
-  - range, select-case constructs
+!!! info "AI-generated"
+
+A Go executable includes a runtime with a garbage collector, goroutine scheduler,
+and network poller. The runtime schedules many goroutines over a smaller or equal
+number of operating-system threads and grows goroutine stacks as needed.
+
+Goroutines are lightweight, but not free. Every goroutine should have a bounded
+lifetime and an owner that can wait for or cancel it. The main language and
+library tools are:
+
+- the `go` statement to start a goroutine;
+- channels and the `<-` operator for communication;
+- `select` for coordinating channel operations and cancellation;
+- `sync` and `sync/atomic` for shared-state synchronization;
+- `context.Context` for cancellation and deadlines across API boundaries.
 
 ## Basic Constructs
 
 ### Wait Groups
 
+!!! info "AI-generated"
+
 ```go
-wg := sync.WaitGroup{}
-
-func f1() {
+func f1(wg *sync.WaitGroup) {
+    defer wg.Done()
     fmt.Println("f1 started")
-    time.Sleep(1 * time.Seconds)
+    time.Sleep(1 * time.Second)
     fmt.Println("f1 stopped")
-
-    wg.Done()
 }
 
-func f2() {
+func f2(wg *sync.WaitGroup) {
+    defer wg.Done()
     fmt.Println("f2 started")
-    time.Sleep(2 * time.Seconds)
+    time.Sleep(2 * time.Second)
     fmt.Println("f2 stopped")
-
-    wg.Done()
 }
 
 func main() {
-    wg.Add(1)
+    var wg sync.WaitGroup
+    wg.Add(2)
 
-    go f1()
-    f2()
+    go f1(&wg)
+    go f2(&wg)
     wg.Wait()
 }
 ```
 
-- Wait group detects the deadlock in case if all the the go-routines are in sleep state (non-runnable state).
-- it is better to was WaitGroup ref as an arg to functions to be executed as go-routines.
+A `WaitGroup` counts work; it does not detect deadlocks. Call `Add` before starting
+the goroutine and arrange for exactly one `Done` per unit. A `WaitGroup` must not
+be copied after first use, so pass a pointer when it crosses a function boundary.
 
 ### Managing State with Concurrency
+
+!!! info "AI-generated"
 
 - "data-races" will happen on mutations happening in go-routines
   - "-race" flag/switch in go command : `go run -race {x}` shows if there are race conditions and result may not be correct.
@@ -70,8 +75,8 @@ type Counter struct {
 
 func (c *Counter) Inc() {
     c.Lock()
-    count++
-    c.Unlock()
+    defer c.Unlock()
+    c.count++
 }
 ```
 
@@ -87,13 +92,9 @@ atomicCount.Add(1)
 
 #### Communication b/w Go-Routines
 
-> "Communicate by sharing memory"
+!!! info "AI-generated"
 
-- We can Communicate by sharing memory
-  - we can have common variable(s)
-  - there are many challenges with this approach
-
-> "Share memory by communicating"
+> Avoid communicating by sharing memory; share memory by communicating.
 
 Channels
 
@@ -118,20 +119,90 @@ Operations:
   - send only channel with `chan<- {type}`
   - we can use these syntaxes at parameters of functions or return type of functions
   - e.g., `func Producer(...) <-chan int { ... }`
-- In case of streaming, on `close(ch)` the receiver will keep reading "zero" value (in a non-blocking manner) for the data-type.
-  - To avoid this, we can use `data, isOpen := <- ch; isOpen { ... }`
+- After `close(ch)`, receives drain buffered values and then return the element
+  type's zero value immediately with `ok == false`.
+  - Detect this with `data, isOpen := <-ch`.
   - Or, we can range over a channel like: `for data := range ch { ... }`
+
+The sender that owns the stream should close the channel. Closing is a broadcast
+that no more values will arrive; it is not needed for garbage collection.
 
 ## Concurrency - Streaming
 
 ### Multiple Channels
 
+!!! info "AI-generated"
+
+Use `select` when a goroutine must wait on more than one channel:
+
+```go
+select {
+case value := <-results:
+    return value, nil
+case <-ctx.Done():
+    return Result{}, ctx.Err()
+}
+```
+
+If several cases are ready, one is chosen pseudo-randomly. A `default` case makes
+the operation non-blocking and can accidentally create a busy loop; use it only
+when dropping or polling is intentional.
+
 ### Buffered Channels
+
+!!! info "AI-generated"
+
+```go
+jobs := make(chan Job, 16)
+```
+
+A send blocks only while the buffer is full; a receive blocks while it is empty.
+Buffers can absorb short bursts and decouple producer timing, but they do not fix
+an indefinitely slower consumer. Choose capacity from a measured burst or
+backpressure requirement, not as a substitute for flow control.
 
 ## Concurrency - Patterns
 
 ### Runner
 
+!!! info "AI-generated"
+
+A runner owns the lifetime of several goroutines. It starts them, cancels siblings
+when one fails or the caller cancels, and waits for all of them before returning.
+This keeps background work from leaking beyond its request or process owner.
+
 ### Pool
 
+!!! info "AI-generated"
+
+A worker pool bounds concurrency: start a fixed number of workers, send jobs over
+a channel, close the jobs channel when production ends, and wait for workers.
+Propagate cancellation so producers do not block forever after consumers stop.
+
 ### Worker
+
+!!! info "AI-generated"
+
+```go
+func worker(ctx context.Context, jobs <-chan Job, results chan<- Result) {
+    for {
+        select {
+        case <-ctx.Done():
+            return
+        case job, ok := <-jobs:
+            if !ok {
+                return
+            }
+            result := process(job)
+            select {
+            case results <- result:
+            case <-ctx.Done():
+                return
+            }
+        }
+    }
+}
+```
+
+The second `select` matters: cancellation must also unblock a worker that is
+trying to publish a result after the receiver has gone away.

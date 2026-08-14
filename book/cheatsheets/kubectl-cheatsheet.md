@@ -19,6 +19,13 @@ Getting "all" resources
 kubectl get all
 ```
 
+### Scope of `all`
+
+!!! info "AI-generated"
+
+`all` is a convenient category, not every resource type in the namespace. Query
+the specific type when completeness matters.
+
 ## Describing resource
 
 ```bash
@@ -43,9 +50,9 @@ Usage: __kubectl [command] [TYPE] [NAME] -o \<output-format\>__
 Examples:
 
 ```bash
-kubectl create namespace test-123 --dry-run -o json
+kubectl create namespace test-123 --dry-run=client -o json
 
-kubectl create namespace test-123 --dry-run -o yaml
+kubectl create namespace test-123 --dry-run=client -o yaml
 
 # Wide
 kubectl get pods -o wide
@@ -84,7 +91,7 @@ kubectl label <resource-type> <resource-name> <label-name>-
 ## Port Forward
 
 ```bash
-kubectl port-forward mongo-75f59d57f4-4nd6q <external/local-port>:<pod-port>
+kubectl port-forward mongo-75f59d57f4-4nd6q <local-port>:<pod-port>
 ```
 
 ## Imperative Commands (Single command to create resources)

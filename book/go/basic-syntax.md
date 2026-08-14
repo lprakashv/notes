@@ -2,33 +2,27 @@
 
 ## Variables
 
+!!! info "AI-generated"
+
 ```go
-// Define and assign
+// Declare, then assign.
 var someInt int
 someInt = 42
 
-// combines define and assign => type inference
+// Short declaration with type inference. This form is valid inside functions.
 someOtherInt := 42
 
-// Multiple variables declaration
-var a, b, c, d int
-var e, f, g, h string
-
-// Multiple variables with assignment
+// Grouped declarations are valid at package or function scope.
 var (
-  x = 42
-  y = 54
-  z = "some string"
-  caps = map[string]string{
-    "a" : "A",
-    "b" : "B",
-    "c" : "C",
-  }
+    SomeIntPublic = 42 // Exported because the name starts with an uppercase letter.
+    privateText   = "visible only inside this package"
 )
 
-
-// Capital case to make it visible outside current package
-SomeIntPublic := 42
+caps := map[string]string{
+    "a": "A",
+    "b": "B",
+    "c": "C",
+}
 ```
 
 ## If-Else
@@ -63,7 +57,7 @@ for i < 10 {
 // Looping over lists/arrays/slices
 someList := []string{ "Apple", "Banana", "Carrot" }
 for index, element := range someList {
-  fmt.Print("At %v -> %v\n", index, element)
+  fmt.Printf("At %v -> %v\n", index, element)
 }
 
 // Looping over maps
@@ -73,7 +67,7 @@ someMap := map[string]string{
   "c" : "C",
 }
 for key, val := range someMap {
-  fmt.Print("For key: %v, value is: %v\n", key, val)
+  fmt.Printf("For key: %v, value is: %v\n", key, val)
 }
 ```
 
@@ -157,30 +151,68 @@ func main() {
 
 ## Interfaces
 
-Interface as a "God" type:
+!!! info "AI-generated"
+
+Interfaces describe behavior. A concrete type implements an interface implicitly
+by providing its methods; there is no `implements` declaration.
+
+Keep interfaces small and define them near the code that consumes them. The empty
+interface `any` accepts a value of any type, but using it gives up compile-time
+knowledge and should not be a default abstraction.
+
+### Type assertions
+
+!!! info "AI-generated"
 
 ```go
+value, ok := input.(string)
+if !ok {
+    return fmt.Errorf("expected string, got %T", input)
+}
 ```
 
-Type assertions:
+Use the two-result form when a different dynamic type is expected; a failed
+single-result assertion panics.
+
+### Type switches
+
+!!! info "AI-generated"
 
 ```go
+switch value := input.(type) {
+case string:
+    fmt.Println("string:", value)
+case int:
+    fmt.Println("int:", value)
+default:
+    fmt.Printf("unsupported: %T\n", value)
+}
 ```
 
-Type assertions with type-switch (runtime):
+### Compile-time contract check
+
+!!! info "AI-generated"
 
 ```go
+var _ Animal = Dog{}
 ```
 
-Compile time type contract:
+The blank identifier turns an accidental missing method into a compile-time error.
+
+### Composing interfaces
+
+!!! info "AI-generated"
 
 ```go
+type ReaderWriter interface {
+    io.Reader
+    io.Writer
+}
 ```
 
-Composing types using `interface{ interface{ SomeFunc any } }` or with named one `interface{ Contract1, Contract2 }`:
+### Implicit implementation
 
-```go
-```
+!!! info "AI-generated"
 
 ```go
 type Animal interface {
@@ -190,12 +222,12 @@ type Animal interface {
 
 // Any struct implementing/having an interface's all the methods
 // it automatically implements that interface
-type Dog struct {
+type Dog struct{}
 
-}
 func (d Dog) Speak() string {
   return "Bark"
 }
+
 func (d Dog) Legs() int {
   return 4
 }

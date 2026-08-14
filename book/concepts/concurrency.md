@@ -4,7 +4,12 @@
 
 ### Data race / race condition
 
-2 or more tasks writing a shared variable outside a critical section (without any synch mechanism) then the final output depends upon order of execution.
+!!! info "AI-generated"
+
+A **data race** occurs when concurrent operations access the same memory, at least
+one operation writes, and the accesses are not ordered by the language's
+synchronization rules. A **race condition** is broader: correctness depends on
+uncontrolled timing or ordering even when every individual access is atomic.
 
 ### Deadlock
 
@@ -18,11 +23,17 @@
 
 ### Live lock
 
-2 tasks always changing states due to another actions of the other -> perpetually changing and not continuing their work.
+!!! info "AI-generated"
+
+Two or more tasks keep reacting to one another and changing state, but no task
+makes useful progress. Unlike a deadlock, the tasks remain active.
 
 ### Resource starvation
 
-More than one tasks waiting for the same resource, when it gets freed up is is allocated to one of them. One of the tasks might never get the resource
+!!! info "AI-generated"
+
+One task waits indefinitely because other tasks repeatedly receive the resource
+or scheduling opportunity first.
 
 - Solution -> fair allocation algorithm.
 - Fairness solutions to this problem takes additional overhead.
@@ -35,37 +46,38 @@ Low priority task holds the resource needed by the high priority task.
 
 ### Shared mutable state
 
+!!! info "AI-generated"
+
 - Synchronize/lock access - may lead to deadlocks
   - Fix deadlocks by locking objects in a pre-defined order.
-- Use atomic wherever necessary (better than custom synchronization).
+- Use atomic operations for simple state transitions; use locks or higher-level
+  coordination when several values must change together.
 - Accidental Non-determinism in thread execution (coz controlled by OS).
   - Not evident from library/classes that they share mutable state.
 
 ### Functional way (parallelism)
 
-- Better concurrency support using pure functions.
-- Basic primitives
-  - __Futures__
-    - Block of code running in a different thread.
-    - Cannot have deadlocks.
-    - Can make parallel execution with multiple processors.
-    - Faster execution and deterministic results.
-  - __Promises__
-    - Container where we can put the value only once.
-    - Will block the promise read until the promise gets filled.
-    - Can have "deadlocks"!!
-      - Predictable/deterministic.
+!!! info "AI-generated"
 
-### Functional concurrency
+Pure functions and immutable values reduce coordination because concurrent tasks
+do not mutate the same state. They do not guarantee parallel speed-up or freedom
+from deadlock; futures can still wait cyclically, block a limited executor, or
+perform nondeterministic I/O.
 
-- __Atoms__ in clojure (atomic references)
-  - More atomic swaps than the actual changes needed (rollback and discarding the inconsistent atomic change)
-    - Solution: put more values in same atom
-    - Solution: __STM__
-- Agents
-  - Same as atoms -> just the fn needed to update value runs on a diff thread.
-  - Await needed at the end to wait for all the update ops on the agent.
-- __Ref__ / __STM__
-  - Unlike atom, can synchronize multiple values
-  - Each operation should by in transaction (`dosync`)
-- __Actor model__
+- A **future** represents a result that may become available later.
+- A **promise** is a writable handle used to complete a future once.
+- Parallel work is useful only when the tasks are independent enough and the
+  scheduling/communication overhead is smaller than the saved computation time.
+
+### Message passing and functional concurrency
+
+!!! info "AI-generated"
+
+- **Clojure atoms** apply an atomic function to one reference. The function may
+  be retried, so it must not perform side effects.
+- **Clojure refs/STM** coordinate changes to multiple references inside `dosync`.
+- **Clojure agents** serialize asynchronous actions against one value; `await`
+  waits for queued actions when a synchronous boundary is needed.
+- In the **actor model**, actors isolate state and communicate through messages.
+  An actor handles one message at a time, but the system still needs supervision,
+  mailbox limits, ordering assumptions, and failure handling.

@@ -2,11 +2,18 @@
 
 ## Strings
 
-- String pool was used to be in Permgen, but __since java 8 it has been moved to main heap area__.
-- Since java 1.7 `+` operators are implemented using `StringBuilder`'s `.append()` method.
-- `.concat()` can only concat 2 strings (unlike `.append()` and `+` which can concat different data types)
-- __There was a memory leak in java 1.6 `String()` constructor.__
-- Regex - match introduced in java 8.
+!!! info "AI-generated"
+
+- The interned string pool moved from PermGen to the regular heap in Java 7.
+- String concatenation with `+` is compiled to an implementation chosen by the
+  compiler/runtime. Modern JDKs may use `invokedynamic`; do not rely on a specific
+  `StringBuilder` translation.
+- `String.concat` accepts one `String`; `+` converts operands using string
+  conversion rules.
+- Since Java 7u6, `substring` copies the requested range instead of retaining the
+  original backing array.
+- `String` is immutable. Use `StringBuilder` for repeated single-threaded mutation
+  when profiling shows concatenation is a hot path.
 
 ## Stream
 
@@ -54,56 +61,35 @@ Key Advantages:
 1. No distraction of garbage variable (sellers, sorted in the above example)
 2. Don't have to keep track of context which leads to code understanding on one glance, less error prone.
 
-## ClassLoader
+## Class Loaders
 
-__javac__ : `*.java` files to `*.class` files
+!!! info "AI-generated"
 
-__Class-loader__ : loads the `*.class` files!
+`javac` compiles source into class files. At runtime, class loaders locate class
+definitions and define `Class<?>` objects. Current JDKs have three built-in loader
+roles:
 
-Kinds of class loaders and load from locations:
+1. **Bootstrap loader:** built into the VM; loads foundational runtime classes and
+   is commonly represented by `null` from `Class.getClassLoader()`.
+2. **Platform loader:** loads Java SE platform and JDK runtime classes.
+3. **System/application loader:** normally loads application classes from the
+   class path or module path.
 
-1. __Bootstrap__ (or "Primordial ClassLoader")
-    1. `JRE/lib/rt.jar`
-2. __Extension__
-    1. `JRE/lib/ext`
-    2. Or any directory denoted by : `"java.ext.dirs"`
-3. System or Application
-    1. `"CLASSPATH"` environment variable.
-    2. `"-classmate"` or "-cp" option.
-    3. Classpath attribute of manifest inside JAR file.
+The pre-Java-9 extension mechanism, `rt.jar`, `lib/ext`, and `java.ext.dirs` no
+longer describe the current runtime image.
 
-### Bootstrap ClassLoader
+### Parent delegation
 
-- Loads standard JDK class files from "rt.jar"
-- Parent of all class loaders
-- Doesn't have any parent
-  - `String.class.getClassLoader() == null`
-- Only class loader which is __implemented in native language__, mostly in "C" !
-  - __All others are implemented using `java.lang.ClassLoader`__
+!!! info "AI-generated"
 
-### Extension ClassLoader
+The usual `ClassLoader.loadClass` implementation asks its parent first and calls
+`findClass` only if the parent cannot load the class. This prevents an application
+loader from casually replacing platform classes. Custom plugin and container
+loaders may use different delegation rules.
 
-- Delegates class loading request to its parent (Bootstrap)
-- If unsuccessful from parent (Bootstrap), it loads class from `"jre/lib/ext"` or any directory pointed by `"java.ext.dirs"`
-- Implemented by : `sun.misc.Launcher$ExtClassLoader`
-- Child or Extension class loader
+~{Java class-loader parent delegation}(<java-classloader-delegation.json> "Application and platform loaders delegate upward before a not-found request falls back toward findClass.")
 
-![ClassLoader](./images/jvm-classloader.png)
+Class identity includes both the binary name and the defining loader. Two loaders
+can define classes with the same name that are not assignment-compatible.
 
-Principles:
-
-1. Delegation principle: A class in loaded in Java when it is needed.
-2. Visibility principle: Child ClassLoader can see class loaded by parent ClassLoader, but the vice-versa is not true.
-
-Simple test to prove visibility principle
-
-- Get Current class's ClassLoader by calling, `Abc.class.getClassLoader()` ====> Abc is an Application ClassLoader class
-- If we try to load this class using the Extension class loader like:
-  - `Class.forName("somepack.Abc", true, ClassLoaderTest.class.getClassLoader().getParent())`
-  - This will fail! =====> meaning extension class loader cannot see the classes loaded by application class loader
-
-Extras:
-
-- Class is loaded by calling `loadClass()` method of `java.lang.ClassLoader` class which calls `findClass()` method to locate bytecodes for the corresponding class
-- Extension ClassLoader uses `java.net.URLClassLoader` which searches for class files and resources in JAR and directories. any search path which is ended using "/" is considered a directory
-- If `findClass()` does not found the class than it throws `java.lang.ClassNotFoundException` and if it finds it calls defineClass() to convert bytecodes into a `.class` instance which is returned to the caller
+Further reading: [`ClassLoader`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ClassLoader.html).

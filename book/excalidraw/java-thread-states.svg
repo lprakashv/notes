@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 750" width="100%" role="img">
+  <title>Java thread lifecycle states</title>
+  <desc>Transitions among NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, and TERMINATED with representative causes.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/java/images/threadlifecycle.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="610.0" y="35.0">Java exposes six Thread.State values</tspan></text>
+  <rect x="50" y="145" width="200" height="80" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="150.0" y="185.0">NEW</tspan></text>
+  <rect x="430" y="135" width="320" height="95" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="169.375">RUNNABLE</tspan><tspan x="590.0" y="195.625">(eligible or running)</tspan></text>
+  <rect x="940" y="145" width="230" height="80" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1055.0" y="185.0">TERMINATED</tspan></text>
+  <rect x="80" y="505" width="240" height="90" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="200.0" y="550.0">BLOCKED</tspan></text>
+  <rect x="445" y="505" width="240" height="90" rx="12" fill="#d0bfff" stroke="#6741d9" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="565.0" y="550.0">WAITING</tspan></text>
+  <rect x="800" y="505" width="340" height="90" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text text-anchor="middle" font-size="22" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="970.0" y="550.0">TIMED_WAITING</tspan></text>
+  <polyline points="250,185 430,185" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="340.0" y="163.0">start()</tspan></text>
+  <polyline points="750,185 940,185" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="845.0" y="163.0">run() returns or throws</tspan></text>
+  <polyline points="500,230 200,505" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)"/>
+  <polyline points="590,230 565,505" fill="none" stroke="#6741d9" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)"/>
+  <polyline points="680,230 970,505" fill="none" stroke="#e67700" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" marker-start="url(#arrow-start)"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="250" y="354.375">enter: monitor unavailable</tspan><tspan x="250" y="375.625">return: lock acquired</tspan></text>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="565" y="354.375">enter: wait / join / park</tspan><tspan x="565" y="375.625">return: notify / completion / unpark</tspan></text>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="900" y="354.375">enter: sleep / timed wait, join, or park</tspan><tspan x="900" y="375.625">return: timeout or signal</tspan></text>
+  <text text-anchor="middle" font-size="18" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="610" y="675.0">RUNNABLE includes both executing in the JVM and eligible to execute.</tspan></text>
+</svg>

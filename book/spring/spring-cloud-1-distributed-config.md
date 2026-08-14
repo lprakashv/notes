@@ -1,11 +1,9 @@
 # Distributed Config
 
-Configuration in a non-distributed to distributed explodes really rapidly, from a handlful of configuration files to many-many ones.
-
 We can still live with configuration management tools like Puppet, Chef etc. But there are issues with typical configuration management:
 
 - __Deployment oriented:__ Need to kick-off deployments even for small or temporary changes.
-- __Push-based is usally not dynamic enough:__ Won't work in cloud environment, as we need to keep track of all the newly spun up instances and push to those as well.
+- __Push-based is usually not dynamic enough:__ Won't work in cloud environment, as we need to keep track of all the newly spun up instances and push to those as well.
 - __Pull-based adds latency with temporal polling:__ Usually works on polling mechanism, which adds time-interval latency.
 
 __Configuration Server__ can solve our problems!
@@ -177,50 +175,40 @@ pom.xml
 
 #### Config First
 
-Specify the location of the config server.
+!!! info "AI-generated"
 
-`bootstrap.properties`
+Specify the location of the Config Server directly. With Spring Boot 2.4 and
+later, Config Data import is the default approach and a `bootstrap` file is not
+required.
+
+`application.properties`
 
 ```properties
 spring.application.name=<your_application_name>
-spring.cloud.config.discovery.enabled=true
+spring.config.import=optional:configserver:http://localhost:8888
 ```
 
-OR `bootstrap.yml`
-
-```yaml
-spring:
-  application:
-    name: <your_application_name>
-  cloud:
-    config:
-      discovery:
-        enabled: true
-```
+Remove `optional:` when startup must fail if the Config Server is unavailable.
 
 #### Discovery First
 
-Discover the location of the config server.
+!!! info "AI-generated"
 
-`bootstrap.properties`
+Discover the Config Server through a configured discovery client instead of
+hard-coding its URL.
+
+`application.properties`
 
 ```properties
 spring.application.name=<your_application_name>
-spring.cloud.config.uri=http://localhost:8888/
+spring.config.import=optional:configserver:
+spring.cloud.config.discovery.enabled=true
+spring.cloud.config.discovery.service-id=configserver
 ```
 
-OR `bootstrap.yml`
-
-```yaml
-spring:
-  application:
-    name: <your_application_name>
-  cloud:
-    config:
-      uri: http://localhost:8888/
-```
-
-__NOTE:__ Don't forget to add eureka client dependencies, service-url configuration and `@EnableDiscoveryClient`
+Add and configure the selected discovery-client implementation. Discovery-first
+adds a registry lookup before configuration can be fetched, so use it only when
+that extra dependency is worthwhile.
 
 ### Refreshing configuration properties
 
@@ -275,7 +263,7 @@ public class SomeConfiguration {
 
 ```properties
 my.datasource.username=foobar
-my.datasource.password={cypher}AASFDSFJSRFAFESECCSE
+my.datasource.password={cipher}AASFDSFJSRFAFESECCSE
 ```
 
 OR `application.yml`
@@ -283,7 +271,7 @@ OR `application.yml`
 ```yaml
 my:
   datasource:
-    usernmae: foobar
+    username: foobar
     password: '{cipher}AASFDSFJSRFAFESECCSE'
 ```
 
@@ -294,4 +282,22 @@ my:
 
 Configure the Config Server with: `spring.cloud.config.server.encrypt.enabled=false`
 
-TODO: encryption and decryption setup with examples.
+#### Encryption setup example
+
+!!! info "AI-generated"
+
+The Config Server can use a symmetric key for a small local setup:
+
+```bash
+export ENCRYPT_KEY='replace-with-a-secret-from-a-secret-manager'
+curl --silent --header 'Content-Type: text/plain' \
+  --data 'database-password' http://localhost:8888/encrypt
+```
+
+Store the returned value with the `{cipher}` prefix. Secure the `/encrypt` and
+`/decrypt` endpoints, never commit the encryption key, and use TLS because server-
+side decryption sends plaintext configuration to the client over the connection.
+For asymmetric encryption, configure a keystore so encryption can use a public
+key while decryption remains limited to the server holding the private key.
+
+Further reading: [Spring Cloud Config encryption and decryption](https://docs.spring.io/spring-cloud-config/reference/server/encryption-and-decryption.html).

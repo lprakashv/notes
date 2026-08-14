@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="100%" role="img">
+  <title>NodePort Service across a cluster</title>
+  <desc>The same NodePort 30008 is reachable on every node and routes through one Service to Pods on any node.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/images/nodeport1.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="35.0">The same NodePort is exposed on every node</tspan></text>
+  <ellipse cx="590" cy="102" rx="75" ry="32" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="20" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590" y="102.0">Client</tspan></text>
+  <rect x="80" y="230" width="300" height="420" rx="12" fill="#f8f9fa" stroke="#495057" stroke-width="2" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="230" y="258.0">Node 192.168.1.2</tspan></text>
+  <rect x="145" y="295" width="170" height="55" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="230.0" y="322.5">NodePort 30008</tspan></text>
+  <rect x="145" y="515" width="170" height="82" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="230.0" y="545.375">Pod</tspan><tspan x="230.0" y="566.625">10.244.0.3</tspan></text>
+  <polyline points="590,134 230,295" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <rect x="425" y="230" width="300" height="420" rx="12" fill="#f8f9fa" stroke="#495057" stroke-width="2" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575" y="258.0">Node 192.168.1.3</tspan></text>
+  <rect x="490" y="295" width="170" height="55" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="322.5">NodePort 30008</tspan></text>
+  <rect x="490" y="515" width="170" height="82" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="575.0" y="545.375">Pod</tspan><tspan x="575.0" y="566.625">10.244.0.2</tspan></text>
+  <polyline points="590,134 575,295" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <rect x="770" y="230" width="300" height="420" rx="12" fill="#f8f9fa" stroke="#495057" stroke-width="2" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="18" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="920" y="258.0">Node 192.168.1.4</tspan></text>
+  <rect x="835" y="295" width="170" height="55" rx="12" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="920.0" y="322.5">NodePort 30008</tspan></text>
+  <rect x="835" y="515" width="170" height="82" rx="12" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="920.0" y="545.375">Pod</tspan><tspan x="920.0" y="566.625">10.244.0.4</tspan></text>
+  <polyline points="590,134 920,295" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)" stroke-dasharray="9 7"/>
+  <rect x="350" y="395" width="480" height="70" rx="12" fill="#c5f6fa" stroke="#0b7285" stroke-width="2"/>
+  <text text-anchor="middle" font-size="19" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590.0" y="430.0">One virtual Service routes across the cluster</tspan></text>
+  <polyline points="230,350 230,395" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="590,465 230,515" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="575,350 575,395" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="590,465 575,515" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="920,350 920,395" fill="none" stroke="#e8590c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <polyline points="590,465 920,515" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="590" y="685.0">Client may use :30008 on any node IP; the selected backend Pod may run elsewhere.</tspan></text>
+</svg>

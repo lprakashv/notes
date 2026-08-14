@@ -42,7 +42,7 @@ Zuul is a gateway service that provides dynamic routing, monitoring, resiliency,
 public class Application {
 
   public static void main(String[] args) {
-    SpringBootApplication.run(Application.class, args);
+    SpringApplication.run(Application.class, args);
   }
 }
 ```
@@ -109,7 +109,7 @@ __NOTEs:__
 ```properties
 spring.application.name=gateway-service
 zuul.routes.<route_name>.path=/somepath/**
-zuul.routes.<route_name>.serviceld=some_service_id
+zuul.routes.<route_name>.serviceId=some_service_id
 zuul.ignored-services=some_service_id
 ```
 
@@ -121,9 +121,9 @@ spring:
     name: gateway-service
   zuul:
     routes:
-      ‹route_name>:
-        path: / somepath/**
-        serviceld: some_service_id
+      <route_name>:
+        path: /somepath/**
+        serviceId: some_service_id
     ignored-services: some_service_id
 ```
 
@@ -145,8 +145,8 @@ spring:
     name: gateway-service
   zuul:
     routes:
-      ‹route_name>:
-        path: / somepath/**
+      <route_name>:
+        path: /somepath/**
         url: http://some_path_url/
 ```
 
@@ -224,7 +224,7 @@ RequestContext ctx = RequestContext.getCurrentContext();
 HttpServletRequest req = ctx.getRequest();
 
 // Get the servlet response
-HttpServletResponse = res = ctx.getResponse();
+HttpServletResponse res = ctx.getResponse();
 
 // Set a variable
 ctx.set("foobar", "PRE_FILTER_EXECUTED");

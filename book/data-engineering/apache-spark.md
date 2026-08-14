@@ -43,12 +43,13 @@ __RDD:__ distributed counterpart of the Scala's parallel collection !
 
 ### Important latency figures
 
-- Reading from RAM/main mem. Is ~100x faster than reading from disk!
-  - Read 1 MB from memory (main/RAM) -> 250us
-  - Read 1 MB from disk -> 20ms ( 20000us )
-- Main memory reference is ~1000000 ( 1M ) times faster than x-fer over the n/w US-Eu-US
-  - Main mem. Ref -> 100ns
-  - Send packet US-Eu-US -> 150ms ( 150000000ns )
+!!! info "AI-generated"
+
+The exact numbers depend on hardware, storage, topology, and workload. The stable
+lesson is the order of magnitude: local memory access is generally cheaper than
+local storage, and both are cheaper and more predictable than a cross-network
+shuffle. Measure the actual platform instead of designing from a fixed latency
+table.
 
 ### What Spark's predecessor, MapReduce did to get so popular in 2000s
 
@@ -57,17 +58,17 @@ __RDD:__ distributed counterpart of the Scala's parallel collection !
 
 ### Now, why Spark? If Hadoop's MapReduce works so well.
 
-- Hadoop/MapReduce
-  - Fault tolerance in Hadoop/MapReduce comes at a cost!
-    - B/w each map and reduce stage it shuffles the data and stores intermediate data in disk ( to recover for potential failures )
-  - => Lot of n/w and disk!
-- Spark
-  - Retains fault tolerance but…
-  - Uses FP -> keeps all data “in memory” and “immutable”.
-  - All operations are functional-transformation (like regular Scala collections)
-  - To achieve tolerance -> replaying functional-transformation on original dataset over and over again (without worrying about side-effects).
-  - => 100x performance improvement over Hadoop!!!
-  - => Even more expressive APIs than Hadoop!!!
+!!! info "AI-generated"
+
+Classic MapReduce materializes intermediate results between jobs, which makes a
+multi-stage or iterative workflow expensive. Spark builds a directed acyclic
+graph of transformations and can cache reused datasets in memory.
+
+Spark does **not** keep all data in memory. It can read from and spill to storage,
+and wide transformations still shuffle data across the network. RDD lineage lets
+Spark recompute lost partitions, while checkpointing can truncate very long or
+expensive lineage. Performance gains depend on the workload, partitioning,
+serialization, storage, and cluster—not on a universal “100×” multiplier.
 
 ## RDD
 

@@ -1,17 +1,29 @@
 # Big Data
 
-Characterised by 4 V's
+## The four Vs
 
-1. velocity - **big data** is being generated, and arriving at high speeds.
-2. velocity - **big data** is big, so that a single machine can't handle it.
-3. variety - **big data** may come from a variety of sources and in a variety of formats.
-4. veracity - **big data** often needs to be cleaned before using it.
+!!! info "AI-generated"
+
+“Big data” is a relative engineering description, not a fixed byte threshold. It
+is often summarized with four Vs:
+
+1. **Volume:** the amount of data exceeds the convenient capacity of one machine
+   or one conventional database design.
+2. **Velocity:** data arrives or must be processed quickly.
+3. **Variety:** sources and formats differ.
+4. **Veracity:** quality, meaning, and trustworthiness vary.
+
+The useful question is which constraint forces a distributed design. Distribution
+adds network, consistency, recovery, and operational costs, so a single database
+or machine is preferable while it still meets the requirement.
 
 ## Hadoop
 
-- Began in 2011.
-- Based on Google's infrastructure.
-- Distributed storage and processing of massive datasets (like Google's).
+!!! info "AI-generated"
+
+Apache Hadoop emerged in the mid-2000s from the Nutch project, influenced by
+Google's papers on the Google File System and MapReduce. It provides distributed
+storage and batch processing on clusters of commodity machines.
 
 Consists of:
 
@@ -19,18 +31,25 @@ Consists of:
 2. YARN - Yet another resource manager, manages all nodes, assigns tasks to nodes etc.
 3. Map-Reduce - allows you to write scripts to analyze data that is spread across multiple machines.
 
-## "Major" Big-Data vendors
+## Vendor history
 
-## Hortonworks
+!!! info "AI-generated"
 
-Does not market itself around Hadoop, but Hadoop still remains at the core of it.
+Hortonworks and Cloudera were prominent commercial Hadoop distributors. They
+completed a merger in 2019, so treating them as two current competing vendors is
+historical rather than a present-day market comparison.
 
-Product offerings:
+### Hortonworks
 
-- HDP - Hortonworks Data Platform, their core product, bundles multiple OSS tools to provide a easy deployable solution to mamage, query and do ML on data.
-- HDF - Hortonworks Data Flow, for streaming data in real-time.
+!!! info "AI-generated"
 
-## Cloudera
+Hortonworks Data Platform (HDP) bundled Hadoop ecosystem projects. Hortonworks
+DataFlow (HDF) focused on data-in-motion tooling, including Apache NiFi.
 
-- more propreitary systems
-- some systems and tools they have open-sources and they do contribute back to the community.
+### Cloudera
+
+!!! info "AI-generated"
+
+Cloudera combined open-source ecosystem projects with commercial management,
+security, governance, and support. Current product names and packaging change;
+check vendor documentation before using these historical names in an architecture.

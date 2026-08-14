@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 650" width="100%" role="img">
+  <title>Direct method call compared with a transaction proxy</title>
+  <desc>Without a proxy the caller invokes the application object directly; with a Spring transaction proxy, an interceptor begins a transaction, invokes the target, then commits or rolls back.</desc>
+  <metadata>{&quot;provenance&quot;: &quot;AI-generated&quot;, &quot;sourceAssets&quot;: [&quot;archive/original-images/book/spring/images/without-proxy.png&quot;, &quot;archive/original-images/book/spring/images/with-proxy.png&quot;]}</metadata>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="context-stroke"/></marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M9,0 L9,6 L0,3 z" fill="context-stroke"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text text-anchor="middle" font-size="28" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="610.0" y="35.0">@Transactional works when the call crosses the proxy</tspan></text>
+  <text text-anchor="middle" font-size="23" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="295" y="105.0">Without proxy</tspan></text>
+  <rect x="60" y="230" width="190" height="100" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="155.0" y="280.0">Calling code</tspan></text>
+  <rect x="360" y="205" width="250" height="150" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="20" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="485.0" y="267.5">Application object</tspan><tspan x="485.0" y="292.5">@Transactional method</tspan></text>
+  <polyline points="250,280 360,280" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="305.0" y="265.0">direct call</tspan></text>
+  <text text-anchor="middle" font-size="17" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="330" y="420.0">No transaction advice surrounds the invocation.</tspan></text>
+  <polyline points="650,90 650,590" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" stroke-dasharray="9 7"/>
+  <text text-anchor="middle" font-size="23" font-weight="500" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="935" y="105.0">With proxy</tspan></text>
+  <rect x="700" y="230" width="170" height="100" rx="12" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text text-anchor="middle" font-size="21" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="785.0" y="280.0">Calling code</tspan></text>
+  <rect x="915" y="210" width="230" height="140" rx="12" fill="#d0bfff" stroke="#6741d9" stroke-width="2"/>
+  <text text-anchor="middle" font-size="20" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1030.0" y="267.5">Transaction proxy</tspan><tspan x="1030.0" y="292.5">interceptor</tspan></text>
+  <rect x="915" y="455" width="230" height="110" rx="12" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+  <text text-anchor="middle" font-size="20" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1030.0" y="497.5">Application object</tspan><tspan x="1030.0" y="522.5">method</tspan></text>
+  <polyline points="870,280 915,280" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="892.5" y="262.0">1  call</tspan></text>
+  <polyline points="1030,350 1030,455" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="910.0" y="384.5">2  begin + invoke</tspan></text>
+  <polyline points="1145,510 1175,510 1175,330 1145,330" fill="none" stroke="#495057" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-end)"/>
+  <text text-anchor="middle" font-size="16" font-weight="400" fill="#1e1e1e" font-family="Inter, system-ui, sans-serif"><tspan x="1075.0" y="448.0">3  commit / rollback</tspan></text>
+</svg>

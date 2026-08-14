@@ -17,11 +17,27 @@ infrastructure, data, AI and machine learning, observability, cheat sheets,
 and a work-learning journal. Every Markdown note is represented in that
 navigation.
 
+Public refresher pages are maintained separately from the personal work-learning
+journal. Empty public topic stubs should be replaced with compact, source-backed
+refreshers; version-specific legacy workflows should carry an explicit
+manual-review warning instead of silently appearing current.
+
 ## Diagram assets
 
-Existing note illustrations remain beside their source pages. New editable
-diagrams belong in `book/excalidraw/` as Excalidraw JSON with a matching SVG
-export; the enabled Shadcn Excalidraw extension renders the SVG asset.
+Editable diagrams live in `book/excalidraw/` as Excalidraw JSON with a matching
+SVG export; the enabled Shadcn Excalidraw extension renders the SVG asset.
+Replaced raster sources retain their original repository-relative path under
+`archive/original-images/`. Pixel-exact UI and log screenshots stay beside their
+source pages because converting them would discard evidence.
+
+Regenerate the maintained diagram pairs with:
+
+```bash
+python3 scripts/generate_diagrams.py
+```
+
+The asset test checks local image links, Excalidraw references, JSON/SVG pairing,
+and `AI-generated` diagram metadata.
 
 ## Local development and validation
 
