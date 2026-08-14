@@ -45,15 +45,17 @@ nav:
       - Rust: rust/rust-snippets.md
       - Spring:
           - Data Transactions: spring/spring-data-transactions.md
-          - Spring Cloud:
-              - Fundamentals: spring/spring-cloud-0.md
-              - Distributed Configuration: spring/spring-cloud-1-distributed-config.md
-              - Service Discovery: spring/spring-cloud-2-service-discovery.md
-              - Intelligent Routing: spring/spring-cloud-3-intelligent-routing.md
-              - Client-side Load Balancing: spring/spring-cloud-4-cslb.md
-              - Self-healing Services: spring/spring-cloud-5-self-healing-services.md
-              - Wrap-up: spring/spring-cloud-6-wrap.md
           - Miscellaneous: spring/spring-misc.md
+      # The theme renders two levels of navigation. Keep Spring Cloud as a
+      # Programming-level group so every page remains reachable from the sidebar.
+      - Spring Cloud:
+          - Fundamentals: spring/spring-cloud-0.md
+          - Distributed Configuration: spring/spring-cloud-1-distributed-config.md
+          - Service Discovery: spring/spring-cloud-2-service-discovery.md
+          - Intelligent Routing: spring/spring-cloud-3-intelligent-routing.md
+          - Client-side Load Balancing: spring/spring-cloud-4-cslb.md
+          - Self-healing Services: spring/spring-cloud-5-self-healing-services.md
+          - Wrap-up: spring/spring-cloud-6-wrap.md
   - Cloud and Infrastructure:
       - AWS: aws/aws-assentials.md
       - Kubernetes:

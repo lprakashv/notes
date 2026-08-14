@@ -13,7 +13,11 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 BOOK_DIR = PROJECT_ROOT / "book"
 MKDOCS_CONFIG = PROJECT_ROOT / "mkdocs.yml"
 
-NAV_PAGE_PATTERN = re.compile(r"(?P<path>[A-Za-z0-9_./-]+\.md)\s*$", re.MULTILINE)
+NAV_PAGE_PATTERN = re.compile(
+    r"^(?P<indent> *)-\s+[^:\n]+:\s+(?P<path>[A-Za-z0-9_./-]+\.md)\s*$",
+    re.MULTILINE,
+)
+MAX_SIDEBAR_NAV_PATH_INDENT = 10
 HEADING_PATTERN = re.compile(r"^(?P<marks>#{1,6})\s+(?P<title>.+?)\s*$")
 UNRESOLVED_MARKER_PATTERN = re.compile(
     r"\b(?:FIXME|XXX)\b|manual review required|/\*code\*/",
@@ -100,16 +104,20 @@ def validate_page(page: Path) -> list[str]:
 def main() -> int:
     """Validate every Markdown page and report primary-navigation coverage."""
     pages = sorted(BOOK_DIR.rglob("*.md"))
-    configured_path_list = [
-        match.group("path")
-        for match in NAV_PAGE_PATTERN.finditer(
-            MKDOCS_CONFIG.read_text(encoding="utf-8")
-        )
-    ]
+    configured_nav_entries = list(
+        NAV_PAGE_PATTERN.finditer(MKDOCS_CONFIG.read_text(encoding="utf-8"))
+    )
+    configured_path_list = [match.group("path") for match in configured_nav_entries]
     configured_paths = set(configured_path_list)
     existing_paths = {str(page.relative_to(BOOK_DIR)) for page in pages}
 
     errors: list[str] = []
+    for entry in configured_nav_entries:
+        if len(entry.group("indent")) > MAX_SIDEBAR_NAV_PATH_INDENT:
+            errors.append(
+                "mkdocs.yml: navigation target exceeds the Shadcn sidebar depth "
+                f"limit: {entry.group('path')}"
+            )
     for path in sorted(existing_paths - configured_paths):
         errors.append(f"book/{path}: page is missing from primary navigation")
     for path in sorted(configured_paths - existing_paths):

@@ -15,7 +15,9 @@ enforces it. Language-tagged fenced code blocks receive syntax highlighting.
 The primary navigation groups the notebook into programming, cloud and
 infrastructure, data, AI and machine learning, observability, cheat sheets,
 and a work-learning journal. Every Markdown note is represented in that
-navigation.
+navigation. The Shadcn sidebar renders one collapsible group beneath a site
+section, so its leaves must not be nested more deeply; the home-page directory
+retains the full subject hierarchy.
 
 Public refresher pages are maintained separately from the personal work-learning
 journal. Empty public topic stubs should be replaced with compact, source-backed
