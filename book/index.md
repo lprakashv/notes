@@ -90,10 +90,16 @@ is validated for a consistent heading hierarchy and working local image links.
 
 ## Content provenance
 
-New AI-generated or substantially AI-rewritten material is marked at its
-specific section with an `AI-generated` information panel. Editable diagrams
-are stored with their SVG exports in `book/excalidraw/`; replaced raster sources
-are retained under `archive/original-images/`.
+!!! info "AI-modified"
+
+    Modified: 2026-08-14T16:10:25+05:30
+
+New AI-created or substantially AI-rewritten material is marked at its specific
+section with a timestamped `AI-generated` or `AI-modified` information panel.
+Uncertain or unverified time-sensitive content receives a timestamped review
+warning. Editable diagrams are stored with their SVG exports in
+`book/excalidraw/`; replaced raster sources are retained under
+`archive/original-images/`.
 
 ## Maintained refresher coverage
 
@@ -107,3 +113,16 @@ not be followed without checking current primary documentation.
 
 The work-learning journal remains personal material and is not part of public-note
 content refreshes.
+
+## Cultivating rough notes
+
+!!! info "AI-generated"
+
+    Generated: 2026-08-14T16:10:25+05:30
+
+Rough inputs are kept outside the published notebook and pass through a private,
+one-time claim workflow. Refinements are written to a separate review area with
+section-level provenance, timestamps, references, and review flags. Raw sources
+remain unchanged and are archived only after explicit approval; configured
+private paths and the existing personal journal are excluded from automated
+reading by default.

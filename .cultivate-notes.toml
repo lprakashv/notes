@@ -1,0 +1,34 @@
+version = 1
+raw_paths = ["rough-notes"]
+review_path = "note-reviews"
+archive_path = "archive/rough-notes"
+published_path = "book"
+state_path = ".cultivate-notes/ledger.json"
+claim_path = ".cultivate-notes/claims"
+style_profile = ".cultivate-notes/style.md"
+style_paths = ["book"]
+exclude_paths = [
+  ".git",
+  ".venv",
+  "site",
+  "private",
+  "**/private/**",
+  "book/journal.md",
+  ".cultivate-notes/claims",
+]
+text_extensions = [".md", ".markdown", ".txt", ".rst", ".csv", ".tsv"]
+auxiliary_extensions = [
+  ".pdf", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg",
+  ".excalidraw", ".xlsx", ".xls", ".ods", ".ppt", ".pptx", ".docx",
+]
+
+[site]
+framework = "mkdocs"
+config = "mkdocs.yml"
+build_command = "make build"
+preview_command = "make run"
+
+[visualization]
+default = "excalidraw"
+editable_path = "book/excalidraw"
+export_format = "svg"

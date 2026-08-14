@@ -6,3 +6,6 @@ logs/
 .venv/
 site/
 .obsidian/
+__pycache__/
+*.pyc
+.cultivate-notes/claims/

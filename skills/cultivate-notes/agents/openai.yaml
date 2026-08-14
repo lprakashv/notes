@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cultivate Notes"
+  short_description: "Safely refine, research, and grow rough notes"
+  default_prompt: "Use $cultivate-notes to process my unread rough notes into reviewable, source-backed drafts."

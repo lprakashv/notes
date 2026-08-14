@@ -7,12 +7,13 @@ readonly venv_dir="$project_dir/.venv"
 readonly python_bin="${PYTHON_BIN:-python3}"
 readonly package_index="${MKDOCS_PIP_INDEX_URL:-https://pypi.org/simple}"
 readonly mode="${1:-build}"
+readonly notes_script="$project_dir/skills/cultivate-notes/scripts/notes.py"
 
 usage() {
   cat <<'EOF'
 Usage: bash ./build-local.sh [lint|build|test|coverage|run|serve]
 
-lint      Check note markers, heading hierarchy, and navigation coverage.
+lint      Check note markers, navigation, and the rough-note workflow.
 build     Lint and build the static site with strict validation (default).
 test      Lint, validate linked assets, and run the strict site build.
 coverage  Report and enforce primary-navigation coverage for every note page.
@@ -40,13 +41,20 @@ fi
 
 cd "$project_dir"
 
-if [[ "$mode" == "lint" || "$mode" == "coverage" ]]; then
+if [[ "$mode" == "coverage" ]]; then
   exec "$python_bin" scripts/validate_notes.py
 fi
 
 "$python_bin" scripts/validate_notes.py
+"$python_bin" "$notes_script" --repo "$project_dir" lint
+
+if [[ "$mode" == "lint" ]]; then
+  exit 0
+fi
 
 if [[ "$mode" == "test" ]]; then
+  "$python_bin" -m unittest discover \
+    skills/cultivate-notes/scripts -p 'test_*.py'
   "$python_bin" scripts/validate_assets.py
 fi
 

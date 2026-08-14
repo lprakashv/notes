@@ -20,9 +20,15 @@ NAV_PAGE_PATTERN = re.compile(
 MAX_SIDEBAR_NAV_PATH_INDENT = 10
 HEADING_PATTERN = re.compile(r"^(?P<marks>#{1,6})\s+(?P<title>.+?)\s*$")
 UNRESOLVED_MARKER_PATTERN = re.compile(
-    r"\b(?:FIXME|XXX)\b|manual review required|/\*code\*/",
+    r"\b(?:FIXME|XXX)\b|/\*code\*/",
     re.IGNORECASE,
 )
+PROVENANCE_MARKERS = {
+    '!!! info "AI-generated"',
+    '!!! info "AI-modified"',
+    '!!! warning "Manual review required"',
+    '!!! warning "Potentially outdated"',
+}
 
 
 def normalized_heading(title: str) -> str:
@@ -35,12 +41,12 @@ def validate_page(page: Path) -> list[str]:
     """Return structural validation errors for a single Markdown page."""
     errors: list[str] = []
     relative_page = page.relative_to(PROJECT_ROOT)
+    page_lines = page.read_text(encoding="utf-8").splitlines()
     in_fence = False
     headings: list[tuple[int, str, int]] = []
     seen_headings: dict[str, int] = {}
-    previous_nonblank_line = ""
 
-    for line_number, line in enumerate(page.read_text(encoding="utf-8").splitlines(), 1):
+    for line_number, line in enumerate(page_lines, 1):
         if line.lstrip().startswith("```"):
             in_fence = not in_fence
 
@@ -53,11 +59,18 @@ def validate_page(page: Path) -> list[str]:
                 f"{relative_page}:{line_number}: unresolved marker {marker.group(0)!r}"
             )
 
-        if line.strip() == '!!! info "AI-generated"':
-            scope_heading = HEADING_PATTERN.match(previous_nonblank_line)
+        if line.strip() in PROVENANCE_MARKERS:
+            probe = line_number - 2
+            while probe >= 0 and (
+                not page_lines[probe].strip()
+                or page_lines[probe].startswith("    ")
+                or page_lines[probe].strip() in PROVENANCE_MARKERS
+            ):
+                probe -= 1
+            scope_heading = HEADING_PATTERN.match(page_lines[probe]) if probe >= 0 else None
             if not scope_heading or len(scope_heading.group("marks")) < 2:
                 errors.append(
-                    f"{relative_page}:{line_number}: AI-generated marker must follow "
+                    f"{relative_page}:{line_number}: provenance marker must follow "
                     "a specific H2-H6 section heading"
                 )
 
@@ -75,9 +88,6 @@ def validate_page(page: Path) -> list[str]:
                 )
             else:
                 seen_headings[key] = line_number
-
-        if line.strip():
-            previous_nonblank_line = line
 
     if in_fence:
         errors.append(f"{relative_page}: unclosed fenced code block")

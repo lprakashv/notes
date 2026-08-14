@@ -6,9 +6,42 @@ in `book/`; generated output is written to `site/`.
 ## Content provenance
 
 New AI-generated or substantially AI-rewritten note content is marked at the
-narrowest applicable section with `!!! info "AI-generated"`. The repository
-rules in [AGENTS.md](AGENTS.md) define the convention; the note validator
-enforces it. Language-tagged fenced code blocks receive syntax highlighting.
+narrowest applicable section with `AI-generated` or `AI-modified`. New markers
+include a timezone-aware timestamp; uncertain and time-sensitive material also
+receives a timestamped manual-review or potentially-outdated warning. The
+repository rules in [AGENTS.md](AGENTS.md) define the convention; the note
+validator enforces its placement. Language-tagged fenced code blocks receive
+syntax highlighting.
+
+## Cultivating rough notes
+
+The portable [`cultivate-notes`](skills/cultivate-notes/SKILL.md) skill supports
+brainstorming, journaling, research, learning, and source-backed refinement.
+Drop allowed inputs into `rough-notes/`; generated proposals go to
+`note-reviews/`, while approved raw sources move to `archive/rough-notes/` only
+after explicit confirmation. `.cultivate-notes.toml` controls source, review,
+archive, published, style, excluded, site-framework, and visualization paths.
+The existing personal journal is excluded from automated reading and style
+sampling by default.
+
+The skill's gate records each claimed source version, redacts marked private or
+excluded text before the agent sees it, and never edits the raw file. Binary
+inputs use file-level privacy and are staged as temporary claim copies. Those
+copies are ignored by Git and removed when a proposal is registered.
+
+Use the workflow checks with:
+
+```bash
+make notes-list
+make notes-check
+make notes-test
+```
+
+To share the skill, copy `skills/cultivate-notes/` into another repository and
+route its repository instructions to the copied `SKILL.md`. To make it globally
+discoverable by Codex, copy the same folder into
+`${CODEX_HOME:-$HOME/.codex}/skills/`. Run the bundled `init` command in the
+target repository, then review its exclusions before claiming content.
 
 ## Content organization
 
@@ -57,7 +90,7 @@ bash ./build-local.sh build
 ```
 
 Run the complete test task: note lint, local image-link validation, and strict
-site build:
+site build, including the rough-note lifecycle tests:
 
 ```bash
 bash ./build-local.sh test
