@@ -1741,10 +1741,16 @@ is validated for a consistent heading hierarchy and working local image links.</
 <li><a href="journal/">Work Learnings Journal</a></li>
 </ul>
 <h2 id="content-provenance">Content provenance</h2>
-<p>New AI-generated or substantially AI-rewritten material is marked at its
-specific section with an <code>AI-generated</code> information panel. Editable diagrams
-are stored with their SVG exports in <code>book/excalidraw/</code>; replaced raster sources
-are retained under <code>archive/original-images/</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">AI-modified</p>
+<p>Modified: 2026-08-14T16:10:25+05:30</p>
+</div>
+<p>New AI-created or substantially AI-rewritten material is marked at its specific
+section with a timestamped <code>AI-generated</code> or <code>AI-modified</code> information panel.
+Uncertain or unverified time-sensitive content receives a timestamped review
+warning. Editable diagrams are stored with their SVG exports in
+<code>book/excalidraw/</code>; replaced raster sources are retained under
+<code>archive/original-images/</code>.</p>
 <h2 id="maintained-refresher-coverage">Maintained refresher coverage</h2>
 <div class="admonition info">
 <p class="admonition-title">AI-generated</p>
@@ -1756,6 +1762,17 @@ context, with a manual-review warning where a version-specific workflow should
 not be followed without checking current primary documentation.</p>
 <p>The work-learning journal remains personal material and is not part of public-note
 content refreshes.</p>
+<h2 id="cultivating-rough-notes">Cultivating rough notes</h2>
+<div class="admonition info">
+<p class="admonition-title">AI-generated</p>
+<p>Generated: 2026-08-14T16:10:25+05:30</p>
+</div>
+<p>Rough inputs are kept outside the published notebook and pass through a private,
+one-time claim workflow. Refinements are written to a separate review area with
+section-level provenance, timestamps, references, and review flags. Raw sources
+remain unchanged and are archived only after explicit approval; configured
+private paths and the existing personal journal are excluded from automated
+reading by default.</p>
   </div>
   
   <script>
@@ -1989,6 +2006,14 @@ content refreshes.</p>
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#maintained-refresher-coverage');">
             Maintained refresher coverage
+        </a>
+        
+
+        
+        <a href="#cultivating-rough-notes"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#cultivating-rough-notes');">
+            Cultivating rough notes
         </a>
         
 
